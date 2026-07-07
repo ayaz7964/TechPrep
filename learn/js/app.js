@@ -1,11 +1,127 @@
 /* =================== STATE =================== */
+const PREFS_DEFAULTS = {
+  theme: 'dark',
+  textColor: '#e8eaed',
+  bgColor: '#0f1117',
+  accentColor: '#6c9fff',
+  bodyFont: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  headingFont: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontSize: 15,
+  lineHeight: 1.6,
+  contentWidth: 900
+};
+
+const THEME_PRESETS = {
+  dark: {
+    textColor: '#e8eaed', bgColor: '#0f1117', accentColor: '#6c9fff',
+    bgSecondary: '#1a1d28', bgCard: '#222639', bgHover: '#2a2f45',
+    textSecondary: '#9aa0b0', textMuted: '#5f6578', border: '#2e3348',
+    success: '#34d399', warning: '#fbbf24', danger: '#f87171',
+    purple: '#a78bfa', pink: '#f472b6'
+  },
+  light: {
+    textColor: '#1a1d2e', bgColor: '#ffffff', accentColor: '#4f7cff',
+    bgSecondary: '#f5f6fa', bgCard: '#ffffff', bgHover: '#eef0f6',
+    textSecondary: '#5a5f7a', textMuted: '#9aa0b0', border: '#dde0ea',
+    success: '#22c57e', warning: '#e6a817', danger: '#e74c4c',
+    purple: '#8b6cf7', pink: '#e472b6'
+  },
+  sepia: {
+    textColor: '#3b2e1a', bgColor: '#fbf3e8', accentColor: '#8b6c42',
+    bgSecondary: '#f0e6d3', bgCard: '#faf1e2', bgHover: '#e8dcc8',
+    textSecondary: '#6b5d4a', textMuted: '#9a8a75', border: '#d6c8b4',
+    success: '#5c8f6a', warning: '#c4943a', danger: '#b3513a',
+    purple: '#7f6a9e', pink: '#b06a8e'
+  },
+  forest: {
+    textColor: '#dce8d8', bgColor: '#0f1a12', accentColor: '#6abf69',
+    bgSecondary: '#1a2a1f', bgCard: '#223528', bgHover: '#2a4030',
+    textSecondary: '#9aaf96', textMuted: '#5f785c', border: '#2e4a35',
+    success: '#4ecdc4', warning: '#f4d03f', danger: '#e67e5a',
+    purple: '#9b8ec4', pink: '#d4849a'
+  },
+  ocean: {
+    textColor: '#d6e6f5', bgColor: '#0a1628', accentColor: '#4fc3f7',
+    bgSecondary: '#14223a', bgCard: '#1a2d48', bgHover: '#223a58',
+    textSecondary: '#8aa9cc', textMuted: '#5a7a9a', border: '#26466a',
+    success: '#66bb6a', warning: '#ffb74d', danger: '#ef5350',
+    purple: '#9575cd', pink: '#f06292'
+  }
+};
+
+function loadPrefs() {
+  var saved = localStorage.getItem('tp_prefs');
+  if (saved) {
+    try { return Object.assign({}, PREFS_DEFAULTS, JSON.parse(saved)); }
+    catch(e) { /* ignore */ }
+  }
+  return Object.assign({}, PREFS_DEFAULTS);
+}
+
+function savePrefs() {
+  var toStore = {};
+  for (var k in PREFS_DEFAULTS) toStore[k] = state.prefs[k];
+  localStorage.setItem('tp_prefs', JSON.stringify(toStore));
+}
+
+function applyPrefs() {
+  var p = state.prefs;
+  var root = document.documentElement;
+
+  // Theme class
+  root.className = 'theme-' + p.theme;
+
+  if (p.theme === 'custom') {
+    root.className = '';
+    var preset = THEME_PRESETS.dark;
+    for (var key in preset) {
+      var cssVar = '--' + key.replace(/([A-Z])/g, '-$1').toLowerCase();
+      root.style.setProperty(cssVar, preset[key]);
+    }
+    root.style.setProperty('--bg-primary', p.bgColor);
+    root.style.setProperty('--text-primary', p.textColor);
+    root.style.setProperty('--accent', p.accentColor);
+    root.style.setProperty('--accent-hover', adjustColor(p.accentColor, -20));
+  } else {
+    // Let the theme class handle everything
+    for (var key in THEME_PRESETS.dark) {
+      var cssVar = '--' + key.replace(/([A-Z])/g, '-$1').toLowerCase();
+      root.style.removeProperty(cssVar);
+    }
+    root.style.removeProperty('--bg-primary');
+    root.style.removeProperty('--text-primary');
+    root.style.removeProperty('--accent');
+    root.style.removeProperty('--accent-hover');
+  }
+
+  // Fonts
+  root.style.setProperty('--body-font', p.bodyFont);
+  root.style.setProperty('--heading-font', p.headingFont);
+
+  // Size & spacing
+  root.style.fontSize = p.fontSize + 'px';
+  document.body.style.lineHeight = String(p.lineHeight);
+
+  var content = document.querySelector('.content-panel');
+  if (content) content.style.maxWidth = p.contentWidth + 'px';
+}
+
+function adjustColor(hex, amount) {
+  var c = parseInt(hex.slice(1), 16);
+  var r = Math.max(0, Math.min(255, ((c >> 16) & 255) + amount));
+  var g = Math.max(0, Math.min(255, ((c >> 8) & 255) + amount));
+  var b = Math.max(0, Math.min(255, (c & 255) + amount));
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 const state = {
   categories: [],
   currentCategory: null,
   currentTopic: null,
   topicData: null,
   completed: JSON.parse(localStorage.getItem('tp_completed') || '{}'),
-  searchQuery: ''
+  searchQuery: '',
+  prefs: loadPrefs()
 };
 
 /* =================== HELPERS =================== */
@@ -209,7 +325,111 @@ function loadJSON(path) {
   });
 }
 
+/* =================== PREFERENCES =================== */
+function renderPreferencesPanel() {
+  var p = state.prefs;
+  var body = $('#prefs-body');
+  if (!body) return;
+
+  var themeOpts = ['dark', 'light', 'sepia', 'forest', 'ocean', 'custom'].map(function(t) {
+    var active = p.theme === t ? ' active' : '';
+    var label = t.charAt(0).toUpperCase() + t.slice(1);
+    return '<button class="theme-option' + active + '" data-theme="' + t + '">' + label + '</button>';
+  }).join('');
+
+  body.innerHTML =
+    '<div class="prefs-section">' +
+      '<span class="prefs-label">Theme</span>' +
+      '<div class="prefs-row">' + themeOpts + '</div>' +
+    '</div>' +
+    '<div class="prefs-section" id="prefs-custom-colors"' + (p.theme !== 'custom' ? ' style="display:none"' : '') + '>' +
+      '<span class="prefs-label">Custom Colors</span>' +
+      '<div class="prefs-field"><label>Background</label><input type="color" id="prefs-bg" value="' + p.bgColor + '" /></div>' +
+      '<div class="prefs-field"><label>Text</label><input type="color" id="prefs-text" value="' + p.textColor + '" /></div>' +
+      '<div class="prefs-field"><label>Accent</label><input type="color" id="prefs-accent" value="' + p.accentColor + '" /></div>' +
+    '</div>' +
+    '<div class="prefs-section">' +
+      '<span class="prefs-label">Typography</span>' +
+      '<div class="prefs-field"><label>Body Font</label><select id="prefs-body-font">' +
+        '<option value="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif"' + (p.bodyFont.includes('Segoe UI') ? ' selected' : '') + '>System Default</option>' +
+        '<option value="\'Georgia\', serif"' + (p.bodyFont.includes('Georgia') ? ' selected' : '') + '>Georgia (Serif)</option>' +
+        '<option value="\'Merriweather\', \'Georgia\', serif"' + (p.bodyFont.includes('Merriweather') ? ' selected' : '') + '>Merriweather</option>' +
+        '<option value="\'Inter\', sans-serif"' + (p.bodyFont.includes('Inter') ? ' selected' : '') + '>Inter (Sans)</option>' +
+        '<option value="\'Atkinson Hyperlegible\', sans-serif"' + (p.bodyFont.includes('Atkinson') ? ' selected' : '') + '>Atkinson Hyperlegible</option>' +
+        '<option value="\'JetBrains Mono\', monospace"' + (p.bodyFont.includes('JetBrains') ? ' selected' : '') + '>JetBrains Mono</option>' +
+        '<option value="\'OpenDyslexic\', sans-serif"' + (p.bodyFont.includes('OpenDyslexic') ? ' selected' : '') + '>OpenDyslexic</option>' +
+      '</select></div>' +
+      '<div class="prefs-field"><label>Heading Font</label><select id="prefs-heading-font">' +
+        '<option value="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif"' + (p.headingFont.includes('Segoe UI') ? ' selected' : '') + '>System Default</option>' +
+        '<option value="\'Georgia\', serif"' + (p.headingFont.includes('Georgia') ? ' selected' : '') + '>Georgia (Serif)</option>' +
+        '<option value="\'Merriweather\', \'Georgia\', serif"' + (p.headingFont.includes('Merriweather') ? ' selected' : '') + '>Merriweather</option>' +
+        '<option value="\'Playfair Display\', serif"' + (p.headingFont.includes('Playfair') ? ' selected' : '') + '>Playfair Display</option>' +
+        '<option value="\'Inter\', sans-serif"' + (p.headingFont.includes('Inter') ? ' selected' : '') + '>Inter (Sans)</option>' +
+        '<option value="\'Poppins\', sans-serif"' + (p.headingFont.includes('Poppins') ? ' selected' : '') + '>Poppins</option>' +
+      '</select></div>' +
+      '<div class="prefs-field"><label>Font Size</label><input type="range" id="prefs-font-size" min="12" max="22" step="0.5" value="' + p.fontSize + '" /><span class="range-value" id="prefs-font-size-val">' + p.fontSize + 'px</span></div>' +
+      '<div class="prefs-field"><label>Line Height</label><input type="range" id="prefs-line-height" min="1.2" max="2.2" step="0.05" value="' + p.lineHeight + '" /><span class="range-value" id="prefs-line-height-val">' + p.lineHeight + '</span></div>' +
+    '</div>' +
+    '<div class="prefs-section">' +
+      '<span class="prefs-label">Layout</span>' +
+      '<div class="prefs-field"><label>Content Width</label><input type="range" id="prefs-content-width" min="600" max="1200" step="20" value="' + p.contentWidth + '" /><span class="range-value" id="prefs-content-width-val">' + p.contentWidth + 'px</span></div>' +
+    '</div>' +
+    '<button class="prefs-reset" id="prefs-reset">Reset to Defaults</button>';
+
+  // Attach events
+  body.querySelectorAll('.theme-option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      state.prefs.theme = this.dataset.theme;
+      savePrefs();
+      applyPrefs();
+      renderPreferencesPanel();
+    });
+  });
+
+  var customSection = $('#prefs-custom-colors');
+  if (customSection) {
+    var bgInput = $('#prefs-bg');
+    var textInput = $('#prefs-text');
+    var accentInput = $('#prefs-accent');
+    if (bgInput) bgInput.addEventListener('input', function() { state.prefs.bgColor = this.value; savePrefs(); applyPrefs(); });
+    if (textInput) textInput.addEventListener('input', function() { state.prefs.textColor = this.value; savePrefs(); applyPrefs(); });
+    if (accentInput) accentInput.addEventListener('input', function() { state.prefs.accentColor = this.value; savePrefs(); applyPrefs(); });
+  }
+
+  var bodyFont = $('#prefs-body-font');
+  if (bodyFont) bodyFont.addEventListener('change', function() { state.prefs.bodyFont = this.value; savePrefs(); applyPrefs(); });
+
+  var headingFont = $('#prefs-heading-font');
+  if (headingFont) headingFont.addEventListener('change', function() { state.prefs.headingFont = this.value; savePrefs(); applyPrefs(); });
+
+  ['font-size', 'line-height', 'content-width'].forEach(function(id) {
+    var input = $('#prefs-' + id);
+    var val = $('#prefs-' + id + '-val');
+    if (input && val) {
+      input.addEventListener('input', function() {
+        var v = this.value;
+        var key = id === 'content-width' ? 'contentWidth' : id.replace(/-([a-z])/g, function(g) { return g[1].toUpperCase(); });
+        state.prefs[key] = id === 'line-height' ? parseFloat(v) : Number(v);
+        val.textContent = id === 'line-height' ? v : v + (id === 'font-size' ? 'px' : 'px');
+        savePrefs();
+        applyPrefs();
+      });
+    }
+  });
+
+  var resetBtn = $('#prefs-reset');
+  if (resetBtn) resetBtn.addEventListener('click', function() {
+    for (var k in PREFS_DEFAULTS) state.prefs[k] = PREFS_DEFAULTS[k];
+    savePrefs();
+    applyPrefs();
+    renderPreferencesPanel();
+  });
+}
+
 function init() {
+  // Apply saved preferences
+  applyPrefs();
+
   // Use embedded data for categories and topic lists (always works)
   state.categories = EMBEDDED.categories.map(function(c) {
     return { id: c.id, name: c.name, icon: c.icon, color: c.color, description: c.description, _topics: null };
@@ -221,6 +441,31 @@ function init() {
     searchEl.addEventListener('input', function() {
       state.searchQuery = this.value;
       renderSidebar();
+    });
+  }
+
+  // Settings button
+  var settingsBtn = $('#settings-btn');
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', function() {
+      renderPreferencesPanel();
+      $('#prefs-overlay').classList.add('open');
+    });
+  }
+
+  // Preferences close
+  var closeBtn = $('#prefs-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      $('#prefs-overlay').classList.remove('open');
+    });
+  }
+
+  // Click overlay to close
+  var overlay = $('#prefs-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.classList.remove('open');
     });
   }
 

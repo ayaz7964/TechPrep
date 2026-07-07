@@ -19,6 +19,7 @@
           </svg>
           <span id="progress-percent" class="progress-text">0%</span>
         </div>
+        <button class="settings-btn" id="settings-btn" title="Preferences">⚙</button>
       </div>
       <div class="search-wrapper">
         <input type="text" id="topic-search" placeholder="Search topics..." autocomplete="off" />
@@ -128,6 +129,19 @@
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Preferences Panel -->
+  <div class="prefs-overlay" id="prefs-overlay">
+    <div class="prefs-panel">
+      <div class="prefs-header">
+        <h2>Preferences</h2>
+        <button class="prefs-close" id="prefs-close">&times;</button>
+      </div>
+      <div class="prefs-body" id="prefs-body">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
   </div>
 
   <script src="data/javascript/topics-data.js"></script>
