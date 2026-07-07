@@ -3634,6 +3634,3725 @@ TOPICS_DATA["javascript"]["this-keyword"] = {
     }
   ]
 }
+
+// New topics added by preparation script
+TOPICS_DATA["javascript"]["spread-operator"] = {
+  "title": "JavaScript Spread Operator",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "The <strong>spread operator</strong> (<code>...</code>) expands an iterable (array, string, object) into its individual elements.",
+    "Spread can be used to <strong>copy</strong> arrays/objects, <strong>concatenate</strong> arrays, <strong>pass array elements as arguments</strong>, and <strong>merge objects</strong>.",
+    "Object spread (<code>{...obj}</code>) creates a <strong>shallow copy</strong> — nested objects are still shared by reference.",
+    "Spread works on any <strong>iterable</strong> (arrays, strings, Sets, Maps) and on <strong>own enumerable properties</strong> of objects."
+  ],
+  "laymanDefinition": "Imagine you have a box of colorful balls and you want to take each ball out and place them individually on a shelf. The spread operator (...) is like opening the box and letting all the balls spill out individually. Instead of having a box (array) as one unit, you now have the contents as separate items. This is incredibly useful for combining boxes of balls, making copies, or handing individual balls to different people (functions).",
+  "deepDive": [
+    {
+      "heading": "Spread Syntax in Array Literals",
+      "text": "Inside an array literal, the spread operator expands an iterable into individual elements: <code>const combined = [...arr1, ...arr2]</code>. This creates a new array containing all elements from arr1 followed by all elements from arr2. Spread can be placed anywhere in the array: <code>const arr = [first, ...middle, last]</code>. This is commonly used for copying, concatenating, and inserting elements."
+    },
+    {
+      "heading": "Spread in Function Calls",
+      "text": "When calling a function, spread expands an iterable into individual arguments: <code>Math.max(...numbers)</code> is equivalent to <code>Math.max(num[0], num[1], ...)</code>. This replaces the older <code>Function.prototype.apply</code> pattern. Spread works with any number of arguments and is more readable than apply()."
+    },
+    {
+      "heading": "Object Spread Properties",
+      "text": "Object spread (<code>{...obj1, ...obj2}</code>) copies own enumerable properties from source objects into the new object. If multiple sources have the same key, the later source overwrites earlier ones. This is commonly used for immutable state updates: <code>const updated = { ...state, name: 'new name' }</code>. Object spread is a shallow copy — nested objects are shared."
+    },
+    {
+      "heading": "Spread vs rest Parameters",
+      "list": [
+        "<strong>Spread</strong> expands an iterable into individual elements — used in array/object literals and function calls.",
+        "<strong>Rest</strong> collects individual elements into an array — used in function parameters and destructuring.",
+        "Both use the <code>...</code> syntax but serve opposite purposes: spread unpacks, rest packs.",
+        "Spread is used on the <strong>right side</strong> of assignment or in function calls; rest is used on the <strong>left side</strong> (parameters)."
+      ]
+    },
+    {
+      "heading": "Spread with Strings and Sets",
+      "text": "Spread works on any iterable, including strings: <code>[...'hello']</code> returns <code>['h', 'e', 'l', 'l', 'o']</code>. With Sets: <code>const unique = [...new Set(arr)]</code> removes duplicates from an array. With Maps: <code>const entries = [...map]</code> returns an array of [key, value] pairs. Strings are iterated by Unicode code points."
+    }
+  ],
+  "interviewAnswer": "The spread operator (...) expands iterables (arrays, strings, Sets, Maps) into individual elements. In array literals, it copies and concatenates arrays: [...arr1, ...arr2]. In function calls, it spreads array elements as arguments: Math.max(...nums). In object literals, it copies own enumerable properties: {...obj1, ...obj2}. Object spread creates a shallow copy. Spread is the opposite of rest — spread unpacks, rest collects. Spread is widely used for immutable updates, array manipulation, and function argument passing.",
+  "interviewQuestions": [
+    {
+      "question": "What does the spread operator do?",
+      "answer": "The spread operator (...) expands an iterable (array, string, Set, Map) into its individual elements. It can be used in array literals, object literals, and function calls."
+    },
+    {
+      "question": "How do you copy an array using spread?",
+      "answer": "const copy = [...original]. This creates a new array with all elements of original. It's a shallow copy — nested objects are still shared."
+    },
+    {
+      "question": "How do you merge two objects using spread?",
+      "answer": "const merged = { ...obj1, ...obj2 }. If both have the same key, obj2's value overwrites obj1's. This is a shallow merge."
+    },
+    {
+      "question": "What is the difference between spread and rest?",
+      "answer": "Spread unpacks an iterable into individual elements (used in arrays, objects, function calls). Rest collects individual elements into an array (used in function parameters). Both use ... but serve opposite purposes."
+    },
+    {
+      "question": "How do you use spread to pass array elements as function arguments?",
+      "answer": "Math.max(...[1, 5, 3, 9, 2]) spreads the array elements as individual arguments: Math.max(1, 5, 3, 9, 2). This replaces the older apply() pattern."
+    },
+    {
+      "question": "Is object spread a deep or shallow copy?",
+      "answer": "Object spread creates a shallow copy. Top-level properties are independent, but nested objects and arrays are shared by reference between the original and the copy."
+    },
+    {
+      "question": "Can you spread a string?",
+      "answer": "Yes. [...'hello'] returns ['h', 'e', 'l', 'l', 'o']. Strings are iterables, so spread works character by character (by Unicode code point)."
+    },
+    {
+      "question": "How do you remove duplicates from an array using spread?",
+      "answer": "const unique = [...new Set(arr)]. The Set removes duplicates, and spread converts it back to an array."
+    },
+    {
+      "question": "What happens when you spread a non-iterable?",
+      "answer": "Spreading a non-iterable (like a plain number or object without Symbol.iterator) throws a TypeError: 'xxx is not iterable'."
+    },
+    {
+      "question": "Where can spread be used in an array literal?",
+      "answer": "Spread can be used anywhere in an array literal: at the beginning ([...arr, 5]), middle ([1, ...arr, 5]), or end ([1, ...arr]). You can also use multiple spreads ([...a, ...b, ...c])."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Spread Operator (...) Flow</text><rect x=\"60\" y=\"70\" width=\"240\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"180\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">const arr = [1, 2, 3]</text><text x=\"180\" y=\"112\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Array with 3 elements</text><line x1=\"300\" y1=\"97\" x2=\"350\" y2=\"97\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"325\" y=\"87\" fill=\"#fbbf24\" font-size=\"11\">...</text><rect x=\"350\" y=\"70\" width=\"280\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"490\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">console.log(...arr)</text><text x=\"490\" y=\"112\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ 1 2 3 (individual elements)</text><line x1=\"490\" y1=\"125\" x2=\"490\" y2=\"155\" stroke=\"#e5c07b\" stroke-width=\"2\"/><rect x=\"120\" y=\"155\" width=\"260\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#e5c07b\" stroke-width=\"1.5\"/><text x=\"250\" y=\"178\" text-anchor=\"middle\" fill=\"#e5c07b\" font-size=\"12\" font-weight=\"bold\">const copy = [...arr]</text><text x=\"250\" y=\"197\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ [1, 2, 3] new array copy</text><line x1=\"380\" y1=\"182\" x2=\"420\" y2=\"182\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"420\" y=\"155\" width=\"220\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"530\" y=\"178\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">const merged = [...a, ...b]</text><text x=\"530\" y=\"197\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ concatenated array</text><text x=\"350\" y=\"280\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Spread unpacks iterables into individual elements</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Array Copy and Concatenation",
+      "useCase": "Creating new arrays from existing ones",
+      "code": "const fruits = ['apple', 'banana', 'orange'];\nconst vegetables = ['carrot', 'broccoli'];\n\n// Copy an array\nconst fruitsCopy = [...fruits];\nconsole.log(fruitsCopy); // ['apple', 'banana', 'orange']\n\n// Concatenate arrays\nconst food = [...fruits, ...vegetables];\nconsole.log(food);\n// ['apple', 'banana', 'orange', 'carrot', 'broccoli']\n\n// Insert between\nconst more = ['grape', ...fruits, 'kiwi'];\nconsole.log(more);\n// ['grape', 'apple', 'banana', 'orange', 'kiwi']\n\n// Multiple spreads\nconst all = [...fruits, ...vegetables, ...['milk', 'bread']];\n\nconsole.log(fruitsCopy === fruits); // false (different references)",
+      "description": "Spread creates new arrays. The original arrays are not modified. Copying is shallow — nested objects are shared."
+    },
+    {
+      "title": "Spread in Function Calls",
+      "useCase": "Passing array elements as arguments",
+      "code": "const numbers = [45, 12, 89, 33, 71, 56];\n\n// Spread as function arguments\nconst max = Math.max(...numbers);\nconst min = Math.min(...numbers);\n\nconsole.log(max); // 89\nconsole.log(min); // 12\n\n// Equivalent to:\n// Math.max(45, 12, 89, 33, 71, 56)\n\n// Old way (still works but less readable):\n// Math.max.apply(null, numbers)\n\n// Using with Date constructor\nconst dateParts = [2024, 0, 15]; // [year, month, day]\nconst date = new Date(...dateParts);\nconsole.log(date); // Mon Jan 15 2024\n\n// With push()\nconst arr = [1, 2];\narr.push(...[3, 4, 5]);\nconsole.log(arr); // [1, 2, 3, 4, 5]",
+      "description": "Spread replaces apply() for passing array elements as function arguments. It works with any function that accepts multiple arguments."
+    },
+    {
+      "title": "Object Spread for Immutable Updates",
+      "useCase": "State management pattern",
+      "code": "const state = {\n  user: { name: 'Alice', age: 30 },\n  settings: { theme: 'dark', lang: 'en' },\n  items: ['a', 'b']\n};\n\n// Shallow update — only top level is new\nconst updated = {\n  ...state,\n  settings: {\n    ...state.settings,\n    theme: 'light'  // override specific property\n  }\n};\n\nconsole.log(updated.settings.theme);  // 'light'\nconsole.log(state.settings.theme);   // 'dark' (unchanged)\n\n// But nested objects not spread are still shared:\nconsole.log(updated.items === state.items); // true (same reference)\n\n// Override properties with spread order:\nconst defaults = { theme: 'dark', lang: 'en', fontSize: 14 };\nconst userPrefs = { theme: 'light' };\nconst config = { ...defaults, ...userPrefs };\nconsole.log(config); // { theme: 'light', lang: 'en', fontSize: 14 }",
+      "description": "Object spread enables immutable update patterns — create a new object with changes instead of mutating the original. Later sources override earlier ones."
+    },
+    {
+      "title": "Practical: Removing Duplicates and String Manipulation",
+      "useCase": "Everyday spread patterns",
+      "code": "// Remove duplicates from an array\nconst withDuplicates = [1, 2, 3, 2, 4, 1, 5];\nconst unique = [...new Set(withDuplicates)];\nconsole.log(unique); // [1, 2, 3, 4, 5]\n\n// Convert NodeList to Array\nconst divs = document.querySelectorAll('div');\nconst divArray = [...divs]; // Now has array methods like map/filter\n\n// Convert string to array of characters\nconst chars = [...'Hello'];\nconsole.log(chars); // ['H', 'e', 'l', 'l', 'o']\n\n// Max from numbers in a string\nconst values = '45,12,89';\nconst maxVal = Math.max(...values.split(',').map(Number));\nconsole.log(maxVal); // 89\n\n// Merge arrays with deduplication\nconst a = [1, 2, 3];\nconst b = [3, 4, 5];\nconst merged = [...new Set([...a, ...b])];\nconsole.log(merged); // [1, 2, 3, 4, 5]",
+      "description": "Practical patterns: deduplication with Set, converting DOM collections to arrays, and string manipulation."
+    },
+    {
+      "title": "Spread vs Rest — Side by Side",
+      "useCase": "Understanding the difference",
+      "code": "// SPREAD: unpacks (right side of assignment)\nconst arr = [1, 2, 3];\nconst spread = [...arr, 4];\nconsole.log(spread); // [1, 2, 3, 4]\n\nfunction sum(a, b, c) {\n  return a + b + c;\n}\nconsole.log(sum(...arr)); // 6 (spread)\n\n// REST: collects (left side / parameters)\nfunction collect(...args) {\n  console.log(args); // [1, 2, 3, 4, 5]\n}\ncollect(1, 2, 3, 4, 5);\n\nconst [first, ...rest] = [1, 2, 3, 4];\nconsole.log(first); // 1\nconsole.log(rest);  // [2, 3, 4]\n\n// Both use ... but:\n// Spread: expands an iterable INTO individual elements\n// Rest: collects individual elements INTO an array",
+      "description": "Spread and rest use the same syntax (...) but opposite directions. Spread unpacks iterables; rest collects values into arrays."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does [...[1, 2, 3]] return?",
+      "options": ["[[1, 2, 3]]", "[1, 2, 3]", "[...[1, 2, 3]]", "undefined"],
+      "answer": 1,
+      "explanation": "Spread unpacks the inner array elements into a new array, resulting in [1, 2, 3]."
+    },
+    {
+      "question": "What is the result of Math.max(...[5, 2, 9, 1])?",
+      "options": ["5", "2", "9", "1"],
+      "answer": 2,
+      "explanation": "Spread expands the array into individual arguments: Math.max(5, 2, 9, 1) = 9."
+    },
+    {
+      "question": "Does {...obj} create a deep copy?",
+      "options": ["Yes", "No, it creates a shallow copy", "It creates a reference", "It depends on the object size"],
+      "answer": 1,
+      "explanation": "Object spread creates a shallow copy. Top-level properties are independent but nested objects are shared."
+    },
+    {
+      "question": "What is the difference between spread and rest?",
+      "options": ["They are the same", "Spread unpacks iterables; rest collects into arrays", "Rest unpacks iterables; spread collects into arrays", "Spread only works with objects"],
+      "answer": 1,
+      "explanation": "Spread (...) expands iterables into individual elements. Rest (...) collects individual elements into an array."
+    },
+    {
+      "question": "What does [...'abc'] return?",
+      "options": ["'abc'", "['a', 'b', 'c']", "['abc']", "[...'abc']"],
+      "answer": 1,
+      "explanation": "Strings are iterables. Spread iterates over each character and creates an array: ['a', 'b', 'c']."
+    },
+    {
+      "question": "What happens when you spread a non-iterable (like a number)?",
+      "options": ["It becomes an array with that number", "It throws TypeError", "It returns undefined", "It returns an empty array"],
+      "answer": 1,
+      "explanation": "Numbers are not iterable. Spreading a non-iterable throws a TypeError."
+    },
+    {
+      "question": "How do you merge two objects with spread?",
+      "options": ["{obj1, obj2}", "{...obj1, ...obj2}", "merge(obj1, obj2)", "Object.spread(obj1, obj2)"],
+      "answer": 1,
+      "explanation": "Use {...obj1, ...obj2} to merge. Later sources overwrite earlier ones for duplicate keys."
+    },
+    {
+      "question": "What will the following log? const a = [1, 2]; const b = [...a]; console.log(a === b);",
+      "options": ["true", "false", "undefined", "TypeError"],
+      "answer": 1,
+      "explanation": "Spread creates a new array. a and b are different array objects, so a === b is false."
+    },
+    {
+      "question": "Can spread be used multiple times in one array?",
+      "options": ["Yes: [...a, ...b, ...c]", "No, only once", "Only at the end", "Only at the beginning"],
+      "answer": 0,
+      "explanation": "You can use multiple spreads in one array literal: [...arr1, ...arr2, ...arr3]."
+    },
+    {
+      "question": "What does [...new Set([1, 1, 2, 3, 3])] return?",
+      "options": ["[1, 2, 3]", "[1, 1, 2, 3, 3]", "Error", "[]"],
+      "answer": 0,
+      "explanation": "Set removes duplicates (1, 2, 3). Spread converts the Set back to an array: [1, 2, 3]."
+    }
+  ]
+}
 ;
 
-// Total topics: 20
+TOPICS_DATA["javascript"]["rest-operator"] = {
+  "title": "JavaScript Rest Operator",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "The <strong>rest operator</strong> (<code>...</code>) collects multiple elements into a <strong>single array</strong> — used in function parameters and destructuring.",
+    "Rest parameters (<code>function(...args)</code>) collect all remaining arguments into a real <strong>Array</strong> (unlike the array-like <code>arguments</code> object).",
+    "In destructuring, rest collects remaining properties: <code>const [a, ...rest] = arr</code> or <code>const {x, ...rest} = obj</code>.",
+    "The rest operator must be the <strong>last</strong> parameter/destructuring element — there can be only one rest element per pattern."
+  ],
+  "laymanDefinition": "Imagine you're packing for a trip. You have a large suitcase and you're putting items in it one by one. The rest operator is like saying 'take all these remaining items and put them in this suitcase.' When you have a function call like log('a', 'b', 'c', 'd') and the function says function log(...items), the rest operator collects all four arguments into an array called items. It's the opposite of the spread operator — spread takes things out, rest gathers things in.",
+  "deepDive": [
+    {
+      "heading": "Rest Parameters — Variadic Functions",
+      "text": "Rest parameters allow a function to accept any number of arguments as an array: <code>function sum(...numbers) { return numbers.reduce((a, b) => a + b, 0); }</code>. Unlike the <code>arguments</code> object (which is array-like and lacks Array methods), rest parameters are a real Array — you can use map, filter, reduce, etc. directly."
+    },
+    {
+      "heading": "Rest Parameters vs the arguments Object",
+      "list": [
+        "<strong>Rest parameters</strong>: Real Array, has all Array methods, can be named, only includes parameters after the rest syntax.",
+        "<strong>arguments object</strong>: Array-like (not a real Array), has only .length and indexed access, includes ALL parameters including named ones, available only in non-arrow functions.",
+        "Rest parameters are preferred in modern JavaScript — they're more flexible and work with arrow functions."
+      ]
+    },
+    {
+      "heading": "Rest in Array Destructuring",
+      "text": "In array destructuring, rest collects remaining elements: <code>const [first, second, ...rest] = [1, 2, 3, 4, 5]</code> gives <code>first=1, second=2, rest=[3,4,5]</code>. Rest must be the last element. You can skip elements: <code>const [, , ...rest] = arr</code> skips the first two and collects the rest."
+    },
+    {
+      "heading": "Rest in Object Destructuring",
+      "text": "In object destructuring, rest collects remaining properties into a new object: <code>const { name, age, ...details } = user</code>. This is useful for picking specific properties while keeping the rest together. The rest object is a plain object with the remaining own enumerable properties."
+    },
+    {
+      "heading": "Rest Operator Rules and Limitations",
+      "list": [
+        "Rest must be the <strong>last</strong> parameter or destructuring element.",
+        "Only <strong>one</strong> rest element allowed per pattern.",
+        "Rest parameters are <strong>not</strong> counted in <code>fn.length</code> (the arity excludes rest).",
+        "Rest in object destructuring creates a new plain object with remaining own enumerable properties.",
+        "Rest in array destructuring always produces an array (empty array if no remaining elements)."
+      ]
+    }
+  ],
+  "interviewAnswer": "The rest operator (...) collects multiple elements into a single array or object. In function parameters, it creates a real Array of remaining arguments — replacing the older arguments object. In array destructuring, it collects remaining elements into an array. In object destructuring, it collects remaining properties into a new object. Rest must always be the last element, and only one rest per pattern. Rest is the counterpart of spread: spread unpacks iterables, while rest gathers individual elements into a collection.",
+  "interviewQuestions": [
+    {
+      "question": "What does the rest operator do in function parameters?",
+      "answer": "It collects all remaining arguments into a real Array: function log(...items) { console.log(items); }. log(1, 2, 3) → items = [1, 2, 3]. Unlike arguments, it's a true Array."
+    },
+    {
+      "question": "What is the difference between rest parameters and the arguments object?",
+      "answer": "Rest parameters are a real Array with all Array methods. The arguments object is array-like (not a real Array) and lacks methods like map/filter/reduce. Rest parameters also only capture parameters after the rest syntax, while arguments captures all."
+    },
+    {
+      "question": "Can you have multiple rest parameters in one function?",
+      "answer": "No. Only one rest parameter is allowed, and it must be the last parameter: function(a, ...rest) is valid. function(...a, b) or function(...a, ...b) are invalid."
+    },
+    {
+      "question": "How do you use rest in array destructuring?",
+      "answer": "const [first, second, ...rest] = [1, 2, 3, 4, 5]. Here first=1, second=2, rest=[3, 4, 5]. Rest must be the last element and collects remaining elements into an array."
+    },
+    {
+      "question": "How do you use rest in object destructuring?",
+      "answer": "const { name, ...details } = { name: 'Alice', age: 30, city: 'NY' }. Here name='Alice', details={ age: 30, city: 'NY' }. Picks 'name' and collects the rest into a new object."
+    },
+    {
+      "question": "What does fn.length return for a function with rest parameters?",
+      "answer": "fn.length counts only the parameters before the rest parameter. The rest parameter itself is not counted. function(a, b, ...rest) has length 2."
+    },
+    {
+      "question": "Does rest work with arrow functions?",
+      "answer": "Yes. Arrow functions support rest parameters: const sum = (...nums) => nums.reduce((a, b) => a + b, 0). Arrow functions do NOT have the arguments object, making rest even more important."
+    },
+    {
+      "question": "What happens if there are no remaining elements when using rest?",
+      "answer": "In array destructuring, rest becomes an empty array []. In object destructuring, rest becomes an empty object {}."
+    },
+    {
+      "question": "How do you use rest to omit properties from an object?",
+      "answer": "const { password, ssn, ...safeUser } = user. This extracts password and ssn, and safeUser contains all remaining properties. Useful for removing sensitive data before sending to client."
+    },
+    {
+      "question": "What is the difference between spread and rest?",
+      "answer": "Both use ... but serve opposite purposes. Spread unpacks an iterable into individual elements (used in arrays, objects, function calls). Rest collects individual elements into an array/object (used in parameters, destructuring)."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Rest Operator (...) Flow</text><rect x=\"60\" y=\"70\" width=\"260\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"190\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">function sum(...numbers)</text><text x=\"190\" y=\"112\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Rest collects all args into 'numbers' array</text><line x1=\"320\" y1=\"97\" x2=\"370\" y2=\"97\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"345\" y=\"87\" fill=\"#fbbf24\" font-size=\"11\">call</text><rect x=\"370\" y=\"65\" width=\"270\" height=\"65\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"505\" y=\"88\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">sum(1, 2, 3, 4, 5)</text><text x=\"505\" y=\"108\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">numbers = [1, 2, 3, 4, 5] (real Array)</text><line x1=\"505\" y1=\"130\" x2=\"505\" y2=\"160\" stroke=\"#e5c07b\" stroke-width=\"2\"/><rect x=\"80\" y=\"160\" width=\"540\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#e5c07b\" stroke-width=\"1.5\"/><text x=\"350\" y=\"183\" text-anchor=\"middle\" fill=\"#e5c07b\" font-size=\"12\" font-weight=\"bold\">Destructuring: const [first, ...rest] = [1, 2, 3, 4]</text><text x=\"350\" y=\"202\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">first = 1, rest = [2, 3, 4]</text><text x=\"350\" y=\"280\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Rest collects individual elements into an array/object</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Rest Parameters in Functions",
+      "useCase": "Variadic function arguments",
+      "code": "// Sum any number of arguments\nfunction sum(...numbers) {\n  return numbers.reduce(function(total, n) {\n    return total + n;\n  }, 0);\n}\n\nconsole.log(sum(1, 2));          // 3\nconsole.log(sum(1, 2, 3, 4, 5)); // 15\nconsole.log(sum());              // 0 (empty array)\n\n// With named parameters before rest\nfunction introduce(greeting, ...names) {\n  return names.map(function(name) {\n    return greeting + ', ' + name + '!';\n  });\n}\n\nconsole.log(introduce('Hello', 'Alice', 'Bob', 'Charlie'));\n// ['Hello, Alice!', 'Hello, Bob!', 'Hello, Charlie!']\n\n// Rest vs arguments comparison:\nfunction oldWay() {\n  // arguments is array-like — must convert to Array\n  var args = Array.prototype.slice.call(arguments);\n  return args.reduce(function(a, b) { return a + b; });\n}\n\nfunction newWay(...args) {\n  // args is a real Array already\n  return args.reduce(function(a, b) { return a + b; });\n}",
+      "description": "Rest parameters collect all arguments into a real Array. Named parameters before rest capture specific arguments; rest captures the rest."
+    },
+    {
+      "title": "Rest in Array Destructuring",
+      "useCase": "Extracting first elements and collecting the rest",
+      "code": "const numbers = [10, 20, 30, 40, 50];\n\n// Extract first two, collect the rest\nconst [first, second, ...rest] = numbers;\nconsole.log(first);  // 10\nconsole.log(second); // 20\nconsole.log(rest);   // [30, 40, 50]\n\n// Skip elements with rest\nconst [head, , , ...tail] = numbers;\nconsole.log(head); // 10\nconsole.log(tail); // [40, 50]\n\n// Empty rest (no remaining elements)\nconst [a, b, c, d, e, ...empty] = numbers;\nconsole.log(empty); // []\n\n// Practical: first and rest pattern\nfunction processItems([first, ...rest]) {\n  console.log('Processing first:', first);\n  console.log('Remaining:', rest.length, 'items');\n  return [first, ...rest.map(function(item) { return item * 2; })];\n}\n\nconsole.log(processItems([1, 2, 3]));\n// Processing first: 1\n// Remaining: 2 items\n// [1, 4, 6]",
+      "description": "Rest in array destructuring collects remaining elements into a new array. Combined with destructuring, it enables elegant head/tail patterns."
+    },
+    {
+      "title": "Rest in Object Destructuring (Picking Properties)",
+      "useCase": "Omitting sensitive or unwanted properties",
+      "code": "const user = {\n  id: 42,\n  name: 'Alice',\n  email: 'alice@example.com',\n  password: 'secret123',\n  ssn: '123-45-6789',\n  role: 'admin',\n  preferences: { theme: 'dark' }\n};\n\n// Extract specific properties, collect the rest\nconst { password, ssn, ...safeUser } = user;\n\nconsole.log(password);  // 'secret123'\nconsole.log(ssn);       // '123-45-6789'\nconsole.log(safeUser);\n// { id: 42, name: 'Alice', email: 'alice@example.com', role: 'admin', preferences: { theme: 'dark' } }\n\n// The rest object is a plain object with remaining properties\nconsole.log(Object.keys(safeUser)); // ['id', 'name', 'email', 'role', 'preferences']\n\n// Merging with defaults after picking\nconst { name, ...details } = user;\nconst defaultDetails = { role: 'user', active: true };\nconst merged = { ...defaultDetails, ...details };\nconsole.log(merged);\n// { role: 'admin', active: true, id: 42, email: ..., ssn: ..., ... }",
+      "description": "Object rest destructuring is perfect for extracting specific properties and keeping the rest. Commonly used for sanitizing data."
+    },
+    {
+      "title": "Rest with Arrow Functions and Callbacks",
+      "useCase": "Flexible callback signatures",
+      "code": "// Arrow function with rest\nconst multiply = (multiplier, ...numbers) =>\n  numbers.map(function(n) { return n * multiplier; });\n\nconsole.log(multiply(2, 1, 2, 3, 4)); // [2, 4, 6, 8]\nconsole.log(multiply(10, 5, 6));      // [50, 60]\n\n// Rest in array method callbacks\nconst results = [1, 2, 3, 4, 5].map(function(element, index, ...rest) {\n  console.log('Extra args:', rest); // rest is always empty for map\n  return element * 2;\n});\n\n// Practical: event handler with extra args\nfunction createLogger(prefix) {\n  return function(...messages) {\n    console.log('[' + prefix + ']', ...messages);\n  };\n}\n\nconst info = createLogger('INFO');\nconst error = createLogger('ERROR');\n\ninfo('Server started', 'on port 3000');\n// [INFO] Server started on port 3000\nerror('Connection failed', 'retrying...');\n// [ERROR] Connection failed retrying...",
+      "description": "Rest parameters work with arrow functions. Combined with closure patterns, they enable flexible logging and callback utilities."
+    },
+    {
+      "title": "Rest with Dynamic Argument Forwarding",
+      "useCase": "Wrapping/decorating functions",
+      "code": "function withLogging(fn) {\n  return function(...args) {\n    console.log('Calling:', fn.name || 'anonymous', 'with:', args);\n    const result = fn.apply(this, args);\n    console.log('Result:', result);\n    return result;\n  };\n}\n\nconst add = function(a, b) { return a + b; };\nconst loggedAdd = withLogging(add);\n\nconsole.log(loggedAdd(3, 4));\n// Calling: add with: [3, 4]\n// Result: 7\n// 7\n\n// Rest + spread for forwarding\nfunction createCounter() {\n  let count = 0;\n  return {\n    increment(...args) {\n      count++;\n      console.log('Count:', count, 'Args:', args);\n      return count;\n    },\n    getCount() { return count; }\n  };\n}\n\nconst counter = createCounter();\ncounter.increment();         // Count: 1 Args: []\ncounter.increment('reset');  // Count: 2 Args: ['reset']\ncounter.increment(1, 2, 3);  // Count: 3 Args: [1, 2, 3]",
+      "description": "Rest parameters enable clean function wrappers. Combined with spread, they allow perfect argument forwarding — a core pattern in middleware and decorators."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does function(...args) collect?",
+      "options": ["The first argument only", "All arguments as a real Array", "No arguments", "The arguments as an object"],
+      "answer": 1,
+      "explanation": "The rest parameter collects all remaining arguments into a real Array, unlike the array-like arguments object."
+    },
+    {
+      "question": "What will this return? const [a, ...b] = [1, 2, 3]; console.log(b);",
+      "options": ["[1, 2, 3]", "[2, 3]", "2", "[1]"],
+      "answer": 1,
+      "explanation": "a gets 1 (the first element), and b collects the remaining elements: [2, 3]."
+    },
+    {
+      "question": "Can there be multiple rest parameters in one function?",
+      "options": ["Yes, as many as needed", "No, only one rest parameter is allowed", "Yes, but they must be adjacent", "Only if the function is an arrow function"],
+      "answer": 1,
+      "explanation": "Only one rest parameter is allowed per function, and it must be the last parameter."
+    },
+    {
+      "question": "What is the difference between rest and the arguments object?",
+      "options": ["They are identical", "Rest is a real Array; arguments is array-like", "Arguments is an Array; rest is array-like", "Rest only works in arrow functions"],
+      "answer": 1,
+      "explanation": "Rest parameters create a real Array with all Array methods. The arguments object is array-like (only length and indexed access)."
+    },
+    {
+      "question": "What happens when you destructure an empty array with rest? const [...rest] = []",
+      "options": ["rest is null", "rest is []", "rest is undefined", "TypeError"],
+      "answer": 1,
+      "explanation": "If there are no remaining elements, rest becomes an empty array: []."
+    },
+    {
+      "question": "What does { name, ...rest } = { name: 'A', age: 10, city: 'B' } produce?",
+      "options": ["rest = { age: 10, city: 'B' }", "rest = ['age', 'city']", "rest = { name: 'A' }", "rest = 'A'"],
+      "answer": 0,
+      "explanation": "name gets 'A', and rest collects the remaining properties into a new object: { age: 10, city: 'B' }."
+    },
+    {
+      "question": "What does fn.length return for function(a, b, ...rest) {}?",
+      "options": ["0", "2", "3", "Infinity"],
+      "answer": 1,
+      "explanation": "fn.length counts parameters up to (but not including) the rest parameter. So function(a, b, ...rest) has length 2."
+    },
+    {
+      "question": "Can rest parameters be used in arrow functions?",
+      "options": ["No, arrow functions don't support rest", "Yes, arrow functions support rest parameters", "Only if the arrow function has a block body", "Only with a single parameter"],
+      "answer": 1,
+      "explanation": "Arrow functions fully support rest parameters: const sum = (...nums) => nums.reduce((a, b) => a + b)."
+    },
+    {
+      "question": "What is the output? const { x, ...y } = { x: 1, z: 3 }; console.log(y);",
+      "options": ["{ x: 1, z: 3 }", "{ z: 3 }", "[z: 3]", "undefined"],
+      "answer": 1,
+      "explanation": "x extracts the x property (1). y collects the remaining property z into a new object: { z: 3 }."
+    },
+    {
+      "question": "What is a practical use of rest in object destructuring?",
+      "options": ["Sorting objects", "Omitting sensitive properties from an object", "Increasing object size", "Freezing objects"],
+      "answer": 1,
+      "explanation": "Rest in object destructuring is commonly used to extract specific properties (like password, ssn) while keeping the remaining safe properties together."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["destructuring"] = {
+  "title": "JavaScript Destructuring",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "<strong>Destructuring</strong> is a JavaScript expression that <strong>unpacks</strong> values from arrays or properties from objects into distinct variables.",
+    "Array destructuring: <code>const [a, b] = [1, 2]</code> assigns <code>a=1, b=2</code>. Supports <strong>skipping</strong> (<code>[, , c]</code>), <strong>defaults</strong>, and <strong>rest</strong>.",
+    "Object destructuring: <code>const { name, age } = obj</code> assigns <code>name=obj.name, age=obj.age</code>. Supports <strong>renaming</strong> (<code>{ name: userName }</code>) and <strong>defaults</strong>.",
+    "Destructuring works in <strong>variable declarations</strong>, <strong>function parameters</strong>, <strong>assignments</strong>, and <strong>loops</strong>."
+  ],
+  "laymanDefinition": "Imagine you receive a gift box that says 'Mixed Fruits' on it. Inside are apples, bananas, and oranges. Instead of unpacking them one by one saying 'this is an apple, this is a banana,' destructuring lets you say 'I want the apple and the banana' and the JavaScript engine automatically extracts them for you. It's like having a machine that opens boxes and hands you exactly the items you asked for, in the order you specified.",
+  "deepDive": [
+    {
+      "heading": "Array Destructuring — Positional Unpacking",
+      "text": "Array destructuring uses position to match variables to values: <code>const [a, b, c] = [1, 2, 3]</code>. You can skip elements with commas: <code>const [, , third] = arr</code>. Default values protect against undefined: <code>const [a = 5, b = 10] = [1]</code> gives a=1, b=10. Swapping variables: <code>[a, b] = [b, a]</code> is a classic use."
+    },
+    {
+      "heading": "Object Destructuring — Named Unpacking",
+      "text": "Object destructuring uses property names to match: <code>const { name, age } = person</code>. Rename with colon: <code>const { name: personName, age: personAge } = person</code>. Defaults with renaming: <code>const { name = 'Guest', role = 'user' } = person</code>. Nested destructuring: <code>const { address: { city } } = person</code>."
+    },
+    {
+      "heading": "Destructuring in Function Parameters",
+      "text": "Destructuring can extract specific properties from an object/array passed as an argument: <code>function greet({ name, age }) { ... }</code>. This makes function signatures self-documenting. Combine with defaults: <code>function connect({ host = 'localhost', port = 3000 } = {})</code>. This is the standard pattern for options objects."
+    },
+    {
+      "heading": "Nested Destructuring and Complex Patterns",
+      "text": "Destructuring works at any depth: <code>const { data: { user: { name } } } = response</code>. Mix array and object destructuring: <code>const { users: [first, ...rest] } = data</code>. Use with the rest operator: <code>const [head, ...tail] = arr</code> or <code>const { name, ...details } = obj</code>. These patterns are common in React hooks and API responses."
+    },
+    {
+      "heading": "Destructuring Use Cases and Best Practices",
+      "list": [
+        "<strong>API responses:</strong> Extract specific fields from JSON responses.",
+        "<strong>Function options:</strong> Cleanly extract configuration from an options object.",
+        "<strong>React hooks:</strong> <code>const [state, setState] = useState(initial)</code> and <code>const { data, loading } = useQuery()</code>.",
+        "<strong>Swapping variables:</strong> <code>[a, b] = [b, a]</code> — no temp variable needed.",
+        "<strong>Importing modules:</strong> <code>const { map, filter } = require('lodash')</code>."
+      ]
+    }
+  ],
+  "interviewAnswer": "Destructuring is a JavaScript syntax that unpacks values from arrays (by position) or properties from objects (by name) into variables. Array destructuring uses square brackets: const [a, b] = [1, 2]. Supports skipping, defaults, and rest (...). Object destructuring uses curly braces: const { name, age } = obj. Supports renaming (colon), defaults, nested destructuring, and rest. Destructuring is commonly used in function parameters to extract options objects, in React for useState/useEffect, in imports, and for variable swapping. It makes code more readable by reducing repetitive property access.",
+  "interviewQuestions": [
+    {
+      "question": "What is destructuring in JavaScript?",
+      "answer": "Destructuring is a syntax that unpacks values from arrays or objects into distinct variables. Array destructuring uses positions: const [a, b] = [1, 2]. Object destructuring uses property names: const { name } = { name: 'Alice' }."
+    },
+    {
+      "question": "How do you skip elements in array destructuring?",
+      "answer": "Use commas without variable names: const [, , third] = [1, 2, 3]. The first two elements are skipped, third gets 3."
+    },
+    {
+      "question": "How do you set default values in destructuring?",
+      "answer": "With = after the variable: const [a = 10] = [] gives a=10. const { name = 'Guest' } = {} gives name='Guest'. Defaults apply only when the value is undefined."
+    },
+    {
+      "question": "How do you rename a property in object destructuring?",
+      "answer": "Use colon: const { name: userName, age: userAge } = person. This extracts person.name into userName and person.age into userAge."
+    },
+    {
+      "question": "How do you swap two variables using destructuring?",
+      "answer": "[a, b] = [b, a]. This swaps the values of a and b without needing a temporary variable."
+    },
+    {
+      "question": "How does destructuring work in function parameters?",
+      "answer": "function display({ name, age }) { console.log(name, age); }. Called as display({ name: 'Alice', age: 30 }). The object is destructured in the parameter list."
+    },
+    {
+      "question": "What is nested destructuring?",
+      "answer": "Destructuring nested structures: const { address: { city, zip } } = person. This extracts person.address.city and person.address.zip into city and zip variables."
+    },
+    {
+      "question": "Can you mix array and object destructuring?",
+      "answer": "Yes: const { users: [first, ...rest] } = data. This extracts data.users, then destructures the array into first and rest."
+    },
+    {
+      "question": "What happens if the destructured value is null or undefined?",
+      "answer": "Destructuring null or undefined throws a TypeError. Always provide defaults or guard against null/undefined when destructuring potentially null values."
+    },
+    {
+      "question": "How is destructuring used in React?",
+      "answer": "const [count, setCount] = useState(0) — array destructuring for state hook. const { data, loading, error } = useQuery(...) — object destructuring for query results."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Destructuring — Unpacking Arrays and Objects</text><rect x=\"40\" y=\"70\" width=\"280\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"180\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">const [a, b, ...rest] = [1, 2, 3, 4]</text><text x=\"180\" y=\"112\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">a=1, b=2, rest=[3, 4]</text><rect x=\"40\" y=\"145\" width=\"280\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"180\" y=\"168\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">const { name, age } = person</text><text x=\"180\" y=\"187\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">name = person.name, age = person.age</text><rect x=\"40\" y=\"220\" width=\"280\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"180\" y=\"243\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">function greet({ name = 'Guest' })</text><text x=\"180\" y=\"262\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Destructuring in function params</text><text x=\"380\" y=\"100\" fill=\"#9aa0b0\" font-size=\"11\">Array → position-based</text><text x=\"380\" y=\"170\" fill=\"#9aa0b0\" font-size=\"11\">Object → name-based</text><text x=\"380\" y=\"240\" fill=\"#9aa0b0\" font-size=\"11\">Parameters → clean API</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Array Destructuring Basics",
+      "useCase": "Extracting values by position",
+      "code": "const rgb = [255, 128, 64];\n\n// Basic destructuring\nconst [red, green, blue] = rgb;\nconsole.log(red, green, blue); // 255 128 64\n\n// Skipping elements\nconst [, , last] = rgb;\nconsole.log(last); // 64\n\n// Default values\nconst [a = 1, b = 2, c = 3] = [10, 20];\nconsole.log(a, b, c); // 10 20 3\n\n// Variable swap\nlet x = 10, y = 20;\n[x, y] = [y, x];\nconsole.log(x, y); // 20 10\n\n// Rest with destructuring\nconst [head, ...tail] = [1, 2, 3, 4, 5];\nconsole.log(head); // 1\nconsole.log(tail); // [2, 3, 4, 5]\n\n// Ignoring return values\nfunction getCoordinates() {\n  return [10, 20, 30];\n}\nconst [xCoord, , zCoord] = getCoordinates();\nconsole.log(xCoord, zCoord); // 10 30",
+      "description": "Array destructuring unpacks by position. Supports skipping with commas, defaults with =, rest with ..., and variable swapping."
+    },
+    {
+      "title": "Object Destructuring Basics",
+      "useCase": "Extracting properties by name",
+      "code": "const user = {\n  id: 42,\n  name: 'Alice',\n  email: 'alice@example.com',\n  address: {\n    city: 'New York',\n    zip: '10001'\n  }\n};\n\n// Basic destructuring\nconst { name, email } = user;\nconsole.log(name, email); // 'Alice' 'alice@example.com'\n\n// Renaming\nconst { name: userName, email: userEmail } = user;\nconsole.log(userName, userEmail); // 'Alice' 'alice@example.com'\n\n// Default values\nconst { role = 'user', status = 'active' } = user;\nconsole.log(role, status); // 'user' 'active'\n\n// Renaming with default\nconst { name: displayName = 'Anonymous' } = user;\nconsole.log(displayName); // 'Alice'\n\n// Nested destructuring\nconst { address: { city, zip } } = user;\nconsole.log(city, zip); // 'New York' '10001'\n\n// Rest in object destructuring\nconst { id, password, ...safeUser } = {\n  ...user,\n  password: 'secret'\n};\nconsole.log(safeUser);\n// { name: 'Alice', email: 'alice@example.com', address: {...} }",
+      "description": "Object destructuring unpacks by property name. Supports renaming with :, defaults with =, nested destructuring, and rest with ..."
+    },
+    {
+      "title": "Destructuring in Function Parameters",
+      "useCase": "Options object pattern",
+      "code": "// Without destructuring — repetitive\nfunction createUser(name, email, options) {\n  const role = options.role || 'user';\n  const active = options.active !== false;\n  const theme = options.theme || 'light';\n  // ...\n}\n\n// With destructuring — clean and clear\nfunction createUser(name, email, { role = 'user', active = true, theme = 'dark' } = {}) {\n  console.log('Creating:', name, email, role, active, theme);\n  return { name, email, role, active, theme };\n}\n\ncreateUser('Alice', 'alice@test.com', { role: 'admin', theme: 'light' });\n// Creating: Alice alice@test.com admin true light\n\ncreateUser('Bob', 'bob@test.com');\n// Creating: Bob bob@test.com user true dark (defaults work)\n\n// Array destructuring in function params\nfunction sumFirstTwo([a, b]) {\n  return a + b;\n}\nconsole.log(sumFirstTwo([3, 7])); // 10\n\n// Multiple params with destructuring\nfunction display({ name, age }, { format }) {\n  console.log(format === 'json' ? JSON.stringify({ name, age }) : name + ' is ' + age);\n}\ndisplay({ name: 'Alice', age: 30 }, { format: 'text' });\n// 'Alice is 30'",
+      "description": "Parameter destructuring makes function signatures self-documenting. Default values protect against undefined options. The = {} default ensures destructuring works when no argument is passed."
+    },
+    {
+      "title": "Destructuring API Responses",
+      "useCase": "Extracting data from nested JSON",
+      "code": "// Simulated API response\nconst apiResponse = {\n  status: 200,\n  data: {\n    user: {\n      id: 1,\n      profile: {\n        name: 'Alice',\n        avatar: 'https://example.com/avatar.png'\n      },\n      stats: {\n        posts: 42,\n        followers: 128\n      }\n    },\n    meta: {\n      page: 1,\n      total: 100\n    }\n  }\n};\n\n// Deep nested destructuring\nconst {\n  status,\n  data: {\n    user: {\n      profile: { name, avatar },\n      stats: { posts, followers }\n    },\n    meta: { page, total }\n  }\n} = apiResponse;\n\nconsole.log(name, avatar);    // 'Alice' 'https://...'\nconsole.log(posts, followers); // 42 128\nconsole.log(page, total);      // 1 100\n\n// Destructuring with renaming for clarity\nconst {\n  data: {\n    user: {\n      profile: { name: userName },\n      stats: { posts: postCount }\n    }\n  }\n} = apiResponse;\n\nconsole.log(userName, postCount); // 'Alice' 42",
+      "description": "Nested destructuring cleanly extracts deeply nested data from API responses. Renaming clarifies variable names from API field names."
+    },
+    {
+      "title": "Practical Destructuring Patterns",
+      "useCase": "Everyday use cases",
+      "code": "// 1. Swapping variables (no temp needed)\nlet firstName = 'Alice', lastName = 'Smith';\n[firstName, lastName] = [lastName, firstName];\nconsole.log(firstName, lastName); // 'Smith' 'Alice'\n\n// 2. Returning multiple values from function\nfunction getMinMax(values) {\n  return [Math.min(...values), Math.max(...values)];\n}\nconst [min, max] = getMinMax([3, 1, 4, 1, 5, 9]);\nconsole.log(min, max); // 1 9\n\n// 3. Iterating with destructuring (entries)\nconst map = new Map([\n  ['a', 1],\n  ['b', 2],\n  ['c', 3]\n]);\nfor (const [key, value] of map) {\n  console.log(key + ' = ' + value);\n}\n// a = 1, b = 2, c = 3\n\n// 4. String destructuring\nconst [firstChar, ...restChars] = 'hello';\nconsole.log(firstChar, restChars.join('')); // 'h' 'ello'\n\n// 5. Computed property names with destructuring\nconst key = 'theme';\nconst settings = { theme: 'dark', lang: 'en' };\nconst { [key]: currentTheme, lang } = settings;\nconsole.log(currentTheme, lang); // 'dark' 'en'",
+      "description": "Everyday patterns: swapping, multiple return values, Map iteration, string extraction, and computed property destructuring."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does const [a, b] = [1, 2, 3] assign?",
+      "options": ["a=1, b=2", "a=1, b=[2, 3]", "a=[1, 2], b=3", "Error"],
+      "answer": 0,
+      "explanation": "Array destructuring assigns by position. a gets the first element (1), b gets the second (2). The third element is ignored."
+    },
+    {
+      "question": "What is the output of: const { x, y } = { x: 10, y: 20, z: 30 }; console.log(x, y);",
+      "options": ["10 20", "10 30", "20 30", "undefined undefined"],
+      "answer": 0,
+      "explanation": "Object destructuring extracts by property name. x gets 10, y gets 20. z is ignored."
+    },
+    {
+      "question": "How do you set a default value in destructuring?",
+      "options": ["const { name = 'Guest' } = obj", "const { name: 'Guest' } = obj", "const [name == 'Guest'] = obj", "const { name || 'Guest' } = obj"],
+      "answer": 0,
+      "explanation": "Use = after the variable name to set a default: const { name = 'Guest' } = obj. The default applies only if the value is undefined."
+    },
+    {
+      "question": "How do you rename a destructured property?",
+      "options": ["const { name: userName } = obj", "const { name -> userName } = obj", "const { name = userName } = obj", "const { name(userName) } = obj"],
+      "answer": 0,
+      "explanation": "Use colon: const { name: userName } = obj extracts obj.name into the variable userName."
+    },
+    {
+      "question": "What does const [a, , c] = [1, 2, 3] assign?",
+      "options": ["a=1, c=2", "a=1, c=3", "a=2, c=3", "Error"],
+      "answer": 1,
+      "explanation": "The comma skips the second element (2). a gets 1, c gets 3."
+    },
+    {
+      "question": "What happens when you destructure null? const { a } = null;",
+      "options": ["a is null", "a is undefined", "TypeError", "The code silently fails"],
+      "answer": 2,
+      "explanation": "Destructuring null or undefined throws a TypeError because you cannot access properties of null/undefined."
+    },
+    {
+      "question": "What is the purpose of = {} in function({ a } = {})?",
+      "options": ["It's a syntax error", "It provides a default empty object so calling the function without args doesn't throw", "It makes 'a' always undefined", "It increases performance"],
+      "answer": 1,
+      "explanation": "The = {} provides a default parameter value. If the function is called without arguments, it uses {} instead of undefined, preventing a TypeError."
+    },
+    {
+      "question": "What does the following log? const [x, ...y] = [1]; console.log(x, y);",
+      "options": ["1 [1]", "1 []", "[1] []", "1 undefined"],
+      "answer": 1,
+      "explanation": "x gets 1 (the first element). y collects remaining elements via rest — there are none, so y is []."
+    },
+    {
+      "question": "How do you extract properties from a nested object?",
+      "options": ["const { address: { city } } = obj", "const { address.city } = obj", "const { address->city } = obj", "const { address[city] } = obj"],
+      "answer": 0,
+      "explanation": "Nested destructuring uses colon + braces: const { address: { city } } = obj extracts obj.address.city into city."
+    },
+    {
+      "question": "Which pattern correctly swaps a and b?",
+      "options": ["[a, b] = [b, a]", "a = b; b = a;", "swap(a, b)", "[b, a] = [a, b]"],
+      "answer": 0,
+      "explanation": "[a, b] = [b, a] correctly swaps a and b using array destructuring. This pattern swaps without a temporary variable."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["modules"] = {
+  "title": "JavaScript Modules",
+  "difficulty": "beginner",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "<strong>JavaScript modules</strong> allow splitting code into separate files, each with its own scope, and exporting/importing values between them.",
+    "<strong>ES6 Modules</strong> (<code>import</code>/<code>export</code>) are the standard, with static analysis, strict mode by default, and support for both <strong>named</strong> and <strong>default</strong> exports.",
+    "Named exports: <code>export const x = 1</code>; import: <code>import { x } from './module.js'</code>. Default export: <code>export default fn</code>; import: <code>import fn from './module.js'</code>.",
+    "Modules are <strong>singletons</strong> — they are executed only once, and subsequent imports get a cached reference."
+  ],
+  "laymanDefinition": "Think of modules like chapters in a book. Each chapter covers a specific topic and can reference other chapters. Without modules, writing JavaScript is like writing one enormous chapter with everything crammed in — chaos. With modules, you organize your code into separate files (chapters), each with a clear purpose. You decide what each chapter 'exports' (makes available to others) and what it 'imports' (needs from others). This is like saying 'Chapter 3 needs the concepts from Chapter 1.' Modules keep code organized, reusable, and easy to maintain.",
+  "deepDive": [
+    {
+      "heading": "ES6 Module Syntax — Export",
+      "text": "There are two types of exports: <strong>named exports</strong> (multiple per module) and <strong>default export</strong> (one per module). Named exports can be declared inline (<code>export const x = 1</code>) or at the end (<code>export { x, y, z }</code>). Default exports are typically for the main functionality: <code>export default class User { ... }</code>. You can mix named and default exports in the same module."
+    },
+    {
+      "heading": "ES6 Module Syntax — Import",
+      "text": "Named imports use destructuring-like syntax: <code>import { specificItem } from './module.js'</code>. Rename with <code>as</code>: <code>import { oldName as newName } from './module.js'</code>. Import all with namespace: <code>import * as Utils from './module.js'</code>. Default import: <code>import DefaultThing from './module.js'</code>. Combine: <code>import DefaultThing, { named1, named2 } from './module.js'</code>."
+    },
+    {
+      "heading": "Module Scope and Execution",
+      "text": "Each module has its own top-level scope — variables declared in a module are not available globally unless exported. Modules are in strict mode by default. A module is executed only once per page/app, and the imported binding is a live reference (not a copy). This means if the exported value changes in the source module, the importing module sees the updated value."
+    },
+    {
+      "heading": "Named Exports vs Default Exports",
+      "list": [
+        "<strong>Named exports:</strong> Enforce exact import names. Better for libraries with multiple utilities. Tree-shakeable (bundlers can eliminate unused exports).",
+        "<strong>Default exports:</strong> Convenient for the main export. The import name can be anything, which can lead to inconsistent naming across projects.",
+        "Some style guides recommend preferring named exports for consistency and better IDE support (autocomplete, refactoring)."
+      ]
+    },
+    {
+      "heading": "Dynamic Imports and Code Splitting",
+      "text": "<code>import()</code> (dynamic import) returns a promise for the module namespace. This enables lazy loading and code splitting: <code>const module = await import('./heavy-module.js')</code>. Dynamic imports are useful for route-based splitting (load component only when navigating to a route) and conditionally loading polyfills. Unlike static imports, dynamic imports can be called from anywhere, not just module top-level."
+    }
+  ],
+  "interviewAnswer": "JavaScript modules (ES6/ES2015) allow organizing code into separate files with their own scope. Modules use export to expose values and import to consume them. Named exports ({ export const x }) allow exporting multiple values; default export (export default) exports a single main value. Imports use matching syntax: import { x } for named and import x for default. Modules are executed once and imports are live bindings. Dynamic import (import()) enables lazy loading. Modules are automatically in strict mode. Before ES6 modules, CommonJS (require/module.exports) was used in Node.js. Modern bundlers (Webpack, Vite, Rollup) tree-shake named exports for smaller bundles.",
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between named and default exports?",
+      "answer": "Named exports allow multiple exports per module and enforce the import name: export const x = 1; import { x } from 'module'. Default export allows one per module and the import name can be any name: export default 42; import anyName from 'module'."
+    },
+    {
+      "question": "How do you rename an import?",
+      "answer": "Use the 'as' keyword: import { originalName as newName } from './module.js'. This is useful when the imported name conflicts with a local variable."
+    },
+    {
+      "question": "What is a namespace import?",
+      "answer": "import * as Utils from './module.js' imports all exports as properties of the Utils object. Utils.x accesses the named export 'x'."
+    },
+    {
+      "question": "How are ES6 modules different from CommonJS?",
+      "answer": "ES6: static imports/exports, live bindings, strict mode by default, tree-shakeable. CommonJS: dynamic require(), module.exports, not tree-shakeable, used in Node.js. ES6 is the standard; CommonJS is legacy for Node."
+    },
+    {
+      "question": "What is a live binding in modules?",
+      "answer": "Imported values are live references to the exporting module's variables, not copies. If the exporting module changes the value, the importing module sees the change. This differs from CommonJS where exports are copied."
+    },
+    {
+      "question": "Can modules have side effects?",
+      "answer": "Yes. A module can execute side-effect code at the top level (like setting up a global event listener). The import statement runs the module's top-level code. Side-effect imports: import './setup.js' (import nothing, just run the module)."
+    },
+    {
+      "question": "What is dynamic import and when would you use it?",
+      "answer": "import() is a function-like expression that returns a promise resolving to the module namespace. It enables lazy loading/code splitting: const { default: Component } = await import('./Component.js'). Use for route-based splitting, conditionally loading heavy libraries, or on-demand loading."
+    },
+    {
+      "question": "Are ES6 modules supported in Node.js?",
+      "answer": "Yes, since Node.js 12+. Use .mjs extension, or set 'type': 'module' in package.json. CommonJS (.cjs) still works alongside ES modules."
+    },
+    {
+      "question": "What happens if you import the same module twice?",
+      "answer": "Modules are singletons — they execute only once per application. The second import returns the same cached reference. This ensures consistency and efficiency."
+    },
+    {
+      "question": "Can you export a value that was imported from another module?",
+      "answer": "Yes. Re-export: export { x } from './other.js'. Or combine: export * from './utils.js'. This is useful for creating barrel/index files that aggregate multiple modules."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">ES6 Modules — Import / Export Flow</text><rect x=\"40\" y=\"70\" width=\"280\" height=\"100\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"180\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">utils.js (export)</text><text x=\"180\" y=\"115\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\" font-family=\"monospace\">export const add = (a, b) =&gt; a + b;</text><text x=\"180\" y=\"135\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\" font-family=\"monospace\">export const PI = 3.14159;</text><text x=\"180\" y=\"155\" text-anchor=\"middle\" fill=\"#e5c07b\" font-size=\"10\" font-family=\"monospace\">export default function multiply() {}</text><line x1=\"320\" y1=\"120\" x2=\"370\" y2=\"120\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"370\" y=\"70\" width=\"280\" height=\"100\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"510\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">main.js (import)</text><text x=\"510\" y=\"115\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"10\" font-family=\"monospace\">import multiply, { add, PI } from './utils.js'</text><text x=\"510\" y=\"135\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">multiply = default export</text><text x=\"510\" y=\"155\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">add, PI = named exports</text><text x=\"350\" y=\"280\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Modules: own scope, strict mode, singletons, static analysis</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Named Exports and Imports",
+      "useCase": "Exporting multiple utilities",
+      "code": "// ---- math.js ----\nexport const PI = 3.14159;\nexport const E = 2.71828;\n\nexport function add(a, b) {\n  return a + b;\n}\n\nexport function multiply(a, b) {\n  return a * b;\n}\n\n// Inline exports — can export any declaration\n\n// ---- app.js ----\nimport { add, multiply, PI } from './math.js';\n\nconsole.log(add(2, 3));        // 5\nconsole.log(multiply(4, 5));   // 20\nconsole.log(PI);               // 3.14159\n\n// Renaming imports\nimport { add as sum, PI as pi } from './math.js';\nconsole.log(sum(1, 2));  // 3\n\n// Import all as a namespace\nimport * as MathUtils from './math.js';\nconsole.log(MathUtils.add(1, 2));      // 3\nconsole.log(MathUtils.PI);             // 3.14159",
+      "description": "Named exports allow a module to export multiple values. Imports must use the exact names (or rename with 'as'). Namespace imports collect all exports into an object."
+    },
+    {
+      "title": "Default Exports and Mixing Export Types",
+      "useCase": "Single main export with helpers",
+      "code": "// ---- User.js ----\nexport default class User {\n  constructor(name, email) {\n    this.name = name;\n    this.email = email;\n  }\n\n  getDisplayName() {\n    return this.name + ' &lt;' + this.email + '&gt;';\n  }\n}\n\n// Named helper alongside default\nexport function validateEmail(email) {\n  return email.includes('@');\n}\n\n// ---- app.js ----\n// Import default (any name) + named (must match)\nimport User, { validateEmail } from './User.js';\n\nconst user = new User('Alice', 'alice@example.com');\nconsole.log(user.getDisplayName());\n// 'Alice <alice@example.com>'\n\nconsole.log(validateEmail('test@test.com')); // true\n\n// Default import can be renamed freely:\nimport MyUser from './User.js';  // also works\n\n// But named imports must match:\n// import { validate } from './User.js'; // ERROR!",
+      "description": "Default exports are ideal for the primary class/function of a module. The import name is arbitrary. Named exports alongside provide helper utilities with fixed names."
+    },
+    {
+      "title": "Re-exporting and Barrel Files",
+      "useCase": "Aggregating multiple modules",
+      "code": "// ---- shapes/circle.js ----\nexport const PI = 3.14159;\nexport function area(radius) {\n  return PI * radius * radius;\n}\n\n// ---- shapes/square.js ----\nexport function area(side) {\n  return side * side;\n}\n\n// ---- shapes/index.js (barrel file) ----\nexport { area as circleArea, PI } from './circle.js';\nexport { area as squareArea } from './square.js';\n\n// ---- app.js ----\nimport { circleArea, squareArea, PI } from './shapes/index.js';\n\nconsole.log(circleArea(5));  // 78.53975\nconsole.log(squareArea(4));  // 16\nconsole.log(PI);             // 3.14159\n\n// Or re-export everything:\n// export * from './circle.js';\n// export * from './square.js';\n// (caution: name conflicts are silently dropped or cause errors)",
+      "description": "Barrel files (index.js) re-export from multiple modules, providing a single import path. Use explicit re-exports to avoid naming conflicts."
+    },
+    {
+      "title": "Dynamic Imports for Lazy Loading",
+      "useCase": "Code splitting and on-demand loading",
+      "code": "// ---- heavy-chart.js ----\nexport default function renderChart(data) {\n  // Expensive chart rendering logic\n  console.log('Rendering chart with', data.length, 'points');\n  return 'Chart rendered';\n}\n\nexport function formatData(raw) {\n  return raw.map(function(item) { return { x: item.x, y: item.y }; });\n}\n\n// ---- app.js ----\nconst button = document.getElementById('load-chart');\n\nbutton.addEventListener('click', async function() {\n  // Dynamic import — loads the module only on click\n  try {\n    const chartModule = await import('./heavy-chart.js');\n\n    // Default export is on .default\n    const renderChart = chartModule.default;\n    // Named exports are regular properties\n    const { formatData } = chartModule;\n\n    const rawData = [{ x: 1, y: 2 }, { x: 3, y: 4 }];\n    const formatted = formatData(rawData);\n    const result = renderChart(formatted);\n    console.log(result);\n  } catch (err) {\n    console.error('Failed to load chart module:', err);\n  }\n});\n\n// Dynamic imports enable smaller initial bundle sizes\n// and faster page loads — the browser only loads\n// heavy-chart.js when the user clicks the button",
+      "description": "Dynamic import() returns a promise, enabling lazy loading. The module is fetched and executed only when needed. Default exports are accessed via .default."
+    },
+    {
+      "title": "import.meta and Module Metadata",
+      "useCase": "Accessing module information",
+      "code": "// ---- config.js ----\n// import.meta provides metadata about the current module\n\n// In browsers:\nconsole.log(import.meta.url);\n// 'https://example.com/js/config.js'\n\n// In Node.js:\n// console.log(import.meta.url);\n// 'file:///home/user/project/js/config.js'\n\n// Using import.meta.url to resolve relative paths (browser):\nconst configUrl = new URL('./config.json', import.meta.url);\nconsole.log(configUrl.href);\n// 'https://example.com/js/config.json'\n\n// ---- app.js ----\nimport('./config.js');  // Just to run the above code\n\n// import.meta is also useful for:\n// - Worker constructors: new Worker(new URL('./worker.js', import.meta.url))\n// - Dynamic CSS imports\n// - Feature detection\n\n// Note: import.meta is only available in module scripts\n// &lt;script type=\"module\" src=\"app.js\"&gt;&lt;/script&gt;",
+      "description": "import.meta provides metadata like the module URL. Useful for constructing relative URLs in module contexts. Only available in ES6 modules."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is the correct syntax for a named export?",
+      "options": ["export default const x = 1", "export const x = 1", "export = { x: 1 }", "module.exports = { x: 1 }"],
+      "answer": 1,
+      "explanation": "Named exports use 'export' before a declaration: export const x = 1; or export { x };"
+    },
+    {
+      "question": "How do you import a default export?",
+      "options": ["import { default } from './module.js'", "import anything from './module.js'", "import * from './module.js'", "import default as x from './module.js'"],
+      "answer": 1,
+      "explanation": "Default exports are imported without braces: import MyName from './module.js'. The import name can be anything."
+    },
+    {
+      "question": "What is a live binding in ES6 modules?",
+      "options": ["A variable that cannot change", "Imports are live references that see changes in the exporting module", "A locked variable", "A temporary variable"],
+      "answer": 1,
+      "explanation": "ES6 modules provide live bindings — imported values are references to the exporting module's variables, not copies. Changes in the exporter are visible to importers."
+    },
+    {
+      "question": "Can you use import and export inside a function?",
+      "options": ["Yes, anywhere", "No, they are static and must be at the top level", "Only export inside functions", "Only import inside functions"],
+      "answer": 1,
+      "explanation": "Static import/export statements must be at the top level of a module, outside any blocks or functions. Dynamic import() can be used anywhere."
+    },
+    {
+      "question": "What does 'tree-shaking' mean in relation to modules?",
+      "answers": ["Modules that fall over", "Bundlers removing unused exports to reduce bundle size", "Organizing code into a tree structure", "Shaking the module to find bugs"],
+      "answer": 1,
+      "explanation": "Tree-shaking is a bundler optimization that removes unused exports from the final bundle. Named exports enable precise tree-shaking since the bundler knows exactly what's imported."
+    },
+    {
+      "question": "How do you import everything from a module as a single object?",
+      "options": ["import * as All from './module.js'", "import All from './module.js'", "import './module.js'", "import { * } from './module.js'"],
+      "answer": 0,
+      "explanation": "import * as All from './module.js' imports all exports as properties of the All object. Access All.namedExport or All.default."
+    },
+    {
+      "question": "What happens if you import a module that has already been imported elsewhere?",
+      "options": ["It executes again", "It returns the cached module — executes only once", "It throws a duplicate import error", "It's ignored silently"],
+      "answer": 1,
+      "explanation": "Modules are singletons — they are executed only once. The second import returns the same cached module instance."
+    },
+    {
+      "question": "Are ES6 modules in strict mode?",
+      "options": ["Yes, automatically", "No, strict mode must be declared", "Only if 'use strict' is added", "Only in Node.js"],
+      "answer": 0,
+      "explanation": "ES6 modules are always in strict mode by default, without needing 'use strict'. This includes restrictions like no undeclared variables."
+    },
+    {
+      "question": "What is the difference between export { x } and export default x?",
+      "options": ["They are identical", "Named export requires exact import name; default allows any import name", "Default export is faster", "Named export is only for functions"],
+      "answer": 1,
+      "explanation": "Named exports must be imported with the same name (or renamed with 'as'). Default exports can be imported with any name."
+    },
+    {
+      "question": "What does import() return?",
+      "options": ["The default export only", "A promise that resolves to the module namespace object", "The module code as a string", "undefined"],
+      "answer": 1,
+      "explanation": "Dynamic import() returns a Promise that resolves to the module namespace object. Access default via .default and named exports as regular properties."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["var-let-const"] = {
+  "title": "JavaScript var vs let vs const",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "<code>var</code> is <strong>function-scoped</strong>, can be <strong>re-declared</strong> and <strong>updated</strong>, and is <strong>hoisted</strong> to the top of its function (initialized as <code>undefined</code>).",
+    "<code>let</code> is <strong>block-scoped</strong> (<code>{}</code>), can be <strong>updated</strong> but <strong>not re-declared</strong> in the same scope, and is hoisted but in a <strong>Temporal Dead Zone (TDZ)</strong>.",
+    "<code>const</code> is <strong>block-scoped</strong>, must be <strong>initialized at declaration</strong>, cannot be <strong>re-assigned</strong> (but objects/arrays can be mutated), and is also in TDZ.",
+    "Prefer <code>const</code> by default, use <code>let</code> when re-assignment is needed, and <strong>avoid</strong> <code>var</code> in modern code."
+  ],
+  "laymanDefinition": "Imagine three different types of parking spaces. var is like a general parking spot — anyone can park there, any car can park, and cars can be moved around freely. The spot exists anywhere in the parking lot (function scope). let is like a reserved spot in a specific garage bay (block scope) — you can change which car is there, but you can only have one car and it can't cross into other bays. const is like a permanently assigned spot with a car that's bolted to the ground — the car itself can be modified (new paint, new tires) but the assignment to that spot is permanent.",
+  "deepDive": [
+    {
+      "heading": "Scope: Function vs Block",
+      "text": "var is function-scoped — it is visible throughout the entire function regardless of block boundaries (if, for, while). let and const are block-scoped — they are only visible within the nearest set of curly braces {}. This means a let variable inside an if block is not accessible outside it. Block scoping prevents common bugs from variable leakage outside loops and conditionals."
+    },
+    {
+      "heading": "Hoisting Behavior",
+      "text": "All three are hoisted (moved to the top of their scope), but they behave differently. var declarations are hoisted AND initialized to undefined — you can access them before the declaration line (you'll get undefined). let and const are hoisted but NOT initialized — accessing them before declaration throws a ReferenceError. This period between entering scope and declaration is called the 'Temporal Dead Zone' (TDZ)."
+    },
+    {
+      "heading": "Re-declaration and Re-assignment",
+      "list": [
+        "<strong>var:</strong> Can be re-declared and re-assigned freely. Re-declaring a var multiple times in the same scope does not throw an error.",
+        "<strong>let:</strong> Can be re-assigned but NOT re-declared in the same scope. Re-declaration throws SyntaxError.",
+        "<strong>const:</strong> Cannot be re-assigned OR re-declared. Must be initialized at declaration. Throws SyntaxError for re-declaration, TypeError for re-assignment."
+      ]
+    },
+    {
+      "heading": "The Temporal Dead Zone (TDZ)",
+      "text": "The TDZ is the time between entering a block scope (where a let/const variable exists) and reaching the declaration. During this period, accessing the variable throws a ReferenceError. The TDZ prevents the common bug of accessing a variable before initialization (which would silently return undefined with var). The TDZ ends when the declaration is evaluated."
+    },
+    {
+      "heading": "const with Objects and Mutation",
+      "text": "const prevents re-assignment of the variable binding, not mutation of the value. For objects and arrays, const means the reference cannot change, but the contents can be modified. Object.freeze() can make an object deeply immutable, but it's a shallow freeze. For true immutability, use libraries like Immer or immutable update patterns."
+    }
+  ],
+  "interviewAnswer": "var is function-scoped, hoisted with undefined initialization, and allows re-declaration. let and const are block-scoped, hoisted but not initialized (Temporal Dead Zone), and disallow re-declaration. const additionally disallows re-assignment but allows mutation of objects/arrays. Always prefer const, use let when re-assignment is needed, and avoid var in modern code. The TDZ prevents accessing variables before declaration, which was a common source of bugs with var. Block scoping with let/const prevents variable leakage outside loops and conditionals.",
+  "interviewQuestions": [
+    {
+      "question": "What is the main difference between var and let?",
+      "answer": "var is function-scoped and hoisted with undefined initialization. let is block-scoped and in the Temporal Dead Zone until declaration. let also cannot be re-declared in the same scope."
+    },
+    {
+      "question": "What is the Temporal Dead Zone?",
+      "answer": "The TDZ is the period between entering a block scope and reaching the variable declaration. During this time, accessing a let/const variable throws a ReferenceError. It prevents accessing variables before initialization."
+    },
+    {
+      "question": "Can you re-assign a const variable?",
+      "answer": "No, const prevents re-assignment. You cannot do const x = 1; x = 2; — this throws TypeError. However, const objects can have their properties mutated."
+    },
+    {
+      "question": "What is hoisting?",
+      "answer": "Hoisting is JavaScript's behavior of moving declarations to the top of their scope during compilation. var is hoisted and initialized to undefined. let/const are hoisted but not initialized — accessing them before declaration throws ReferenceError (TDZ)."
+    },
+    {
+      "question": "What happens if you try to access a let variable before its declaration?",
+      "answer": "It throws a ReferenceError because the variable is in the Temporal Dead Zone. With var, it would return undefined (silent bug)."
+    },
+    {
+      "question": "Can you re-declare a let variable in the same scope?",
+      "answer": "No. let x = 1; let x = 2; throws SyntaxError. var allows re-declaration: var x = 1; var x = 2; works."
+    },
+    {
+      "question": "Why would you use const instead of let?",
+      "answer": "Use const by default to signal that the variable binding should not change. This makes code more predictable and prevents accidental re-assignment. Use let only when you need to re-assign the variable."
+    },
+    {
+      "question": "Does const make objects immutable?",
+      "answer": "No. const prevents re-assignment of the variable, but object properties can still be mutated. const obj = { a: 1 }; obj.a = 2; works. Use Object.freeze() for shallow immutability or a library like Immer for deep immutability."
+    },
+    {
+      "question": "What happens if you reference a var before it's declared?",
+      "answer": "It returns undefined (not a ReferenceError). The var declaration is hoisted to the top and initialized to undefined. The assignment stays in place. This behavior is a common source of bugs."
+    },
+    {
+      "question": "Is there any performance difference between let/const and var?",
+      "answer": "In modern engines, there is no meaningful performance difference. let/const may allow better optimization in some cases due to more precise scoping. The choice should be based on semantics, not performance."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 400\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"380\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">var vs let vs const Comparison</text><rect x=\"30\" y=\"70\" width=\"200\" height=\"85\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#f87171\" stroke-width=\"1.5\"/><text x=\"130\" y=\"93\" text-anchor=\"middle\" fill=\"#f87171\" font-size=\"13\" font-weight=\"bold\">var</text><text x=\"45\" y=\"113\" fill=\"#9aa0b0\" font-size=\"10\">✓ Function-scoped</text><text x=\"45\" y=\"130\" fill=\"#9aa0b0\" font-size=\"10\">✓ Hoisted (undefined)</text><text x=\"45\" y=\"147\" fill=\"#9aa0b0\" font-size=\"10\">✓ Re-declarable</text><rect x=\"250\" y=\"70\" width=\"200\" height=\"85\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"350\" y=\"93\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"bold\">let</text><text x=\"265\" y=\"113\" fill=\"#9aa0b0\" font-size=\"10\">✓ Block-scoped</text><text x=\"265\" y=\"130\" fill=\"#9aa0b0\" font-size=\"10\">✓ Hoisted (TDZ)</text><text x=\"265\" y=\"147\" fill=\"#9aa0b0\" font-size=\"10\">✗ Re-assignable</text><rect x=\"470\" y=\"70\" width=\"200\" height=\"85\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"570\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"13\" font-weight=\"bold\">const</text><text x=\"485\" y=\"113\" fill=\"#9aa0b0\" font-size=\"10\">✓ Block-scoped</text><text x=\"485\" y=\"130\" fill=\"#9aa0b0\" font-size=\"10\">✓ Hoisted (TDZ)</text><text x=\"485\" y=\"147\" fill=\"#9aa0b0\" font-size=\"10\">✗ Must init / !reassign</text><text x=\"350\" y=\"200\" fill=\"#e8eaed\" font-size=\"12\" font-weight=\"bold\">Best Practice: const &gt; let &gt; var (avoid)</text><text x=\"350\" y=\"240\" fill=\"#9aa0b0\" font-size=\"11\">Use const by default, let when you need re-assignment,</text><text x=\"350\" y=\"260\" fill=\"#9aa0b0\" font-size=\"11\">never var in modern JavaScript (unless legacy code).</text><text x=\"350\" y=\"300\" fill=\"#e5c07b\" font-size=\"11\" font-weight=\"bold\">Note: const does NOT mean immutable</text><text x=\"350\" y=\"320\" fill=\"#9aa0b0\" font-size=\"10\">const obj = { a: 1 }; obj.a = 2; // Allowed (mutation)</text><text x=\"350\" y=\"340\" fill=\"#9aa0b0\" font-size=\"10\">obj = { b: 3 }; // TypeError (re-assignment blocked)</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Scope Comparison: var vs let",
+      "useCase": "Understanding function vs block scope",
+      "code": "function scopeDemo() {\n  // var is function-scoped\n  if (true) {\n    var x = 10;\n    let y = 20;\n    const z = 30;\n  }\n\n  console.log(x); // 10 (accessible! var ignores block)\n  // console.log(y); // ReferenceError: y is not defined\n  // console.log(z); // ReferenceError: z is not defined\n}\n\nscopeDemo();\n\n// for loop quirk with var\nfor (var i = 0; i < 5; i++) {\n  setTimeout(function() { console.log(i); }, 100);\n}\n// Logs: 5, 5, 5, 5, 5 (all see the same i)\n\nfor (let j = 0; j < 5; j++) {\n  setTimeout(function() { console.log(j); }, 100);\n}\n// Logs: 0, 1, 2, 3, 4 (each iteration gets its own j)",
+      "description": "var ignores block scope (function-scoped), while let/const respect blocks. This is why var in loops creates the classic closure bug."
+    },
+    {
+      "title": "Hoisting and TDZ Behavior",
+      "useCase": "When variables are accessible",
+      "code": "console.log(a); // undefined (var hoisted + initialized)\nvar a = 5;\n\n// console.log(b); // ReferenceError: Cannot access 'b' before initialization\nlet b = 10;\n\n// console.log(c); // ReferenceError: Cannot access 'c' before initialization\nconst c = 15;\n\n// The Temporal Dead Zone:\n{\n  // TDZ starts for 'd'\n  // console.log(d); // ReferenceError!\n  let d = 20;\n  // TDZ ends for 'd'\n  console.log(d); // 20\n}\n\n// var hoisting visualization:\n// The above is interpreted as:\n// var a;\n// console.log(a); // undefined\n// a = 5;\n\n// let/const are hoisted but not initialized\n// They exist in the scope but are in the TDZ",
+      "description": "var is hoisted and initialized to undefined. let/const are hoisted but uninitialized — accessing them before declaration throws ReferenceError (TDZ)."
+    },
+    {
+      "title": "Re-declaration and Re-assignment Rules",
+      "useCase": "What's allowed and what's not",
+      "code": "// var — can re-declare and re-assign\nvar name = 'Alice';\nvar name = 'Bob';     // OK: re-declared\nname = 'Charlie';      // OK: re-assigned\nconsole.log(name);     // 'Charlie'\n\n// let — can re-assign but NOT re-declare\nlet age = 30;\n// let age = 31;  // SyntaxError: Identifier 'age' has already been declared\nage = 31;              // OK: re-assigned\nconsole.log(age);      // 31\n\n// const — cannot re-assign or re-declare\nconst birthYear = 1990;\n// const birthYear = 1991;  // SyntaxError\n// birthYear = 1992;       // TypeError: Assignment to constant variable\nconsole.log(birthYear); // 1990\n\n// const requires initialization\n// const uninitialized;  // SyntaxError: Missing initializer\n\n// But const objects CAN be mutated:\nconst user = { name: 'Alice' };\nuser.name = 'Bob';     // OK: mutation, not re-assignment\nconsole.log(user.name); // 'Bob'\n// user = { name: 'Charlie' };  // TypeError!",
+      "description": "var allows re-declaration and re-assignment. let allows re-assignment only. const allows neither re-declaration nor re-assignment, but object properties can be mutated."
+    },
+    {
+      "title": "Practical: When to Use Each",
+      "useCase": "Best practices in real code",
+      "code": "// ✅ const by default — never changes\nconst API_BASE = 'https://api.example.com';\nconst MAX_RETRIES = 3;\nconst config = {\n  theme: 'dark',\n  lang: 'en'\n};\n\n// ✅ let when re-assignment is needed\nlet currentUser = null;\nlet counter = 0;\n\nfunction login(userData) {\n  currentUser = userData;  // re-assignment\n  counter++;               // re-assignment\n}\n\n// ❌ var — avoid in modern code\n// var oldWay = 'deprecated'; // old style, avoid\n\n// Common pitfalls:\n// 1. for loops with var\nfor (var i = 0; i < 3; i++) {\n  setTimeout(function() { console.log(i); }, 0);\n}\n// Logs: 3, 3, 3 (NOT 0, 1, 2)\n\n// 2. Accidental global with var\nfunction test() {\n  var local = 1;\n  leaked = 2;  // No var/let/const — creates global!\n}\ntest();\nconsole.log(leaked); // 2 (accidental global)\n\n// 3. const does NOT freeze objects\nconst data = { items: [] };\ndata.items.push('new item');  // Allowed!\nconsole.log(data.items); // ['new item']",
+      "description": "Modern best practice: use const as default, let when re-assignment is needed, avoid var entirely. Remember const doesn't prevent object mutation."
+    },
+    {
+      "title": "Temporal Dead Zone — Detailed Example",
+      "useCase": "Understanding TDZ edge cases",
+      "code": "function tdzDemo() {\n  console.log('Start of function');\n\n  // TDZ for 'value' starts here\n  // 'value' exists in scope but is uninitialized\n\n  function inner() {\n    // 'value' is NOT accessible here either\n    // TDZ continues until the let declaration\n  }\n\n  // console.log(value); // ReferenceError!\n  // typeof value;      // ReferenceError! (not 'undefined'!)\n\n  let value = 42;\n  // TDZ ends here\n  console.log(value);  // 42\n}\n\ntdzDemo();\n\n// typeof quirk:\nconsole.log(typeof undeclaredVar); // 'undefined' (not ReferenceError)\n// But with TDZ:\n// console.log(typeof tdzVar); // ReferenceError!\n// let tdzVar = 1;\n\n// var demonstrates the difference:\nfunction varHoisting() {\n  console.log(x); // undefined (not ReferenceError)\n  var x = 10;\n  console.log(x); // 10\n}\n\nvarHoisting();\n\n// The TDZ provides safety: it prevents the\n// 'undefined' bugs that var hoisting creates",
+      "description": "The TDZ prevents accessing variables before their declaration. Unlike var (which silently returns undefined), let/const throw a clear ReferenceError."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What will the following log? console.log(x); var x = 5;",
+      "options": ["5", "undefined", "ReferenceError", "null"],
+      "answer": 1,
+      "explanation": "var x is hoisted and initialized to undefined. The assignment (x = 5) stays in place, so console.log(x) logs undefined."
+    },
+    {
+      "question": "What will the following log? console.log(y); let y = 5;",
+      "options": ["5", "undefined", "ReferenceError", "null"],
+      "answer": 2,
+      "explanation": "let y is hoisted but in the Temporal Dead Zone until the declaration. Accessing it before the declaration throws a ReferenceError."
+    },
+    {
+      "question": "Can a const variable be re-assigned?",
+      "options": ["Yes, if it's an object", "No, never", "Only once", "Yes, with const = newValue"],
+      "answer": 1,
+      "explanation": "const prevents re-assignment. Even const objects cannot be re-assigned (though their properties can be mutated)."
+    },
+    {
+      "question": "What scope does var use?",
+      "options": ["Block scope", "Function scope", "Global scope only", "Module scope"],
+      "answer": 1,
+      "explanation": "var is function-scoped — it's visible throughout the entire function regardless of block boundaries."
+    },
+    {
+      "question": "What scope does let/const use?",
+      "options": ["Function scope", "Block scope", "Global scope only", "Dynamic scope"],
+      "answer": 1,
+      "explanation": "let and const are block-scoped — they are only visible within the nearest set of curly braces {}."
+    },
+    {
+      "question": "What is the Temporal Dead Zone?",
+      "options": ["The time before a variable is garbage collected", "The period between scope entry and variable declaration where let/const are inaccessible", "The time it takes for var to be hoisted", "A debugging tool"],
+      "answer": 1,
+      "explanation": "The TDZ is the period between entering the scope and reaching the let/const declaration. Accessing the variable during TDZ throws ReferenceError."
+    },
+    {
+      "question": "What will the following log? const obj = { a: 1 }; obj.a = 2; console.log(obj.a);",
+      "options": ["1", "2", "TypeError", "undefined"],
+      "answer": 1,
+      "explanation": "const prevents re-assignment of the variable binding (obj = ...), not mutation of properties. obj.a = 2 is allowed."
+    },
+    {
+      "question": "Which is the recommended best practice?",
+      "options": ["Use var everywhere", "Use const by default, let when needed, avoid var", "Use let everywhere", "Use const everywhere, never let"],
+      "answer": 1,
+      "explanation": "Best practice: prefer const (immutable binding), use let when re-assignment is needed, and avoid var entirely in modern code."
+    },
+    {
+      "question": "What will this loop log? for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i), 0); }",
+      "options": ["0, 1, 2", "3, 3, 3", "undefined, undefined, undefined", "0, 0, 0"],
+      "answer": 1,
+      "explanation": "var i is function-scoped. By the time setTimeout runs, the loop has finished and i is 3. All three callbacks see the same i (3)."
+    },
+    {
+      "question": "What will this loop log? for (let j = 0; j < 3; j++) { setTimeout(() => console.log(j), 0); }",
+      "options": ["0, 1, 2", "3, 3, 3", "undefined, undefined, undefined", "2, 2, 2"],
+      "answer": 0,
+      "explanation": "With let, each iteration creates a new binding for j. Each setTimeout callback captures a different j value (0, 1, 2)."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["arrow-functions"] = {
+  "title": "JavaScript Arrow Functions",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "<strong>Arrow functions</strong> (<code>=&gt;</code>) provide a shorter syntax for writing function expressions and lexically bind the <code>this</code> value.",
+    "Syntax: <code>(params) =&gt; expression</code> (implicit return) or <code>(params) =&gt; { body }</code> (explicit return).",
+    "Arrow functions do <strong>not</strong> have their own <code>this</code> — they inherit <code>this</code> from the <strong>surrounding lexical scope</strong>.",
+    "Arrow functions are <strong>not</strong> constructors (cannot use <code>new</code>), have no <code>arguments</code> object, and cannot be used as generators."
+  ],
+  "laymanDefinition": "Arrow functions are like shorthand notes compared to full sentences. Instead of writing 'function(x) { return x * 2; }', you can write 'x => x * 2'. They're shorter and more direct. But the real superpower is that arrow functions don't have their own 'this' — they borrow 'this' from the surrounding code. This is like having a child who automatically uses their parent's last name instead of creating their own. This eliminates the classic 'this' confusion in callbacks and event handlers.",
+  "deepDive": [
+    {
+      "heading": "Arrow Function Syntax Variants",
+      "text": "Arrow functions have several syntax forms: (1) <code>param => expression</code> — single parameter, implicit return. (2) <code>(param1, param2) => expression</code> — multiple params, implicit return. (3) <code>() => expression</code> — no params, implicit return. (4) <code>(...) => { statements; return value; }</code> — block body, explicit return needed. (5) <code>() => ({ key: value })</code> — returning an object literal requires wrapping in parentheses."
+    },
+    {
+      "heading": "Lexical this Binding — The Key Feature",
+      "text": "Unlike regular functions (which get their own 'this' based on how they're called), arrow functions have no 'this' of their own. They capture 'this' from the enclosing lexical scope at definition time. This eliminates the need for <code>.bind(this)</code>, <code>var self = this</code>, or <code>that = this</code> patterns. This is the primary reason arrow functions were introduced and the main reason they're preferred for callbacks."
+    },
+    {
+      "heading": "Arrow Functions vs Regular Functions",
+      "list": [
+        "<strong>this:</strong> Arrow — lexical (inherits from scope). Regular — dynamic (based on call site).",
+        "<strong>Constructor:</strong> Arrow — cannot use 'new' (throws TypeError). Regular — can be used as constructor.",
+        "<strong>arguments:</strong> Arrow — no arguments object. Regular — has arguments object.",
+        "<strong>new.target:</strong> Arrow — inherits from scope. Regular — has its own.",
+        "<strong>Generator:</strong> Arrow — cannot use yield. Regular — can be a generator.",
+        "<strong>Prototype:</strong> Arrow — no prototype property. Regular — has prototype."
+      ]
+    },
+    {
+      "heading": "Implicit Return and Object Literals",
+      "text": "When an arrow function has a single expression in the body (no {}), the expression is implicitly returned. To return an object literal, wrap it in parentheses: <code>() => ({ key: 'value' })</code>. Without parentheses, the engine interprets {} as a block body and returns undefined. Implicit return makes arrow functions ideal for concise transformations in methods like map, filter, and reduce."
+    },
+    {
+      "heading": "When NOT to Use Arrow Functions",
+      "text": "Avoid arrow functions when: (1) You need dynamic 'this' (e.g., object methods, event handlers that need the DOM element). (2) You need the arguments object. (3) You need a constructor function. (4) You need a generator function. (5) You need to add methods to a prototype. (6) You need recursion with a named function. For these cases, use regular function expressions or declarations."
+    }
+  ],
+  "interviewAnswer": "Arrow functions provide concise syntax and lexical 'this' binding. They inherit 'this' from the enclosing scope, eliminating the need for .bind() or self = this patterns. Arrow functions cannot be used as constructors, have no arguments object, and cannot be generators. Use them for callbacks, array methods (map, filter, reduce), and any context where lexical 'this' is desired. Avoid them for object methods (where dynamic 'this' is needed), event handlers needing event.currentTarget, constructors, and prototype methods. Arrow functions also support implicit return for single-expression bodies.",
+  "interviewQuestions": [
+    {
+      "question": "What is an arrow function?",
+      "answer": "An arrow function is a concise syntax for function expressions using =>. It lexically binds 'this' (inherits from enclosing scope) and cannot be used as a constructor. Example: const add = (a, b) => a + b."
+    },
+    {
+      "question": "How does 'this' work in arrow functions vs regular functions?",
+      "answer": "Arrow functions have no 'this' of their own — they inherit 'this' from the enclosing lexical scope. Regular functions have dynamic 'this' based on how they're called (the call site)."
+    },
+    {
+      "question": "Can arrow functions be used as constructors?",
+      "answer": "No. Arrow functions do not have a [[Construct]] internal method. Calling them with 'new' throws a TypeError: 'x is not a constructor'."
+    },
+    {
+      "question": "Do arrow functions have the arguments object?",
+      "answer": "No. Arrow functions do not have their own arguments object. If you need the arguments object, use a regular function or rest parameters (...args)."
+    },
+    {
+      "question": "How do you return an object literal from an arrow function?",
+      "answer": "Wrap the object in parentheses: const getObj = () => ({ key: 'value' }). Without parentheses, the engine treats {} as a block body and returns undefined."
+    },
+    {
+      "question": "What is implicit return in arrow functions?",
+      "answer": "If the arrow function body is a single expression without {} braces, that expression is automatically returned. const double = x => x * 2; // returns x * 2"
+    },
+    {
+      "question": "When should you NOT use an arrow function?",
+      "answer": "Avoid arrows for: object methods (need dynamic this), event handlers needing the DOM element as this, constructors, prototype methods, generator functions, and when arguments object is needed."
+    },
+    {
+      "question": "How do you write a multi-line arrow function?",
+      "answer": "Use block body with {} and explicit return: const fn = (a, b) => { const result = a + b; return result; };"
+    },
+    {
+      "question": "What is the syntax for an arrow function with no parameters?",
+      "answer": "Use empty parentheses: const greet = () => 'Hello'. Or use an underscore: const greet = _ => 'Hello' (though this is less common)."
+    },
+    {
+      "question": "Can arrow functions have default parameters?",
+      "answer": "Yes: const greet = (name = 'Guest') => 'Hello ' + name. Arrow functions support all parameter features: defaults, rest, destructuring."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Arrow Functions — Syntax &amp; this Binding</text><rect x=\"40\" y=\"70\" width=\"300\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"190\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Regular: function(a, b) { return a + b; }</text><text x=\"190\" y=\"112\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Own this, arguments, can be constructor</text><rect x=\"40\" y=\"140\" width=\"300\" height=\"55\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"190\" y=\"163\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">Arrow: (a, b) =&gt; a + b</text><text x=\"190\" y=\"182\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Lexical this, no arguments, no new</text><rect x=\"380\" y=\"70\" width=\"280\" height=\"125\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"520\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">Lexical this (key feature)</text><text x=\"520\" y=\"118\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">const obj = {</text><text x=\"520\" y=\"138\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">  fn: () =&gt; this  // inherits outer this</text><text x=\"520\" y=\"158\" text-anchor=\"middle\" fill=\"#d19a66\" font-size=\"10\">  fn2() { return this; }  // obj's this</text><text x=\"520\" y=\"178\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">}</text><text x=\"350\" y=\"280\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Prefer arrows for callbacks, avoid for methods/constructors</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Arrow Function Syntax Comparison",
+      "useCase": "From regular function to arrow",
+      "code": "// Regular function — full syntax\nconst doubleRegular = function(x) {\n  return x * 2;\n};\n\n// Arrow — block body (explicit return)\nconst doubleBlock = (x) => {\n  return x * 2;\n};\n\n// Arrow — concise body (implicit return)\nconst double = x => x * 2;\n\n// Multiple parameters\nconst add = (a, b) => a + b;\n\n// No parameters\nconst greet = () => 'Hello!';\n\n// Single parameter — parentheses optional\nconst square = x => x * x;\n\n// Returning an object literal\nconst makeUser = (name, age) => ({ name: name, age: age });\n// Without () around {}: returns undefined!\n\n// Block body with multiple statements\nconst process = (items) => {\n  const filtered = items.filter(x => x > 0);\n  const sum = filtered.reduce((a, b) => a + b, 0);\n  return sum / filtered.length;\n};\n\nconsole.log(double(5));       // 10\nconsole.log(makeUser('Alice', 30));\n// { name: 'Alice', age: 30 }",
+      "description": "Arrow functions offer multiple syntax forms. Single-expression arrows use implicit return. Object literals must be wrapped in (). Block bodies need explicit return."
+    },
+    {
+      "title": "Lexical this — The Killer Feature",
+      "useCase": "Eliminating 'this' confusion in callbacks",
+      "code": "function Timer() {\n  this.seconds = 0;\n\n  // Regular function — broken this\n  setInterval(function() {\n    this.seconds++;  // this is the timeout global/window, NOT Timer\n    // console.log(this.seconds); // NaN or undefined\n  }, 1000);\n}\n\nfunction TimerFixed() {\n  this.seconds = 0;\n  var self = this;  // old workaround\n\n  setInterval(function() {\n    self.seconds++;\n    console.log(self.seconds);\n  }, 1000);\n}\n\nfunction TimerArrow() {\n  this.seconds = 0;\n\n  // Arrow — inherits this from TimerArrow scope\n  setInterval(() => {\n    this.seconds++;  // this is TimerArrow instance\n    console.log(this.seconds);\n  }, 1000);\n}\n\n// const t = new TimerArrow(); // Logs: 1, 2, 3, ...\n\n// Same with event handlers:\nclass Button {\n  constructor(label) {\n    this.label = label;\n  }\n\n  // Arrow method — this is always the instance\n  handleClick = () => {\n    console.log(this.label + ' clicked');\n  }\n\n  // Regular method — loses this in callbacks\n  handleBadClick() {\n    console.log(this.label + ' clicked');  // this is undefined in strict mode\n  }\n}",
+      "description": "Arrow functions inherit 'this' from the surrounding scope, making them ideal for callbacks, intervals, and event handlers where regular functions lose 'this'."
+    },
+    {
+      "title": "Arrow Functions in Array Methods",
+      "useCase": "Concise data transformations",
+      "code": "const numbers = [1, 2, 3, 4, 5, 6];\n\n// map — transform each element\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6, 8, 10, 12]\n\n// filter — keep elements that pass the test\nconst evens = numbers.filter(n => n % 2 === 0);\nconsole.log(evens); // [2, 4, 6]\n\n// reduce — accumulate values\nconst sum = numbers.reduce((acc, n) => acc + n, 0);\nconsole.log(sum); // 21\n\n// Chaining with arrows\nconst result = numbers\n  .filter(n => n > 2)\n  .map(n => n * 3)\n  .reduce((a, b) => a + b, 0);\nconsole.log(result); // (3+4+5+6)*3 = 54\n\n// sort with arrow\nconst sorted = [...numbers].sort((a, b) => b - a);\nconsole.log(sorted); // [6, 5, 4, 3, 2, 1]\n\n// every/some\nconst allPositive = numbers.every(n => n > 0); // true\nconst hasLarge = numbers.some(n => n > 10);    // false",
+      "description": "Arrow functions make array method chains concise and readable. Their conciseness shines with map, filter, reduce, and other iteration methods."
+    },
+    {
+      "title": "When Arrow Functions Fail — Object Methods",
+      "useCase": "Understanding when NOT to use arrows",
+      "code": "const user = {\n  name: 'Alice',\n  // Arrow method — WRONG: this is NOT user\n  greetArrow: () => {\n    return 'Hello, ' + this.name;  // this is the outer/window scope\n  },\n  // Regular method — CORRECT: this is user\n  greetRegular() {\n    return 'Hello, ' + this.name;\n  }\n};\n\nconsole.log(user.greetRegular()); // 'Hello, Alice'\nconsole.log(user.greetArrow());   // 'Hello, undefined' or 'Hello, '\n\n// Arrow in prototype — also wrong\nfunction Person(name) {\n  this.name = name;\n}\nPerson.prototype.greetArrow = () => {\n  return 'Hi, ' + this.name;  // this is NOT the instance\n};\nPerson.prototype.greetRegular = function() {\n  return 'Hi, ' + this.name;\n};\n\nconst p = new Person('Bob');\nconsole.log(p.greetRegular()); // 'Hi, Bob'\nconsole.log(p.greetArrow());   // 'Hi, undefined'\n\n// Arrow for event handler (DOM element this)\nconst button = document.querySelector('button');\nbutton.addEventListener('click', function() {\n  console.log(this); // the button element\n});\nbutton.addEventListener('click', () => {\n  console.log(this); // window/outer scope, NOT the button\n});",
+      "description": "Arrow functions inherit 'this' lexically, which makes them unsuitable for object methods, prototype methods, and event handlers that need the DOM element as 'this'."
+    },
+    {
+      "title": "Arrow Functions: No arguments, No new",
+      "useCase": "Understanding limitations",
+      "code": "// No arguments object:\nfunction regular() {\n  console.log(arguments[0], arguments[1]);\n}\n\nconst arrow = () => {\n  // console.log(arguments); // ReferenceError: arguments not defined\n  // Use rest instead:\n};\n\nconst arrowWithRest = (...args) => {\n  console.log(args[0], args[1]);\n};\n\nregular(1, 2);     // 1 2\narrowWithRest(3, 4); // 3 4\n\n// Cannot be used as constructor:\nconst MyClass = () => {};\n// const obj = new MyClass(); // TypeError: MyClass is not a constructor\n\nfunction MyRegularClass() {\n  this.name = 'test';\n}\nconst regularObj = new MyRegularClass(); // Works\n\n// No prototype property:\nconsole.log(MyRegularClass.prototype); // {}\nconsole.log(MyClass.prototype);        // undefined\n\n// Cannot be a generator:\n// const generator =* () => { yield 1; }; // SyntaxError\n// Use regular function* instead:\nfunction* regularGenerator() {\n  yield 1;\n}\n\n// Rest parameters are the arrow-compatible alternative:\nconst logAll = (...args) => {\n  console.log('Arguments:', args);\n};\nlogAll(1, 2, 3, 4); // Arguments: [1, 2, 3, 4]",
+      "description": "Arrow functions lack arguments (use rest), cannot be constructors (no [[Construct]]), have no prototype, and cannot be generators. Use regular functions for these cases."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is the output? const fn = (a, b) => a + b; console.log(fn(3, 4));",
+      "options": ["7", "34", "undefined", "NaN"],
+      "answer": 0,
+      "explanation": "The arrow function implicitly returns a + b. fn(3, 4) returns 7."
+    },
+    {
+      "question": "Do arrow functions have their own this?",
+      "options": ["Yes, like regular functions", "No, they inherit this from the enclosing scope", "Only in strict mode", "Only in the global scope"],
+      "answer": 1,
+      "explanation": "Arrow functions have no 'this' of their own. They capture 'this' from the surrounding lexical scope at definition time."
+    },
+    {
+      "question": "Can arrow functions be used with 'new'?",
+      "options": ["Yes", "No, they throw TypeError", "Only in ES6", "Only in strict mode"],
+      "answer": 1,
+      "explanation": "Arrow functions cannot be used as constructors. They have no [[Construct]] internal method, so 'new' throws a TypeError."
+    },
+    {
+      "question": "What is the correct way to return an object from an arrow function?",
+      "options": ["() => {key: 'value'}", "() => ({key: 'value'})", "() => { return {key: 'value'} }", "Both B and C"],
+      "answer": 3,
+      "explanation": "Both () => ({key: 'value'}) (implicit with parens) and () => { return {key: 'value'}; } (explicit) correctly return an object."
+    },
+    {
+      "question": "Do arrow functions have the 'arguments' object?",
+      "options": ["Yes, like regular functions", "No, use rest parameters instead", "Only in non-strict mode", "Only in Node.js"],
+      "answer": 1,
+      "explanation": "Arrow functions do not have their own arguments object. Use rest parameters (...args) as the alternative."
+    },
+    {
+      "question": "What will this log? const obj = { fn: () => this }; console.log(obj.fn() === window);",
+      "options": ["false", "true (in browser)", "undefined", "TypeError"],
+      "answer": 1,
+      "explanation": "Arrow functions inherit 'this' from the enclosing scope. obj's enclosing scope is the global scope, so this is window (in browsers)."
+    },
+    {
+      "question": "Which of these is a valid arrow function syntax?",
+      "options": ["const f = a, b => a + b", "const f = (a, b) => a + b", "const f = (a, b) => { a + b }", "const f = (a b) => a + b"],
+      "answer": 1,
+      "explanation": "Multiple parameters must be wrapped in parentheses: (a, b) => a + b. Option C lacks the return keyword."
+    },
+    {
+      "question": "How do you write an arrow function with a multi-line block body?",
+      "options": ["() => line1; line2; line3", "() => { line1; line2; return line3; }", "() => (line1, line2, line3)", "() -> { line1; line2; line3 }"],
+      "answer": 1,
+      "explanation": "Use {} for a block body with multiple statements. You must use explicit return if the function should return a value."
+    },
+    {
+      "question": "What is the main advantage of arrow functions over regular functions?",
+      "options": ["Faster execution", "Lexical this binding and concise syntax", "Access to arguments object", "Can be used as constructors"],
+      "answer": 1,
+      "explanation": "The two main advantages are: (1) lexical this binding (no need for .bind() or self = this), and (2) concise syntax for callbacks."
+    },
+    {
+      "question": "When should you NOT use an arrow function?",
+      "options": ["In array callbacks (map, filter)", "For object methods that need dynamic this", "In setTimeout/ setInterval", "For simple transformations"],
+      "answer": 1,
+      "explanation": "Avoid arrow functions for object methods when you need 'this' to refer to the object. Regular functions (or method syntax) are better for that."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["higher-order-functions"] = {
+  "title": "JavaScript Higher Order Functions",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "A <strong>Higher Order Function (HOF)</strong> is a function that either takes one or more functions as arguments, <strong>returns a function</strong>, or both.",
+    "HOFs enable <strong>abstraction</strong>, <strong>code reuse</strong>, and <strong>functional programming</strong> patterns like composition and currying.",
+    "Examples: <code>Array.map()</code>, <code>Array.filter()</code>, <code>Array.reduce()</code>, <code>setTimeout()</code>, <code>addEventListener()</code>.",
+    "Closures and HOFs are closely related — when a HOF returns a function, the returned function has access to the HOF's variables via closure."
+  ],
+  "laymanDefinition": "Imagine you own a factory. A higher order function is like a machine that either takes other machines as input or produces new machines as output. For example, a 'packing machine' might accept a 'wrapping machine' (function as argument) and use it to wrap products. Or you might have a 'machine creator' that builds and returns new machines (returns a function). These are more powerful than regular machines because they work WITH other machines to create complex processes.",
+  "deepDive": [
+    {
+      "heading": "Functions as First-Class Citizens",
+      "text": "In JavaScript, functions are first-class citizens — they can be assigned to variables, passed as arguments to other functions, returned from functions, and stored in data structures. This is the foundation for higher order functions. Languages where functions are not first-class (like older C) cannot easily implement HOFs."
+    },
+    {
+      "heading": "HOFs That Accept Functions (Callbacks)",
+      "text": "The most common HOF pattern is accepting a callback function. Array methods (map, filter, reduce, forEach) are classic examples. The HOF controls when and how the callback is called — it may call it once per array element, transform its return value, or use it to determine logic. Event listeners (addEventListener) are another example: the HOF (addEventListener) stores the callback and calls it when the event fires."
+    },
+    {
+      "heading": "HOFs That Return Functions (Closures)",
+      "text": "A HOF can return a new function, creating a closure. The returned function retains access to the HOF's variables even after the HOF has finished executing. Examples: <code>function multiplyBy(x) { return (y) => x * y; }</code>. The returned function remembers x. This is the basis for currying, partial application, and function factories."
+    },
+    {
+      "heading": "Common Built-in HOFs in JavaScript",
+      "list": [
+        "<strong>Array.prototype</strong>: map(), filter(), reduce(), forEach(), find(), some(), every(), sort().",
+        "<strong>Function.prototype</strong>: bind(), call(), apply() — though these are less commonly called HOFs.",
+        "<strong>Global:</strong> setTimeout(), setInterval(), Promise.then(), Promise.catch().",
+        "<strong>Custom:</strong> Debounce, throttle, once, memoize, pipe, compose."
+      ]
+    },
+    {
+      "heading": "Function Composition with HOFs",
+      "text": "Higher Order Functions enable function composition — combining multiple functions to create more complex ones. A simple compose function: <code>const compose = (f, g) => (x) => f(g(x))</code>. More advanced: <code>const pipe = (...fns) => (x) => fns.reduce((acc, fn) => fn(acc), x)</code>. This creates data pipelines where the output of each function feeds into the next."
+    }
+  ],
+  "interviewAnswer": "A Higher Order Function (HOF) is a function that takes one or more functions as arguments, returns a function, or both. JavaScript treats functions as first-class citizens, enabling this pattern. Common HOFs include Array methods (map, filter, reduce, forEach), event listeners (addEventListener), timers (setTimeout, setInterval), and Promise methods. HOFs enable abstraction, code reuse, function composition, and functional programming patterns like currying and memoization. A HOF returning a function creates a closure over its variables. Key interview topics: implementing HOFs like debounce/throttle/once, understanding how map/filter/reduce work, and composing functions with pipe/compose.",
+  "interviewQuestions": [
+    {
+      "question": "What is a Higher Order Function?",
+      "answer": "A function that either takes one or more functions as arguments, returns a function, or both. Example: Array.map takes a callback (function argument). Function.bind returns a new function."
+    },
+    {
+      "question": "What is the difference between a callback and a HOF?",
+      "answer": "A callback is a function passed as an argument. A HOF is the function that receives or returns a function. In arr.map(callback), map is the HOF and callback is the callback function."
+    },
+    {
+      "question": "What makes a function a first-class citizen?",
+      "answer": "A first-class citizen can be: assigned to a variable, passed as an argument, returned from a function, and stored in data structures. JavaScript functions are first-class, which enables HOFs."
+    },
+    {
+      "question": "What are examples of built-in HOFs?",
+      "answer": "Array.map, Array.filter, Array.reduce, Array.forEach, Array.find, Array.some, Array.every, setTimeout, setInterval, addEventListener, Promise.then, Promise.catch, Function.bind."
+    },
+    {
+      "question": "How does a HOF create a closure?",
+      "answer": "When a HOF returns a function, the returned function retains access to the HOF's variables via closure. Example: function multiplyBy(x) { return (y) => x * y; } — the returned arrow function closes over x."
+    },
+    {
+      "question": "What is function composition with HOFs?",
+      "answer": "Combining multiple functions into a pipeline: const pipe = (...fns) => (x) => fns.reduce((v, fn) => fn(v), x). This creates a HOF that accepts functions and returns a new composed function."
+    },
+    {
+      "question": "How do you implement a 'once' HOF?",
+      "answer": "function once(fn) { let called = false; return function(...args) { if (called) return; called = true; return fn.apply(this, args); }; }. The HOF returns a function that only allows one call."
+    },
+    {
+      "question": "What is difference between declarative and imperative with HOFs?",
+      "answer": "Imperative: for-loop with manual index tracking. Declarative: arr.filter(x => x > 0). HOFs enable declarative code that focuses on WHAT to do, not HOW to do it."
+    },
+    {
+      "question": "Can HOFs improve performance?",
+      "answer": "Not inherently, but they enable optimization patterns like memoization (caching results), debouncing (limiting frequency), and lazy evaluation. The primary benefit is code clarity and reusability."
+    },
+    {
+      "question": "How do you implement a simple debounce HOF?",
+      "answer": "function debounce(fn, delay) { let timer; return function(...args) { clearTimeout(timer); timer = setTimeout(() => fn.apply(this, args), delay); }; }. The HOF takes a function and returns a debounced version."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Higher Order Functions</text><rect x=\"40\" y=\"70\" width=\"280\" height=\"100\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"180\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">HOF — Takes Function as Argument</text><text x=\"180\" y=\"115\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">function map(arr, fn) { ... }</text><text x=\"180\" y=\"135\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">arr = [1, 2, 3], fn = x =&gt; x * 2</text><text x=\"180\" y=\"155\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ [2, 4, 6]</text><rect x=\"360\" y=\"70\" width=\"300\" height=\"100\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"510\" y=\"93\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">HOF — Returns Function</text><text x=\"510\" y=\"115\" text-anchor=\"middle\" fill=\"#e5c07b\" font-size=\"10\">function multiplyBy(x) {</text><text x=\"510\" y=\"135\" text-anchor=\"middle\" fill=\"#e5c07b\" font-size=\"10\">return (y) =&gt; x * y;</text><text x=\"510\" y=\"155\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">}  const double = multiplyBy(2);</text><text x=\"350\" y=\"240\" fill=\"#e8eaed\" font-size=\"12\" font-weight=\"bold\">Key Built-in HOFs</text><text x=\"350\" y=\"265\" fill=\"#9aa0b0\" font-size=\"11\">Array: map, filter, reduce, forEach, find, some, every</text><text x=\"350\" y=\"285\" fill=\"#9aa0b0\" font-size=\"11\">Other: setTimeout, addEventListener, Promise.then, .bind()</text></svg>",
+  "codeExamples": [
+    {
+      "title": "HOF That Takes a Function — Custom Array Map",
+      "useCase": "Understanding how map works internally",
+      "code": "// Custom map — a HOF that takes a callback\nfunction customMap(arr, fn) {\n  const result = [];\n  for (let i = 0; i < arr.length; i++) {\n    result.push(fn(arr[i], i, arr));\n  }\n  return result;\n}\n\nconst numbers = [1, 2, 3, 4];\nconst doubled = customMap(numbers, function(n) {\n  return n * 2;\n});\nconsole.log(doubled); // [2, 4, 6, 8]\n\n// Using the built-in map (also a HOF)\nconst tripled = numbers.map(function(n) {\n  return n * 3;\n});\nconsole.log(tripled); // [3, 6, 9, 12]\n\n// Arrow function version\nconst squared = numbers.map(n => n * n);\nconsole.log(squared); // [1, 4, 9, 16]",
+      "description": "customMap is a HOF that takes an array and a function (callback). It calls the callback for each element, building a new array. The built-in Array.map works the same way."
+    },
+    {
+      "title": "HOF That Returns a Function — Function Factory",
+      "useCase": "Creating specialized functions",
+      "code": "// HOF that returns a new function (closure)\nfunction multiplyBy(factor) {\n  return function(number) {\n    return number * factor;\n  };\n}\n\n// Create specialized functions\nconst double = multiplyBy(2);\nconst triple = multiplyBy(3);\nconst tenTimes = multiplyBy(10);\n\nconsole.log(double(5));   // 10\nconsole.log(triple(5));   // 15\nconsole.log(tenTimes(5)); // 50\n\n// Practical: API URL builder\nfunction createApiClient(baseUrl) {\n  return function(endpoint) {\n    return fetch(baseUrl + endpoint)\n      .then(function(r) { return r.json(); });\n  };\n}\n\nconst githubApi = createApiClient('https://api.github.com');\ngithubApi('/users/octocat').then(function(data) {\n  console.log(data.login); // 'octocat'\n});\n\n// Practical: prefix logger\nfunction createLogger(prefix) {\n  return function(message) {\n    console.log('[' + prefix + '] ' + message);\n  };\n}\n\nconst infoLog = createLogger('INFO');\nconst errorLog = createLogger('ERROR');\ninfoLog('Server started');   // [INFO] Server started\nerrorLog('Connection lost'); // [ERROR] Connection lost",
+      "description": "A HOF returning a function creates a closure over its parameters. This enables creating specialized functions from a general one — a core functional programming pattern."
+    },
+    {
+      "title": "HOF: Function Composition (pipe)",
+      "useCase": "Building data transformation pipelines",
+      "code": "// pipe — HOF that takes multiple functions and composes them\nfunction pipe(...functions) {\n  return function(initialValue) {\n    return functions.reduce(function(acc, fn) {\n      return fn(acc);\n    }, initialValue);\n  };\n}\n\n// compose (right-to-left)\nfunction compose(...functions) {\n  return function(initialValue) {\n    return functions.reduceRight(function(acc, fn) {\n      return fn(acc);\n    }, initialValue);\n  };\n}\n\n// Small reusable functions\nconst add1 = x => x + 1;\nconst double = x => x * 2;\nconst toString = x => 'Result: ' + x;\n\n// Compose them\nconst processNumber = pipe(add1, double, toString);\nconsole.log(processNumber(5)); // 'Result: 12'\n// Step by step: 5 → 6 (add1) → 12 (double) → 'Result: 12' (toString)\n\n// compose (right-to-left)\nconst processNumberRTL = compose(toString, double, add1);\nconsole.log(processNumberRTL(5)); // 'Result: 12'\n// Same result because compose is RTL: add1(5)=6, double(6)=12, toString(12)\n\n// Practical: data processing pipeline\nconst data = [1, 2, 3, 4, 5, 6];\nconst processData = pipe(\n  arr => arr.filter(n => n % 2 === 0),  // keep evens\n  arr => arr.map(n => n * 10),           // multiply by 10\n  arr => arr.reduce((sum, n) => sum + n, 0) // sum\n);\nconsole.log(processData(data)); // (2+4+6)*10 = 120",
+      "description": "pipe/compose are HOFs that accept multiple functions and return a new composed function. Data flows through each function in sequence. This is a fundamental functional programming pattern."
+    },
+    {
+      "title": "HOF: Memoization (Caching)",
+      "useCase": "Optimizing expensive function calls",
+      "code": "// memoize — HOF that caches results\nfunction memoize(fn) {\n  var cache = new Map();\n\n  return function(...args) {\n    var key = JSON.stringify(args);\n\n    if (cache.has(key)) {\n      console.log('Cache hit for:', key);\n      return cache.get(key);\n    }\n\n    console.log('Computing for:', key);\n    var result = fn.apply(this, args);\n    cache.set(key, result);\n    return result;\n  };\n}\n\n// Expensive function\nfunction fibonacci(n) {\n  if (n <= 1) return n;\n  return fibonacci(n - 1) + fibonacci(n - 2);\n}\n\n// Memoized version\nconst memoFib = memoize(function(n) {\n  if (n <= 1) return n;\n  return memoFib(n - 1) + memoFib(n - 2);\n});\n\nconsole.log(memoFib(40)); // 102334155 (fast!)\n// Without memoization, this would be extremely slow\n\n// Practical: memoize API calls\nconst fetchUser = memoize(async function(userId) {\n  var response = await fetch('/api/users/' + userId);\n  return response.json();\n});\n\nfetchUser(1).then(function(u) { console.log('Got user'); });\n// fetchUser(1) // Second call returns cached result — no network request",
+      "description": "A memoize HOF wraps an expensive function with caching. The returned function checks the cache before calling the original function. Cache keys are typically the arguments serialized to string."
+    },
+    {
+      "title": "Practical HOF: once, debounce, throttle",
+      "useCase": "Real-world HOF patterns",
+      "code": "// once — ensures function is called only once\nfunction once(fn) {\n  var called = false;\n  var result;\n  return function(...args) {\n    if (called) return result;\n    called = true;\n    result = fn.apply(this, args);\n    return result;\n  };\n}\n\nvar initialize = once(function() {\n  console.log('Initializing... (runs once)');\n  return { ready: true };\n});\n\nconsole.log(initialize()); // 'Initializing...' + { ready: true }\nconsole.log(initialize()); // { ready: true } (no log)\n\n// debounce — delays execution until after a pause\nfunction debounce(fn, delay) {\n  var timer;\n  return function(...args) {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn.apply(this, args), delay);\n  };\n}\n\n// throttle — limits execution rate\nfunction throttle(fn, limit) {\n  var inThrottle = false;\n  return function(...args) {\n    if (!inThrottle) {\n      fn.apply(this, args);\n      inThrottle = true;\n      setTimeout(function() { inThrottle = false; }, limit);\n    }\n  };\n}\n\n// These are all HOFs: they take a function and return\n// a new function with enhanced behavior",
+      "description": "once, debounce, and throttle are practical HOFs. They wrap a function to add behavior: limiting calls (once), delaying execution (debounce), or rate-limiting (throttle)."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is a Higher Order Function?",
+      "options": ["A function that returns a number", "A function that takes or returns another function", "A function with multiple parameters", "A function that calls itself"],
+      "answer": 1,
+      "explanation": "A HOF is a function that takes one or more functions as arguments, returns a function, or both."
+    },
+    {
+      "question": "Which of these is a Higher Order Function?",
+      "options": ["function add(a, b) { return a + b; }", "Array.prototype.map", "const x = 5", "if (true) { }"],
+      "answer": 1,
+      "explanation": "Array.map is a HOF because it takes a callback function as an argument. The other options are not HOFs."
+    },
+    {
+      "question": "What does a HOF that returns a function create?",
+      "options": ["A callback", "A closure", "A promise", "An iteration"],
+      "answer": 1,
+      "explanation": "When a HOF returns a function, the returned function forms a closure over the HOF's variables."
+    },
+    {
+      "question": "Which of these is NOT a HOF?",
+      "options": ["setTimeout", "Array.filter", "Math.max", "Function.bind"],
+      "answer": 2,
+      "explanation": "Math.max is a regular function that takes values and returns the max. It does NOT take or return a function."
+    },
+    {
+      "question": "Why are functions called 'first-class citizens' in JavaScript?",
+      "options": ["Because they run first", "Because they can be assigned, passed, and returned like any value", "Because they have priority", "Because they execute immediately"],
+      "answer": 1,
+      "explanation": "Functions are first-class citizens because they can be assigned to variables, passed as arguments, returned from functions, and stored in data structures."
+    },
+    {
+      "question": "What is the 'once' HOF pattern?",
+      "options": ["A function that runs indefinitely", "A HOF that ensures the wrapped function runs only once", "A function that runs once per second", "A function with a single parameter"],
+      "answer": 1,
+      "explanation": "The 'once' HOF wraps a function so it executes only on the first call and returns the cached result for subsequent calls."
+    },
+    {
+      "question": "What does pipe(...fns) do?",
+      "options": ["Creates a pipeline where data flows left-to-right through functions", "Creates multiple copies of a function", "Pauses function execution", "Measures function performance"],
+      "answer": 0,
+      "explanation": "pipe is a HOF that composes functions left-to-right. The output of each function becomes the input to the next."
+    },
+    {
+      "question": "Is addEventListener a Higher Order Function?",
+      "options": ["Yes, it takes a callback function as an argument", "No, it only works with strings", "Only in React", "Only in Node.js"],
+      "answer": 0,
+      "explanation": "addEventListener is a HOF because it accepts a function (the event handler) as its second argument."
+    },
+    {
+      "question": "What does the memoize HOF do?",
+      "options": ["Saves results to a file", "Caches function results based on arguments", "Creates documentation", "Optimizes loops"],
+      "answer": 1,
+      "explanation": "Memoize caches the results of expensive function calls and returns the cached result when the same arguments occur again."
+    },
+    {
+      "question": "What enables HOFs in JavaScript?",
+      "options": ["Prototypal inheritance", "Functions being first-class citizens", "The event loop", "Type coercion"],
+      "answer": 1,
+      "explanation": "HOFs are possible because JavaScript treats functions as first-class citizens — they can be passed as arguments and returned from other functions."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["map"] = {
+  "title": "JavaScript map()",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "<code>Array.map()</code> creates a <strong>new array</strong> by calling a function on every element of the original array.",
+    "It returns a new array of the <strong>same length</strong> as the original — each element is the result of the callback.",
+    "Map does <strong>not</strong> mutate the original array — it returns a new array (immutable operation).",
+    "Callback receives: <code>currentValue</code>, <code>index</code>, and the <code>original array</code> as arguments."
+  ],
+  "laymanDefinition": "Imagine you have a basket of apples and a machine that polishes each apple. You put an apple in, it comes out shiny. You put all the apples through, and you get a new basket of shiny apples. Array.map() is like that machine — it takes each element from an array, transforms it using your function, and outputs a new array with the transformed elements. The original array stays unchanged.",
+  "deepDive": [
+    {
+      "heading": "How map() Works Internally",
+      "text": "Array.map iterates over each element in the original array, calls the callback with (element, index, array), and collects the return values into a new array. The callback's return value for each element becomes the corresponding element in the new array. The new array always has the same length as the original. Map does not modify the original array."
+    },
+    {
+      "heading": "Map vs forEach — Key Difference",
+      "list": [
+        "<strong>map()</strong> returns a new array with transformed values. Use when you need a transformed copy of the array.",
+        "<strong>forEach()</strong> returns undefined. Use when you need to perform side effects (logging, DOM updates).",
+        "If you don't use the return value of map, use forEach instead — map without using the result is an anti-pattern."
+      ]
+    },
+    {
+      "heading": "The Index Parameter",
+      "text": "The second argument to the map callback is the current index. Useful for: generating sequential IDs, alternating row colors, or accessing the corresponding element in another array. Example: arr.map((item, index) => `${index + 1}. ${item}`) creates a numbered list."
+    },
+    {
+      "heading": "Map with Object Arrays",
+      "text": "Map is commonly used to extract or transform properties from an array of objects: users.map(u => u.name) extracts all names. users.map(u => ({ ...u, role: 'user' })) adds a property to each object. When returning an object in concise arrow, wrap in parentheses: users.map(u => ({ name: u.name, email: u.email }))."
+    },
+    {
+      "heading": "Performance and When to Use Alternatives",
+      "text": "Map is O(n) — it visits every element once. For simple transformations, map is optimal. However: use filter then map if you need both filtering AND transformation (or use flatMap). Use reduce for complex accumulations. Use a for loop for early exit (map cannot break/continue). Use flatMap to flatten nested arrays after mapping."
+    }
+  ],
+  "interviewAnswer": "Array.map() is a method that creates a new array populated with the results of calling a provided function on every element in the calling array. It does not mutate the original array. The callback receives (currentValue, index, array). Map returns a new array of the same length. It is the standard tool for transforming array data. Common interview: implement map manually, explain difference from forEach, and use cases like extracting object properties or transforming data.",
+  "interviewQuestions": [
+    {
+      "question": "What does Array.map() do?",
+      "answer": "map() creates a new array by calling a function on every element of the original array. The callback's return values become the elements of the new array."
+    },
+    {
+      "question": "Does map() mutate the original array?",
+      "answer": "No. map() returns a new array. The original array remains unchanged. This is a key principle of immutable data operations."
+    },
+    {
+      "question": "What is the difference between map() and forEach()?",
+      "answer": "map() returns a new array with transformed values. forEach() returns undefined and is used for side effects. If you aren't using map's return value, use forEach instead."
+    },
+    {
+      "question": "What arguments does the map callback receive?",
+      "answer": "Three arguments: currentValue (the current element), index (the index of the current element), and array (the original array being mapped)."
+    },
+    {
+      "question": "How do you extract a property from an array of objects using map?",
+      "answer": "const names = users.map(user => user.name). This creates an array of name values from an array of user objects."
+    },
+    {
+      "question": "How do you implement a simple map function?",
+      "answer": "function map(arr, fn) { const result = []; for (let i = 0; i < arr.length; i++) { result.push(fn(arr[i], i, arr)); } return result; }"
+    },
+    {
+      "question": "What happens if you don't return a value from the map callback?",
+      "answer": "The element in the new array will be undefined. map always creates a new array with the same length, filling it with whatever the callback returns (or undefined if nothing is returned)."
+    },
+    {
+      "question": "Can map() be chained with other array methods?",
+      "answer": "Yes. Map returns an array, so you can chain: arr.filter(x => x > 0).map(x => x * 2).reduce(...). This is a common functional programming pattern."
+    },
+    {
+      "question": "What is the type of thisArg in map?",
+      "answer": "map accepts an optional second argument: thisArg. If provided, it is used as 'this' inside the callback. Rarely used in modern code (arrow functions handle this differently)."
+    },
+    {
+      "question": "What is the difference between map and flatMap?",
+      "answer": "flatMap first maps each element using a function, then flattens the result by one level. It's equivalent to arr.map(fn).flat() but more efficient."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.map() Transformation</text><rect x=\"50\" y=\"70\" width=\"220\" height=\"180\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"160\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Original Array</text><rect x=\"65\" y=\"105\" width=\"190\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"160\" y=\"125\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">[1, 2, 3, 4, 5]</text><text x=\"160\" y=\"155\" fill=\"#9aa0b0\" font-size=\"10\">Each element → callback</text><text x=\"160\" y=\"175\" fill=\"#9aa0b0\" font-size=\"10\">Callback: n =&gt; n * 2</text><text x=\"160\" y=\"195\" fill=\"#fbbf24\" font-size=\"10\">1→2, 2→4, 3→6, 4→8, 5→10</text><line x1=\"270\" y1=\"160\" x2=\"330\" y2=\"160\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"330\" y=\"70\" width=\"220\" height=\"180\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"440\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">New Array (returned)</text><rect x=\"345\" y=\"105\" width=\"190\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"440\" y=\"125\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">[2, 4, 6, 8, 10]</text><text x=\"440\" y=\"165\" fill=\"#98c379\" font-size=\"10\">Same length as original</text><text x=\"440\" y=\"185\" fill=\"#98c379\" font-size=\"10\">Original NOT mutated</text><text x=\"440\" y=\"205\" fill=\"#98c379\" font-size=\"10\">Elements are callbacks' returns</text><text x=\"350\" y=\"280\" fill=\"#9aa0b0\" font-size=\"11\">const result = arr.map(x =&gt; x * 2);</text><text x=\"350\" y=\"300\" fill=\"#9aa0b0\" font-size=\"11\">result ≠ arr (different references)</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic Number Transformation",
+      "useCase": "Converting array values",
+      "code": "const numbers = [1, 2, 3, 4, 5];\n\nconst doubled = numbers.map(function(n) {\n  return n * 2;\n});\nconsole.log(doubled); // [2, 4, 6, 8, 10]\n\nconst squared = numbers.map(n => n * n);\nconsole.log(squared); // [1, 4, 9, 16, 25]\n\nconst asStrings = numbers.map(n => 'Number ' + n);\nconsole.log(asStrings);\n// ['Number 1', 'Number 2', 'Number 3', 'Number 4', 'Number 5']\n\n// Original is unchanged\nconsole.log(numbers); // [1, 2, 3, 4, 5]",
+      "description": "Map transforms each element. The callback can be a regular function or arrow. The original array remains unchanged."
+    },
+    {
+      "title": "Extracting and Transforming Object Properties",
+      "useCase": "Working with arrays of objects",
+      "code": "const users = [\n  { id: 1, name: 'Alice', email: 'alice@example.com' },\n  { id: 2, name: 'Bob', email: 'bob@example.com' },\n  { id: 3, name: 'Charlie', email: 'charlie@example.com' }\n];\n\n// Extract a single property\nconst names = users.map(function(u) { return u.name; });\nconsole.log(names); // ['Alice', 'Bob', 'Charlie']\n\n// Transform objects\nconst summaries = users.map(function(u) {\n  return {\n    label: u.name + ' (' + u.email + ')',\n    value: u.id\n  };\n});\nconsole.log(summaries);\n// [{ label: 'Alice (alice@example.com)', value: 1 }, ...]\n\n// Add computed properties (immutable)\nconst withStatus = users.map(function(u) {\n  return { ...u, status: 'active' };\n});\nconsole.log(withStatus[0].status); // 'active'\n\n// Arrow function concise\nconst emails = users.map(u => u.email);\nconsole.log(emails); // ['alice@example.com', 'bob@example.com', ...]",
+      "description": "Map excels at extracting and transforming object properties. Use spread ({...obj}) to add properties immutably. Be careful to wrap object returns in () with arrow functions."
+    },
+    {
+      "title": "Using the Index Parameter",
+      "useCase": "Creating numbered lists or alternating styles",
+      "code": "const items = ['Apple', 'Banana', 'Cherry', 'Date'];\n\n// Numbered list\nconst numbered = items.map(function(item, index) {\n  return (index + 1) + '. ' + item;\n});\nconsole.log(numbered);\n// ['1. Apple', '2. Banana', '3. Cherry', '4. Date']\n\n// HTML list items (using index for keys)\nconst listItems = items.map(function(item, index) {\n  return '<li key=\"' + index + '\">' + item + '</li>';\n});\nconsole.log(listItems);\n// ['<li key=\"0\">Apple</li>', ...]\n\n// Alternating row colors\nconst colors = ['#f0f0f0', '#ffffff'];\nconst rows = items.map(function(item, i) {\n  return { text: item, bgColor: colors[i % 2] };\n});\nconsole.log(rows);\n// [{ text: 'Apple', bgColor: '#f0f0f0' }, ...]\n\n// Using both value and index from another array\nconst prices = [1.99, 2.49, 3.29];\nconst itemsWithPrice = items.map(function(name, i) {\n  return { name: name, price: prices[i] || 0 };\n});\nconsole.log(itemsWithPrice);\n// [{ name: 'Apple', price: 1.99 }, { name: 'Banana', price: 2.49 }, ...]",
+      "description": "The index parameter enables numbered lists, alternating styles, and synchronizing data from parallel arrays."
+    },
+    {
+      "title": "Chaining map with Other Methods",
+      "useCase": "Building data processing pipelines",
+      "code": "const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n// Chain: filter → map → reduce\nconst result = data\n  .filter(function(n) { return n % 2 === 0; })   // [2, 4, 6, 8, 10]\n  .map(function(n) { return n * 3; })              // [6, 12, 18, 24, 30]\n  .reduce(function(sum, n) { return sum + n; }, 0); // 90\n\nconsole.log(result); // 90\n\n// Arrow version:\nconst result2 = data\n  .filter(n => n % 2 === 0)\n  .map(n => n * 3)\n  .reduce((s, n) => s + n, 0);\n\n// Real-world example: process orders\nconst orders = [\n  { id: 1, items: [{ price: 10 }, { price: 20 }] },\n  { id: 2, items: [{ price: 15 }] },\n  { id: 3, items: [{ price: 5 }, { price: 8 }, { price: 12 }] }\n];\n\nconst totals = orders.map(function(order) {\n  return {\n    orderId: order.id,\n    total: order.items.reduce(function(sum, item) {\n      return sum + item.price;\n    }, 0)\n  };\n});\n\nconsole.log(totals);\n// [{ orderId: 1, total: 30 }, { orderId: 2, total: 15 }, { orderId: 3, total: 25 }]",
+      "description": "Map returns an array, making it chainable with filter, reduce, and other array methods. This enables clean data processing pipelines."
+    },
+    {
+      "title": "Manual map() Implementation",
+      "useCase": "Understanding how map works under the hood",
+      "code": "function myMap(array, callback) {\n  var result = [];\n\n  for (var i = 0; i < array.length; i++) {\n    // Check if index exists (handles sparse arrays)\n    if (i in array) {\n      result.push(callback(array[i], i, array));\n    }\n  }\n\n  return result;\n}\n\n// Test it\nvar numbers = [10, 20, 30, 40];\nvar doubled = myMap(numbers, function(n) {\n  return n * 2;\n});\n\nconsole.log(doubled); // [20, 40, 60, 80]\n\n// Also works with arrow functions\nvar tripled = myMap(numbers, n => n * 3);\nconsole.log(tripled); // [30, 60, 90, 120]\n\n// Edge cases\nvar sparse = [1, , 3];  // sparse array\nvar mapped = myMap(sparse, function(n) {\n  return n * 10;\n});\nconsole.log(mapped); // [10, undefined, 30]\n// The 'i in array' check ensures sparse slots are handled correctly",
+      "description": "Manual map implementation creates a new array, iterates, calls the callback on each element, and collects results. The 'i in array' check handles sparse arrays."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does Array.map() return?",
+      "options": ["The original array modified", "A new array with transformed elements", "undefined", "A boolean"],
+      "answer": 1,
+      "explanation": "map() returns a new array where each element is the result of calling the callback on the corresponding original element."
+    },
+    {
+      "question": "Does map() modify the original array?",
+      "options": ["Yes, it mutates it", "No, it returns a new array", "Only if the callback mutates elements", "Only for objects"],
+      "answer": 1,
+      "explanation": "map() does NOT mutate the original array. It returns a new array with the transformed values."
+    },
+    {
+      "question": "What will [1, 2, 3].map(x => x * 2) return?",
+      "options": ["[1, 2, 3]", "[2, 4, 6]", "[2, 4, 6, 8]", "undefined"],
+      "answer": 1,
+      "explanation": "Each element is multiplied by 2: [1*2, 2*2, 3*2] = [2, 4, 6]."
+    },
+    {
+      "question": "What is the difference between map and forEach?",
+      "options": ["They are identical", "map returns a new array; forEach returns undefined", "forEach is faster", "map cannot use arrow functions"],
+      "answer": 1,
+      "explanation": "map returns a new array. forEach returns undefined and is for side effects."
+    },
+    {
+      "question": "What happens if you don't return a value from map's callback?",
+      "options": ["The element is skipped", "The element is undefined", "map throws an error", "The original array is used"],
+      "answer": 1,
+      "explanation": "If the callback doesn't return a value (returns undefined), the corresponding element in the new array will be undefined."
+    },
+    {
+      "question": "What arguments does map's callback receive?",
+      "options": ["currentValue only", "currentValue, index", "currentValue, index, array", "currentValue, index, array, thisArg"],
+      "answer": 2,
+      "explanation": "The callback receives three arguments: currentValue, index, and the original array."
+    },
+    {
+      "question": "What is the length of the array returned by map?",
+      "options": ["Always the same as the original", "Sometimes shorter", "Always longer", "It depends on the callback"],
+      "answer": 0,
+      "explanation": "map always returns a new array with the same length as the original array."
+    },
+    {
+      "question": "How do you extract an array of property values from objects?",
+      "options": ["arr.map(obj => obj.property)", "arr.filter(obj => obj.property)", "arr.forEach(obj => obj.property)", "arr.property"],
+      "answer": 0,
+      "explanation": "Use map with a callback that returns the desired property: arr.map(obj => obj.property)."
+    },
+    {
+      "question": "Can map be chained with filter?",
+      "options": ["Yes, map returns an array so it's chainable", "No, map returns undefined", "Only with promises", "Only in React"],
+      "answer": 0,
+      "explanation": "map returns an array, which has all array methods, so chaining works: arr.filter(fn).map(fn)."
+    },
+    {
+      "question": "What will [1, 2, 3].map((x, i) => x + i) return?",
+      "options": ["[1, 2, 3]", "[1, 3, 5]", "[2, 4, 6]", "[1, 2, 3, 0, 1, 2]"],
+      "answer": 1,
+      "explanation": "Each element is added to its index: 1+0=1, 2+1=3, 3+2=5 → [1, 3, 5]."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["filter"] = {
+  "title": "JavaScript filter()",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "<code>Array.filter()</code> creates a <strong>new array</strong> with all elements that pass a test implemented by the provided function.",
+    "The callback must return a <strong>truthy</strong> value for an element to be included, or a <strong>falsy</strong> value to exclude it.",
+    "Filter returns a new array — the <strong>original is not mutated</strong>. The returned array may be <strong>shorter</strong> than the original.",
+    "Callback receives: <code>currentValue</code>, <code>index</code>, and the <code>original array</code>."
+  ],
+  "laymanDefinition": "Imagine you have a bucket of mixed fruits and you want only apples. You take each fruit one at a time, check if it's an apple, and if yes, you put it in a new bucket. If not, you set it aside. Array.filter() does exactly this — it examines every item, keeps only those that pass your test, and puts them in a new array. The original bucket stays unchanged.",
+  "deepDive": [
+    {
+      "heading": "How filter() Works",
+      "text": "Array.filter iterates over each element and calls the callback with (element, index, array). If the callback returns a truthy value, the element is included in the new array. If falsy, it's excluded. The returned array contains only the elements that passed the test, in the same order as the original. Filter does not modify the original array."
+    },
+    {
+      "heading": "Truthy and Falsy in filter",
+      "text": "The callback's return value is coerced to boolean. Falsy values: false, 0, '' (empty string), null, undefined, NaN. Truthy values: everything else. Common bug: returning a string from the callback — non-empty strings are truthy, so they always pass. Always ensure the callback returns a boolean expression for clarity."
+    },
+    {
+      "heading": "Filter vs Find vs Some",
+      "list": [
+        "<strong>filter()</strong> returns a new array of ALL matching elements. Use when you need multiple matches.",
+        "<strong>find()</strong> returns the FIRST matching element (or undefined). Use when you need a single match.",
+        "<strong>some()</strong> returns a boolean (true/false). Use when you only need to know if a match exists."
+      ]
+    },
+    {
+      "heading": "Chaining filter with Other Methods",
+      "text": "Filter returns an array, so it can be chained: <code>arr.filter(x => x > 0).map(x => x * 2)</code>. This is a common pattern: first filter out unwanted elements, then transform the remaining ones. Filter also chains with reduce, sort, and other array methods. For complex queries, consider combining multiple filters."
+    },
+    {
+      "heading": "Filter on Object Arrays",
+      "text": "Filter is commonly used with arrays of objects: users.filter(u => u.age >= 18) for adults, products.filter(p => p.inStock) for available items, orders.filter(o => o.status === 'pending') for pending orders. Multiple conditions: items.filter(i => i.price > 10 && i.category === 'electronics')."
+    }
+  ],
+  "interviewAnswer": "Array.filter() creates a new array with elements that pass a truth test. The callback returns true to keep the element, false to exclude it. Filter returns a new array (immutable), preserves order, and does not change the original. The returned array may be shorter than the original. Common interview topics: implementing filter manually, difference from find/some, and using filter to remove falsy values (arr.filter(Boolean)).",
+  "interviewQuestions": [
+    {
+      "question": "What does Array.filter() do?",
+      "answer": "filter() creates a new array containing only the elements for which the callback function returns a truthy value. Elements that fail the test are excluded."
+    },
+    {
+      "question": "Does filter() mutate the original array?",
+      "answer": "No. filter() returns a new array. The original array is not modified. This is an immutable operation."
+    },
+    {
+      "question": "What is the difference between filter() and find()?",
+      "answer": "filter() returns a new array of ALL matching elements. find() returns only the FIRST matching element (or undefined if none match)."
+    },
+    {
+      "question": "How do you remove falsy values from an array using filter?",
+      "answer": "arr.filter(Boolean) removes all falsy values (false, 0, '', null, undefined, NaN). 'Boolean' is the built-in Boolean constructor used as the callback — it returns true for truthy values."
+    },
+    {
+      "question": "What arguments does the filter callback receive?",
+      "answer": "Three arguments: currentValue (the current element), index (the index), and array (the original array being filtered)."
+    },
+    {
+      "question": "Can filter be chained with map?",
+      "answer": "Yes: arr.filter(x => x > 0).map(x => x * 2). First filter removes unwanted elements, then map transforms the remaining ones."
+    },
+    {
+      "question": "What is the length of the array returned by filter?",
+      "answer": "The length is the number of elements that passed the test. It can be anything from 0 (no elements passed) to the original array's length (all elements passed)."
+    },
+    {
+      "question": "How do you implement a simple filter function?",
+      "answer": "function filter(arr, fn) { const result = []; for (let i = 0; i < arr.length; i++) { if (fn(arr[i], i, arr)) { result.push(arr[i]); } } return result; }"
+    },
+    {
+      "question": "Does filter preserve the order of elements?",
+      "answer": "Yes. Elements appear in the new array in the same order they appeared in the original array."
+    },
+    {
+      "question": "What happens if the filter callback doesn't return anything?",
+      "answer": "The callback returns undefined (falsy), so no elements are included. The returned array will be empty."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.filter() — Keeping Elements That Pass the Test</text><rect x=\"40\" y=\"70\" width=\"280\" height=\"180\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"180\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Original Array</text><rect x=\"55\" y=\"105\" width=\"250\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"180\" y=\"125\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">[1, 2, 3, 4, 5, 6]</text><text x=\"180\" y=\"160\" fill=\"#9aa0b0\" font-size=\"10\">Test: n =&gt; n % 2 === 0 (is even)</text><text x=\"180\" y=\"180\" fill=\"#98c379\" font-size=\"10\">1 → false ✗</text><text x=\"180\" y=\"195\" fill=\"#98c379\" font-size=\"10\">2 → true  ✓</text><text x=\"180\" y=\"210\" fill=\"#98c379\" font-size=\"10\">3 → false ✗</text><text x=\"180\" y=\"225\" fill=\"#98c379\" font-size=\"10\">4 → true  ✓ (5→✗, 6→✓)</text><line x1=\"320\" y1=\"160\" x2=\"370\" y2=\"160\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"370\" y=\"70\" width=\"280\" height=\"180\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"510\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">Filtered Array (returned)</text><rect x=\"385\" y=\"105\" width=\"250\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"510\" y=\"125\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">[2, 4, 6]</text><text x=\"510\" y=\"165\" fill=\"#98c379\" font-size=\"10\">Only elements where callback returned true</text><text x=\"510\" y=\"185\" fill=\"#98c379\" font-size=\"10\">Original NOT mutated</text><text x=\"510\" y=\"205\" fill=\"#98c379\" font-size=\"10\">Order preserved</text><text x=\"350\" y=\"280\" fill=\"#9aa0b0\" font-size=\"11\">const evens = numbers.filter(n =&gt; n % 2 === 0);</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic Filtering — Numbers",
+      "useCase": "Filtering numeric arrays",
+      "code": "const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n// Keep only even numbers\nconst evens = numbers.filter(function(n) {\n  return n % 2 === 0;\n});\nconsole.log(evens); // [2, 4, 6, 8, 10]\n\n// Keep numbers greater than 5\nconst bigNumbers = numbers.filter(n => n > 5);\nconsole.log(bigNumbers); // [6, 7, 8, 9, 10]\n\n// Chaining filter conditions\nconst mediumEvens = numbers.filter(n => n > 3 && n < 8 && n % 2 === 0);\nconsole.log(mediumEvens); // [4, 6]\n\n// Original unchanged\nconsole.log(numbers); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+      "description": "Filter creates a new array with elements that pass the test. Multiple conditions can be combined with && or ||."
+    },
+    {
+      "title": "Filtering Arrays of Objects",
+      "useCase": "Querying object arrays",
+      "code": "const products = [\n  { id: 1, name: 'Laptop', price: 1200, inStock: true, category: 'electronics' },\n  { id: 2, name: 'Shirt', price: 25, inStock: false, category: 'clothing' },\n  { id: 3, name: 'Phone', price: 800, inStock: true, category: 'electronics' },\n  { id: 4, name: 'Shoes', price: 80, inStock: true, category: 'clothing' },\n  { id: 5, name: 'Tablet', price: 300, inStock: false, category: 'electronics' }\n];\n\n// Available products\nconst available = products.filter(function(p) { return p.inStock; });\nconsole.log(available.length); // 3\n\n// Affordable electronics\nconst affordableElectronics = products.filter(function(p) {\n  return p.category === 'electronics' && p.price < 1000 && p.inStock;\n});\nconsole.log(affordableElectronics);\n// [{ id: 3, name: 'Phone', ... }, { id: 5, name: 'Tablet', ... }]\n\n// Using computed property for filtering\nconst expensive = products.filter(p => p.price > 100);\nconsole.log(expensive.length); // 3 (Laptop, Phone, Tablet)\n\n// Filter by string matching\nconst searchResults = products.filter(function(p) {\n  return p.name.toLowerCase().includes('ph');\n});\nconsole.log(searchResults); // [{ name: 'Phone' }, { name: 'Laptop' }] (no, 'Laptop' doesn't match)\n// Actually only 'Phone' matches 'ph'",
+      "description": "Filter is ideal for querying arrays of objects. Combine multiple conditions, filter by string matching, or use computed expressions."
+    },
+    {
+      "title": "Removing Falsy Values with filter(Boolean)",
+      "useCase": "Cleaning up data",
+      "code": "const messyArray = [0, 1, false, 2, '', 3, null, 4, undefined, 5, NaN];\n\n// Remove all falsy values\nconst clean = messyArray.filter(Boolean);\nconsole.log(clean); // [1, 2, 3, 4, 5]\n\n// Equivalent to:\n// const clean = messyArray.filter(function(x) { return !!x; });\n// const clean = messyArray.filter(x => Boolean(x));\n\n// Practical: filter out empty strings\nconst comments = ['Great post!', '', 'Thanks', '', '', 'Very helpful'];\nconst validComments = comments.filter(Boolean);\nconsole.log(validComments); // ['Great post!', 'Thanks', 'Very helpful']\n\n// Practical: remove null/undefined from mixed array\nconst data = [\n  { id: 1, name: 'Alice' },\n  null,\n  { id: 2, name: 'Bob' },\n  undefined,\n  { id: 3, name: 'Charlie' }\n];\nconst validData = data.filter(Boolean);\nconsole.log(validData.length); // 3\n\n// More explicit: filter only objects\nconst onlyObjects = data.filter(function(item) {\n  return item !== null && item !== undefined;\n});\n// Same result as filter(Boolean) for this specific case",
+      "description": "filter(Boolean) is a concise pattern to remove all falsy values. It uses the Boolean function as the callback — returns true for truthy values, false for falsy."
+    },
+    {
+      "title": "Filter with Index and Chaining",
+      "useCase": "Complex data processing with filter",
+      "code": "const items = ['apple', 'banana', 'avocado', 'cherry', 'apricot', 'blueberry'];\n\n// Get items that start with 'a' and have index > 0\nconst aItems = items.filter(function(item, index) {\n  return item.startsWith('a') && index > 0;\n});\nconsole.log(aItems); // ['avocado', 'apricot'] (apple skipped at index 0)\n\n// Chain filter → map → reduce\nconst numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\nconst result = numbers\n  .filter(function(n) { return n % 2 === 0; })   // [2, 4, 6, 8, 10]\n  .filter(function(n) { return n > 4; })           // [6, 8, 10]\n  .map(function(n) { return n * 10; })             // [60, 80, 100]\n  .reduce(function(sum, n) { return sum + n; }, 0); // 240\n\nconsole.log(result); // 240\n\n// Practical: pagination simulation\nconst page = 2;\nconst pageSize = 3;\nconst allUsers = [\n  { id: 1, name: 'Alice' }, { id: 2, name: 'Bob' },\n  { id: 3, name: 'Charlie' }, { id: 4, name: 'David' },\n  { id: 5, name: 'Eve' }, { id: 6, name: 'Frank' }\n];\n\nconst pageUsers = allUsers.filter(function(user, index) {\n  var start = (page - 1) * pageSize;\n  var end = page * pageSize;\n  return index >= start && index < end;\n});\nconsole.log(pageUsers); // [{ id: 4, ... }, { id: 5, ... }, { id: 6, ... }]",
+      "description": "Filter can use the index parameter for position-based filtering. Chain with map/reduce for complete data processing pipelines."
+    },
+    {
+      "title": "Manual filter() Implementation",
+      "useCase": "Understanding the internal mechanism",
+      "code": "function myFilter(array, callback) {\n  var result = [];\n\n  for (var i = 0; i < array.length; i++) {\n    if (i in array) {  // Handle sparse arrays\n      if (callback(array[i], i, array)) {\n        result.push(array[i]);\n      }\n    }\n  }\n\n  return result;\n}\n\n// Test\nvar numbers = [1, 2, 3, 4, 5, 6];\nvar evens = myFilter(numbers, function(n) {\n  return n % 2 === 0;\n});\nconsole.log(evens); // [2, 4, 6]\n\n// With arrow function\nvar big = myFilter(numbers, n => n > 3);\nconsole.log(big); // [4, 5, 6]\n\n// Using the index\nvar firstHalf = myFilter(numbers, function(n, i) {\n  return i < 3;\n});\nconsole.log(firstHalf); // [1, 2, 3]\n\n// Note: the real Array.filter also handles:\n// - The optional thisArg parameter\n// - Sparse arrays (skipping empty slots)\n// - Being called on non-array objects",
+      "description": "A manual filter implementation helps understand the core mechanism: iterate, test each element, collect those that pass into a new array."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does Array.filter() return?",
+      "options": ["The first matching element", "A new array with elements that passed the test", "undefined", "A boolean"],
+      "answer": 1,
+      "explanation": "filter() returns a new array containing only the elements for which the callback returned a truthy value."
+    },
+    {
+      "question": "What will [1, 2, 3, 4, 5].filter(x => x > 3) return?",
+      "options": ["[3, 4, 5]", "[4, 5]", "[1, 2, 3]", "[5]"],
+      "answer": 1,
+      "explanation": "Elements greater than 3 are 4 and 5. Filter returns [4, 5]."
+    },
+    {
+      "question": "What is the difference between filter() and find()?",
+      "options": ["filter returns all matches; find returns the first match", "They are identical", "find returns all matches; filter returns the first", "filter returns a boolean; find returns an array"],
+      "answer": 0,
+      "explanation": "filter() returns a new array of all matching elements. find() returns the first matching element (or undefined)."
+    },
+    {
+      "question": "What does [0, 1, false, 2, null].filter(Boolean) return?",
+      "options": ["[0, 1, false, 2, null]", "[1, 2]", "[0, false, null]", "[1, false, 2]"],
+      "answer": 1,
+      "explanation": "Boolean returns true for truthy values (1, 2) and false for falsy values (0, false, null). Result: [1, 2]."
+    },
+    {
+      "question": "Does filter change the original array?",
+      "options": ["Yes, it removes elements", "No, it returns a new array", "Only if the callback modifies elements", "Yes, it reverses it"],
+      "answer": 1,
+      "explanation": "filter() is immutable — it does not modify the original array. It returns a new array."
+    },
+    {
+      "question": "What happens if the filter callback always returns false?",
+      "options": ["The original array is returned", "An empty array is returned", "undefined is returned", "An error is thrown"],
+      "answer": 1,
+      "explanation": "If no elements pass the test, filter returns an empty array []."
+    },
+    {
+      "question": "What arguments does the filter callback receive?",
+      "options": ["currentValue only", "currentValue, index, array", "currentValue, index", "currentValue, array"],
+      "answer": 1,
+      "explanation": "The callback receives: currentValue, index, and the array being filtered."
+    },
+    {
+      "question": "Can filter be chained with map?",
+      "options": ["Yes: arr.filter(fn).map(fn)", "No, filter doesn't return an array", "Only with async functions", "Only with forEach"],
+      "answer": 0,
+      "explanation": "filter returns an array, so it can be chained with any array method: arr.filter(fn).map(fn)."
+    },
+    {
+      "question": "How do you filter an array of objects by a property?",
+      "options": ["arr.filter(obj => obj.property === value)", "arr.filter(obj.property === value)", "arr.find(obj => obj.property === value)", "arr.map(obj => obj.property === value)"],
+      "answer": 0,
+      "explanation": "Use filter with a callback that checks the property: arr.filter(obj => obj.property === value)."
+    },
+    {
+      "question": "What is the maximum length of the array returned by filter?",
+      "options": ["Half the original length", "The same length as the original (if all pass)", "The original length minus one", "Unlimited"],
+      "answer": 1,
+      "explanation": "The returned array can be at most the same length as the original (if all elements pass the test), down to 0 (if none pass)."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["reduce"] = {
+  "title": "JavaScript reduce()",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "<code>Array.reduce()</code> executes a callback on each element, resulting in a <strong>single accumulated value</strong>.",
+    "Syntax: <code>arr.reduce(callback(accumulator, currentValue, index, array), initialValue)</code>.",
+    "The <strong>initialValue</strong> is crucial: without it, the first element is used as the accumulator and iteration starts from index 1.",
+    "Reduce is <strong>versatile</strong> — it can implement map, filter, groupBy, flatten, and more."
+  ],
+  "laymanDefinition": "Imagine you have a stack of bills and you want to know the total amount. You start with 0 (your initial value), then look at each bill one by one, adding its amount to the running total. By the end, you have one number: the total. Array.reduce() does the same thing — it goes through an array, repeatedly applying a function that combines the current value with the running result, and finally returns that single accumulated result.",
+  "deepDive": [
+    {
+      "heading": "How reduce() Works",
+      "text": "Reduce iterates over the array and maintains an 'accumulator' — a running value that is passed to each callback call. The callback returns the new accumulator value for the next iteration. After the last element, reduce returns the final accumulator. The initialValue is the starting value of the accumulator. Without initialValue, arr[0] becomes the accumulator and iteration starts at index 1."
+    },
+    {
+      "heading": "The Importance of initialValue",
+      "text": "Always provide an initialValue to avoid edge cases. Without initialValue on an empty array, reduce throws a TypeError. Without initialValue on a single-element array, the callback is never called and that single element is returned directly. With initialValue, the callback runs once for each element regardless. For sum/concatenation, initialValue should be the identity element (0 for sum, '' for strings, [] for arrays)."
+    },
+    {
+      "heading": "Reduce as a Swiss Army Knife",
+      "list": [
+        "Reduce can <strong>implement other array methods</strong>: reduce can replicate map, filter, find, some, every, flat, etc.",
+        "Use reduce for <strong>grouping</strong>: group objects by a property (e.g., group users by role).",
+        "Use reduce for <strong>counting</strong>: count occurrences of values (e.g., word frequency).",
+        "Use reduce for <strong>flattening</strong>: flatten a nested array (combined with concat or spread).",
+        "Use reduce for <strong>transforming</strong>: convert array to object, or array to other structures."
+      ]
+    },
+    {
+      "heading": "Reduce Right — reduceRight()",
+      "text": "Array.reduceRight() works identically to reduce but iterates from right to left (last element to first). Useful for operations where order matters, like evaluating expressions in reverse Polish notation or applying functions right-to-left (similar to compose). The callback signature and initialValue rules are the same."
+    },
+    {
+      "heading": "Performance Considerations",
+      "text": "Reduce is O(n) — it visits each element once. For simple sums, a for loop may be marginally faster, but the difference is negligible for typical array sizes. Reduce creates no intermediate arrays (unlike filter + map chains). For very large arrays, consider using a for loop if the closure overhead of the callback is measurable. Always prefer readability over micro-optimization."
+    }
+  ],
+  "interviewAnswer": "Array.reduce() reduces an array to a single value by applying a callback to each element, passing the result (accumulator) forward. It's incredibly versatile: it can sum numbers, flatten arrays, group objects, count occurrences, implement map/filter, and more. Always provide an initialValue to avoid edge cases. Without initialValue, the first element is used as the accumulator and iteration starts at index 1. Reduce is the most powerful array method because it can replicate the behavior of most other methods.",
+  "interviewQuestions": [
+    {
+      "question": "What does Array.reduce() do?",
+      "answer": "reduce() executes a reducer function on each element, passing the result (accumulator) to the next iteration, returning a single accumulated value at the end."
+    },
+    {
+      "question": "What is the purpose of the initialValue in reduce?",
+      "answer": "initialValue is the starting value of the accumulator. Without it, the first element is used as the accumulator and iteration starts at index 1. Always provide initialValue to avoid errors on empty arrays."
+    },
+    {
+      "question": "What happens if you call reduce on an empty array without initialValue?",
+      "answer": "It throws a TypeError: 'Reduce of empty array with no initial value'. Always provide an initialValue when the array might be empty."
+    },
+    {
+      "question": "How do you sum an array of numbers with reduce?",
+      "answer": "arr.reduce((acc, val) => acc + val, 0). The accumulator starts at 0, each element is added, and the final sum is returned."
+    },
+    {
+      "question": "How do you flatten an array of arrays with reduce?",
+      "answer": "arr.reduce((acc, val) => acc.concat(val), []). Or with spread: arr.reduce((acc, val) => [...acc, ...val], []). Modern alternative: arr.flat()."
+    },
+    {
+      "question": "Can reduce implement map?",
+      "answer": "Yes: arr.reduce((acc, val) => [...acc, fn(val)], []). This builds a new array by applying fn to each element — exactly what map does."
+    },
+    {
+      "question": "Can reduce implement filter?",
+      "answer": "Yes: arr.reduce((acc, val) => condition(val) ? [...acc, val] : acc, []). This adds elements that pass the test — exactly what filter does."
+    },
+    {
+      "question": "How do you group objects by a property using reduce?",
+      "answer": "arr.reduce((acc, obj) => { const key = obj.property; acc[key] = acc[key] || []; acc[key].push(obj); return acc; }, {})"
+    },
+    {
+      "question": "What is the difference between reduce and reduceRight?",
+      "answer": "reduceRight processes the array from right to left (last element to first). The callback signature and behavior are otherwise identical."
+    },
+    {
+      "question": "What arguments does the reduce callback receive?",
+      "answer": "Four arguments: accumulator, currentValue, currentIndex, and the array being reduced."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 380\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"360\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.reduce() — Accumulation Flow</text><rect x=\"50\" y=\"70\" width=\"200\" height=\"200\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"150\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">[1, 2, 3, 4]</text><text x=\"150\" y=\"120\" fill=\"#9aa0b0\" font-size=\"10\">acc=0, val=1 → 1</text><text x=\"150\" y=\"140\" fill=\"#9aa0b0\" font-size=\"10\">acc=1, val=2 → 3</text><text x=\"150\" y=\"160\" fill=\"#9aa0b0\" font-size=\"10\">acc=3, val=3 → 6</text><text x=\"150\" y=\"180\" fill=\"#9aa0b0\" font-size=\"10\">acc=6, val=4 → 10</text><text x=\"150\" y=\"210\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">Final result: 10</text><line x1=\"250\" y1=\"170\" x2=\"310\" y2=\"170\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"310\" y=\"65\" width=\"340\" height=\"80\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"480\" y=\"88\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">Callback: (acc, val) =&gt; acc + val</text><text x=\"480\" y=\"110\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">acc = accumulator (running total)</text><text x=\"480\" y=\"130\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">initialValue = 0</text><text x=\"480\" y=\"185\" fill=\"#e8eaed\" font-size=\"12\" font-weight=\"bold\">Versatile — can implement:</text><text x=\"480\" y=\"210\" fill=\"#9aa0b0\" font-size=\"10\">✓ Sum / Product / Average</text><text x=\"480\" y=\"228\" fill=\"#9aa0b0\" font-size=\"10\">✓ Flatten / Group / Count</text><text x=\"480\" y=\"246\" fill=\"#9aa0b0\" font-size=\"10\">✓ Map / Filter / Find</text><text x=\"350\" y=\"310\" fill=\"#9aa0b0\" font-size=\"11\">const sum = arr.reduce((acc, n) =&gt; acc + n, 0);</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Sum, Product, Average — Basic Accumulation",
+      "useCase": "Core reduce patterns",
+      "code": "const numbers = [10, 20, 30, 40, 50];\n\n// Sum: reduce to a single total\nconst sum = numbers.reduce(function(acc, n) {\n  return acc + n;\n}, 0);\nconsole.log(sum); // 150\n\n// Arrow version\nconst sumArrow = numbers.reduce((acc, n) => acc + n, 0);\n\n// Product (initial value = 1, not 0!)\nconst product = numbers.reduce((acc, n) => acc * n, 1);\nconsole.log(product); // 12000000\n\n// Average\nconst average = numbers.reduce((acc, n, i, arr) => {\n  acc += n;\n  if (i === arr.length - 1) return acc / arr.length;\n  return acc;\n}, 0);\nconsole.log(average); // 30\n\n// Better average: sum then divide\nconst sum2 = numbers.reduce((a, b) => a + b);\nconst avg2 = sum2 / numbers.length;\nconsole.log(avg2); // 30",
+      "description": "Basic numeric reductions. Sum starts at 0, product at 1. Average can be computed inline or as sum/length."
+    },
+    {
+      "title": "Flattening an Array of Arrays",
+      "useCase": "Converting 2D arrays to 1D",
+      "code": "const nested = [[1, 2], [3, 4], [5, 6]];\n\n// Flatten one level\nconst flat = nested.reduce(function(acc, arr) {\n  return acc.concat(arr);\n}, []);\nconsole.log(flat); // [1, 2, 3, 4, 5, 6]\n\n// With spread\nconst flatSpread = nested.reduce((acc, arr) => [...acc, ...arr], []);\nconsole.log(flatSpread); // [1, 2, 3, 4, 5, 6]\n\n// Deep flatten (multiple levels)\nconst deepNested = [[1, [2, 3]], [4, [5, 6]]];\nfunction deepFlatten(arr) {\n  return arr.reduce(function(acc, val) {\n    return acc.concat(Array.isArray(val) ? deepFlatten(val) : val);\n  }, []);\n}\nconsole.log(deepFlatten(deepNested)); // [1, 2, 3, 4, 5, 6]\n\n// Modern native alternative:\nconsole.log(nested.flat());      // [1, 2, 3, 4, 5, 6]\nconsole.log(deepNested.flat(2)); // [1, 2, 3, 4, 5, 6]",
+      "description": "Reduce can flatten arrays by concatenating each inner array into the accumulator. Recursive reduce handles deep nesting."
+    },
+    {
+      "title": "Grouping Objects by Property",
+      "useCase": "Creating groups from a flat array",
+      "code": "const people = [\n  { name: 'Alice', role: 'admin' },\n  { name: 'Bob', role: 'user' },\n  { name: 'Charlie', role: 'user' },\n  { name: 'David', role: 'admin' },\n  { name: 'Eve', role: 'moderator' }\n];\n\n// Group by role\nconst groupedByRole = people.reduce(function(acc, person) {\n  var role = person.role;\n  // Initialize array for this role if it doesn't exist\n  if (!acc[role]) {\n    acc[role] = [];\n  }\n  acc[role].push(person);\n  return acc;\n}, {});\n\nconsole.log(groupedByRole);\n// {\n//   admin: [{ name: 'Alice' }, { name: 'David' }],\n//   user: [{ name: 'Bob' }, { name: 'Charlie' }],\n//   moderator: [{ name: 'Eve' }]\n// }\n\n// Arrow version with nullish coalescing\nconst grouped = people.reduce((acc, p) => {\n  const key = p.role;\n  (acc[key] = acc[key] || []).push(p);\n  return acc;\n}, {});\n\n// Count by role\nconst countByRole = people.reduce(function(acc, person) {\n  acc[person.role] = (acc[person.role] || 0) + 1;\n  return acc;\n}, {});\nconsole.log(countByRole); // { admin: 2, user: 2, moderator: 1 }",
+      "description": "Grouping is a powerful reduce pattern. Each element is placed into a group based on a key. The accumulator is an object with keys for each group."
+    },
+    {
+      "title": "Reduce Implementing Map and Filter",
+      "useCase": "Understanding reduce's versatility",
+      "code": "const numbers = [1, 2, 3, 4, 5, 6];\n\n// Implement map with reduce\nconst doubled = numbers.reduce(function(acc, n) {\n  acc.push(n * 2);\n  return acc;\n}, []);\nconsole.log(doubled); // [2, 4, 6, 8, 10, 12]\n\n// Arrow version\nconst tripled = numbers.reduce((acc, n) => [...acc, n * 3], []);\nconsole.log(tripled); // [3, 6, 9, 12, 15, 18]\n\n// Implement filter with reduce\nconst evens = numbers.reduce(function(acc, n) {\n  if (n % 2 === 0) {\n    acc.push(n);\n  }\n  return acc;\n}, []);\nconsole.log(evens); // [2, 4, 6]\n\n// Implement map + filter with single reduce (more efficient)\nconst result = numbers.reduce(function(acc, n) {\n  if (n % 2 === 0) {        // filter condition\n    acc.push(n * 10);        // map transformation\n  }\n  return acc;\n}, []);\nconsole.log(result); // [20, 40, 60]\n\n// Compare with chained filter+map:\n// numbers.filter(n => n % 2 === 0).map(n => n * 10)\n// Same result, but reduce does it in one pass",
+      "description": "Reduce can replicate map and filter. Doing both in a single reduce pass is more efficient than filter + map chaining (one pass vs two)."
+    },
+    {
+      "title": "Counting Occurrences and Building Objects",
+      "useCase": "Frequency analysis and object construction",
+      "code": "const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple', 'grape'];\n\n// Count occurrences\nconst fruitCount = fruits.reduce(function(acc, fruit) {\n  acc[fruit] = (acc[fruit] || 0) + 1;\n  return acc;\n}, {});\nconsole.log(fruitCount);\n// { apple: 3, banana: 2, orange: 1, grape: 1 }\n\n// Array to Object\nconst users = [\n  { id: 1, name: 'Alice' },\n  { id: 2, name: 'Bob' },\n  { id: 3, name: 'Charlie' }\n];\n\nconst usersById = users.reduce(function(acc, user) {\n  acc[user.id] = user;\n  return acc;\n}, {});\nconsole.log(usersById);\n// { 1: { id: 1, name: 'Alice' }, 2: { ... }, 3: { ... } }\nconsole.log(usersById[2].name); // 'Bob'\n\n// Extract unique values\nconst uniqueFruits = fruits.reduce(function(acc, fruit) {\n  if (!acc.includes(fruit)) {\n    acc.push(fruit);\n  }\n  return acc;\n}, []);\nconsole.log(uniqueFruits); // ['apple', 'banana', 'orange', 'grape']\n\n// Modern alternative for unique:\n// const uniqueFruits = [...new Set(fruits)];",
+      "description": "Reduce is excellent for frequency counting and converting arrays to lookup objects (dictionaries). Common patterns for data normalization."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does reduce() return?",
+      "options": ["An array", "A single accumulated value", "undefined", "The first element"],
+      "answer": 1,
+      "explanation": "Reduce returns a single value — the final accumulated result after processing all elements."
+    },
+    {
+      "question": "What happens if you call reduce on an empty array without initialValue?",
+      "options": ["Returns undefined", "Returns null", "Throws TypeError", "Returns an empty array"],
+      "answer": 2,
+      "explanation": "Reduce on an empty array without initialValue throws: 'Reduce of empty array with no initial value'."
+    },
+    {
+      "question": "What will [1, 2, 3, 4].reduce((acc, n) => acc + n, 0) return?",
+      "options": ["10", "1234", "0", "undefined"],
+      "answer": 0,
+      "explanation": "0 + 1 + 2 + 3 + 4 = 10. The accumulator starts at 0 and each element is added."
+    },
+    {
+      "question": "What arguments does the reduce callback receive?",
+      "options": ["accumulator, currentValue", "accumulator, currentValue, index", "accumulator, currentValue, index, array", "currentValue, index, array"],
+      "answer": 2,
+      "explanation": "The callback receives accumulator, currentValue, currentIndex, and the array being reduced."
+    },
+    {
+      "question": "How do you flatten a 2D array with reduce?",
+      "options": ["arr.reduce((acc, val) => acc.concat(val), [])", "arr.reduce((acc, val) => acc + val)", "arr.reduce((acc, val) => [...acc, val], [])", "Both A and C work"],
+      "answer": 3,
+      "explanation": "Both concat and spread work: acc.concat(val) or [...acc, ...val], both with [] as initialValue."
+    },
+    {
+      "question": "What is the difference between reduce and reduceRight?",
+      "options": ["reduceRight is faster", "reduceRight iterates from right to left", "reduceRight doesn't need initialValue", "They are identical"],
+      "answer": 1,
+      "explanation": "reduceRight processes the array from the last element to the first, while reduce goes from first to last."
+    },
+    {
+      "question": "What will ['a', 'b', 'c'].reduce((acc, v) => acc + v) return?",
+      "options": ["'abc'", "['a', 'b', 'c']", "'abcundefined'", "Error"],
+      "answer": 0,
+      "explanation": "Without initialValue, the first element 'a' is used as the accumulator. Then 'b' is concatenated ('ab'), then 'c' ('abc')."
+    },
+    {
+      "question": "Can reduce implement map?",
+      "options": ["Yes: arr.reduce((acc, v) => [...acc, fn(v)], [])", "No, they are fundamentally different", "Only with strings", "Only with numbers"],
+      "answer": 0,
+      "explanation": "Reduce can implement map by building a new array with the transformed values."
+    },
+    {
+      "question": "How do you find the maximum value using reduce?",
+      "options": ["arr.reduce((max, v) => Math.max(max, v), -Infinity)", "arr.reduce((max, v) => v > max ? v : max)", "arr.reduce((max, v) => v, -Infinity)", "Both A and B"],
+      "answer": 3,
+      "explanation": "Both patterns work: Math.max(max, v) or the ternary v > max ? v : max. Use -Infinity as initialValue."
+    },
+    {
+      "question": "What is the main advantage of reduce over filter + map chaining?",
+      "options": ["Reduce is faster for all cases", "Reduce can do both in one pass (more efficient)", "Reduce doesn't need a callback", "Reduce always returns a number"],
+      "answer": 1,
+      "explanation": "Reduce can combine filter and map in a single pass, avoiding creating two intermediate arrays."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["foreach"] = {
+  "title": "JavaScript forEach()",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "<code>Array.forEach()</code> executes a provided function <strong>once for each array element</strong>, in order.",
+    "Unlike <code>map()</code>, <code>forEach()</code> returns <strong>undefined</strong> — it is used primarily for <strong>side effects</strong>.",
+    "Callback receives: <code>currentValue</code>, <code>index</code>, and the <code>original array</code>.",
+    "forEach cannot be <strong>broken out of</strong> (no <code>break</code>, <code>continue</code>, or <code>return</code> early). Use <code>for...of</code> or <code>some()</code> for early exit."
+  ],
+  "laymanDefinition": "Imagine you have a list of students and you need to read each student's name out loud. You go down the line one by one, say each name, and that's it — you don't return anything. Array.forEach() is exactly that: it visits every element in the array, does something with each one (like logging, updating the DOM, or calling a function), and doesn't produce a new array. It's for performing actions, not transforming data.",
+  "deepDive": [
+    {
+      "heading": "forEach vs map — Side Effects vs Transformation",
+      "text": "The key distinction: forEach is for side effects (logging, DOM manipulation, sending data), while map is for transformation (creating a new array). Use forEach when you want to 'do something' with each element. Use map when you want to 'transform' each element into a new value. If you find yourself pushing to an external array inside forEach, consider whether map would be cleaner."
+    },
+    {
+      "heading": "forEach Cannot Be Stopped",
+      "text": "forEach always iterates over the entire array — you cannot break, continue, or return early from it. A return statement inside the callback only exits that iteration, not the loop. If you need early exit, use a for loop, for...of, or array methods like some() (stop on truthy), every() (stop on falsy), or find() (stop on match)."
+    },
+    {
+      "heading": "forEach and Async/Await",
+      "text": "forEach does NOT wait for promises. An async callback inside forEach runs all iterations concurrently, and forEach returns before any of them complete. If you need sequential async execution, use for...of with await. If you need parallel async, use Promise.all with map."
+    },
+    {
+      "heading": "forEach on Sparse Arrays",
+      "text": "forEach skips empty slots in sparse arrays (arrays with 'holes'). For example, [1, , 3] has no value at index 1 — forEach will skip it entirely. This is different from a dense array with undefined values, where forEach will call the callback with undefined."
+    },
+    {
+      "heading": "The thisArg Parameter",
+      "text": "forEach accepts an optional second argument: thisArg. If provided, it is used as 'this' inside the callback. This is rarely needed in modern code (arrow functions capture this lexically), but useful when using regular function callbacks in older code."
+    }
+  ],
+  "interviewAnswer": "Array.forEach() executes a callback for each array element. It returns undefined and is designed for side effects (logging, DOM updates, external API calls). Unlike map, it does not produce a new array. forEach cannot be broken early — use for...of or some/every if early exit is needed. forEach does not work with await (async callbacks run concurrently). Skip sparse array slots. Use forEach when the purpose is an action per element; use map when the purpose is transforming each element into a new value.",
+  "interviewQuestions": [
+    {
+      "question": "What does forEach() do?",
+      "answer": "forEach() executes a provided callback once for each array element. It returns undefined and is used for side effects."
+    },
+    {
+      "question": "What is the difference between forEach and map?",
+      "answer": "map returns a new array with transformed values. forEach returns undefined and is for side effects. Use map when you need a result; use forEach when performing actions."
+    },
+    {
+      "question": "Can you break out of a forEach loop?",
+      "answer": "No. forEach iterates over all elements. A return in the callback only exits the current iteration, not the loop. Use for...of (with break) or some()/every() for early exit."
+    },
+    {
+      "question": "Does forEach work with async/await?",
+      "answer": "forEach does not wait for promises. An async callback inside forEach runs all iterations concurrently. Use for...of with await for sequential async execution."
+    },
+    {
+      "question": "What arguments does the forEach callback receive?",
+      "answer": "Three arguments: currentValue, index, and the array being iterated."
+    },
+    {
+      "question": "Does forEach handle sparse arrays differently?",
+      "answer": "Yes. forEach skips empty slots (holes) in sparse arrays. It does not call the callback for missing indices."
+    },
+    {
+      "question": "What does forEach return?",
+      "answer": "forEach returns undefined. It does not return a new array or any meaningful value."
+    },
+    {
+      "question": "How do you convert forEach to use early exit?",
+      "answer": "Replace with: for...of (with break/continue), some() (stops when callback returns true), every() (stops when callback returns false), or a regular for loop."
+    },
+    {
+      "question": "Can forEach modify the original array?",
+      "answer": "The callback can modify elements by writing to the index (arr[i] = newValue) or by mutating objects/arrays. However, forEach itself does not modify the array — the callback's direct modifications do."
+    },
+    {
+      "question": "What is the thisArg parameter in forEach?",
+      "answer": "An optional second argument that sets 'this' inside the callback. Rarely used with modern code (arrow functions capture this lexically)."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.forEach() — Side Effect Execution</text><rect x=\"50\" y=\"70\" width=\"280\" height=\"180\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"190\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Original Array</text><rect x=\"65\" y=\"105\" width=\"250\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"190\" y=\"125\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">[1, 2, 3, 4, 5]</text><text x=\"190\" y=\"160\" fill=\"#fbbf24\" font-size=\"10\">forEach runs callback on EACH element</text><text x=\"190\" y=\"180\" fill=\"#9aa0b0\" font-size=\"10\">1 → console.log(1)</text><text x=\"190\" y=\"195\" fill=\"#9aa0b0\" font-size=\"10\">2 → console.log(2)</text><text x=\"190\" y=\"210\" fill=\"#9aa0b0\" font-size=\"10\">3 → console.log(3) ...</text><line x1=\"330\" y1=\"160\" x2=\"380\" y2=\"160\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"380\" y=\"70\" width=\"280\" height=\"180\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#f87171\" stroke-width=\"1.5\"/><text x=\"520\" y=\"93\" text-anchor=\"middle\" fill=\"#f87171\" font-size=\"12\" font-weight=\"bold\">Returns undefined</text><text x=\"520\" y=\"130\" fill=\"#9aa0b0\" font-size=\"10\">No new array created</text><text x=\"520\" y=\"155\" fill=\"#9aa0b0\" font-size=\"10\">Cannot break/continue</text><text x=\"520\" y=\"180\" fill=\"#9aa0b0\" font-size=\"10\">Does NOT await promises</text><text x=\"520\" y=\"205\" fill=\"#9aa0b0\" font-size=\"10\">Skips sparse array holes</text><text x=\"350\" y=\"280\" fill=\"#9aa0b0\" font-size=\"11\">arr.forEach(x =&gt; console.log(x)); // side effect: logging</text><text x=\"350\" y=\"300\" fill=\"#9aa0b0\" font-size=\"11\">arr.map(x =&gt; x * 2); // transformation: creates new array</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic forEach — Logging and Side Effects",
+      "useCase": "Performing an action per element",
+      "code": "const fruits = ['apple', 'banana', 'cherry', 'date'];\n\n// Log each element\nfruits.forEach(function(fruit) {\n  console.log('Fruit:', fruit);\n});\n// Fruit: apple\n// Fruit: banana\n// Fruit: cherry\n// Fruit: date\n\n// With index\nfruits.forEach(function(fruit, index) {\n  console.log((index + 1) + '. ' + fruit);\n});\n// 1. apple\n// 2. banana\n// 3. cherry\n// 4. date\n\n// Arrow syntax\nfruits.forEach(f => console.log(' - ' + f));\n\n// Using the array parameter (third argument)\nfruits.forEach(function(fruit, i, arr) {\n  console.log(fruit + ' is ' + (i + 1) + ' of ' + arr.length);\n});\n// apple is 1 of 4\n// banana is 2 of 4\n// ...",
+      "description": "forEach is ideal for side effects like logging. The callback receives the element, index, and the full array."
+    },
+    {
+      "title": "forEach vs map — Choosing the Right Tool",
+      "useCase": "Understanding when to use each",
+      "code": "const numbers = [1, 2, 3, 4, 5];\n\n// ❌ Anti-pattern: using forEach to build a new array\nconst doubledBad = [];\nnumbers.forEach(function(n) {\n  doubledBad.push(n * 2);\n});\nconsole.log(doubledBad); // [2, 4, 6, 8, 10]\n\n// ✅ Better: use map when transforming\nconst doubledGood = numbers.map(function(n) {\n  return n * 2;\n});\nconsole.log(doubledGood); // [2, 4, 6, 8, 10]\n\n// ✅ Good use of forEach: side effects\nnumbers.forEach(function(n) {\n  // Logging is a side effect — no transformation\n  console.log('Processing:', n);\n});\n\n// ✅ Good: updating external state\nvar total = 0;\nnumbers.forEach(function(n) {\n  total += n;  // updating external variable\n});\nconsole.log(total); // 15\n// Note: reduce is even better for this specific case\n\n// ✅ Good: DOM manipulation\ndocument.querySelectorAll('li').forEach(function(li) {\n  li.classList.add('highlight');\n});",
+      "description": "Use map when you need a transformed array. Use forEach for side effects. Pushing to an external array inside forEach is a code smell — use map instead."
+    },
+    {
+      "title": "forEach Cannot Be Broken — Workarounds",
+      "useCase": "When you need early exit",
+      "code": "const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n// ❌ This does NOT break out of forEach:\nnumbers.forEach(function(n) {\n  if (n > 5) {\n    return;  // Only exits this iteration, not the loop\n  }\n  console.log(n);\n});\n// Logs: 1, 2, 3, 4, 5 (all elements still visited!)\n\n// ✅ Use for...of with break:\nfor (const n of numbers) {\n  if (n > 5) break;\n  console.log(n);\n}\n// Logs: 1, 2, 3, 4, 5\n\n// ✅ Use some() for early exit on condition:\nnumbers.some(function(n) {\n  if (n > 5) return true;  // stops iteration\n  console.log(n);\n  return false;\n});\n// Logs: 1, 2, 3, 4, 5\n\n// ✅ Use every() for early exit (stop on false):\nnumbers.every(function(n) {\n  if (n > 5) return false;  // stops iteration\n  console.log(n);\n  return true;\n});\n// Logs: 1, 2, 3, 4, 5\n\n// ✅ Regular for loop with break:\nfor (let i = 0; i < numbers.length; i++) {\n  if (numbers[i] > 5) break;\n  console.log(numbers[i]);\n}",
+      "description": "forEach cannot be broken — return inside the callback only exits one iteration. Use for...of (with break), some(), every(), or a for loop for early exit."
+    },
+    {
+      "title": "forEach with Async/Await — The Trap",
+      "useCase": "Understanding async behavior",
+      "code": "function delay(ms) {\n  return new Promise(function(resolve) {\n    setTimeout(resolve, ms);\n  });\n}\n\nasync function processItem(item) {\n  await delay(500);\n  console.log('Processed:', item);\n  return item * 2;\n}\n\n// ❌ forEach does NOT wait for async callbacks\nasync function badProcess(items) {\n  items.forEach(async function(item) {\n    await processItem(item);\n  });\n  console.log('Done (but not really!)');\n  // Logs 'Done' immediately, then processes each item in parallel\n}\n\n// ✅ Use for...of with await for sequential\nasync function goodProcessSequential(items) {\n  for (const item of items) {\n    await processItem(item);\n  }\n  console.log('All done sequentially');\n}\n\n// ✅ Use Promise.all with map for parallel\nasync function goodProcessParallel(items) {\n  await Promise.all(items.map(function(item) {\n    return processItem(item);\n  }));\n  console.log('All done in parallel');\n}\n\n// Test:\n// badProcess([1, 2, 3]);\n//   → 'Done (but not really!)'\n//   → (500ms later) 'Processed: 1', 'Processed: 2', 'Processed: 3'\n//\n// goodProcessSequential([1, 2, 3]);\n//   → (500ms) 'Processed: 1'\n//   → (1000ms) 'Processed: 2'\n//   → (1500ms) 'Processed: 3'\n//   → 'All done sequentially'\n//\n// goodProcessParallel([1, 2, 3]);\n//   → (500ms) 'Processed: 1', 'Processed: 2', 'Processed: 3'\n//   → 'All done in parallel'",
+      "description": "forEach does NOT await async callbacks. Use for...of for sequential async, Promise.all with map for parallel async."
+    },
+    {
+      "title": "Practical forEach — DOM Manipulation",
+      "useCase": "Real-world side effects",
+      "code": "// Update all elements with a class\nvar items = document.querySelectorAll('.list-item');\n\n// forEach on NodeList (works in modern browsers)\nitems.forEach(function(el) {\n  el.style.color = '#333';\n  el.classList.add('processed');\n});\n\n// For older browsers: convert to array first\n// [].slice.call(items).forEach(...)\n// or: [...items].forEach(...)\n\n// Practical: form field validation\nvar formFields = ['#name', '#email', '#password'];\n\nformFields.forEach(function(selector) {\n  var field = document.querySelector(selector);\n  if (field) {\n    field.addEventListener('blur', function() {\n      validateField(field);\n    });\n  }\n});\n\nfunction validateField(field) {\n  if (field.value.trim() === '') {\n    field.classList.add('error');\n  } else {\n    field.classList.remove('error');\n  }\n}\n\n// Practical: updating external state\nvar userActions = [];\n\nfunction logAction(action) {\n  userActions.push({\n    action: action,\n    timestamp: Date.now()\n  });\n}\n\n['login', 'view_page', 'click_button'].forEach(function(action) {\n  logAction(action);\n});\nconsole.log(userActions.length); // 3\n\n// Practical: sending analytics\nvar events = [\n  { name: 'page_view', data: { page: '/' } },\n  { name: 'click', data: { element: 'button' } },\n];\n\nevents.forEach(function(event) {\n  // sendEvent(event.name, event.data);  // side effect\n  console.log('Would send:', event.name);\n});",
+      "description": "forEach is ideal for DOM manipulation, event binding, updating external state, and analytics tracking — all side effects that don't produce a new array."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does forEach() return?",
+      "options": ["A new array", "undefined", "The original array", "A boolean"],
+      "answer": 1,
+      "explanation": "forEach returns undefined. It is used for side effects, not value transformation."
+    },
+    {
+      "question": "What is the main difference between forEach and map?",
+      "options": ["forEach is faster", "map returns a new array; forEach returns undefined", "forEach can break; map cannot", "map only works with numbers"],
+      "answer": 1,
+      "explanation": "map creates a new array from return values. forEach returns undefined and is for side effects."
+    },
+    {
+      "question": "Can you break out of a forEach loop?",
+      "options": ["Yes, using break", "Yes, using return", "No, forEach always processes all elements", "Yes, using continue"],
+      "answer": 2,
+      "explanation": "forEach cannot be broken. Return only exits the current callback iteration. Use for...of for early exit."
+    },
+    {
+      "question": "Does forEach wait for async functions?",
+      "options": ["Yes, it awaits each callback", "No, async callbacks run concurrently", "It depends on the browser", "Only if the callback uses await"],
+      "answer": 1,
+      "explanation": "forEach does not wait for promises. Async callbacks run in parallel and forEach returns immediately."
+    },
+    {
+      "question": "What arguments does the forEach callback receive?",
+      "options": ["currentValue only", "currentValue, index", "currentValue, index, array", "currentValue, array"],
+      "answer": 2,
+      "explanation": "The callback receives currentValue, index, and the original array."
+    },
+    {
+      "question": "What is an anti-pattern with forEach?",
+      "options": ["Using it for logging", "Pushing to an external array inside forEach (use map instead)", "Using it with arrow functions", "Using the index parameter"],
+      "answer": 1,
+      "explanation": "Building a new array by pushing inside forEach is an anti-pattern. Use map which is designed for transformation."
+    },
+    {
+      "question": "Does forEach handle sparse arrays?",
+      "options": ["Yes, it calls the callback with undefined for holes", "No, it skips empty slots", "It depends on the engine", "Sparse arrays throw an error"],
+      "answer": 1,
+      "explanation": "forEach skips empty slots in sparse arrays. Only indices that exist are visited."
+    },
+    {
+      "question": "How do you convert forEach to allow early exit?",
+      "options": ["Add a break statement", "Use for...of with break instead", "Return from the callback", "Set a flag and check it"],
+      "answer": 1,
+      "explanation": "Replace forEach with for...of loop which supports break, continue, and return."
+    },
+    {
+      "question": "What will this log? [1, 2, 3].forEach(x => { if (x === 2) return; console.log(x); });",
+      "options": ["1 2 3", "1 3", "1 2", "1"],
+      "answer": 1,
+      "explanation": "return only exits the current callback invocation. The loop continues. x=2 is skipped (return stops the console.log), but x=3 still runs. Output: 1, 3."
+    },
+    {
+      "question": "Can forEach modify the original array?",
+      "options": ["No, forEach is immutable", "Yes, if the callback explicitly modifies elements", "Only with numbers", "Only with strings"],
+      "answer": 1,
+      "explanation": "forEach itself doesn't modify the array, but the callback can modify elements by assignment (arr[i] = x) or mutation."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["find"] = {
+  "title": "JavaScript find()",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "<code>Array.find()</code> returns the <strong>first element</strong> in the array that satisfies the provided testing function.",
+    "If no element satisfies the test, <code>find()</code> returns <strong>undefined</strong>.",
+    "Callback receives: <code>currentValue</code>, <code>index</code>, and the <code>original array</code>.",
+    "find() <strong>stops iterating</strong> once a match is found — it does not process remaining elements."
+  ],
+  "laymanDefinition": "Imagine you're looking for a specific book in a library. You scan the shelves from left to right. The moment you see the book you want, you grab it and stop looking — you don't check the remaining shelves. Array.find() works the same way: it examines each element from first to last, and as soon as it finds one that matches your criteria, it returns that element and stops.",
+  "deepDive": [
+    {
+      "heading": "How find() Works",
+      "text": "Array.find iterates through the array from index 0 upward. For each element, it calls the callback. If the callback returns a truthy value, find immediately returns that element and stops iterating. If the callback never returns a truthy value, find returns undefined. This early-exit behavior makes find efficient for large arrays."
+    },
+    {
+      "heading": "find vs filter vs findIndex",
+      "list": [
+        "<strong>find()</strong> returns the first matching element (or undefined). Use when you need the element itself.",
+        "<strong>filter()</strong> returns a new array of ALL matching elements. Use when multiple matches are possible.",
+        "<strong>findIndex()</strong> returns the index of the first matching element (or -1). Use when you need the position."
+      ]
+    },
+    {
+      "heading": "find with Objects",
+      "text": "find is commonly used to look up an object by ID or unique property in an array: users.find(u => u.id === 42) returns the user with id 42. This is the go-to method for finding a specific item in an array. For repeated lookups, consider converting the array to a Map or object for O(1) access."
+    },
+    {
+      "heading": "find vs indexOf vs includes",
+      "text": "indexOf and includes find by value comparison (===). find uses a callback, enabling complex search logic (property matching, computed conditions). Use indexOf/includes for primitive value search. Use find for object property matching or custom logic."
+    },
+    {
+      "heading": "Edge Cases with find",
+      "text": "find returns undefined when no match is found — always check for undefined before using the result. find on an empty array returns undefined immediately (callback never runs). For arrays containing undefined values, find may return undefined meaningfully — distinguish 'no match' from 'matched undefined' by using findIndex or checking the result type."
+    }
+  ],
+  "interviewAnswer": "Array.find() returns the first element that satisfies a test function, or undefined if no match is found. It stops iterating as soon as a match is found (short-circuiting). Common use: looking up an element by ID or unique property in an object array. Unlike filter (which returns all matches), find returns a single element. Unlike findIndex (which returns the position), find returns the element itself. Always check for undefined before using the result of find, as no-match returns undefined.",
+  "interviewQuestions": [
+    {
+      "question": "What does Array.find() do?",
+      "answer": "find() returns the first element in the array that satisfies the provided testing function. If no element passes the test, it returns undefined."
+    },
+    {
+      "question": "What is the difference between find() and filter()?",
+      "answer": "find() returns the first matching element (or undefined). filter() returns a new array with ALL matching elements. find stops at the first match; filter processes all elements."
+    },
+    {
+      "question": "What is the difference between find() and findIndex()?",
+      "answer": "find() returns the matching element itself. findIndex() returns the index of the matching element (or -1 if not found)."
+    },
+    {
+      "question": "What does find() return if no element matches?",
+      "answer": "It returns undefined. Always check the result before using it: const result = arr.find(fn); if (result) { ... } or if (result !== undefined) { ... }"
+    },
+    {
+      "question": "Does find() stop iterating after finding a match?",
+      "answer": "Yes. find() short-circuits — it stops as soon as it finds the first matching element. Remaining elements are not processed."
+    },
+    {
+      "question": "How do you find an object by ID in an array?",
+      "answer": "users.find(user => user.id === targetId). This returns the user object with the matching ID, or undefined if not found."
+    },
+    {
+      "question": "What arguments does the find callback receive?",
+      "answer": "Three arguments: currentValue, index, and the array being searched."
+    },
+    {
+      "question": "How is find different from indexOf?",
+      "answer": "indexOf searches by strict equality (===) for primitive values. find uses a callback for complex search logic, making it suitable for objects and computed conditions."
+    },
+    {
+      "question": "What happens if find is called on an empty array?",
+      "answer": "The callback never executes and find returns undefined."
+    },
+    {
+      "question": "Can find return undefined as a valid match?",
+      "answer": "Potentially confusing — if an element is undefined and matches the condition, find returns that undefined. Use findIndex or check hasOwnProperty to distinguish 'no match' from 'matched undefined'."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.find() — First Match Only</text><rect x=\"40\" y=\"70\" width=\"280\" height=\"190\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"180\" y=\"93\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Array: [5, 12, 8, 130, 44]</text><text x=\"180\" y=\"125\" fill=\"#9aa0b0\" font-size=\"10\">find(x =&gt; x &gt; 10)</text><text x=\"180\" y=\"148\" fill=\"#98c379\" font-size=\"10\">5 &gt; 10? No   (continue)</text><text x=\"180\" y=\"168\" fill=\"#98c379\" font-size=\"10\">12 &gt; 10? Yes  (stop!)</text><text x=\"180\" y=\"195\" fill=\"#e5c07b\" font-size=\"12\" font-weight=\"bold\">Returns: 12</text><text x=\"180\" y=\"218\" fill=\"#9aa0b0\" font-size=\"10\">Does NOT check 8, 130, 44</text><line x1=\"320\" y1=\"165\" x2=\"370\" y2=\"165\" stroke=\"#fbbf24\" stroke-width=\"2\"/><rect x=\"370\" y=\"65\" width=\"290\" height=\"200\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"515\" y=\"93\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">Key Characteristics</text><text x=\"515\" y=\"125\" fill=\"#9aa0b0\" font-size=\"10\">✓ Returns element (not array)</text><text x=\"515\" y=\"148\" fill=\"#9aa0b0\" font-size=\"10\">✓ Short-circuits on first match</text><text x=\"515\" y=\"171\" fill=\"#9aa0b0\" font-size=\"10\">✓ Returns undefined if not found</text><text x=\"515\" y=\"194\" fill=\"#9aa0b0\" font-size=\"10\">✓ Complex callback logic</text><text x=\"515\" y=\"217\" fill=\"#9aa0b0\" font-size=\"10\">✓ Common for ID lookups</text><text x=\"350\" y=\"290\" fill=\"#9aa0b0\" font-size=\"11\">const user = users.find(u =&gt; u.id === 42);</text><text x=\"350\" y=\"310\" fill=\"#9aa0b0\" font-size=\"11\">const found = arr.find(x =&gt; condition);</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic find — First Match",
+      "useCase": "Finding elements by value condition",
+      "code": "const numbers = [5, 12, 8, 130, 44];\n\n// Find first number > 10\nconst found = numbers.find(function(element) {\n  return element > 10;\n});\nconsole.log(found); // 12\n\n// Find first even number\nconst firstEven = numbers.find(n => n % 2 === 0);\nconsole.log(firstEven); // 12\n\n// Find first number > 100\nconst big = numbers.find(n => n > 100);\nconsole.log(big); // 130\n\n// No match → undefined\nconst negative = numbers.find(n => n < 0);\nconsole.log(negative); // undefined\n\n// Important: check for undefined\nconst result = numbers.find(n => n > 1000);\nif (result === undefined) {\n  console.log('No matching element found');\n}",
+      "description": "find returns the first matching element. It short-circuits on the first match. Returns undefined when nothing matches."
+    },
+    {
+      "title": "Finding Objects by Property",
+      "useCase": "ID/unique property lookups",
+      "code": "const users = [\n  { id: 1, name: 'Alice', email: 'alice@example.com' },\n  { id: 2, name: 'Bob', email: 'bob@example.com' },\n  { id: 3, name: 'Charlie', email: 'charlie@example.com' },\n  { id: 4, name: 'David', email: 'david@example.com' }\n];\n\n// Find by ID\nfunction findUserById(id) {\n  return users.find(function(user) {\n    return user.id === id;\n  });\n}\n\nvar user = findUserById(3);\nconsole.log(user); // { id: 3, name: 'Charlie', ... }\n\n// Find by email\nvar byEmail = users.find(u => u.email === 'bob@example.com');\nconsole.log(byEmail.name); // 'Bob'\n\n// No match\nvar notFound = users.find(u => u.id === 99);\nconsole.log(notFound); // undefined\n\n// Multiple conditions\nvar specific = users.find(function(u) {\n  return u.name.startsWith('C') && u.email.includes('example');\n});\nconsole.log(specific.name); // 'Charlie'\n\n// Using with destructuring in callback\nvar found = users.find(({ id }) => id === 2);\nconsole.log(found.name); // 'Bob'",
+      "description": "find is the go-to method for looking up an object by ID or unique property. The callback can use any condition(s)."
+    },
+    {
+      "title": "find with Complex Conditions",
+      "useCase": "Advanced search logic",
+      "code": "const products = [\n  { id: 1, name: 'Laptop', price: 1200, inStock: true, tags: ['electronics', 'computers'] },\n  { id: 2, name: 'Phone', price: 800, inStock: true, tags: ['electronics', 'mobile'] },\n  { id: 3, name: 'Tablet', price: 300, inStock: false, tags: ['electronics', 'mobile'] },\n  { id: 4, name: 'Headphones', price: 150, inStock: true, tags: ['audio'] }\n];\n\n// Find first in-stock product under $200\nvar affordable = products.find(function(p) {\n  return p.inStock && p.price < 200;\n});\nconsole.log(affordable.name); // 'Headphones'\n\n// Find first product that has a specific tag\nvar tagged = products.find(function(p) {\n  return p.tags.includes('mobile');\n});\nconsole.log(tagged.name); // 'Phone'\n\n// Find using index\nvar firstHighValue = products.find(function(p, i) {\n  return p.price > 500 && i > 1;  // skip first two\n});\nconsole.log(firstHighValue); // undefined (Tablet is $300)\n// Actually: products[2] is Tablet ($300, not > 500)\n// products[3] is Headphones ($150, not > 500)\n// So: no match — undefined\n\n// Computed property\nvar found = products.find(function(p) {\n  return p.price > 1000;\n});\nconsole.log(found.name); // 'Laptop'\n\n// Null check pattern\nvar maybeProduct = products.find(p => p.id === 99);\nif (maybeProduct) {\n  console.log(maybeProduct.name);\n} else {\n  console.log('Product not found');\n}",
+      "description": "find supports complex conditions with &&, ||, array methods (includes), index-based filtering, and computed expressions."
+    },
+    {
+      "title": "find vs filter vs findIndex — Side by Side",
+      "useCase": "Choosing the right method",
+      "code": "const items = [\n  { id: 1, type: 'fruit', name: 'Apple' },\n  { id: 2, type: 'vegetable', name: 'Carrot' },\n  { id: 3, type: 'fruit', name: 'Banana' },\n  { id: 4, type: 'fruit', name: 'Cherry' }\n];\n\n// find — first match (single element)\nvar firstFruit = items.find(function(item) {\n  return item.type === 'fruit';\n});\nconsole.log(firstFruit); // { id: 1, type: 'fruit', name: 'Apple' }\n\n// filter — all matches (array)\nvar allFruits = items.filter(function(item) {\n  return item.type === 'fruit';\n});\nconsole.log(allFruits.length); // 3\n\n// findIndex — position of first match\nvar fruitIndex = items.findIndex(function(item) {\n  return item.type === 'fruit';\n});\nconsole.log(fruitIndex); // 0\n\n// indexOf — value comparison (primitives only)\nvar names = ['Apple', 'Banana', 'Carrot', 'Cherry'];\nvar index = names.indexOf('Banana');\nconsole.log(index); // 1\n\n// includes — checks existence (boolean)\nvar hasBanana = names.includes('Banana');\nconsole.log(hasBanana); // true\n\n// Performance note: find stops at first match\n// filter always processes ALL elements\n// For large arrays, find is more efficient when\n// you only need the first match",
+      "description": "find returns the element, filter returns an array of all matches, findIndex returns the position. Choose based on what you need."
+    },
+    {
+      "title": "Implementing find Manually",
+      "useCase": "Understanding the internal logic",
+      "code": "function myFind(array, callback) {\n  for (var i = 0; i < array.length; i++) {\n    if (i in array) {  // Handle sparse arrays\n      if (callback(array[i], i, array)) {\n        return array[i];  // Return element, stop iteration!\n      }\n    }\n  }\n  return undefined;  // No match\n}\n\n// Test with numbers\nvar numbers = [5, 12, 8, 130, 44];\nvar first = myFind(numbers, function(n) {\n  return n > 10;\n});\nconsole.log(first); // 12\n\n// Test with objects\nvar users = [\n  { id: 1, name: 'Alice' },\n  { id: 2, name: 'Bob' },\n  { id: 3, name: 'Charlie' }\n];\n\nvar bob = myFind(users, function(u) {\n  return u.name === 'Bob';\n});\nconsole.log(bob); // { id: 2, name: 'Bob' }\n\n// Test with no match\nvar notFound = myFind(users, function(u) {\n  return u.name === 'David';\n});\nconsole.log(notFound); // undefined\n\n// Test on empty array\nvar empty = myFind([], function() { return true; });\nconsole.log(empty); // undefined\n\n// The early return is crucial — as soon as we find\n// a match, we return immediately without iterating\n// the rest of the array",
+      "description": "Manual find implementation: iterate, check each element, return the element immediately on first match, return undefined if no match."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does Array.find() return?",
+      "options": ["A new array with matching elements", "The first matching element", "The index of the first match", "A boolean"],
+      "answer": 1,
+      "explanation": "find() returns the first element for which the callback returns a truthy value, or undefined if none match."
+    },
+    {
+      "question": "What happens if no element satisfies the test in find()?",
+      "options": ["Returns null", "Returns undefined", "Returns an empty array", "Throws an error"],
+      "answer": 1,
+      "explanation": "find() returns undefined when no element passes the test."
+    },
+    {
+      "question": "What is the difference between find() and filter()?",
+      "options": ["They are identical", "find returns one element; filter returns an array of all matches", "filter returns one element; find returns an array", "find is for objects; filter is for primitives"],
+      "answer": 1,
+      "explanation": "find() returns the first matching element (single value). filter() returns a new array of ALL matching elements."
+    },
+    {
+      "question": "Does find() continue iterating after finding a match?",
+      "options": ["Yes, it always processes all elements", "No, it stops at the first match", "It depends on the callback", "Only if the match is at the end"],
+      "answer": 1,
+      "explanation": "find() short-circuits — it stops iterating as soon as the first match is found."
+    },
+    {
+      "question": "What will [1, 3, 5, 7, 9].find(x => x % 2 === 0) return?",
+      "options": ["2", "undefined", "null", "0"],
+      "answer": 1,
+      "explanation": "No even numbers exist in the array. find() returns undefined."
+    },
+    {
+      "question": "How do you find an object by ID using find?",
+      "options": ["arr.filter(obj => obj.id === id)", "arr.find(obj => obj.id === id)", "arr.indexOf(id)", "arr.includes(obj)"],
+      "answer": 1,
+      "explanation": "arr.find(obj => obj.id === id) returns the first object with the given ID, or undefined if not found."
+    },
+    {
+      "question": "What is the difference between find() and findIndex()?",
+      "options": ["find returns the element; findIndex returns the index", "find returns the index; findIndex returns the element", "They are the same", "find is synchronous; findIndex is async"],
+      "answer": 0,
+      "explanation": "find() returns the matching element. findIndex() returns the index of the matching element (or -1)."
+    },
+    {
+      "question": "What arguments does the find callback receive?",
+      "options": ["currentValue only", "currentValue, index", "currentValue, index, array", "currentValue, array"],
+      "answer": 2,
+      "explanation": "Three arguments: currentValue, index, and the array being searched."
+    },
+    {
+      "question": "What happens when you call find on an empty array?",
+      "options": ["Returns undefined immediately", "Throws an error", "Returns null", "Returns an empty array"],
+      "answer": 0,
+      "explanation": "On an empty array, the callback never runs and find returns undefined."
+    },
+    {
+      "question": "How is find different from indexOf?",
+      "options": ["find uses a callback for complex logic; indexOf uses === equality", "indexOf uses a callback; find uses ===", "They are identical for primitives", "find is faster than indexOf"],
+      "answer": 0,
+      "explanation": "indexOf searches by strict equality (===) for a specific value. find uses a callback, enabling complex conditions (property matching, computed expressions)."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["some"] = {
+  "title": "JavaScript some()",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "<code>Array.some()</code> tests whether <strong>at least one element</strong> in the array passes the provided test function.",
+    "Returns <code>true</code> as soon as an element passes — <strong>short-circuits</strong> and stops iterating.",
+    "Returns <code>false</code> if <strong>no element</strong> passes the test, or if the array is <strong>empty</strong>.",
+    "Does <strong>not mutate</strong> the original array."
+  ],
+  "laymanDefinition": "Imagine you're a teacher asking 'Does anyone have a pencil?' to a row of students. You start at the first student and ask. The moment any student says 'Yes', you stop asking and report back 'Yes, someone has a pencil.' You don't need to ask the remaining students. Array.some() works the same way — it checks each element until it finds one that passes the test, then immediately returns true and stops.",
+  "deepDive": [
+    {
+      "heading": "How some() Works",
+      "text": "Array.some() iterates over each element and calls the callback with (element, index, array). If the callback returns a truthy value for any element, some() immediately returns true and stops iterating (short-circuit). If the callback never returns truthy, some() returns false. On an empty array, some() always returns false — there is no element that could pass the test."
+    },
+    {
+      "heading": "Short-Circuiting Behavior",
+      "text": "The most important feature of some() is short-circuiting. Once it finds a match, it stops iterating. This is a performance optimization — if you need to check whether a condition is met, some() stops at the first success rather than processing every element. Contrast with filter(), which always processes the entire array."
+    },
+    {
+      "heading": "some() vs includes() vs indexOf()",
+      "list": [
+        "<strong>includes()</strong>: Checks if a specific value exists. Simpler but only checks exact equality (<code>===</code>).",
+        "<strong>indexOf()</strong>: Returns the index of the first occurrence, or -1. Also uses strict equality.",
+        "<strong>some()</strong>: Most flexible — uses any test function. Use when you need custom comparison logic or complex conditions."
+      ]
+    },
+    {
+      "heading": "some() on Empty Arrays",
+      "text": "some() on an empty array always returns false because there is no element that could possibly satisfy the test. This is a vacuous truth — no element exists to pass the test, so the result is false. This is consistent with the mathematical principle that 'there exists' (the existential quantifier) is false for an empty set."
+    }
+  ],
+  "interviewAnswer": "Array.some() tests whether at least one element passes a test function, returning true or false. It short-circuits — returns true immediately on the first match. On an empty array, it returns false. It does not mutate the original array. Common use cases: form validation (checking if any field is invalid), permission checks (does any user have admin access?), and existence checks with custom logic. The key contrast is with every() (which returns true only if ALL pass) and includes() (which checks exact equality).",
+  "interviewQuestions": [
+    {
+      "question": "What does Array.some() do?",
+      "answer": "some() tests whether at least one element in the array passes the provided test function. It returns true if any element passes, false otherwise."
+    },
+    {
+      "question": "What does some() return on an empty array?",
+      "answer": "false. No element exists in an empty array that could pass the test, so some() always returns false."
+    },
+    {
+      "question": "Does some() short-circuit?",
+      "answer": "Yes. some() stops iterating as soon as it finds an element that passes the test. It returns true immediately without processing remaining elements."
+    },
+    {
+      "question": "What is the difference between some() and includes()?",
+      "answer": "includes() checks for exact equality (===) of a specific value. some() accepts a callback function and can evaluate any condition, including complex logic with objects or computed properties."
+    },
+    {
+      "question": "Does some() mutate the original array?",
+      "answer": "No. some() is read-only and does not modify the original array."
+    },
+    {
+      "question": "What arguments does the some() callback receive?",
+      "answer": "Three arguments: currentValue, index, and the original array."
+    },
+    {
+      "question": "How do you check if an array has any even numbers with some()?",
+      "answer": "arr.some(n => n % 2 === 0). Returns true if any element is even, false if all are odd."
+    },
+    {
+      "question": "What is the difference between some() and every()?",
+      "answer": "some() returns true if at least one element passes the test (logical OR). every() returns true only if ALL elements pass the test (logical AND)."
+    },
+    {
+      "question": "Can some() be used with arrays of objects?",
+      "answer": "Yes: users.some(u => u.role === 'admin') checks if any user has admin role. This is a common pattern for permission and validation checks."
+    },
+    {
+      "question": "How do you implement a simple some() function?",
+      "answer": "function some(arr, fn) { for (var i = 0; i < arr.length; i++) { if (fn(arr[i], i, arr)) return true; } return false; }"
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"630\" height=\"280\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"325\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.some() — Short-Circuits on First Match</text><rect x=\"30\" y=\"65\" width=\"580\" height=\"120\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"320\" y=\"85\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Testing: n =&gt; n > 3</text><rect x=\"50\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"90\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">1</text><text x=\"90\" y=\"145\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"10\">false</text><rect x=\"150\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"190\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">2</text><text x=\"190\" y=\"145\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"10\">false</text><rect x=\"250\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"290\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">3</text><text x=\"290\" y=\"145\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"10\">false</text><rect x=\"350\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"#1b5e20\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"390\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">4</text><text x=\"390\" y=\"145\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">true ✓</text><rect x=\"450\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#555\" stroke-width=\"1\" opacity=\"0.5\"/><text x=\"490\" y=\"119\" text-anchor=\"middle\" fill=\"#555\" font-size=\"11\">5</text><text x=\"490\" y=\"145\" text-anchor=\"middle\" fill=\"#555\" font-size=\"10\">skipped</text><rect x=\"550\" y=\"100\" width=\"50\" height=\"30\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#555\" stroke-width=\"1\" opacity=\"0.5\"/><text x=\"575\" y=\"119\" text-anchor=\"middle\" fill=\"#555\" font-size=\"11\">...</text><text x=\"575\" y=\"145\" text-anchor=\"middle\" fill=\"#555\" font-size=\"10\">skipped</text><text x=\"320\" y=\"200\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"14\" font-weight=\"bold\">Result: true (stopped at 4)</text><text x=\"320\" y=\"225\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">some() returns true immediately at first match — short-circuits</text><text x=\"320\" y=\"245\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Remaining elements (5, 6, ...) are never checked</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic some() Usage",
+      "useCase": "Checking if any element meets a condition",
+      "code": "const numbers = [1, 2, 3, 4, 5];\n\n// Check if any number is even\nconst hasEven = numbers.some(function(n) {\n  return n % 2 === 0;\n});\nconsole.log(hasEven); // true\n\n// Check if any number is greater than 10\nconst hasBig = numbers.some(n => n > 10);\nconsole.log(hasBig); // false\n\n// Empty array always returns false\nconsole.log([].some(n => n > 0)); // false\n\n// Short-circuit verification\nconst logAndCheck = numbers.some(function(n) {\n  console.log('Checking:', n);\n  return n > 3;\n});\n// Logs: Checking: 1, Checking: 2, Checking: 3, Checking: 4\n// Stops at 4 — does NOT check 5\nconsole.log(logAndCheck); // true",
+      "description": "some() tests elements until one passes, then stops. Empty arrays always return false."
+    },
+    {
+      "title": "Form Validation with some()",
+      "useCase": "Checking if any form field is invalid",
+      "code": "const formFields = [\n  { name: 'email', value: 'user@example.com', valid: true },\n  { name: 'password', value: '', valid: false },\n  { name: 'age', value: '25', valid: true }\n];\n\n// Check if any field is invalid\nconst hasErrors = formFields.some(function(field) {\n  return !field.valid;\n});\nconsole.log(hasErrors); // true\n\n// Find which fields are invalid\nconst invalidNames = formFields\n  .filter(function(f) { return !f.valid; })\n  .map(function(f) { return f.name; });\nconsole.log(invalidNames); // ['password']\n\n// Real-world: validate required fields\nconst requiredFields = ['name', 'email', 'password'];\nconst formData = { name: 'Alice', email: '', password: 'secret' };\nconst missingRequired = requiredFields.some(function(field) {\n  return !formData[field];\n});\nconsole.log(missingRequired); // true (email is empty)\n\n// With multiple conditions\nconst isFormValid = !formFields.some(function(f) {\n  return !f.valid || f.value.trim() === '';\n});\nconsole.log(isFormValid); // false",
+      "description": "some() is perfect for validation — check if any field fails and show errors. Combine with filter/map for detailed error reporting."
+    },
+    {
+      "title": "Permission and Access Checks",
+      "useCase": "Checking roles and permissions",
+      "code": "const users = [\n  { id: 1, name: 'Alice', roles: ['viewer'] },\n  { id: 2, name: 'Bob', roles: ['editor', 'admin'] },\n  { id: 3, name: 'Charlie', roles: ['viewer'] }\n];\n\n// Check if any user has admin role\nconst hasAdmin = users.some(function(user) {\n  return user.roles.includes('admin');\n});\nconsole.log(hasAdmin); // true\n\n// Check access for a specific feature\nconst canEdit = users.some(function(user) {\n  return user.roles.some(function(role) {\n    return role === 'editor' || role === 'admin';\n  });\n});\nconsole.log(canEdit); // true (Bob can edit)\n\n// Check if any user meets multiple criteria\nconst canApprove = users.some(function(u) {\n  return u.roles.includes('admin') && u.id !== 1;\n});\nconsole.log(canApprove); // true (Bob, id 2, is admin)\n\n// Combined permission check with array methods\nconst permissions = ['read', 'write', 'delete'];\nconst hasPermission = permissions.some(function(p) {\n  return ['admin', 'superadmin'].some(function(role) {\n    return users.some(function(u) { return u.roles.includes(role); });\n  });\n});\nconsole.log(hasPermission); // true",
+      "description": "some() shines for permission checks — test if any user has a required role. Can be nested for complex authorization logic."
+    },
+    {
+      "title": "some() with Complex Conditions",
+      "useCase": "Advanced predicate logic",
+      "code": "const products = [\n  { name: 'Laptop', price: 1200, inStock: true },\n  { name: 'Mouse', price: 25, inStock: false },\n  { name: 'Keyboard', price: 75, inStock: true }\n];\n\n// Check if any product is expensive AND in stock\nconst hasExpensiveAvailable = products.some(function(p) {\n  return p.price > 100 && p.inStock;\n});\nconsole.log(hasExpensiveAvailable); // true (Laptop)\n\n// Check if any product matches a search query\nconst query = 'mouse';\nconst found = products.some(function(p) {\n  return p.name.toLowerCase().includes(query.toLowerCase());\n});\nconsole.log(found); // true (Mouse)\n\n// Check if array contains any truthy value\nconst mixed = [0, '', null, undefined, false, 42];\nconsole.log(mixed.some(Boolean)); // true\n\n// Check for duplicates\nconst hasDuplicate = function(arr) {\n  return arr.some(function(item, index) {\n    return arr.indexOf(item) !== index;\n  });\n};\nconsole.log(hasDuplicate([1, 2, 3, 4])); // false\nconsole.log(hasDuplicate([1, 2, 3, 2])); // true\n\n// Check if any date is in the past\nconst dates = [\n  new Date('2025-01-01'),\n  new Date('2023-06-15'),\n  new Date('2024-12-25')\n];\nconst hasPast = dates.some(function(d) {\n  return d < new Date();\n});\nconsole.log(hasPast); // true (2023-06-15 is in the past)",
+      "description": "some() handles complex conditions with multiple properties, nested predicates, and various data types."
+    },
+    {
+      "title": "Manual some() Implementation",
+      "useCase": "Understanding the internal mechanism",
+      "code": "function mySome(array, callback) {\n  for (var i = 0; i < array.length; i++) {\n    if (i in array) {  // Handle sparse arrays\n      if (callback(array[i], i, array)) {\n        return true;\n      }\n    }\n  }\n  return false;\n}\n\n// Test\nvar numbers = [1, 2, 3, 4, 5];\nconsole.log(mySome(numbers, function(n) {\n  return n % 2 === 0;\n})); // true\n\nconsole.log(mySome(numbers, function(n) {\n  return n > 10;\n})); // false\n\n// Empty array\nconsole.log(mySome([], function(n) {\n  return true;\n})); // false\n\n// Short-circuit test\nvar callCount = 0;\nvar result = mySome([1, 2, 3, 4, 5], function(n) {\n  callCount++;\n  return n > 2;\n});\nconsole.log(result); // true\nconsole.log(callCount); // 3 (checked 1, 2, 3 — stopped at 3)\n\n// Sparse array behavior\nvar sparse = [1, , , 4, 5];\nconsole.log(mySome(sparse, function(n) {\n  return n === undefined;\n})); // false (empty slots are skipped)\n\n// Note: real Array.some also handles:\n// - The optional thisArg parameter\n// - Being called on non-array objects",
+      "description": "A manual implementation of some() reveals its short-circuit nature and sparse array handling."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does Array.some() return?",
+      "options": ["A new array", "undefined", "A boolean (true/false)", "The first matching element"],
+      "answer": 2,
+      "explanation": "some() returns a boolean: true if any element passes the test, false otherwise."
+    },
+    {
+      "question": "What does [1, 2, 3].some(n => n > 5) return?",
+      "options": ["true", "false", "[6]", "undefined"],
+      "answer": 1,
+      "explanation": "No element is greater than 5, so some() returns false."
+    },
+    {
+      "question": "What does [].some(n => true) return?",
+      "options": ["true", "false", "undefined", "TypeError"],
+      "answer": 1,
+      "explanation": "Some() on an empty array always returns false, even if the test always passes — no element exists to test."
+    },
+    {
+      "question": "Does some() short-circuit?",
+      "options": ["No, it checks every element", "Yes, it stops at the first match", "Only in strict mode", "Only with arrow functions"],
+      "answer": 1,
+      "explanation": "some() short-circuits — it returns true immediately upon finding the first matching element, without checking the rest."
+    },
+    {
+      "question": "What is the difference between some() and every()?",
+      "options": ["some() checks if ANY pass; every() checks if ALL pass", "They are identical", "some() checks if ALL pass; every() checks if ANY pass", "some() returns an array; every() returns a boolean"],
+      "answer": 0,
+      "explanation": "some() is like OR (at least one must pass). every() is like AND (all must pass)."
+    },
+    {
+      "question": "How do you check if any number in [2, 4, 6, 8] is odd?",
+      "options": ["arr.some(n => n % 2 !== 0)", "arr.every(n => n % 2 === 0)", "arr.filter(n => n % 2 === 0)", "arr.includes(odd)"],
+      "answer": 0,
+      "explanation": "arr.some(n => n % 2 !== 0) returns false because no element is odd."
+    },
+    {
+      "question": "Does some() mutate the original array?",
+      "options": ["Yes", "No", "Only if the callback mutates it", "Only for nested objects"],
+      "answer": 1,
+      "explanation": "some() is read-only. It does not modify the original array."
+    },
+    {
+      "question": "What arguments does the some() callback receive?",
+      "options": ["currentValue only", "currentValue, index, array", "currentValue, index", "array, index"],
+      "answer": 1,
+      "explanation": "The callback receives currentValue, index, and the array being iterated."
+    },
+    {
+      "question": "What is a common use case for some()?",
+      "options": ["Transforming all elements", "Sorting arrays", "Checking if any form field has an error", "Calculating a sum"],
+      "answer": 2,
+      "explanation": "some() is commonly used for validation — check if any field fails a condition."
+    },
+    {
+      "question": "How do you check if an array contains a value with custom comparison?",
+      "options": ["arr.includes(value)", "arr.some(item => customCondition(item))", "arr.indexOf(value)", "arr.filter(item => customCondition(item)).length > 0"],
+      "answer": 1,
+      "explanation": "some() accepts any test function, making it the most flexible for custom comparison logic."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["every"] = {
+  "title": "JavaScript every()",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "<code>Array.every()</code> tests whether <strong>all elements</strong> in the array pass the provided test function.",
+    "Returns <code>true</code> if <strong>every element</strong> passes — <strong>short-circuits</strong> and returns <code>false</code> on the first failure.",
+    "Returns <code>true</code> for an <strong>empty array</strong> (vacuous truth).",
+    "Does <strong>not mutate</strong> the original array."
+  ],
+  "laymanDefinition": "Imagine you're a quality inspector checking items on an assembly line. Your rule is 'All items must be undamaged.' You start checking each item. The moment you find a single damaged item, you stop and report 'No, not all items pass.' You don't need to check the rest. Array.every() works the same way — it checks each element until one fails, then immediately returns false.",
+  "deepDive": [
+    {
+      "heading": "How every() Works",
+      "text": "Array.every() iterates over each element and calls the callback with (element, index, array). If the callback returns a falsy value for any element, every() immediately returns false and stops iterating (short-circuit). If the callback returns truthy for every element, every() returns true."
+    },
+    {
+      "heading": "Vacuous Truth — Empty Array",
+      "text": "every() on an empty array returns true. This is called 'vacuous truth' — the statement 'all elements satisfy this condition' is true when there are no elements to violate it. This is consistent with mathematical logic: 'All unicorns are pink' is true because no non-pink unicorn exists to disprove it."
+    },
+    {
+      "heading": "Short-Circuiting Behavior",
+      "text": "every() short-circuits on the first false — it stops iterating as soon as it finds a failing element. This is the inverse of some(), which short-circuits on the first true. If you have a large array and most elements will pass, every() is efficient because it stops at the first failure."
+    },
+    {
+      "heading": "every() vs some() — De Morgan's Law",
+      "text": "!arr.every(fn) is equivalent to arr.some(function(x) { return !fn(x); }). And !arr.some(fn) is equivalent to arr.every(function(x) { return !fn(x); }). This is De Morgan's Law applied to array testing: 'Not all passed' means 'At least one failed'. Understanding this relationship helps choose the right method."
+    }
+  ],
+  "interviewAnswer": "Array.every() tests whether all elements pass a test function, returning true or false. It short-circuits — returns false immediately on the first failure. On an empty array, it returns true (vacuous truth). It does not mutate the original array. Common use cases: form validation (all fields valid?), data integrity checks (all required properties present?), permission checks (all users have required role?), and comparison checks (all elements equal a value). The key distinction from some() is that every() requires ALL elements to pass (logical AND), while some() requires at least one (logical OR).",
+  "interviewQuestions": [
+    {
+      "question": "What does Array.every() do?",
+      "answer": "every() tests whether all elements in the array pass the provided test function. Returns true if all pass, false if any fail."
+    },
+    {
+      "question": "What does every() return on an empty array?",
+      "answer": "true. This is vacuous truth — no element exists that could fail the test, so the statement 'all elements pass' is true."
+    },
+    {
+      "question": "Does every() short-circuit?",
+      "answer": "Yes. every() stops iterating as soon as it finds an element that fails the test. It returns false immediately without processing remaining elements."
+    },
+    {
+      "question": "What is the difference between every() and some()?",
+      "answer": "every() requires ALL elements to pass (returns true only if all pass). some() requires AT LEAST ONE to pass (returns true if any passes)."
+    },
+    {
+      "question": "Does every() mutate the original array?",
+      "answer": "No. every() is read-only and does not modify the original array."
+    },
+    {
+      "question": "What arguments does the every() callback receive?",
+      "answer": "Three arguments: currentValue, index, and the original array."
+    },
+    {
+      "question": "How do you check if all numbers in an array are even?",
+      "answer": "arr.every(n => n % 2 === 0). Returns true if all are even, false if any is odd."
+    },
+    {
+      "question": "What is the relationship between every() and some()?",
+      "answer": "De Morgan's Law: !arr.every(fn) === arr.some(x => !fn(x)). And !arr.some(fn) === arr.every(x => !fn(x))."
+    },
+    {
+      "question": "Can every() be used with arrays of objects?",
+      "answer": "Yes: users.every(u => u.age >= 18) checks if all users are adults. This is a common pattern for data validation."
+    },
+    {
+      "question": "How do you implement a simple every() function?",
+      "answer": "function every(arr, fn) { for (var i = 0; i < arr.length; i++) { if (!fn(arr[i], i, arr)) return false; } return true; }"
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"630\" height=\"280\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"325\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Array.every() — Short-Circuits on First Failure</text><rect x=\"30\" y=\"65\" width=\"580\" height=\"120\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"320\" y=\"85\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Testing: n =&gt; n &lt; 5</text><rect x=\"50\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"90\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">1</text><text x=\"90\" y=\"145\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">true ✓</text><rect x=\"150\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"190\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">2</text><text x=\"190\" y=\"145\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">true ✓</text><rect x=\"250\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"var(--border)\"/><text x=\"290\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">3</text><text x=\"290\" y=\"145\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">true ✓</text><rect x=\"350\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"#b71c1c\" stroke=\"#e64745\" stroke-width=\"1.5\"/><text x=\"390\" y=\"119\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"11\">5</text><text x=\"390\" y=\"145\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"10\">false ✗</text><rect x=\"450\" y=\"100\" width=\"80\" height=\"30\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#555\" stroke-width=\"1\" opacity=\"0.5\"/><text x=\"490\" y=\"119\" text-anchor=\"middle\" fill=\"#555\" font-size=\"11\">10</text><text x=\"490\" y=\"145\" text-anchor=\"middle\" fill=\"#555\" font-size=\"10\">skipped</text><rect x=\"550\" y=\"100\" width=\"50\" height=\"30\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#555\" stroke-width=\"1\" opacity=\"0.5\"/><text x=\"575\" y=\"119\" text-anchor=\"middle\" fill=\"#555\" font-size=\"11\">...</text><text x=\"575\" y=\"145\" text-anchor=\"middle\" fill=\"#555\" font-size=\"10\">skipped</text><text x=\"320\" y=\"200\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"14\" font-weight=\"bold\">Result: false (stopped at 5)</text><text x=\"320\" y=\"225\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">every() returns false immediately at first failure — short-circuits</text><text x=\"320\" y=\"245\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Remaining elements (10, ...) are never checked</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic every() Usage",
+      "useCase": "Checking if all elements meet a condition",
+      "code": "const numbers = [2, 4, 6, 8, 10];\n\n// Check if all numbers are even\nconst allEven = numbers.every(function(n) {\n  return n % 2 === 0;\n});\nconsole.log(allEven); // true\n\n// Check if all numbers are greater than 0\nconst allPositive = numbers.every(n => n > 0);\nconsole.log(allPositive); // true\n\n// Mixed array — one fails\nconst mixed = [2, 4, 5, 8];\nconsole.log(mixed.every(n => n % 2 === 0)); // false (5 is odd)\n\n// Empty array always returns true\nconsole.log([].every(n => n > 0)); // true\n\n// Short-circuit verification\nconst logAndCheck = [1, 3, 5, 7, 8].every(function(n) {\n  console.log('Checking:', n);\n  return n % 2 !== 0;\n});\n// Logs: Checking: 1, Checking: 3, Checking: 5, Checking: 7, Checking: 8\n// Stops at 8 (first even number)\nconsole.log(logAndCheck); // false",
+      "description": "every() tests all elements until one fails. Empty arrays always return true (vacuous truth)."
+    },
+    {
+      "title": "Form Validation with every()",
+      "useCase": "Ensuring all fields are valid",
+      "code": "const formFields = [\n  { name: 'email', value: 'user@example.com', valid: true },\n  { name: 'password', value: 'secret123', valid: true },\n  { name: 'age', value: '25', valid: true }\n];\n\n// Check if ALL fields are valid\nconst isFormValid = formFields.every(function(field) {\n  return field.valid;\n});\nconsole.log(isFormValid); // true\n\n// Check if all required fields have values\nconst requiredFields = ['name', 'email', 'password'];\nconst formData = { name: 'Alice', email: 'alice@example.com', password: 'secret' };\nconst allFilled = requiredFields.every(function(field) {\n  return formData[field] && formData[field].trim() !== '';\n});\nconsole.log(allFilled); // true\n\n// Multi-condition validation\nconst isCompletelyValid = formFields.every(function(f) {\n  return f.valid && f.value.length >= 3;\n});\nconsole.log(isCompletelyValid); // true\n\n// Combining with some for nuanced validation\nconst allRequiredPresent = requiredFields.every(function(f) {\n  return formData[f] !== undefined && formData[f] !== '';\n});\nconsole.log(allRequiredPresent); // true",
+      "description": "every() is perfect for validating that ALL conditions are met before form submission."
+    },
+    {
+      "title": "Data Integrity and Comparison Checks",
+      "useCase": "Validating data consistency",
+      "code": "const users = [\n  { id: 1, name: 'Alice', email: 'alice@example.com', age: 25 },\n  { id: 2, name: 'Bob', email: 'bob@example.com', age: 30 },\n  { id: 3, name: 'Charlie', email: 'charlie@example.com', age: 35 }\n];\n\n// Check if ALL users have email addresses\nconst allHaveEmail = users.every(function(u) {\n  return u.email && u.email.includes('@');\n});\nconsole.log(allHaveEmail); // true\n\n// Check if ALL users are adults\nconst allAdults = users.every(u => u.age >= 18);\nconsole.log(allAdults); // true\n\n// Check if all elements are unique\nconst hasDuplicates = function(arr) {\n  return !arr.every(function(item, index) {\n    return arr.indexOf(item) === index;\n  });\n};\nconsole.log(hasDuplicates([1, 2, 3])); // false (all unique)\nconsole.log(hasDuplicates([1, 2, 2])); // true (has duplicate)\n\n// Check if all values equal a specific value\nconst allSame = arr => arr.every(x => x === arr[0]);\nconsole.log(allSame([5, 5, 5])); // true\nconsole.log(allSame([5, 5, 6])); // false\n\n// Nested validation\nconst orders = [\n  { items: ['book', 'pen'], paid: true },\n  { items: ['notebook'], paid: true }\n];\nconst readyToShip = orders.every(function(order) {\n  return order.paid && order.items.length > 0;\n});\nconsole.log(readyToShip); // true",
+      "description": "every() is ideal for data integrity checks — ensure all records have required fields and pass validation rules."
+    },
+    {
+      "title": "Performance and Optimization Patterns",
+      "useCase": "Using every() for early exit optimization",
+      "code": "const largeArray = Array.from({ length: 1000000 }, function(_, i) {\n  return { id: i, value: Math.random(), valid: i !== 500000 };\n});\n\n// every() short-circuits — stops at first invalid item\nvar start = Date.now();\nvar allValid = largeArray.every(function(item) {\n  return item.valid;\n});\nvar elapsed = Date.now() - start;\nconsole.log(allValid); // false\nconsole.log('Checked ~500k items then stopped:', elapsed + 'ms');\n\n// Equivalent with filter (always checks ALL items)\nstart = Date.now();\nvar invalidCount = largeArray.filter(function(item) {\n  return !item.valid;\n}).length;\nelapsed = Date.now() - start;\nvar hasInvalid = invalidCount > 0;\nconsole.log(hasInvalid); // true\nconsole.log('Checked ALL 1M items:', elapsed + 'ms');\n\n// Using every() for range checks\nconst values = [10, 20, 30, 40, 50];\nconst inRange = values.every(function(v) {\n  return v >= 0 && v <= 100;\n});\nconsole.log(inRange); // true\n\n// Combining every with early validation\nfunction validateInputs(inputs) {\n  return inputs.every(function(input) {\n    if (input === null || input === undefined) return false;\n    if (typeof input === 'string') return input.trim().length > 0;\n    if (typeof input === 'number') return !isNaN(input) && input >= 0;\n    return true;\n  });\n}\nconsole.log(validateInputs(['hello', 42, 'world'])); // true\nconsole.log(validateInputs(['hello', '', 'world'])); // false",
+      "description": "every() is more performant than filter() for existence checks because it short-circuits on the first failure."
+    },
+    {
+      "title": "Manual every() Implementation",
+      "useCase": "Understanding the internal mechanism",
+      "code": "function myEvery(array, callback) {\n  for (var i = 0; i < array.length; i++) {\n    if (i in array) {  // Handle sparse arrays\n      if (!callback(array[i], i, array)) {\n        return false;\n      }\n    }\n  }\n  return true;\n}\n\n// Test\nvar numbers = [2, 4, 6, 8];\nconsole.log(myEvery(numbers, function(n) {\n  return n % 2 === 0;\n})); // true\n\nconsole.log(myEvery(numbers, function(n) {\n  return n > 5;\n})); // false (2 and 4 fail)\n\n// Empty array\nconsole.log(myEvery([], function(n) {\n  return false;\n})); // true\n\n// Short-circuit test\nvar callCount = 0;\nvar result = myEvery([2, 4, 5, 6], function(n) {\n  callCount++;\n  return n % 2 === 0;\n});\nconsole.log(result); // false\nconsole.log(callCount); // 3 (checked 2, 4, 5 — stopped at 5)\n\n// Sparse array behavior\nvar sparse = [2, , 6, 8];\nconsole.log(myEvery(sparse, function(n) {\n  return n !== undefined;\n})); // true (empty slots are skipped)\n\n// Note: real Array.every also handles:\n// - The optional thisArg parameter\n// - Being called on non-array objects",
+      "description": "A manual implementation shows every() short-circuits on first false and returns true for empty arrays."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does Array.every() return?",
+      "options": ["A new array", "undefined", "A boolean (true/false)", "The first failing element"],
+      "answer": 2,
+      "explanation": "every() returns a boolean: true if all elements pass the test, false if any fail."
+    },
+    {
+      "question": "What does [1, 2, 3].every(n => n > 0) return?",
+      "options": ["true", "false", "[1, 2, 3]", "undefined"],
+      "answer": 0,
+      "explanation": "All elements are greater than 0, so every() returns true."
+    },
+    {
+      "question": "What does [].every(n => false) return?",
+      "options": ["true", "false", "undefined", "TypeError"],
+      "answer": 0,
+      "explanation": "Every() on an empty array always returns true (vacuous truth) — no element exists to fail the test."
+    },
+    {
+      "question": "Does every() short-circuit?",
+      "options": ["No, it checks every element", "Yes, it stops at the first failure", "Only in strict mode", "Only with arrow functions"],
+      "answer": 1,
+      "explanation": "every() short-circuits — it returns false immediately upon finding the first failing element."
+    },
+    {
+      "question": "What is the difference between every() and some()?",
+      "options": ["every() checks if ALL pass; some() checks if ANY pass", "They are identical", "every() checks if ANY pass; some() checks if ALL pass", "every() returns an array; some() returns a boolean"],
+      "answer": 0,
+      "explanation": "every() is like AND (all must pass). some() is like OR (at least one must pass)."
+    },
+    {
+      "question": "How do you check if all numbers in [2, 4, 5, 6] are even?",
+      "options": ["arr.every(n => n % 2 === 0)", "arr.some(n => n % 2 === 0)", "arr.filter(n => n % 2 === 0)", "arr.includes(even)"],
+      "answer": 0,
+      "explanation": "arr.every(n => n % 2 === 0) returns false because 5 is odd."
+    },
+    {
+      "question": "Does every() mutate the original array?",
+      "options": ["Yes", "No", "Only if the callback mutates it", "Only for nested objects"],
+      "answer": 1,
+      "explanation": "every() is read-only. It does not modify the original array."
+    },
+    {
+      "question": "What arguments does the every() callback receive?",
+      "options": ["currentValue only", "currentValue, index, array", "currentValue, index", "array, index"],
+      "answer": 1,
+      "explanation": "The callback receives currentValue, index, and the array being iterated."
+    },
+    {
+      "question": "What is a common use case for every()?",
+      "options": ["Finding the first match", "Checking if all form fields are valid", "Transforming array elements", "Sorting arrays"],
+      "answer": 1,
+      "explanation": "every() is commonly used for validation — ensure all fields pass before allowing form submission."
+    },
+    {
+      "question": "How do you check if an array contains only strings?",
+      "options": ["arr.every(item => typeof item === 'string')", "arr.some(item => typeof item === 'string')", "arr.includes('string')", "arr.filter(item => typeof item === 'string').length === arr.length"],
+      "answer": 0,
+      "explanation": "arr.every(item => typeof item === 'string') is the most direct way to check if all elements are strings."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["generator-functions"] = {
+  "title": "Generator Functions",
+  "difficulty": "advanced",
+  "estimatedMinutes": 30,
+  "tldr": [
+    "Generator functions (<code>function*</code>) return a <strong>Generator</strong> object that can be paused and resumed using <code>yield</code>.",
+    "Calling a generator function does <strong>not execute</strong> its body — it returns a Generator iterator. Each <code>.next()</code> call executes until the next <code>yield</code>.",
+    "Generators enable <strong>lazy evaluation</strong>, <strong>infinite sequences</strong>, and <strong>custom iterables</strong> with stateful iteration.",
+    "The <code>yield*</code> expression <strong>delegates</strong> to another generator or iterable."
+  ],
+  "laymanDefinition": "Imagine a Netflix series. When you click 'Play,' you don't watch the entire season at once. You get one episode (yield), watch it, then ask for the next episode (next()). The show pauses between episodes, resuming only when you press 'Next Episode.' A generator function works the same way — it runs until a yield statement, pauses, and waits for you to request the next value. You can watch a 10-episode season one episode at a time, or stop after 3 episodes if you lose interest.",
+  "deepDive": [
+    {
+      "heading": "Generator Function Syntax and Basics",
+      "text": "A generator function is declared with function* syntax. Inside the body, yield expressions pause execution and return a value. Calling the function returns a Generator object (an iterator). Each call to generator.next() resumes execution from the last yield, runs until the next yield or return, and returns an object { value, done }. When done is true, the generator has completed."
+    },
+    {
+      "heading": "The Generator Object Protocol",
+      "text": "A Generator implements both the Iterable protocol (Symbol.iterator) and the Iterator protocol (next()). This means generators can be used with for...of loops, spread operators, destructuring, and other iterable-consuming APIs. The generator maintains internal state (its execution context) across yield points."
+    },
+    {
+      "heading": "yield* Delegation",
+      "text": "yield* delegates to another generator or iterable. It iterates over the target and yields each value. This enables composing generators: a flatMap generator can yield* over each element's sub-generator. yield* also captures the return value of the delegated generator."
+    },
+    {
+      "heading": "Two-Way Communication with .next()",
+      "text": "generator.next(value) can send a value back into the generator. The value becomes the result of the yield expression that paused the generator. This enables two-way communication — the generator yields data out, and the caller pushes data back in."
+    },
+    {
+      "heading": "Generator.return() and Generator.throw()",
+      "text": "Generator.return(value) terminates the generator at the current yield point, setting done to true. Generator.throw(error) throws an exception at the yield point, which can be caught inside the generator with try/catch. Both cause the generator to clean up and finalize."
+    }
+  ],
+  "interviewAnswer": "A generator function (function*) returns a Generator object that can be paused with yield and resumed with .next(). Each .next() call returns { value, done }. Generators enable lazy evaluation, infinite sequences, and custom iterables. The yield* expression delegates to another generator. Generators also support two-way communication via .next(value), and can be terminated with .return() or injected with errors via .throw(). Common use cases include generating unique IDs, implementing custom iteration logic, managing async control flow (with libraries like co or redux-saga), and processing large datasets lazily.",
+  "interviewQuestions": [
+    {
+      "question": "What is a generator function?",
+      "answer": "A generator function (function*) returns a Generator object that can be paused and resumed. Each yield pauses execution, and .next() resumes it."
+    },
+    {
+      "question": "What does generator.next() return?",
+      "answer": "It returns an object { value, done }. value is the yielded value, done is a boolean indicating if the generator has completed."
+    },
+    {
+      "question": "What happens when a generator reaches a return statement?",
+      "answer": "The return value is yielded as { value: returnVal, done: true }. The generator is finished and subsequent .next() calls return { value: undefined, done: true }."
+    },
+    {
+      "question": "What does yield* do?",
+      "answer": "yield* delegates to another generator or iterable. It iterates over the target and yields each value. It also captures the return value of the delegated generator."
+    },
+    {
+      "question": "Can you pass values into a generator?",
+      "answer": "Yes. generator.next(value) sends a value back to the generator, which becomes the result of the yield expression that paused execution."
+    },
+    {
+      "question": "What is a practical use case for generators?",
+      "answer": "Infinite sequences (like unique ID generators), lazy evaluation of large datasets, custom iterables, async flow control (co, redux-saga), and representing state machines."
+    },
+    {
+      "question": "Can a generator be used in a for...of loop?",
+      "answer": "Yes. Generators implement the iterable protocol (Symbol.iterator returns itself). for...of calls .next() until done is true."
+    },
+    {
+      "question": "What does generator.throw() do?",
+      "answer": "It throws an error at the generator's current yield point. If caught inside the generator with try/catch, execution continues; otherwise it propagates."
+    },
+    {
+      "question": "How do generators handle errors?",
+      "answer": "Wrap yield in try/catch inside the generator. Errors can be injected via generator.throw() or thrown naturally. The generator can catch, handle, and continue or finalize."
+    },
+    {
+      "question": "Are generators synchronous or asynchronous?",
+      "answer": "Generators themselves are synchronous — they execute until yield and pause, all synchronously. However, they can be used with async-aware runners (like co) to manage async code."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 400\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"380\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Generator Function Execution Flow</text><rect x=\"30\" y=\"60\" width=\"640\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1\"/><text x=\"350\" y=\"82\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Generator Function Definition: function* counter() { ... }</text><text x=\"350\" y=\"100\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Calling counter() returns a Generator object — no code runs yet</text><line x1=\"50\" y1=\"125\" x2=\"650\" y2=\"125\" stroke=\"var(--border)\" stroke-dasharray=\"4\"/><rect x=\"50\" y=\"140\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"120\" y=\"164\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">gen.next()</text><text x=\"120\" y=\"195\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Call 1</text><rect x=\"230\" y=\"140\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"300\" y=\"164\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">yield 1</text><text x=\"300\" y=\"195\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ { value: 1, done: false }</text><line x1=\"190\" y1=\"160\" x2=\"230\" y2=\"160\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><rect x=\"50\" y=\"225\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"120\" y=\"249\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">gen.next()</text><text x=\"120\" y=\"280\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Call 2</text><rect x=\"230\" y=\"225\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"300\" y=\"249\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">yield 2</text><text x=\"300\" y=\"280\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ { value: 2, done: false }</text><line x1=\"190\" y1=\"245\" x2=\"230\" y2=\"245\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><rect x=\"50\" y=\"310\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"120\" y=\"334\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">gen.next()</text><text x=\"120\" y=\"365\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Call 3</text><rect x=\"230\" y=\"310\" width=\"140\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#e64745\" stroke-width=\"1.5\"/><text x=\"300\" y=\"334\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"12\" font-weight=\"bold\">return</text><text x=\"300\" y=\"365\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">→ { value: undefined, done: true }</text><line x1=\"190\" y1=\"330\" x2=\"230\" y2=\"330\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><text x=\"530\" y=\"180\" fill=\"#9aa0b0\" font-size=\"11\">Generator</text><text x=\"530\" y=\"195\" fill=\"#9aa0b0\" font-size=\"11\">pauses here</text><text x=\"530\" y=\"270\" fill=\"#9aa0b0\" font-size=\"11\">Resumes from</text><text x=\"530\" y=\"285\" fill=\"#9aa0b0\" font-size=\"11\">last yield</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic Generator",
+      "useCase": "Creating and using a simple generator",
+      "code": "function* numberGenerator() {\n  yield 1;\n  yield 2;\n  yield 3;\n}\n\nconst gen = numberGenerator();\n\nconsole.log(gen.next()); // { value: 1, done: false }\nconsole.log(gen.next()); // { value: 2, done: false }\nconsole.log(gen.next()); // { value: 3, done: false }\nconsole.log(gen.next()); // { value: undefined, done: true }\n\n// Using with for...of\nconst gen2 = numberGenerator();\nfor (const num of gen2) {\n  console.log(num); // 1, 2, 3\n}\n\n// Spread into array\nconst gen3 = numberGenerator();\nconsole.log([...gen3]); // [1, 2, 3]",
+      "description": "A basic generator yields values one at a time. The generator pauses after each yield and resumes on the next .next() call."
+    },
+    {
+      "title": "Infinite Sequence Generator",
+      "useCase": "Generating infinite sequences lazily",
+      "code": "function* fibonacci() {\n  let a = 0, b = 1;\n  while (true) {\n    yield a;\n    [a, b] = [b, a + b];\n  }\n}\n\nconst fib = fibonacci();\n\nconsole.log(fib.next().value); // 0\nconsole.log(fib.next().value); // 1\nconsole.log(fib.next().value); // 1\nconsole.log(fib.next().value); // 2\nconsole.log(fib.next().value); // 3\nconsole.log(fib.next().value); // 5\nconsole.log(fib.next().value); // 8\n\n// Take first 10 Fibonacci numbers\nconst first10 = [];\nconst limitedFib = fibonacci();\nfor (let i = 0; i < 10; i++) {\n  first10.push(limitedFib.next().value);\n}\nconsole.log(first10); // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]\n\n// Infinite can be controlled — no memory issues\nfunction* naturalNumbers() {\n  let n = 1;\n  while (true) yield n++;\n}\n\nconst take = function(iterable, n) {\n  const gen = iterable[Symbol.iterator]();\n  const result = [];\n  for (let i = 0; i < n; i++) {\n    result.push(gen.next().value);\n  }\n  return result;\n};\n\nconsole.log(take(naturalNumbers(), 5)); // [1, 2, 3, 4, 5]",
+      "description": "Generators enable infinite sequences that don't consume memory — values are computed lazily only when requested via .next()."
+    },
+    {
+      "title": "Generator with yield* Delegation",
+      "useCase": "Composing generators together",
+      "code": "function* gen1() {\n  yield 'a';\n  yield 'b';\n}\n\nfunction* gen2() {\n  yield 'x';\n  yield 'y';\n}\n\nfunction* combined() {\n  yield* gen1();\n  yield* gen2();\n  yield 'done';\n}\n\nconsole.log([...combined()]);\n// ['a', 'b', 'x', 'y', 'done']\n\n// yield* with arrays (any iterable)\nfunction* flatten(arr) {\n  for (const item of arr) {\n    if (Array.isArray(item)) {\n      yield* flatten(item); // Recursive delegation\n    } else {\n      yield item;\n    }\n  }\n}\n\nconst nested = [1, [2, [3, 4], 5], 6];\nconsole.log([...flatten(nested)]);\n// [1, 2, 3, 4, 5, 6]\n\n// Using return value from delegated generator\nfunction* withReturn() {\n  const result = yield* gen1();\n  yield result; // undefined (gen1 doesn't return)\n}\n\nfunction* withExplicitReturn() {\n  yield 1;\n  return 'done';\n}\n\nfunction* consumer() {\n  const val = yield* withExplicitReturn();\n  yield 'Delegated returned: ' + val;\n}\n\nconsole.log([...consumer()]);\n// [1, 'Delegated returned: done']",
+      "description": "yield* delegates to another generator or any iterable. It supports recursion for flattening nested structures, and captures return values."
+    },
+    {
+      "title": "Two-Way Communication with .next(value)",
+      "useCase": "Sending values back into generators",
+      "code": "function* interactive() {\n  const a = yield 'What is a?';\n  const b = yield 'What is b?';\n  yield 'Sum is ' + (a + b);\n}\n\nconst gen = interactive();\n\nconsole.log(gen.next());          // { value: 'What is a?', done: false }\nconsole.log(gen.next(10));        // { value: 'What is b?', done: false }\nconsole.log(gen.next(20));        // { value: 'Sum is 30', done: false }\nconsole.log(gen.next());          // { value: undefined, done: true }\n\n// Practical: state machine with feedback\nfunction* questionGame() {\n  let score = 0;\n  const answer1 = yield 'What is 2+2?';\n  if (answer1 === 4) score += 10;\n  const answer2 = yield 'What is the capital of France?';\n  if (answer2 && answer2.toLowerCase() === 'paris') score += 10;\n  yield 'Final score: ' + score;\n}\n\nconst game = questionGame();\nconsole.log(game.next());                // Question 1\nconsole.log(game.next(4));               // Correct!\nconsole.log(game.next('Paris'));         // Also correct!\nconsole.log(game.next());                // Final score: 20",
+      "description": "Generators support sending values back via .next(value). The value becomes the result of the yield expression that paused execution."
+    },
+    {
+      "title": "Generator Error Handling and Cleanup",
+      "useCase": "Managing errors and cleanup in generators",
+      "code": "function* safeGenerator() {\n  try {\n    yield 1;\n    yield 2;\n    yield 3;\n  } catch (err) {\n    console.log('Caught inside generator:', err.message);\n    yield 'error handled';\n  } finally {\n    console.log('Cleanup: always runs');\n  }\n}\n\nconst gen = safeGenerator();\nconsole.log(gen.next());         // { value: 1, done: false }\nconsole.log(gen.throw(new Error('Something broke')));\n// 'Caught inside generator: Something broke'\n// 'Cleanup: always runs'\n// { value: 'error handled', done: false }\n\nconsole.log(gen.next());         // { value: undefined, done: true }\n\n// Generator.return() for early termination\nfunction* withCleanup() {\n  try {\n    yield 1;\n    yield 2;\n    yield 3;\n  } finally {\n    console.log('Cleanup executed');\n  }\n}\n\nconst gen2 = withCleanup();\nconsole.log(gen2.next());        // { value: 1, done: false }\nconsole.log(gen2.return('early exit'));\n// 'Cleanup executed'\n// { value: 'early exit', done: true }\n\nconsole.log(gen2.next());        // { value: undefined, done: true }\n\n// Use try/finally for resource cleanup\nfunction* fileReader(files) {\n  const opened = [];\n  try {\n    for (const file of files) {\n      opened.push(file);\n      yield 'Reading: ' + file;\n    }\n  } finally {\n    for (const f of opened) {\n      console.log('Closing:', f);\n    }\n  }\n}",
+      "description": "Errors can be injected via .throw() and caught inside the generator. .return() triggers finally blocks for cleanup, then terminates."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does calling a generator function return?",
+      "options": ["The first yielded value", "A Generator object", "undefined", "The return value"],
+      "answer": 1,
+      "explanation": "Calling a generator function returns a Generator object (an iterator). The function body is not executed until .next() is called."
+    },
+    {
+      "question": "What does generator.next() return?",
+      "options": ["The yielded value directly", "An array [value, done]", "An object { value, done }", "A Promise"],
+      "answer": 2,
+      "explanation": ".next() returns { value, done }. value is the yielded expression, done is a boolean indicating completion."
+    },
+    {
+      "question": "What keyword pauses generator execution?",
+      "options": ["await", "yield", "pause", "break"],
+      "answer": 1,
+      "explanation": "yield pauses the generator and returns a value to the caller. Execution resumes at the next .next() call."
+    },
+    {
+      "question": "What does yield* do?",
+      "options": ["Yields the same value twice", "Delegates to another generator or iterable", "Yields undefined", "Creates a nested generator"],
+      "answer": 1,
+      "explanation": "yield* delegates to another iterable or generator, yielding each of its values and optionally capturing its return value."
+    },
+    {
+      "question": "Can generators produce infinite sequences?",
+      "options": ["Yes, with while(true) and yield", "No, generators must terminate", "Only with arrays", "Only with async/await"],
+      "answer": 0,
+      "explanation": "Generators can use while(true) loops to produce values indefinitely. Values are computed lazily on each .next() call."
+    },
+    {
+      "question": "How do you send a value back into a generator?",
+      "options": ["generator.send(value)", "generator.next(value)", "generator.emit(value)", "generator.push(value)"],
+      "answer": 1,
+      "explanation": "generator.next(value) sends a value into the generator. The value becomes the result of the yield expression that paused execution."
+    },
+    {
+      "question": "What does generator.return() do?",
+      "options": ["Returns the next value", "Terminates the generator and sets done to true", "Restarts the generator", "Throws an error"],
+      "answer": 1,
+      "explanation": "generator.return(value) terminates the generator, runs any finally blocks, and marks it as done."
+    },
+    {
+      "question": "Can generators be used with for...of?",
+      "options": ["Yes, generators implement the iterable protocol", "No, generators are not iterable", "Only if they return arrays", "Only with async generators"],
+      "answer": 0,
+      "explanation": "Generators implement both the iterable and iterator protocols, so they work with for...of, spread, and destructuring."
+    },
+    {
+      "question": "What is a common use case for generators?",
+      "options": ["DOM manipulation", "Lazy evaluation and infinite sequences", "CSS animations", "Database queries"],
+      "answer": 1,
+      "explanation": "Generators excel at lazy evaluation, infinite sequences, custom iterables, state machines, and async flow control."
+    },
+    {
+      "question": "Are generators synchronous or asynchronous?",
+      "options": ["Synchronous (they pause and resume within the same thread)", "Asynchronous (they run on separate threads)", "Both depending on use", "Neither"],
+      "answer": 0,
+      "explanation": "Generators are synchronous — execution pauses at yield and resumes at .next(), all within a single thread. Async generators (async function*) add Promise-based async behavior."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["iterators"] = {
+  "title": "Iterators & Iterables",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "An <strong>iterable</strong> is an object with a <code>Symbol.iterator</code> method that returns an <strong>iterator</strong>.",
+    "An <strong>iterator</strong> is an object with a <code>.next()</code> method that returns <code>{ value, done }</code>.",
+    "Built-in iterables: <code>Array</code>, <code>String</code>, <code>Map</code>, <code>Set</code>, <code>NodeList</code>, <code>arguments</code>, and <strong>generators</strong>.",
+    "The <strong>iteration protocol</strong> enables <code>for...of</code>, spread <code>...</code>, destructuring, and <code>Array.from()</code> to work on any iterable."
+  ],
+  "laymanDefinition": "Imagine a PE teacher with a list of students. If the students know how to 'line up' (Symbol.iterator), the teacher can call each student one by one using a roll call (next()). A student who can line up is 'iterable.' The teacher's act of calling each student is 'iteration.' Different classes might line up differently (arrays by index, maps by entry), but as long as they know how to line up, the teacher can use the same roll-call process on any class. That's the iteration protocol — a standard way to loop over any data structure.",
+  "deepDive": [
+    {
+      "heading": "The Iterable Protocol",
+      "text": "An object is iterable if it has a method at Symbol.iterator that returns an iterator. The method is called without arguments and should return an object conforming to the iterator protocol. Many built-in types are iterable: Array, String, Map, Set, TypedArray, NodeList, arguments, and generators. Plain objects are NOT iterable by default."
+    },
+    {
+      "heading": "The Iterator Protocol",
+      "text": "An iterator is an object with a next() method. next() returns an object with two properties: value (any value) and done (boolean). When done is true, the iterator has completed and value is typically omitted or undefined. After an iterator is done, calling next() should continue returning { done: true }."
+    },
+    {
+      "heading": "Consuming Iterables — for...of, Spread, Destructuring",
+      "text": "The for...of loop calls Symbol.iterator on the iterable, then calls next() on the returned iterator until done is true. The spread operator (...) and destructuring also consume iterables. Array.from() converts any iterable to an array. These all work on any object implementing the iterable protocol."
+    },
+    {
+      "heading": "Creating Custom Iterables",
+      "text": "Any object can become iterable by implementing Symbol.iterator. The method should return an iterator object with next(). Custom iterables enable domain-specific iteration patterns — iterating over a range of numbers, paginated API data, tree structures, or infinite sequences. This is the foundation for custom data structures that integrate with JavaScript's built-in iteration APIs."
+    },
+    {
+      "heading": "Iterators vs Generators",
+      "text": "Generators (function*) are the easiest way to create iterators. A generator function returns a Generator object that is both iterable and an iterator. While you can manually create iterators with next() methods, generators handle the state machine automatically. Use generators for simple iterators, and explicit iterators when you need fine-grained control over the iteration state."
+    }
+  ],
+  "interviewAnswer": "An iterable implements Symbol.iterator, which returns an iterator. An iterator has next() that returns { value, done }. Built-in iterables include Array, String, Map, Set, and generators. Consuming syntaxes like for...of, spread, destructuring, and Array.from() all use the iteration protocol. Custom objects can become iterable by implementing Symbol.iterator. Generators (function*) simplify iterator creation by automatically handling the iteration protocol. Key interview topics: implementing Symbol.iterator manually, converting iterables to arrays, understanding the difference between iterables and array-likes, and the relationship between iterators and generators.",
+  "interviewQuestions": [
+    {
+      "question": "What is an iterable?",
+      "answer": "An object that implements the Symbol.iterator method, which returns an iterator. Built-in iterables: Array, String, Map, Set, NodeList, arguments."
+    },
+    {
+      "question": "What is an iterator?",
+      "answer": "An object with a next() method that returns { value, done }. next() is called repeatedly until done is true."
+    },
+    {
+      "question": "How do you make a custom object iterable?",
+      "answer": "Implement [Symbol.iterator]() on the object. The method should return an iterator object with a next() method."
+    },
+    {
+      "question": "What syntaxes consume iterables?",
+      "answer": "for...of loops, spread operator (...), destructuring assignment, Array.from(), Promise.all/race, Map/Set constructors, and yield*."
+    },
+    {
+      "question": "Is a plain JavaScript object iterable?",
+      "answer": "No. Plain objects ({}) are not iterable by default. You must implement Symbol.iterator to make them iterable."
+    },
+    {
+      "question": "What is the difference between an iterable and an array-like?",
+      "answer": "Iterables implement Symbol.iterator. Array-likes have a length property and indexed elements (e.g., arguments, NodeList). Array-likes are not necessarily iterable (but modern ones like NodeList are). Array.from() accepts both."
+    },
+    {
+      "question": "How do iterators relate to generators?",
+      "answer": "Generators (function*) return Generator objects that are both iterable and iterators. Generators provide a concise syntax for creating custom iterators."
+    },
+    {
+      "question": "What happens when an iterator is exhausted?",
+      "answer": "Once done is true, the iterator is exhausted. Subsequent .next() calls should continue returning { value: undefined, done: true }."
+    },
+    {
+      "question": "Can an iterator also be iterable?",
+      "answer": "Yes. The standard pattern is for the iterator to have a Symbol.iterator method that returns itself (this). This allows iterators to be used in for...of loops."
+    },
+    {
+      "question": "How do you check if something is iterable?",
+      "answer": "Check if obj !== null && typeof obj[Symbol.iterator] === 'function'. If yes, it can be used with for...of, spread, etc."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"280\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Iteration Protocol</text><rect x=\"30\" y=\"65\" width=\"280\" height=\"90\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"170\" y=\"85\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"13\" font-weight=\"bold\">Iterable</text><text x=\"170\" y=\"105\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Has [Symbol.iterator]()</text><text x=\"170\" y=\"125\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"11\">Example: [1, 2, 3]</text><line x1=\"310\" y1=\"110\" x2=\"350\" y2=\"110\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"330\" y=\"100\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"10\">returns</text><rect x=\"350\" y=\"65\" width=\"300\" height=\"90\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"500\" y=\"85\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"13\" font-weight=\"bold\">Iterator</text><text x=\"500\" y=\"105\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Has .next() → { value, done }</text><text x=\"500\" y=\"125\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"11\">next() → { value: 1, done: false }</text><text x=\"500\" y=\"142\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"11\">next() → { value: 2, done: false }</text><rect x=\"30\" y=\"185\" width=\"620\" height=\"80\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1\"/><text x=\"340\" y=\"208\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">Consumed by: for...of | ...spread | [a, b] = iterable | Array.from() | new Map()</text><text x=\"340\" y=\"235\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">These syntaxes call Symbol.iterator() then repeatedly call .next() until done is true</text><text x=\"340\" y=\"255\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Custom objects: implement [Symbol.iterator]() { return { next() { ... } }; }</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic Iterator and Iterable",
+      "useCase": "Creating and consuming a manual iterator",
+      "code": "// Manual iterator\nfunction createIterator(array) {\n  let index = 0;\n  return {\n    next: function() {\n      if (index < array.length) {\n        return { value: array[index++], done: false };\n      } else {\n        return { value: undefined, done: true };\n      }\n    }\n  };\n}\n\nconst it = createIterator(['a', 'b', 'c']);\nconsole.log(it.next()); // { value: 'a', done: false }\nconsole.log(it.next()); // { value: 'b', done: false }\nconsole.log(it.next()); // { value: 'c', done: false }\nconsole.log(it.next()); // { value: undefined, done: true }\n\n// Making an object iterable\nconst range = {\n  from: 1,\n  to: 5,\n  [Symbol.iterator]: function() {\n    let current = this.from;\n    const end = this.to;\n    return {\n      next: function() {\n        if (current <= end) {\n          return { value: current++, done: false };\n        } else {\n          return { value: undefined, done: true };\n        }\n      }\n    };\n  }\n};\n\n// Now range can be used with for...of\nfor (const n of range) {\n  console.log(n); // 1, 2, 3, 4, 5\n}\n\n// And with spread\nconsole.log([...range]); // [1, 2, 3, 4, 5]",
+      "description": "A manual iterator implements next() returning { value, done }. An iterable implements Symbol.iterator returning an iterator."
+    },
+    {
+      "title": "Built-in Iterables in Action",
+      "useCase": "Using for...of on various built-in types",
+      "code": "// Array\nfor (const item of ['a', 'b', 'c']) {\n  console.log(item); // 'a', 'b', 'c'\n}\n\n// String — iterates characters\nfor (const char of 'hello') {\n  console.log(char); // 'h', 'e', 'l', 'l', 'o'\n}\n\n// Map — iterates [key, value] entries\nconst map = new Map([['name', 'Alice'], ['age', 30]]);\nfor (const [key, value] of map) {\n  console.log(key, value); // 'name' 'Alice', 'age' 30\n}\n\n// Set\nconst set = new Set([1, 2, 3, 3]);\nfor (const num of set) {\n  console.log(num); // 1, 2, 3 (no duplicate)\n}\n\n// arguments (array-like, now also iterable)\n(function() {\n  for (const arg of arguments) {\n    console.log(arg);\n  }\n})('x', 'y', 'z'); // 'x', 'y', 'z'\n\n// NodeList (in browsers)\n// document.querySelectorAll('div') is iterable\n\n// TypedArray\nconst int32 = new Int32Array([10, 20, 30]);\nconsole.log([...int32]); // [10, 20, 30]\n\n// Generator functions\nfunction* gen() {\n  yield 'generated';\n  yield 'values';\n}\nfor (const val of gen()) {\n  console.log(val); // 'generated', 'values'\n}",
+      "description": "Built-in iterables include Array, String, Map, Set, arguments, NodeList, TypedArray, and generators."
+    },
+    {
+      "title": "Custom Iterable — Paginated Data",
+      "useCase": "Iterating over paginated API data",
+      "code": "class PaginatedAPI {\n  constructor(baseUrl, pageSize = 10) {\n    this.baseUrl = baseUrl;\n    this.pageSize = pageSize;\n  }\n\n  [Symbol.iterator]() {\n    let page = 1;\n    let hasMore = true;\n    let buffer = [];\n    let bufferIndex = 0;\n    const self = this;\n\n    return {\n      next: function() {\n        // If we have items in buffer, return next one\n        if (bufferIndex < buffer.length) {\n          return { value: buffer[bufferIndex++], done: false };\n        }\n\n        // If no more pages, we're done\n        if (!hasMore) {\n          return { value: undefined, done: true };\n        }\n\n        // Simulate fetching a page (in real code, use async)\n        console.log('Fetching page ' + page + '...');\n        // Simulate: fetch(self.baseUrl + '?page=' + page + '&size=' + self.pageSize)\n        // For demo, generate synthetic data\n        buffer = [];\n        const start = (page - 1) * self.pageSize;\n        for (let i = 0; i < self.pageSize; i++) {\n          buffer.push({ id: start + i + 1, name: 'Item ' + (start + i + 1) });\n        }\n        page++;\n        hasMore = page <= 5; // Simulate 5 pages\n        bufferIndex = 0;\n\n        if (buffer.length > 0) {\n          return { value: buffer[bufferIndex++], done: false };\n        }\n        return { value: undefined, done: true };\n      }\n    };\n  }\n}\n\nconst api = new PaginatedAPI('/api/items', 3);\nlet count = 0;\nfor (const item of api) {\n  console.log(item.id, item.name);\n  count++;\n  if (count >= 5) break; // Only take first 5\n}\n// Logs pages 1-2 (fetching as needed)",
+      "description": "Custom iterables enable lazy iteration over external data sources like paginated APIs, fetching data on demand."
+    },
+    {
+      "title": "Consuming Iterables — Spread, Destructuring, Array.from",
+      "useCase": "Using iteration protocol features",
+      "code": "const range = {\n  from: 1,\n  to: 5,\n  [Symbol.iterator]() {\n    let current = this.from;\n    const end = this.to;\n    return {\n      next() {\n        return current <= end\n          ? { value: current++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n\n// Spread operator\nconst nums = [...range];\nconsole.log(nums); // [1, 2, 3, 4, 5]\n\n// Destructuring\nconst [first, second, ...rest] = range;\nconsole.log(first);  // 1\nconsole.log(second); // 2\nconsole.log(rest);   // [3, 4, 5]\n\n// Array.from()\nconst arr = Array.from(range);\nconsole.log(arr); // [1, 2, 3, 4, 5]\n\n// Array.from() with mapping function\nconst doubled = Array.from(range, n => n * 2);\nconsole.log(doubled); // [2, 4, 6, 8, 10]\n\n// Using iterable with Map constructor\nconst pairs = [[1, 'one'], [2, 'two'], [3, 'three']];\nconst map = new Map(pairs);\nconsole.log(map.get(2)); // 'two'\n\n// Using iterable with Set constructor\nconst set = new Set([1, 2, 2, 3, 3, 3]);\nconsole.log([...set]); // [1, 2, 3]\n\n// Promise.all with iterable\n// Promise.all accepts any iterable, not just arrays\nfunction* asyncTasks() {\n  yield Promise.resolve(1);\n  yield Promise.resolve(2);\n  yield Promise.resolve(3);\n}\n// Promise.all(asyncTasks()).then(console.log); // [1, 2, 3]",
+      "description": "The spread operator, destructuring, Array.from(), Map/Set constructors, and Promise.all all consume iterables."
+    },
+    {
+      "title": "Making Iterables from Generators",
+      "useCase": "Using generators to simplify iterator creation",
+      "code": "// Generator as iterable factory\nfunction* rangeIterator(start, end) {\n  for (let i = start; i <= end; i++) {\n    yield i;\n  }\n}\n\nconst range = rangeIterator(1, 5);\nconsole.log([...range]); // [1, 2, 3, 4, 5]\n\n// Generator as Symbol.iterator\nconst iterableObject = {\n  *[Symbol.iterator]() {\n    yield 'a';\n    yield 'b';\n    yield 'c';\n  }\n};\n\nconsole.log([...iterableObject]); // ['a', 'b', 'c']\n\n// Object with computed iteration\nconst countdown = {\n  from: 5,\n  *[Symbol.iterator]() {\n    for (let i = this.from; i >= 0; i--) {\n      yield i;\n    }\n  }\n};\n\nfor (const num of countdown) {\n  console.log(num); // 5, 4, 3, 2, 1, 0\n}\n\n// Both iterable and iterator\nfunction* fibonacci() {\n  let a = 0, b = 1;\n  while (true) {\n    yield a;\n    [a, b] = [b, a + b];\n  }\n}\n\nconst fib = fibonacci();\nconsole.log(fib[Symbol.iterator]() === fib); // true (is both)\nconsole.log(fib.next().value); // 0\nconsole.log(fib.next().value); // 1\nconsole.log(fib.next().value); // 1\n\n// for...of with automatic iteration\nlet count = 0;\nfor (const n of fibonacci()) {\n  console.log(n);\n  if (++count >= 5) break;\n}\n// 0, 1, 1, 2, 3",
+      "description": "Generators are the easiest way to create iterators. They are both iterable and iterators, and can be used as Symbol.iterator methods."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What makes an object iterable?",
+      "options": ["Having a length property", "Implementing Symbol.iterator", "Being an array", "Having numeric keys"],
+      "answer": 1,
+      "explanation": "An object is iterable if it has a method at Symbol.iterator that returns an iterator."
+    },
+    {
+      "question": "What must an iterator's next() method return?",
+      "options": ["A value", "An object { value, done }", "A boolean", "An array [value, done]"],
+      "answer": 1,
+      "explanation": "next() must return an object with two properties: value (any type) and done (boolean)."
+    },
+    {
+      "question": "Which of these is NOT iterable out of the box?",
+      "options": ["Array", "String", "Plain object {}", "Map"],
+      "answer": 2,
+      "explanation": "Plain objects are not iterable by default. Arrays, Strings, Maps, and Sets are built-in iterables."
+    },
+    {
+      "question": "Which syntax consumes iterables?",
+      "options": ["for...in", "for...of", "while", "do...while"],
+      "answer": 1,
+      "explanation": "for...of calls Symbol.iterator and iterates using next(). for...in iterates over enumerable property keys."
+    },
+    {
+      "question": "How do you convert an iterable to an array?",
+      "options": ["Array.from(iterable)", "iterable.toArray()", "new Array(iterable)", "iterable.array()"],
+      "answer": 0,
+      "explanation": "Array.from(iterable), [...iterable], or Array.prototype.slice.call(iterable) (for array-likes)."
+    },
+    {
+      "question": "Can an iterator also be iterable?",
+      "options": ["Yes, by implementing Symbol.iterator to return this", "No, they are mutually exclusive", "Only generators", "Only if it's an array"],
+      "answer": 0,
+      "explanation": "An iterator can be iterable by having Symbol.iterator return itself (this). This allows use in for...of loops."
+    },
+    {
+      "question": "What is the simplest way to create a custom iterable?",
+      "options": ["Implement next() manually", "Use a generator function for Symbol.iterator", "Extend Array", "Use Object.defineProperty"],
+      "answer": 1,
+      "explanation": "A generator function (function*) for Symbol.iterator is the simplest way — it automatically handles the iteration protocol."
+    },
+    {
+      "question": "After an iterator returns { done: true }, what should subsequent .next() calls return?",
+      "options": ["{ value: undefined, done: true }", "undefined", "null", "An error"],
+      "answer": 0,
+      "explanation": "After completion, .next() should continue returning { value: undefined, done: true } for consistency."
+    },
+    {
+      "question": "Is the arguments object iterable?",
+      "options": ["Yes, in modern JavaScript", "No, never", "Only in strict mode", "Only with bind"],
+      "answer": 0,
+      "explanation": "In modern JavaScript (ES6+), the arguments object is iterable. It also has array-like properties (length, indexed access)."
+    },
+    {
+      "question": "What does Array.from() do with an iterable?",
+      "options": ["Creates a new array from all elements of the iterable", "Checks if it's an array", "Returns the first element", "Modifies the original iterable"],
+      "answer": 0,
+      "explanation": "Array.from(iterable) creates a new array containing all elements from the iterable. It also accepts a mapping function."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["weakmap"] = {
+  "title": "WeakMap",
+  "difficulty": "advanced",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "<code>WeakMap</code> is a collection of key-value pairs where keys are <strong>objects</strong> (or non-registered symbols) and values can be any type.",
+    "Keys are held <strong>weakly</strong> — if there are no other references to the key object, it is eligible for <strong>garbage collection</strong>.",
+    "WeakMap has <strong>no size property</strong>, no <code>clear()</code> method, and is <strong>not iterable</strong> (no keys(), values(), entries()).",
+    "Primary use cases: <strong>private data</strong> for objects, <strong>caching</strong> computed values, and <strong>avoiding memory leaks</strong>."
+  ],
+  "laymanDefinition": "Imagine a post-it note system where you can attach private notes to different people (objects), but the notes vanish automatically when the person leaves the room. You can look up your note for a specific person, but you can't list all people who have notes. You can't count the notes either. If a person walks out (is no longer referenced), their note disappears with them — no need to clean up manually. That's WeakMap: a way to associate private data with objects that auto-cleans when the objects are gone.",
+  "deepDive": [
+    {
+      "heading": "WeakMap Fundamentals — Weak References",
+      "text": "The 'weak' in WeakMap refers to how keys are held. A WeakMap holds a 'weak reference' to its key objects. This means the existence of the key in the WeakMap does not prevent garbage collection. When all other references to the key object are gone, the key-value pair is automatically removed from the WeakMap. This is critical for preventing memory leaks in long-lived applications."
+    },
+    {
+      "heading": "WeakMap API — Limited but Purposeful",
+      "text": "WeakMap has only four methods: set(key, value), get(key), has(key), and delete(key). There is no size, no clear(), no iteration methods (keys, values, entries, forEach). The limited API is intentional — because references are weak and keys can disappear at any time (during garbage collection), a size or iteration API would be unreliable."
+    },
+    {
+      "heading": "WeakMap for Private Data",
+      "text": "WeakMap is commonly used to store private data associated with objects. The WeakMap is defined in a closure and only the privileged functions have access to it. External code cannot access the private data because it doesn't have access to the WeakMap instance. When the object is garbage collected, the private data is automatically cleaned up."
+    },
+    {
+      "heading": "WeakMap for Caching and Memoization",
+      "text": "WeakMap is ideal for caching computed values or results tied to specific objects. If you need to cache expensive computations per object, WeakMap ensures the cache entry is automatically removed when the source object is no longer needed, preventing memory leaks in caching scenarios."
+    },
+    {
+      "heading": "WeakMap vs Map",
+      "list": [
+        "<strong>Keys:</strong> Map accepts any type. WeakMap only accepts objects (or non-registered symbols).",
+        "<strong>References:</strong> Map holds strong references. WeakMap holds weak references. WeakMap keys can be GC'd.",
+        "<strong>Iteration:</strong> Map is iterable (keys, values, entries, forEach). WeakMap is not iterable.",
+        "<strong>Size:</strong> Map has size property. WeakMap does not (keys may disappear at any time).",
+        "<strong>Use cases:</strong> Map for general-purpose key-value storage. WeakMap for object-private data and memory-safe caching."
+      ]
+    }
+  ],
+  "interviewAnswer": "WeakMap is a collection that holds weak references to its object keys, allowing garbage collection when no other references exist. It has a limited API — set, get, has, delete — and is not iterable. Primary use cases: storing private data associated with objects (using closure-scoped WeakMaps), caching computed values per object without preventing GC, preventing memory leaks in DOM element associations, and implementing observable patterns. WeakMap keys must be objects (or non-registered symbols); primitive values are not allowed. The main advantage over Map is automatic cleanup — when the key object is GC'd, the entry is removed automatically.",
+  "interviewQuestions": [
+    {
+      "question": "What is a WeakMap?",
+      "answer": "A WeakMap is a collection of key-value pairs where keys are objects (held weakly) and values can be any type. Weak references allow garbage collection."
+    },
+    {
+      "question": "What types can be WeakMap keys?",
+      "answer": "Only objects and non-registered symbols. Primitive values (strings, numbers, booleans) are not allowed as WeakMap keys."
+    },
+    {
+      "question": "Why does WeakMap not have a size property?",
+      "answer": "Because references are weak, keys can be garbage collected at any time. The size could change unpredictably, making it unreliable and inconsistent."
+    },
+    {
+      "question": "Why is WeakMap not iterable?",
+      "answer": "Keys can be garbage collected at any time during iteration, leading to inconsistent results. The limited API ensures predictable behavior despite weak references."
+    },
+    {
+      "question": "What is the difference between Map and WeakMap?",
+      "answer": "Map holds strong references and allows any key type. WeakMap holds weak references, only allows object keys, has no iteration methods, and no size."
+    },
+    {
+      "question": "What are common use cases for WeakMap?",
+      "answer": "1) Private data storage for objects. 2) Caching/memoization per object. 3) Avoiding memory leaks with DOM elements. 4) Storing metadata without modifying objects."
+    },
+    {
+      "question": "How does WeakMap prevent memory leaks?",
+      "answer": "WeakMap doesn't prevent GC of its key objects. When a key is no longer referenced elsewhere, the WeakMap entry is automatically removed, preventing lingering references."
+    },
+    {
+      "question": "What methods does WeakMap have?",
+      "answer": "set(key, value), get(key), has(key), delete(key). That is the complete API — no size, clear, keys, values, entries, or forEach."
+    },
+    {
+      "question": "Can you use a WeakMap key that has been garbage collected?",
+      "answer": "No. If the key object has been GC'd, the entry is automatically removed. get() returns undefined and has() returns false for GC'd keys."
+    },
+    {
+      "question": "What happens to WeakMap entries when the key object goes out of scope?",
+      "answer": "When all strong references to the key object are gone, the key is eligible for GC. At the next GC cycle, the entry is automatically removed from the WeakMap."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"630\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"325\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">WeakMap — Weak References for Object Keys</text><rect x=\"30\" y=\"65\" width=\"280\" height=\"120\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"170\" y=\"85\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"13\" font-weight=\"bold\">WeakMap</text><text x=\"170\" y=\"105\" fill=\"#9aa0b0\" font-size=\"11\">  obj1 → { private: 'data1' }</text><text x=\"170\" y=\"125\" fill=\"#9aa0b0\" font-size=\"11\">  obj2 → { private: 'data2' }</text><text x=\"170\" y=\"145\" fill=\"#9aa0b0\" font-size=\"11\">  obj3 → { private: 'data3' }</text><text x=\"170\" y=\"170\" fill=\"#e64745\" font-size=\"10\">  (weak references — not counted by GC)</text><rect x=\"370\" y=\"65\" width=\"240\" height=\"120\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"490\" y=\"85\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"13\" font-weight=\"bold\">Strong References</text><text x=\"490\" y=\"110\" fill=\"#9aa0b0\" font-size=\"11\">let obj1 = new MyClass();</text><text x=\"490\" y=\"130\" fill=\"#9aa0b0\" font-size=\"11\">let obj2 = new MyClass();</text><text x=\"490\" y=\"150\" fill=\"#9aa0b0\" font-size=\"11\">let obj3 = new MyClass();</text><line x1=\"310\" y1=\"100\" x2=\"370\" y2=\"100\" stroke=\"var(--border)\" stroke-width=\"1\" stroke-dasharray=\"4\"/><text x=\"340\" y=\"95\" fill=\"#9aa0b0\" font-size=\"9\">keys</text><rect x=\"30\" y=\"215\" width=\"580\" height=\"100\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1\"/><text x=\"320\" y=\"240\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"bold\">When obj3 = null (no strong refs)…</text><text x=\"320\" y=\"265\" fill=\"#9aa0b0\" font-size=\"11\">GC removes obj3 from WeakMap automatically</text><text x=\"320\" y=\"285\" fill=\"#9aa0b0\" font-size=\"11\">No manual cleanup needed — automatic memory management</text><text x=\"320\" y=\"305\" fill=\"#98c379\" font-size=\"11\">Use cases: private data, caches, DOM metadata, event listeners</text></svg>",
+  "codeExamples": [
+    {
+      "title": "WeakMap Basics",
+      "useCase": "Creating and using a WeakMap",
+      "code": "const wm = new WeakMap();\n\nconst obj1 = { id: 1 };\nconst obj2 = { id: 2 };\n\n// Set values\nwm.set(obj1, 'private data for obj1');\nwm.set(obj2, { secret: 42, role: 'admin' });\n\n// Get values\nconsole.log(wm.get(obj1)); // 'private data for obj1'\nconsole.log(wm.get(obj2)); // { secret: 42, role: 'admin' }\n\n// Check existence\nconsole.log(wm.has(obj1)); // true\nconsole.log(wm.has({})); // false (different reference)\n\n// Delete\nconsole.log(wm.delete(obj1)); // true\nconsole.log(wm.has(obj1)); // false\n\n// Primitive keys are NOT allowed\nconst wm2 = new WeakMap();\ntry {\n  wm2.set('string', 'value'); // TypeError!\n} catch (e) {\n  console.log('Error:', e.message); // Invalid value used as WeakMap key\n}\n\n// Symbol keys — only non-registered symbols work\nconst sym = Symbol('test');\nconst wm3 = new WeakMap();\n// wm3.set(sym, 'value'); // OK in modern JS (ES2023+)\n// wm3.set(Symbol.for('global'), 'value'); // TypeError! Registered symbols are not allowed",
+      "description": "WeakMap only accepts object keys. Primitive values cause TypeError. The API is minimal: set, get, has, delete."
+    },
+    {
+      "title": "Private Data with WeakMap",
+      "useCase": "Encapsulating private object state",
+      "code": "// Private data stored in WeakMap — inaccessible from outside\nconst _privateData = new WeakMap();\n\nclass User {\n  constructor(name, ssn) {\n    // Store sensitive data in WeakMap\n    _privateData.set(this, {\n      ssn: ssn,\n      createdAt: new Date()\n    });\n\n    // Public property\n    this.name = name;\n  }\n\n  getSSN() {\n    return _privateData.get(this).ssn;\n  }\n\n  getAge() {\n    const createdAt = _privateData.get(this).createdAt;\n    return Math.floor((Date.now() - createdAt) / (365 * 24 * 60 * 60 * 1000));\n  }\n\n  destroy() {\n    _privateData.delete(this);\n  }\n}\n\nconst user = new User('Alice', '123-45-6789');\nconsole.log(user.name);     // 'Alice'\nconsole.log(user.ssn);       // undefined (private!)\nconsole.log(user.getSSN());  // '123-45-6789'\n\n// More practical: state management for library internals\nconst _state = new WeakMap();\n\nclass Counter {\n  constructor() {\n    _state.set(this, { count: 0 });\n  }\n\n  increment() {\n    const s = _state.get(this);\n    s.count++;\n    return s.count;\n  }\n\n  getCount() {\n    return _state.get(this).count;\n  }\n}\n\nconst c = new Counter();\nconsole.log(c.increment()); // 1\nconsole.log(c.increment()); // 2\nconsole.log(c.getCount());  // 2\n\n// External code cannot access _state\nconsole.log(c._state); // undefined\nconsole.log(Object.keys(c)); // []",
+      "description": "WeakMap provides true encapsulation for private data. External code cannot access the WeakMap, and data is GC'd with the object."
+    },
+    {
+      "title": "Caching with WeakMap",
+      "useCase": "Memory-safe caching of computed results",
+      "code": "// Cache that auto-cleans when source objects are GC'd\nconst cache = new WeakMap();\n\nfunction expensiveComputation(obj) {\n  if (cache.has(obj)) {\n    console.log('Cache hit');\n    return cache.get(obj);\n  }\n\n  console.log('Computing...');\n  const result = Object.keys(obj).reduce(function(sum, key) {\n    return sum + (typeof obj[key] === 'number' ? obj[key] : 0);\n  }, 0);\n\n  cache.set(obj, result);\n  return result;\n}\n\nconst data = { a: 10, b: 20, c: 30 };\nconsole.log(expensiveComputation(data)); // Computing... 60\nconsole.log(expensiveComputation(data)); // Cache hit 60\n\n// When data is no longer needed, cache is auto-cleaned\nlet temp = { x: 100 };\nexpensiveComputation(temp); // Computing... 100\nconsole.log(cache.has(temp)); // true\n\n// After nullifying the reference\ntemp = null;\n// Next GC cycle removes the entry from cache\n// No need to manually clear the cache!\n\n// Practical: caching DOM measurements\nconst measurementCache = new WeakMap();\n\nfunction getElementDimensions(el) {\n  if (measurementCache.has(el)) {\n    return measurementCache.get(el);\n  }\n  const rect = el.getBoundingClientRect();\n  const dimensions = { width: rect.width, height: rect.height };\n  measurementCache.set(el, dimensions);\n  return dimensions;\n}\n\n// When DOM elements are removed, cache entries auto-clean",
+      "description": "WeakMap caching ensures computed values are automatically cleaned up when source objects are garbage collected."
+    },
+    {
+      "title": "DOM Element Metadata with WeakMap",
+      "useCase": "Associating data with DOM elements without memory leaks",
+      "code": "// In browser environments — storing metadata per DOM element\nconst elementData = new WeakMap();\n\nfunction registerClickHandler(element, callback) {\n  // Store handler and state per element\n  elementData.set(element, {\n    handler: callback,\n    clickCount: 0\n  });\n\n  element.addEventListener('click', function() {\n    const data = elementData.get(element);\n    data.clickCount++;\n    console.log('Click #' + data.clickCount);\n    callback(element, data.clickCount);\n  });\n}\n\n// When element is removed from DOM:\n// 1. No strong references to element remain\n// 2. GC reclaims the element\n// 3. WeakMap entry is automatically removed\n// 4. No memory leak!\n\n// Compare with dataset approach:\n// element.dataset.clickCount = '5';\n// Problem: even after element removal, if something\n// holds a reference, it stays in memory\n\n// WeakMap approach — clean separation of concerns\nconst _domData = new WeakMap();\n\nconst componentData = new WeakMap();\n\nfunction createComponent(el, config) {\n  componentData.set(el, {\n    config: config,\n    state: { mounted: true },\n    children: []\n  });\n\n  return {\n    getConfig: function() {\n      return componentData.get(el).config;\n    },\n    destroy: function() {\n      // Explicit cleanup\n      componentData.delete(el);\n    }\n  };\n}\n\n// Memory safety: if code forgets to call destroy(),\n// the WeakMap entry is still cleaned up when el is GC'd",
+      "description": "WeakMap enables safe metadata association with DOM elements, preventing memory leaks when elements are removed."
+    },
+    {
+      "title": "WeakMap vs Map — Memory Leak Demo",
+      "useCase": "Understanding the memory implications",
+      "code": "// Map — STRONG reference (potential memory leak)\nconst map = new Map();\n\nfunction demoMapLeak() {\n  let obj = { id: 'big-data' };\n  obj.data = new Array(1000000).fill('x'); // Large data\n\n  map.set(obj, 'metadata');\n\n  // Even after function ends and obj is out of scope,\n  // the Map still holds a strong reference to obj\n  // obj cannot be GC'd — MEMORY LEAK\n  // obj = null would help, but if we forget...\n}\n\ndemoMapLeak();\n// map still has reference to obj — memory is not freed!\n\n// WeakMap — WEAK reference (no leak)\nconst wm = new WeakMap();\n\nfunction demoWeakMapNoLeak() {\n  let obj = { id: 'big-data' };\n  obj.data = new Array(1000000).fill('x');\n\n  wm.set(obj, 'metadata');\n\n  // When function ends:\n  // - obj goes out of scope\n  // - No strong references to obj exist\n  // - WeakMap's weak reference doesn't prevent GC\n  // - obj and its data are reclaimed — NO LEAK\n}\n\ndemoWeakMapNoLeak();\n// wm no longer has the entry — memory is automatically freed!\n\n// Practical example: event listener registry\nconst listenerMap = new Map();  // Bad: prevents GC of listeners\nconst listenerWm = new WeakMap(); // Good: auto-cleanup\n\n// Always prefer WeakMap when:\n// - Keys are objects you don't control\n// - You need automatic cleanup\n// - You don't need to iterate over entries",
+      "description": "Map holds strong references (can cause memory leaks). WeakMap holds weak references (auto-cleanup when keys are GC'd)."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What types can be used as WeakMap keys?",
+      "options": ["Any type", "Objects only", "Strings only", "Numbers and strings"],
+      "answer": 1,
+      "explanation": "WeakMap only accepts objects (and non-registered symbols in ES2023+). Primitives cause TypeError."
+    },
+    {
+      "question": "Why does WeakMap not have a size property?",
+      "options": ["Performance reasons", "Keys can be GC'd at any time, making size unreliable", "It was forgotten in the spec", "Memory constraints"],
+      "answer": 1,
+      "explanation": "Because weak references can be garbage collected at any time, the size would be unpredictable and inconsistent."
+    },
+    {
+      "question": "Is WeakMap iterable?",
+      "options": ["Yes, with for...of", "No, it has no iteration methods", "Only with keys()", "Only with entries()"],
+      "answer": 1,
+      "explanation": "WeakMap has no iteration methods (keys, values, entries, forEach) and cannot be used with for...of."
+    },
+    {
+      "question": "What methods does WeakMap have?",
+      "options": ["set, get, has, delete", "set, get, has, delete, clear", "set, get, has, delete, size", "set, get, has, keys, values"],
+      "answer": 0,
+      "explanation": "WeakMap has exactly four methods: set(), get(), has(), and delete(). No clear(), no iteration, no size."
+    },
+    {
+      "question": "What is the primary advantage of WeakMap over Map?",
+      "options": ["Faster performance", "Automatic garbage collection of entries when keys are no longer referenced", "Larger storage capacity", "Support for primitive keys"],
+      "answer": 1,
+      "explanation": "WeakMap holds weak references to keys, so entries are automatically removed when keys are garbage collected."
+    },
+    {
+      "question": "What happens to a WeakMap entry when the key is garbage collected?",
+      "options": ["The entry stays until explicitly deleted", "The entry is automatically removed", "An error is thrown", "The value becomes undefined"],
+      "answer": 1,
+      "explanation": "When the key object is GC'd, the WeakMap entry is automatically removed. No manual cleanup is needed."
+    },
+    {
+      "question": "Which is a common use case for WeakMap?",
+      "options": ["Sorting arrays", "Storing private data for objects", "String manipulation", "Mathematical calculations"],
+      "answer": 1,
+      "explanation": "WeakMap is commonly used for private data storage, caching per object, and memory-safe DOM element metadata."
+    },
+    {
+      "question": "Can you iterate over all keys in a WeakMap?",
+      "options": ["Yes, with wm.keys()", "No, WeakMap doesn't expose its keys", "Yes, with for...of", "Only if you know the keys"],
+      "answer": 1,
+      "explanation": "WeakMap does not have keys(), values(), or entries() methods. You cannot iterate or list its contents."
+    },
+    {
+      "question": "What does wm.get(key) return if the key has been GC'd?",
+      "options": ["null", "undefined", "false", "An error"],
+      "answer": 1,
+      "explanation": "If the key has been garbage collected, the entry is removed and get() returns undefined."
+    },
+    {
+      "question": "Is WeakMap suitable for storing primitive key-value pairs?",
+      "options": ["Yes, it works like Map", "No, keys must be objects", "Yes, but only with strings", "Yes, but performance is worse"],
+      "answer": 1,
+      "explanation": "WeakMap requires object keys. For primitive keys, use a regular Map instead."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["weakset"] = {
+  "title": "WeakSet",
+  "difficulty": "advanced",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "<code>WeakSet</code> is a collection of <strong>objects only</strong> (no primitives), where each object can appear at most once.",
+    "Objects are held <strong>weakly</strong> — if no other references exist, the object is eligible for <strong>garbage collection</strong>.",
+    "WeakSet has <strong>no size property</strong>, no iteration methods, and only three methods: <code>add()</code>, <code>has()</code>, <code>delete()</code>.",
+    "Primary use cases: <strong>tagging</strong> or <strong>marking</strong> objects without memory leaks (e.g., marking visited DOM nodes)."
+  ],
+  "laymanDefinition": "Imagine a guest list at an exclusive party. The bouncer has a mental list of VIPs, but doesn't write anything down — he just recognizes them. Once a VIP leaves the party (no longer around), the bouncer automatically forgets them. You can ask 'Is this person a VIP?' and the bouncer checks. But you can't ask 'How many VIPs are here?' or 'List all VIPs.' WeakSet is exactly this — a way to mark objects as part of a set, with automatic cleanup when the objects disappear.",
+  "deepDive": [
+    {
+      "heading": "WeakSet Fundamentals — Weak Object References",
+      "text": "WeakSet holds weak references to its objects. Adding an object to a WeakSet does not prevent its garbage collection. When all other references to the object are gone, the object is removed from the WeakSet automatically. This makes WeakSet ideal for tracking or tagging objects without interfering with their lifecycle."
+    },
+    {
+      "heading": "Limited API — By Design",
+      "text": "WeakSet has only three methods: add(obj), has(obj), and delete(obj). There is no size, no clear(), no iteration (forEach, keys, values, entries). The API is intentionally minimal because objects can be removed by GC at any time, making iteration unreliable. You can only check if a specific object is in the set."
+    },
+    {
+      "heading": "WeakSet vs Set",
+      "list": [
+        "<strong>Values:</strong> Set accepts any type. WeakSet only accepts objects.",
+        "<strong>References:</strong> Set holds strong references. WeakSet holds weak references.",
+        "<strong>Iteration:</strong> Set is iterable (forEach, keys, values, entries). WeakSet is not iterable.",
+        "<strong>Size:</strong> Set has size property. WeakSet does not.",
+        "<strong>Use cases:</strong> Set for general-purpose unique collections. WeakSet for object tagging and lifecycle tracking."
+      ]
+    },
+    {
+      "heading": "WeakSet vs WeakMap — When to Use Each",
+      "text": "Use WeakSet when you only need to track whether an object is in the collection (membership testing). Use WeakMap when you need to associate data with an object. WeakSet is simpler — think of it as a 'tag set' for objects. WeakMap is for key-value associations. Both provide the same weak-reference benefit of automatic cleanup."
+    }
+  ],
+  "interviewAnswer": "WeakSet is a collection of objects held by weak reference, allowing garbage collection when no other references exist. It has three methods: add(obj), has(obj), delete(obj). It is not iterable and has no size property. Primary use cases: marking/tagging objects (e.g., visited DOM nodes, processed items), tracking object membership without preventing GC, implementing safe object registries, and detecting cycles in object graphs. The main advantage over Set is automatic cleanup — objects are removed from the WeakSet when they are garbage collected, preventing memory leaks.",
+  "interviewQuestions": [
+    {
+      "question": "What is a WeakSet?",
+      "answer": "A WeakSet is a collection of objects (only objects) held by weak reference. Objects are unique within the set and auto-removed when GC'd."
+    },
+    {
+      "question": "What types can be added to a WeakSet?",
+      "answer": "Only objects. Adding primitive values (numbers, strings, booleans) throws a TypeError."
+    },
+    {
+      "question": "What methods does WeakSet have?",
+      "answer": "add(obj), has(obj), and delete(obj). That is the complete API — no size, clear, or iteration methods."
+    },
+    {
+      "question": "Why is WeakSet not iterable?",
+      "answer": "Objects can be garbage collected at any time, making iteration unreliable. The limited API ensures consistent behavior despite weak references."
+    },
+    {
+      "question": "What is the difference between Set and WeakSet?",
+      "answer": "Set holds strong references (prevents GC) and accepts any value type. WeakSet holds weak references, only accepts objects, and is not iterable."
+    },
+    {
+      "question": "What are common use cases for WeakSet?",
+      "answer": "1) Tracking visited/marked objects without memory leaks. 2) Cycle detection in object graphs. 3) Tagging DOM elements. 4) Object deduplication with auto-cleanup."
+    },
+    {
+      "question": "How does WeakSet prevent memory leaks?",
+      "answer": "WeakSet holds weak references, so adding an object to a WeakSet doesn't prevent GC. When the object is no longer referenced, the WeakSet entry auto-clears."
+    },
+    {
+      "question": "Can you check if an object is in a WeakSet?",
+      "answer": "Yes, using ws.has(obj). This is the primary operation — membership testing."
+    },
+    {
+      "question": "What happens to WeakSet entries when objects are garbage collected?",
+      "answer": "They are automatically removed. has() returns false for objects that have been GC'd."
+    },
+    {
+      "question": "When would you choose WeakSet over WeakMap?",
+      "answer": "When you only need to track membership (is this object in the set?), not associate additional data. WeakSet is simpler when no values are needed."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"630\" height=\"280\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"325\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">WeakSet — Object Tagging with Weak References</text><rect x=\"30\" y=\"65\" width=\"280\" height=\"120\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"170\" y=\"85\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"13\" font-weight=\"bold\">WeakSet</text><text x=\"170\" y=\"108\" fill=\"#9aa0b0\" font-size=\"11\">  {obj1, obj2, obj3}</text><text x=\"170\" y=\"130\" fill=\"#9aa0b0\" font-size=\"11\">  (weak references — no GC protection)</text><text x=\"170\" y=\"155\" fill=\"#9aa0b0\" font-size=\"11\">  has(obj) → true/false</text><text x=\"170\" y=\"173\" fill=\"#9aa0b0\" font-size=\"11\">  add(obj) | delete(obj)</text><rect x=\"370\" y=\"65\" width=\"240\" height=\"120\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"490\" y=\"85\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"13\" font-weight=\"bold\">Object References</text><text x=\"490\" y=\"110\" fill=\"#9aa0b0\" font-size=\"11\">let obj1 = new MyClass();</text><text x=\"490\" y=\"130\" fill=\"#9aa0b0\" font-size=\"11\">let obj2 = new MyClass();</text><text x=\"490\" y=\"150\" fill=\"#9aa0b0\" font-size=\"11\">let obj3 = new MyClass();</text><line x1=\"310\" y1=\"110\" x2=\"370\" y2=\"110\" stroke=\"var(--border)\" stroke-width=\"1\" stroke-dasharray=\"4\"/><text x=\"340\" y=\"105\" fill=\"#9aa0b0\" font-size=\"9\">tag</text><rect x=\"30\" y=\"205\" width=\"580\" height=\"60\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1\"/><text x=\"320\" y=\"228\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">Object tagging: mark objects as 'visited' or 'processed'</text><text x=\"320\" y=\"250\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">When obj is GC'd, WeakSet entry vanishes — no manual cleanup needed</text></svg>",
+  "codeExamples": [
+    {
+      "title": "WeakSet Basics",
+      "useCase": "Creating and using a WeakSet",
+      "code": "const visited = new WeakSet();\n\nconst obj1 = { id: 'A' };\nconst obj2 = { id: 'B' };\nconst obj3 = { id: 'C' };\n\n// Mark objects as visited\nvisited.add(obj1);\nvisited.add(obj2);\n\n// Check membership\nconsole.log(visited.has(obj1)); // true\nconsole.log(visited.has(obj2)); // true\nconsole.log(visited.has(obj3)); // false\n\n// Remove a marking\nvisited.delete(obj2);\nconsole.log(visited.has(obj2)); // false\n\n// Primitives are NOT allowed\nconst ws = new WeakSet();\ntry {\n  ws.add(42); // TypeError!\n} catch (e) {\n  console.log('Error:', e.message);\n}\n\n// Different references are distinct\nconst a = { name: 'same' };\nconst b = { name: 'same' };\nvisited.add(a);\nconsole.log(visited.has(a)); // true\nconsole.log(visited.has(b)); // false (different reference)",
+      "description": "WeakSet only accepts objects. Membership is reference-based, not value-based. Only three methods: add, has, delete."
+    },
+    {
+      "title": "Object Tagging with WeakSet",
+      "useCase": "Marking objects without modifying them",
+      "code": "// Simple object tagging — no leaks\nconst processed = new WeakSet();\nconst cached = new WeakSet();\n\nfunction processData(data) {\n  // Skip if already processed\n  if (processed.has(data)) {\n    console.log('Already processed, skipping');\n    return;\n  }\n\n  console.log('Processing:', data.name);\n  processed.add(data);\n\n  // Process the data...\n}\n\nconst item1 = { name: 'Report A' };\nconst item2 = { name: 'Report B' };\n\nprocessData(item1); // Processing: Report A\nprocessData(item1); // Already processed, skipping\nprocessData(item2); // Processing: Report B\n\n// Cycle detection in object graphs\nconst seen = new WeakSet();\n\nfunction traverse(obj, depth = 0) {\n  if (obj === null || typeof obj !== 'object') return;\n\n  if (seen.has(obj)) {\n    console.log('Cycle detected, avoiding infinite loop');\n    return;\n  }\n\n  seen.add(obj);\n\n  for (const key of Object.keys(obj)) {\n    console.log('  '.repeat(depth) + key + ':', obj[key]);\n    traverse(obj[key], depth + 1);\n  }\n}\n\n// Create a circular reference\nconst graph = { name: 'parent', child: null };\ngraph.child = { name: 'child', parent: null };\ngraph.child.parent = graph; // Back-reference (creates cycle)\n\ntraverse(graph);\n// Will not infinite loop — cycle detected via WeakSet",
+      "description": "WeakSet is ideal for tagging objects as 'processed,' 'visited,' or 'cached' without modifying the objects or leaking memory."
+    },
+    {
+      "title": "DOM Node Tracking with WeakSet",
+      "useCase": "Tracking DOM elements without memory leaks",
+      "code": "// In browser environments\nconst trackedElements = new WeakSet();\nconst eventListeners = new WeakSet();\n\nfunction trackElement(el) {\n  if (trackedElements.has(el)) {\n    console.log('Element already tracked');\n    return;\n  }\n\n  trackedElements.add(el);\n  console.log('Now tracking:', el.tagName);\n}\n\n// When elements are removed from DOM, they can be GC'd\n// WeakSet entries are automatically cleaned up\n\n// Mark DOM nodes as 'initialized'\nconst initialized = new WeakSet();\n\nfunction initComponent(el) {\n  if (initialized.has(el)) {\n    return; // Already initialized\n  }\n\n  initialized.add(el);\n  // Initialize component...\n  el.setAttribute('data-component', 'active');\n}\n\n// Safe: even if element is removed, WeakSet doesn't hold a strong ref\n\n// Real-world: marking nodes for batch processing\nconst pendingBatch = new WeakSet();\n\nfunction markForBatchUpdate(el) {\n  if (!pendingBatch.has(el)) {\n    pendingBatch.add(el);\n    scheduleBatch();\n  }\n}\n\nfunction processBatch() {\n  // Process all pending elements\n  // Since WeakSet is not iterable, we use a different approach\n  // Elements mark themselves; we process based on a separate list\n  console.log('Batch processing complete');\n}\n\n// Using WeakSet for event deduplication\nconst listenersWithHandler = new WeakSet();\n\nfunction addOnceListener(el, event, handler) {\n  const key = { el: el, event: event, handler: handler };\n  // This is contrived — normally you'd track per-element\n  // The key benefit: no memory leak when handler is GC'd\n}",
+      "description": "WeakSet is useful for tracking DOM elements and component initialization states without causing memory leaks."
+    },
+    {
+      "title": "WeakSet vs Set — Memory Leak Comparison",
+      "useCase": "Understanding when to use WeakSet over Set",
+      "code": "// Set — STRONG references (can leak)\nconst strongSet = new Set();\n\n(function() {\n  const obj = { data: new Array(100000).fill('x') };\n  strongSet.add(obj);\n  // obj still in strongSet after IIFE ends\n  // obj cannot be GC'd — memory held!\n})();\n\n// strongSet still contains obj — memory NOT freed\nconsole.log(strongSet.size); // 1 (the object is still there!)\n\n// WeakSet — WEAK references (no leak)\nconst weakSet = new WeakSet();\n\n(function() {\n  const obj = { data: new Array(100000).fill('x') };\n  weakSet.add(obj);\n  // After IIFE, obj reference is gone\n  // WeakSet's weak reference doesn't prevent GC\n  // obj will be GC'd — memory freed!\n})();\n\n// Cannot verify size — WeakSet has no size property\n// But the entry IS automatically removed when obj is GC'd\n\n// Practical: marking objects as 'initialized'\nconst initializedSet = new Set();   // Bad: prevents GC\nconst initializedWeak = new WeakSet(); // Good: allows GC\n\n// Use Set when:\n// - You need to iterate over all values\n// - You need to know the size\n// - Values are primitives\n// - You need strong references (prevent GC)\n\n// Use WeakSet when:\n// - You only need membership testing\n// - Keys are objects\n// - You want automatic cleanup\n// - You need to prevent memory leaks",
+      "description": "Set holds strong references (can cause memory leaks). WeakSet holds weak references (auto-cleanup). Choose based on your lifecycle needs."
+    },
+    {
+      "title": "Practical WeakSet Patterns",
+      "useCase": "Real-world use cases for WeakSet",
+      "code": "// 1. Object deduplication in data processing\nconst seenObjects = new WeakSet();\n\nfunction deduplicate(arr) {\n  const result = [];\n  for (const obj of arr) {\n    if (obj !== null && typeof obj === 'object') {\n      if (!seenObjects.has(obj)) {\n        seenObjects.add(obj);\n        result.push(obj);\n      }\n    } else {\n      result.push(obj); // Primitives pass through\n    }\n  }\n  return result;\n}\n\nconst a = { id: 1 };\nconst b = { id: 2 };\nconst c = a; // Same reference\n\nconsole.log(deduplicate([a, b, c])); // [{ id: 1 }, { id: 2 }]\n// c is skipped — same reference as a\n\n// 2. Object registry with auto-cleanup\nconst registry = new WeakSet();\n\nclass ManagedResource {\n  constructor(name) {\n    this.name = name;\n    registry.add(this);\n  }\n\n  isManaged() {\n    return registry.has(this);\n  }\n}\n\nconst res = new ManagedResource('db-connection');\nconsole.log(res.isManaged()); // true\n// When res is GC'd, registry auto-cleans\n\n// 3. Feature flag tracking per object\nconst featureFlags = new WeakSet();\n\nfunction enableFeature(obj) {\n  featureFlags.add(obj);\n}\n\nfunction hasFeature(obj) {\n  return featureFlags.has(obj);\n}\n\n// 4. Safe mixin/plugin system\nconst pluginInstalled = new WeakSet();\n\nfunction installPlugin(target, plugin) {\n  if (pluginInstalled.has(target)) {\n    console.log('Plugin already installed');\n    return;\n  }\n  pluginInstalled.add(target);\n  // Apply plugin to target...\n}",
+      "description": "WeakSet is useful for deduplication, object registries, feature flags, and plugin systems where automatic cleanup is desired."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What types can be added to a WeakSet?",
+      "options": ["Any type", "Objects only", "Primitives only", "Strings only"],
+      "answer": 1,
+      "explanation": "WeakSet only accepts objects. Adding primitives (numbers, strings, booleans) throws a TypeError."
+    },
+    {
+      "question": "What methods does WeakSet have?",
+      "options": ["add, has, delete", "add, has, delete, clear", "add, has, delete, size", "add, has, delete, forEach"],
+      "answer": 0,
+      "explanation": "WeakSet has exactly three methods: add(), has(), and delete(). No clear(), no size, no iteration."
+    },
+    {
+      "question": "Why does WeakSet not have a size property?",
+      "options": ["Objects can be GC'd at any time, making size unreliable", "It was omitted from the spec", "Performance optimization", "Memory constraints"],
+      "answer": 0,
+      "explanation": "WeakSet entries can be garbage collected at any time, so the size would be unpredictable."
+    },
+    {
+      "question": "Is WeakSet iterable?",
+      "options": ["Yes, with for...of", "No, it has no iteration methods", "Only with the values() method", "Only in modern browsers"],
+      "answer": 1,
+      "explanation": "WeakSet has no iteration methods and cannot be used with for...of or forEach."
+    },
+    {
+      "question": "What is the primary advantage of WeakSet over Set?",
+      "options": ["Faster add/remove operations", "Automatic cleanup when objects are garbage collected", "Support for primitive values", "Larger capacity"],
+      "answer": 1,
+      "explanation": "WeakSet holds weak references, so entries are automatically removed when objects are garbage collected."
+    },
+    {
+      "question": "What is a common use case for WeakSet?",
+      "options": ["Sorting arrays", "Marking objects as visited without memory leaks", "Storing key-value pairs", "String manipulation"],
+      "answer": 1,
+      "explanation": "WeakSet is ideal for tagging/marking objects (like visited, processed, initialized) without preventing garbage collection."
+    },
+    {
+      "question": "Can you check if an object is in a WeakSet?",
+      "options": ["Yes, with has(obj)", "No, WeakSet doesn't support lookup", "Only during iteration", "With indexOf()"],
+      "answer": 0,
+      "explanation": "has(obj) is the membership test. It returns true if the object is in the WeakSet."
+    },
+    {
+      "question": "What is the difference between WeakSet and WeakMap?",
+      "options": ["WeakSet tracks membership only; WeakMap associates values with keys", "They are identical", "WeakSet is iterable; WeakMap is not", "WeakSet allows primitives; WeakMap does not"],
+      "answer": 0,
+      "explanation": "WeakSet is for tagging objects (membership testing). WeakMap is for associating data values with object keys."
+    },
+    {
+      "question": "What does ws.delete(obj) return?",
+      "options": ["true if the object was in the set, false otherwise", "The deleted object", "undefined", "The WeakSet itself"],
+      "answer": 0,
+      "explanation": "delete() returns true if the object was present and removed, false if it was not found."
+    },
+    {
+      "question": "When would you choose WeakSet over a regular Set?",
+      "options": ["When you need to iterate over all values", "When you need automatic cleanup of objects that are no longer referenced", "When storing primitive values", "When you need to know the number of entries"],
+      "answer": 1,
+      "explanation": "Use WeakSet when objects in the set should not be prevented from garbage collection. Use Set when you need iteration or size."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["symbol"] = {
+  "title": "Symbol",
+  "difficulty": "advanced",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "<code>Symbol</code> is a <strong>primitive type</strong> introduced in ES6, used to create <strong>unique identifiers</strong>.",
+    "Every symbol value is <strong>unique</strong> — <code>Symbol('id') !== Symbol('id')</code>. Symbols can be used as <strong>object property keys</strong>.",
+    "Symbols enable <strong>non-enumerable</strong> properties (hidden in <code>for...in</code> and <code>Object.keys()</code>) and <strong>well-known symbols</strong> for customizing language behavior.",
+    "Use <code>Symbol.for(key)</code> for <strong>global symbols</strong> (shared across realms), and <code>Symbol.keyFor(sym)</code> to retrieve the key."
+  ],
+  "laymanDefinition": "Imagine a coat check where every person gets a unique ticket. Even if two people have the exact same coat, their tickets are different. The ticket number doesn't describe the coat — it just identifies which coat is yours. Symbol is like that ticket: it's a unique identifier. You can attach it to an object as a hidden property name that won't accidentally clash with other property names, and that won't show up in regular property listings (like for...in).",
+  "deepDive": [
+    {
+      "heading": "Symbol as a Primitive Type",
+      "text": "Symbol is the seventh primitive type in JavaScript (after string, number, boolean, null, undefined, and bigint). Symbols are created by calling Symbol() — not with 'new Symbol()' (that throws TypeError). Each call to Symbol() returns a completely unique value. Symbols can be used as object property keys, enabling properties that are guaranteed unique."
+    },
+    {
+      "heading": "Symbol Properties — Hidden from Normal Enumeration",
+      "text": "Symbol-keyed properties are not included in for...in loops, Object.keys(), Object.values(), Object.entries(), or JSON.stringify(). They ARE included in Object.getOwnPropertySymbols() and Reflect.ownKeys(). This makes symbols useful for metadata and internal properties that should not appear in normal iteration."
+    },
+    {
+      "heading": "Well-Known Symbols — Customizing Language Behavior",
+      "text": "JavaScript has built-in well-known symbols that let you customize core language behavior: Symbol.iterator (make objects iterable), Symbol.toStringTag (customize Object.prototype.toString), Symbol.toPrimitive (customize type coercion), Symbol.hasInstance (customize instanceof), Symbol.match/replace/search/split (customize string methods), Symbol.species (control derived objects), and Symbol.isConcatSpreadable (control Array.prototype.concat)."
+    },
+    {
+      "heading": "Global Symbol Registry — Symbol.for() and Symbol.keyFor()",
+      "text": "Symbol.for(key) creates or retrieves a global symbol. If a symbol with the given key exists in the runtime-wide registry, it is returned. Otherwise, a new symbol is created and registered. Symbol.keyFor(sym) retrieves the key for a global symbol. Global symbols are shared across iframes, service workers, and different realms in the same JavaScript runtime."
+    },
+    {
+      "heading": "Symbols for Constants and Enum-like Values",
+      "text": "Symbols are commonly used for 'enum-like' constants where values must be unique. For example, HTTP status categories, Redux action types, or event names. Using symbols prevents accidental collisions with string-based constants."
+    }
+  ],
+  "interviewAnswer": "Symbol is a primitive type that creates unique identifiers. Every Symbol() call returns a unique value. Symbols can be used as object property keys that are hidden from normal enumeration (for...in, Object.keys). Well-known symbols (like Symbol.iterator, Symbol.toStringTag, Symbol.toPrimitive) allow customizing JavaScript's built-in behavior. Symbol.for() creates shared global symbols. Common use cases: unique property keys to avoid collisions, implementing custom iterables via Symbol.iterator, defining internal/metadata properties, enum-like constants (Redux action types, event names), and implementing the observer pattern with Symbol.observable.",
+  "interviewQuestions": [
+    {
+      "question": "What is a Symbol in JavaScript?",
+      "answer": "Symbol is a primitive type that creates a unique value. Every Symbol() call returns a completely unique identifier, even with the same description."
+    },
+    {
+      "question": "How do you create a Symbol?",
+      "answer": "Symbol() with an optional description string: const sym = Symbol('description'). Do NOT use new Symbol() — that throws TypeError."
+    },
+    {
+      "question": "Are two symbols with the same description equal?",
+      "answer": "No. Symbol('id') !== Symbol('id'). The description is just a label for debugging; each Symbol() call creates a unique value."
+    },
+    {
+      "question": "How do you create a shared global symbol?",
+      "answer": "Symbol.for('key'). This checks the global symbol registry: if a symbol with that key exists, it's returned; otherwise a new one is created."
+    },
+    {
+      "question": "Are symbol properties visible in for...in?",
+      "answer": "No. Symbol-keyed properties are excluded from for...in, Object.keys(), Object.values(), Object.entries(), and JSON.stringify()."
+    },
+    {
+      "question": "How do you access symbol-keyed properties?",
+      "answer": "Use Object.getOwnPropertySymbols(obj) to get an array of symbol keys, or Reflect.ownKeys(obj) to get all keys including symbols."
+    },
+    {
+      "question": "What are well-known symbols?",
+      "answer": "Built-in symbols like Symbol.iterator, Symbol.toStringTag, Symbol.toPrimitive, Symbol.hasInstance, Symbol.match, Symbol.replace, etc. They let you customize JavaScript's built-in behavior."
+    },
+    {
+      "question": "What is Symbol.iterator used for?",
+      "answer": "Symbol.iterator defines how an object is iterated (for...of, spread, etc.). Implementing [Symbol.iterator]() makes an object iterable."
+    },
+    {
+      "question": "What does Symbol.toStringTag do?",
+      "answer": "It customizes the output of Object.prototype.toString.call(obj). For example, class MyClass { get [Symbol.toStringTag]() { return 'MyClass'; } } makes toString return '[object MyClass]'."
+    },
+    {
+      "question": "What is a practical use case for Symbols?",
+      "answer": "Unique property keys (collision-free), internal/metadata properties, enum-like constants, customizing iteration (Symbol.iterator), string formatting (Symbol.toPrimitive), and framework internals (React's React.Fragment, Redux action types)."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 300\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"630\" height=\"280\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"325\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Symbol — Unique Property Keys &amp; Well-Known Symbols</text><rect x=\"30\" y=\"65\" width=\"280\" height=\"90\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"170\" y=\"85\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"13\" font-weight=\"bold\">Creating Symbols</text><text x=\"170\" y=\"108\" fill=\"#9aa0b0\" font-size=\"11\">const s1 = Symbol('id');</text><text x=\"170\" y=\"128\" fill=\"#9aa0b0\" font-size=\"11\">const s2 = Symbol('id');</text><text x=\"170\" y=\"148\" fill=\"#e64745\" font-size=\"10\">s1 !== s2 (always unique)</text><rect x=\"340\" y=\"65\" width=\"280\" height=\"90\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"480\" y=\"85\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"13\" font-weight=\"bold\">As Object Keys</text><text x=\"480\" y=\"108\" fill=\"#9aa0b0\" font-size=\"11\">obj[s1] = 'hidden value';</text><text x=\"480\" y=\"128\" fill=\"#9aa0b0\" font-size=\"11\">Not in for...in or Object.keys()</text><text x=\"480\" y=\"148\" fill=\"#9aa0b0\" font-size=\"10\">Object.getOwnPropertySymbols(obj)</text><rect x=\"30\" y=\"185\" width=\"590\" height=\"80\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1\"/><text x=\"325\" y=\"208\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"bold\">Well-Known Symbols</text><text x=\"325\" y=\"232\" fill=\"#9aa0b0\" font-size=\"11\">Symbol.iterator — for...of | Symbol.toStringTag — toString()</text><text x=\"325\" y=\"252\" fill=\"#9aa0b0\" font-size=\"11\">Symbol.toPrimitive — type coercion | Symbol.hasInstance — instanceof</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Symbol Basics",
+      "useCase": "Creating and using symbols",
+      "code": "// Creating symbols\nconst sym1 = Symbol();\nconst sym2 = Symbol('description');\nconst sym3 = Symbol('description');\n\nconsole.log(sym2 === sym3); // false (always unique)\nconsole.log(sym2.description); // 'description'\n\n// Symbols are primitives\nconsole.log(typeof sym1); // 'symbol'\n\n// Cannot use new Symbol()\ntry {\n  new Symbol(); // TypeError\n} catch (e) {\n  console.log(e.message); // 'Symbol is not a constructor'\n}\n\n// Symbols as object keys\nconst obj = {};\nconst id = Symbol('id');\nobj[id] = 'secret';\nobj.name = 'Alice';\n\nconsole.log(obj[id]); // 'secret'\nconsole.log(obj.name); // 'Alice'\n\n// Not in normal enumeration\nconsole.log(Object.keys(obj)); // ['name']\nconsole.log(Object.getOwnPropertyNames(obj)); // ['name']\n\n// But accessible via getOwnPropertySymbols\nconsole.log(Object.getOwnPropertySymbols(obj)); // [Symbol(id)]\nconsole.log(Reflect.ownKeys(obj)); // ['name', Symbol(id)]\n\n// Symbols in JSON.stringify are omitted\nconsole.log(JSON.stringify(obj)); // '{\"name\":\"Alice\"}'",
+      "description": "Symbols are unique primitives. As property keys, they're hidden from normal enumeration but accessible via getOwnPropertySymbols."
+    },
+    {
+      "title": "Global Symbols with Symbol.for()",
+      "useCase": "Shared symbols across modules/realm",
+      "code": "// Create or retrieve global symbols\nconst globalSym1 = Symbol.for('app.global.id');\nconst globalSym2 = Symbol.for('app.global.id');\n\nconsole.log(globalSym1 === globalSym2); // true (same symbol)\n\n// Retrieve key from global symbol\nconsole.log(Symbol.keyFor(globalSym1)); // 'app.global.id'\n\n// Non-global symbols don't have a key\nconst localSym = Symbol('local');\nconsole.log(Symbol.keyFor(localSym)); // undefined\n\n// Global symbols are cross-realm\n// If an iframe and parent page both call Symbol.for('shared'),\n// they get the same symbol\n\n// Practical: library API constants\nconst Events = {\n  USER_LOGIN: Symbol.for('app.event.user.login'),\n  USER_LOGOUT: Symbol.for('app.event.user.logout'),\n  DATA_UPDATE: Symbol.for('app.event.data.update')\n};\n\nfunction emit(event, data) {\n  // event is a symbol — guaranteed unique\n  console.log('Event:', Symbol.keyFor(event) || event.description);\n}\n\nemit(Events.USER_LOGIN, { userId: 42 });\n// Event: app.event.user.login\n\n// Cross-module sharing\n// module1.js: const TYPE = Symbol.for('mylib.type');\n// module2.js: const TYPE = Symbol.for('mylib.type');\n// module1.TYPE === module2.TYPE // true!",
+      "description": "Symbol.for() creates/retrieves global symbols from a runtime-wide registry. Symbol.keyFor() gets the key for a global symbol."
+    },
+    {
+      "title": "Well-Known Symbols — Customizing Behavior",
+      "useCase": "Using Symbol.iterator, Symbol.toStringTag, Symbol.toPrimitive",
+      "code": "// Symbol.iterator — make objects iterable\nconst range = {\n  from: 1,\n  to: 5,\n  [Symbol.iterator]() {\n    let current = this.from;\n    const end = this.to;\n    return {\n      next() {\n        return current <= end\n          ? { value: current++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n\nconsole.log([...range]); // [1, 2, 3, 4, 5]\n\n// Symbol.toStringTag — customize toString()\nclass CustomClass {\n  get [Symbol.toStringTag]() {\n    return 'CustomClass';\n  }\n}\n\nconst instance = new CustomClass();\nconsole.log(Object.prototype.toString.call(instance));\n// '[object CustomClass]'\n\n// Symbol.toPrimitive — customize type coercion\nclass Money {\n  constructor(amount, currency) {\n    this.amount = amount;\n    this.currency = currency;\n  }\n\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') {\n      return this.amount;\n    }\n    if (hint === 'string') {\n      return this.amount + ' ' + this.currency;\n    }\n    return this.amount; // default\n  }\n}\n\nconst price = new Money(100, 'USD');\nconsole.log(+price);       // 100 (number hint)\nconsole.log(String(price)); // '100 USD' (string hint)\nconsole.log(price + 50);    // 150 (default hint)",
+      "description": "Well-known symbols let you customize how objects interact with JavaScript language features like iteration, toString, and coercion."
+    },
+    {
+      "title": "Symbols for Constants and Enum Patterns",
+      "useCase": "Using symbols as enum-like constants",
+      "code": "// Symbols as enum constants — guaranteed uniqueness\nconst Color = {\n  RED: Symbol('red'),\n  GREEN: Symbol('green'),\n  BLUE: Symbol('blue')\n};\n\nfunction getHexCode(color) {\n  switch (color) {\n    case Color.RED:   return '#FF0000';\n    case Color.GREEN: return '#00FF00';\n    case Color.BLUE:  return '#0000FF';\n    default:          return '#000000';\n  }\n}\n\nconsole.log(getHexCode(Color.RED)); // '#FF0000'\n\n// No risk of collision — even if someone creates a 'red' string\n\n// Symbol-based state machine\nconst State = {\n  IDLE: Symbol('idle'),\n  LOADING: Symbol('loading'),\n  SUCCESS: Symbol('success'),\n  ERROR: Symbol('error')\n};\n\nclass FetchState {\n  constructor() {\n    this.state = State.IDLE;\n  }\n\n  setLoading() { this.state = State.LOADING; }\n  setSuccess() { this.state = State.SUCCESS; }\n  setError()   { this.state = State.ERROR; }\n\n  isIdle()    { return this.state === State.IDLE; }\n  isLoading() { return this.state === State.LOADING; }\n  isSuccess() { return this.state === State.SUCCESS; }\n  isError()   { return this.state === State.ERROR; }\n}\n\n// Redux action types with symbols\nconst ActionTypes = {\n  ADD_TODO: Symbol('ADD_TODO'),\n  REMOVE_TODO: Symbol('REMOVE_TODO'),\n  TOGGLE_TODO: Symbol('TOGGLE_TODO')\n};\n\nfunction todoReducer(state = [], action) {\n  switch (action.type) {\n    case ActionTypes.ADD_TODO:\n      return [...state, action.payload];\n    case ActionTypes.REMOVE_TODO:\n      return state.filter((_, i) => i !== action.payload);\n    default:\n      return state;\n  }\n}",
+      "description": "Symbols make excellent enum-like constants because they are guaranteed unique and cannot be accidentally compared with strings or other values."
+    },
+    {
+      "title": "Symbol-Metadata for Internal Properties",
+      "useCase": "Hiding internal implementation details",
+      "code": "// Internal metadata hidden from normal access\nconst _internals = Symbol('internals');\n\nclass BankAccount {\n  constructor(owner, balance) {\n    this.owner = owner;\n    this[_internals] = {\n      balance: balance,\n      transactions: [],\n      createdAt: new Date()\n    };\n  }\n\n  deposit(amount) {\n    this[_internals].balance += amount;\n    this[_internals].transactions.push({\n      type: 'deposit',\n      amount: amount,\n      date: new Date()\n    });\n  }\n\n  getBalance() {\n    return this[_internals].balance;\n  }\n\n  getTransactionHistory() {\n    return [...this[_internals].transactions];\n  }\n}\n\nconst account = new BankAccount('Alice', 1000);\n\n// Normal properties\nconsole.log(Object.keys(account)); // ['owner']\nconsole.log(account.owner); // 'Alice'\n\n// Internal data is hidden\nconsole.log(account.balance); // undefined\nconsole.log(account._internals); // undefined\n\n// But it works through methods\nconsole.log(account.getBalance()); // 1000\naccount.deposit(500);\nconsole.log(account.getBalance()); // 1500\n\n// Using symbols for framework metadata\n// React: React.Fragment, React.Profiler, etc.\nconst MY_LIBRARY_INTERNAL = Symbol('myLibrary.internal');\n\nfunction createComponent(config) {\n  return {\n    ...config,\n    [MY_LIBRARY_INTERNAL]: {\n      renderCount: 0,\n      mountTime: Date.now()\n    }\n  };\n}\n\n// JSON serialization — symbols are omitted\nconsole.log(JSON.stringify(account));\n// '{\"owner\":\"Alice\"}' (symbol properties excluded)",
+      "description": "Symbol-keyed properties are ideal for internal implementation details that should not be part of the public API or serialization."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is a Symbol in JavaScript?",
+      "options": ["A string wrapper", "A unique primitive value", "A type of object", "A function"],
+      "answer": 1,
+      "explanation": "Symbol is a primitive type that creates unique values. Each Symbol() call returns a completely unique identifier."
+    },
+    {
+      "question": "Are two symbols with the same description equal?",
+      "options": ["Yes, equal by description", "No, each Symbol() creates a unique value", "Only if created with Symbol.for()", "Only in strict mode"],
+      "answer": 1,
+      "explanation": "Symbol('id') !== Symbol('id'). The description is just a label; every Symbol() call produces a unique value."
+    },
+    {
+      "question": "How do you create a global symbol?",
+      "options": ["Symbol.global('key')", "Symbol.for('key')", "Symbol('key', true)", "new Symbol('key', 'global')"],
+      "answer": 1,
+      "explanation": "Symbol.for('key') creates or retrieves a global symbol from the runtime-wide symbol registry."
+    },
+    {
+      "question": "Are symbol-keyed properties included in JSON.stringify?",
+      "options": ["Yes", "No, they are omitted", "Only if enumerable", "Only global symbols"],
+      "answer": 1,
+      "explanation": "Symbol-keyed properties are excluded from JSON.stringify, for...in, Object.keys(), and Object.values()."
+    },
+    {
+      "question": "What does Symbol.iterator do?",
+      "options": ["Returns the string representation", "Defines how an object is iterated", "Defines type coercion behavior", "Controls instanceof checks"],
+      "answer": 1,
+      "explanation": "Symbol.iterator is a well-known symbol that makes an object iterable (usable with for...of, spread, etc.)."
+    },
+    {
+      "question": "How do you access all symbol properties of an object?",
+      "options": ["Object.keys(obj)", "Object.getOwnPropertySymbols(obj)", "for...in", "obj[Symbol]"],
+      "answer": 1,
+      "explanation": "Object.getOwnPropertySymbols(obj) returns an array of all symbol keys on the object."
+    },
+    {
+      "question": "What does Symbol.toPrimitive customize?",
+      "options": ["Object iteration", "Type coercion behavior", "toString output", "instanceof behavior"],
+      "answer": 1,
+      "explanation": "Symbol.toPrimitive lets you customize how an object is converted to a primitive (number, string, or default hint)."
+    },
+    {
+      "question": "What is the correct way to create a Symbol?",
+      "options": ["new Symbol()", "Symbol()", "Symbol.new()", "create Symbol()"],
+      "answer": 1,
+      "explanation": "Call Symbol() as a function (not a constructor). new Symbol() throws TypeError because Symbol is not a constructor."
+    },
+    {
+      "question": "What is a common use case for Symbols?",
+      "options": ["String manipulation", "Creating unique property keys for internal state", "Array sorting", "Number formatting"],
+      "answer": 1,
+      "explanation": "Symbols are commonly used for unique property keys to store internal/metadata state that should not collide or be enumerated."
+    },
+    {
+      "question": "What does Symbol.hasInstance do?",
+      "options": ["Creates new instances", "Customizes instanceof behavior", "Checks property existence", "Defines object equality"],
+      "answer": 1,
+      "explanation": "Symbol.hasInstance lets you customize how instanceof works with your class. It's used by the instanceof operator."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["garbage-collection"] = {
+  "title": "Garbage Collection",
+  "difficulty": "advanced",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "JavaScript engines use <strong>automatic garbage collection</strong> to free memory that is no longer reachable.",
+    "The primary algorithm is <strong>Mark-and-Sweep</strong>: the engine traces from <strong>roots</strong> (global object, local variables) and marks reachable objects, then sweeps unreachable ones.",
+    "An object is eligible for GC when it is <strong>unreachable</strong> — no references from roots or other reachable objects exist.",
+    "Common <strong>memory leak</strong> patterns: global variables, forgotten timers/closures, detached DOM nodes, and cached data without cleanup."
+  ],
+  "laymanDefinition": "Imagine a city where garbage trucks automatically visit every building. They start at the mayor's office (the root) and follow all roads, marking every building they can reach. Any building they couldn't reach is abandoned and gets demolished. You don't need to call for trash pickup — the system handles it automatically. But if you accidentally build a road from your house to your neighbor's and your neighbor's house is still reachable, your junk stays around even if you didn't want it anymore. That's garbage collection: automatic, but you can accidentally prevent it with unintended references.",
+  "deepDive": [
+    {
+      "heading": "Mark-and-Sweep Algorithm",
+      "text": "The mark-and-sweep algorithm has two phases. In the mark phase, the GC starts from root references (global object, currently executing function's local variables, DOM tree) and traverses all reachable objects, 'marking' them. In the sweep phase, unmarked objects are considered unreachable and their memory is reclaimed. Modern engines enhance this with generational collection, incremental marking, and concurrent sweeping."
+    },
+    {
+      "heading": "Reachability — The Key Concept",
+      "text": "An object is reachable if it can be accessed by traversing references from the roots. Roots include: global object, currently executing function's local variables and parameters, variables on the call stack, and the DOM tree (in browsers). If an object is not reachable through any chain of references, it is garbage. Circular references between unreachable objects are handled correctly — if neither can be reached from roots, both are collected."
+    },
+    {
+      "heading": "Generational Collection",
+      "text": "Modern engines use generational collection based on the observation that most objects die young. Objects are allocated in a 'nursery' (young generation). Objects that survive multiple GC cycles are promoted to the 'old generation.' The nursery is collected frequently (minor GC), while the old generation is collected less often (major GC). This optimizes for the common case where objects are short-lived."
+    },
+    {
+      "heading": "Common Memory Leak Patterns",
+      "text": "1) Accidental global variables: assigning to an undeclared variable creates a global property. 2) Forgotten timers/callbacks: setInterval that references an object prevents its GC. 3) Detached DOM elements: JavaScript variables holding references to removed DOM elements. 4) Closures capturing large objects: a closure that references an outer scope prevents those variables from being GC'd. 5) Event listeners not removed: listeners on elements that are removed. 6) Growing caches without limits."
+    },
+    {
+      "heading": "GC and WeakMap/WeakSet",
+      "text": "WeakMap and WeakSet use weak references — they don't prevent GC of their keys. If a key object is only referenced by a WeakMap/WeakSet, it can be collected. This is the primary mechanism for preventing memory leaks in caching and object-tagging scenarios."
+    }
+  ],
+  "interviewAnswer": "JavaScript uses automatic garbage collection based on the mark-and-sweep algorithm. The GC starts from root references (global object, local variables, DOM tree), marks all reachable objects, and collects unmarked ones. Modern engines use generational collection (nursery for young objects, old generation for survivors), incremental marking (to avoid long pauses), and concurrent sweeping. Memory leaks occur when objects remain reachable unintentionally — common causes: global variables, forgotten timers/intervals, detached DOM nodes still referenced in JS, closures holding large data, event listeners not cleaned up, and unbounded caches. WeakMap/WeakSet help prevent leaks by not preventing GC of their keys. The delete operator removes properties but doesn't trigger GC — it just makes the property unreachable.",
+  "interviewQuestions": [
+    {
+      "question": "How does JavaScript garbage collection work?",
+      "answer": "JavaScript uses automatic mark-and-sweep GC. It marks all reachable objects from root references, then sweeps away unmarked (unreachable) objects."
+    },
+    {
+      "question": "What are root references in GC?",
+      "answer": "Roots include the global object, local variables in currently executing functions, parameters on the call stack, and the DOM tree (in browsers)."
+    },
+    {
+      "question": "Can the JavaScript GC handle circular references?",
+      "answer": "Yes. Modern mark-and-sweep GC traces reachability from roots. A circular reference between two unreachable objects is collected because neither can be reached from roots."
+    },
+    {
+      "question": "What is a common cause of memory leaks?",
+      "answer": "Accidental global variables, forgotten timers/intervals, detached DOM node references, closures holding large object references, and unbounded caches."
+    },
+    {
+      "question": "How do closures cause memory leaks?",
+      "answer": "A closure retains references to its outer scope's variables. If the closure persists (e.g., as an event listener), the entire scope chain is retained, preventing GC of referenced objects."
+    },
+    {
+      "question": "How does delete work with GC?",
+      "answer": "delete removes a property from an object, making that reference unreachable. It doesn't directly trigger GC — GC runs automatically when needed."
+    },
+    {
+      "question": "What is generational collection?",
+      "answer": "Objects are allocated in a nursery (young generation). Those surviving GC cycles are promoted to the old generation. Nursery is collected frequently; old generation less often."
+    },
+    {
+      "question": "How does WeakMap help with memory leaks?",
+      "answer": "WeakMap holds weak references to keys. If a key object has no other references, it can be GC'd even though it's in the WeakMap. The entry is auto-removed."
+    },
+    {
+      "question": "Can you manually trigger garbage collection?",
+      "answer": "In most environments, no — the engine decides when to run GC. In Node.js with --expose-gc, you can call global.gc(). In browsers, performance.memory exists but not direct GC control."
+    },
+    {
+      "question": "What tools can help detect memory leaks?",
+      "answer": "Browser DevTools Memory/Heap profiler, Chrome's Performance tab (record memory), Node.js --inspect with Chrome DevTools, and process.memoryUsage() in Node."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 350\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"330\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Mark-and-Sweep Garbage Collection</text><rect x=\"30\" y=\"65\" width=\"200\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"130\" y=\"94\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"bold\">ROOTS</text><text x=\"130\" y=\"108\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">global, locals, DOM</text><line x1=\"230\" y1=\"90\" x2=\"280\" y2=\"90\" stroke=\"var(--border)\" stroke-width=\"1.5\"/><rect x=\"280\" y=\"65\" width=\"160\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"360\" y=\"88\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\">Object A</text><text x=\"360\" y=\"105\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">REACHABLE ✓</text><line x1=\"390\" y1=\"115\" x2=\"440\" y2=\"140\" stroke=\"var(--border)\" stroke-width=\"1\"/><rect x=\"440\" y=\"130\" width=\"160\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"520\" y=\"153\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\">Object B</text><text x=\"520\" y=\"170\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"10\">REACHABLE ✓</text><line x1=\"250\" y1=\"90\" x2=\"280\" y2=\"200\" stroke=\"var(--border)\" stroke-width=\"1\" stroke-dasharray=\"4\"/><rect x=\"200\" y=\"200\" width=\"160\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#e64745\" stroke-width=\"1.5\"/><text x=\"280\" y=\"223\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"12\">Object C</text><text x=\"280\" y=\"240\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"10\">UNREACHABLE ✗</text><text x=\"360\" y=\"290\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"13\" font-weight=\"bold\">Mark Phase: trace from roots → mark reachable</text><text x=\"360\" y=\"315\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"13\" font-weight=\"bold\">Sweep Phase: collect unmarked (unreachable) objects</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Reachability Demo",
+      "useCase": "Understanding what keeps objects alive",
+      "code": "// Object is reachable — NOT GC'd\nlet user = { name: 'Alice', data: new Array(10000) };\n// The object is reachable from 'user' variable (root)\n\n// Object becomes unreachable — eligible for GC\nuser = null;\n// Now the object has no references from roots\n// Next GC cycle will reclaim it\n\n// Circular references — still collected\nfunction demoCircular() {\n  const objA = {};\n  const objB = {};\n  objA.ref = objB;\n  objB.ref = objA;\n  // After function ends, both objA and objB go out of scope\n  // Neither is reachable from roots — both collected\n  // Modern GC handles circular refs correctly!\n}\n\ndemoCircular();\n// objA and objB were collected after function returned\n\n// Multiple references — one keeps it alive\nlet shared = { data: 'important' };\nlet ref1 = shared;\nlet ref2 = shared;\n\nref1 = null; // Object still reachable via ref2\nref2 = null; // Now object is unreachable — eligible for GC\nconsole.log('References cleared, object eligible for GC');",
+      "description": "An object is reachable if any chain of references from roots leads to it. Setting all references to null makes it eligible for GC."
+    },
+    {
+      "title": "Memory Leak — Accidental Global Variable",
+      "useCase": "Identifying and fixing global variable leaks",
+      "code": "// LEAK: accidental global\nfunction processData() {\n  // No 'let', 'const', or 'var' — becomes global!\n  hugeData = new Array(1000000).fill('leak');\n  // This creates window.hugeData in browsers\n  // global.hugeData in Node.js\n}\n\nprocessData();\n// hugeData persists globally — never GC'd!\n\n// FIX: always declare variables\nfunction processDataFixed() {\n  const data = new Array(1000000).fill('no leak');\n  // data goes out of scope after function returns\n  // Eligible for GC!\n  return data;\n}\n\n// LEAK: 'this' in global context\nfunction leakyFunction() {\n  this.leaky = new Array(100000).fill('leak');\n  // In non-strict mode, 'this' is the global object\n}\n\nleakyFunction();\nconsole.log(window.leaky); // Leaked!\n\n// FIX: use 'use strict'\nfunction safeFunction() {\n  'use strict';\n  // this is undefined — would throw error\n  // this.safe = 'data'; // TypeError!\n}",
+      "description": "Undeclared variables become global properties, persisting for the application lifetime. Always declare with let/const/var."
+    },
+    {
+      "title": "Memory Leak — Detached DOM Elements",
+      "useCase": "DOM references preventing garbage collection",
+      "code": "// LEAK: holding references to removed DOM elements\nconst elements = [];\n\nfunction addElement() {\n  const div = document.createElement('div');\n  div.textContent = 'Temporary';\n  document.body.appendChild(div);\n  elements.push(div); // Storing reference\n}\n\n// Even after removing from DOM:\nfunction removeElements() {\n  for (const el of elements) {\n    document.body.removeChild(el);\n  }\n  // elements[] still holds references — NOT GC'd!\n  // Memory leak: elements persist indefinitely\n}\n\n// FIX: clean up references\nfunction removeElementsFixed() {\n  while (elements.length) {\n    const el = elements.pop();\n    document.body.removeChild(el);\n    // el reference is removed from array\n    // el can now be GC'd\n  }\n}\n\n// Modern approach: use WeakSet/WeakMap\nconst trackedElements = new WeakSet();\n\nfunction trackElement(el) {\n  trackedElements.add(el);\n  // Does NOT prevent GC of el\n  // When el is removed from DOM and all refs gone,\n  // WeakSet entry auto-clears\n}",
+      "description": "DOM references stored in JavaScript arrays or objects prevent GC even after elements are removed from the DOM tree."
+    },
+    {
+      "title": "Memory Leak — Closures and Timers",
+      "useCase": "Forgotten timers and closure scope leaks",
+      "code": "// LEAK: timer holding reference\nfunction startTimer() {\n  const hugeData = new Array(1000000).fill('timer leak');\n\n  setInterval(function() {\n    console.log('Timer tick');\n    // Closure references hugeData\n    // Timer keeps the closure alive\n    // hugeData is never GC'd\n  }, 1000);\n}\n\nstartTimer();\n// hugeData persists as long as interval runs!\n// Even after the function returns\n\n// FIX: clear the timer when done\nfunction startTimerFixed() {\n  const hugeData = new Array(1000000).fill('ok');\n\n  const timerId = setInterval(function() {\n    console.log('Tick');\n  }, 1000);\n\n  // Store timerId and clear when component unmounts\n  return function cleanup() {\n    clearInterval(timerId);\n    // Now closure and hugeData can be GC'd\n  };\n}\n\nconst cleanup = startTimerFixed();\n// Later: cleanup(); // Stops timer, allows GC\n\n// LEAK: closure over large object\nfunction createLeakyHandler() {\n  const largeConfig = { /* lots of data */ };\n\n  document.getElementById('btn').addEventListener('click', function() {\n    console.log('clicked');\n    // This closure captures largeConfig\n    // Event listener keeps it alive indefinitely\n  });\n}\n\n// FIX: only capture what's needed\nfunction createFixedHandler() {\n  const btn = document.getElementById('btn');\n  const handler = function() {\n    console.log('clicked');\n  };\n\n  btn.addEventListener('click', handler);\n\n  // Return cleanup function\n  return function() {\n    btn.removeEventListener('click', handler);\n  };\n}",
+      "description": "Timers and event listeners create closures that keep their outer scope alive. Always clean up timers and remove listeners."
+    },
+    {
+      "title": "Detecting and Debugging Memory Leaks",
+      "useCase": "Using tools to identify leaks",
+      "code": "// In Node.js:\nconst mem = process.memoryUsage();\nconsole.log('RSS:', mem.rss / 1024 / 1024, 'MB');\nconsole.log('Heap Total:', mem.heapTotal / 1024 / 1024, 'MB');\nconsole.log('Heap Used:', mem.heapUsed / 1024 / 1024, 'MB');\n\n// Memory leak detection pattern\nconst leaks = [];\n\nfunction detectLeak() {\n  // In Chrome DevTools:\n  // 1. Go to Memory tab\n  // 2. Take a heap snapshot\n  // 3. Perform actions\n  // 4. Take another snapshot\n  // 5. Compare — look for objects that shouldn't persist\n\n  // Manual check: watch memory growth\n  const used = process.memoryUsage().heapUsed;\n  console.log('Heap used:', Math.round(used / 1024 / 1024) + 'MB');\n}\n\n// Testing for closure leaks\nfunction createLeak() {\n  const big = new Array(1000000).fill('X');\n  return function() {\n    return 'closure captures big array: ' + big.length;\n  };\n}\n\n// Check if closure retains scope\nconst leakyFn = createLeak();\n// big array is still alive because leakyFn holds the closure\n\n// Good practice: nullify references when done\nleakyFn = null;\n// Now the closure and big array are eligible for GC\n\n// Using Chrome Performance tab:\n// 1. Record memory allocation timeline\n// 2. Look for sawtooth pattern (GC working)\n// 3. Steady upward trend = likely leak\n// 4. Heap snapshots show retainers\n\n// Best practices:\n// - Avoid global state\n// - Clean up timers/intervals\n// - Remove event listeners\n// - Use WeakMap/WeakSet for caches\n// - Implement cache size limits\n// - Nullify large references when done",
+      "description": "Use Node.js process.memoryUsage() or Chrome DevTools Heap Snapshots to detect memory leaks. Look for retained objects in snapshots."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "How does JavaScript garbage collection work?",
+      "options": ["Reference counting", "Mark-and-sweep from root references", "Manual memory management", "Automatic reference counting"],
+      "answer": 1,
+      "explanation": "JavaScript uses mark-and-sweep: start from roots, mark all reachable objects, collect unmarked (unreachable) ones."
+    },
+    {
+      "question": "What is a root reference in GC?",
+      "options": ["The first object created", "Global object, local variables, DOM tree", "The main function only", "Object with the most properties"],
+      "answer": 1,
+      "explanation": "Roots include the global object, currently executing local variables, call stack variables, and the DOM tree (browsers)."
+    },
+    {
+      "question": "Can circular references cause memory leaks in modern JS?",
+      "options": ["Yes, circular refs are never collected", "No, mark-and-sweep handles circular refs", "Only between DOM elements", "Only in older browsers"],
+      "answer": 1,
+      "explanation": "Modern mark-and-sweep GC handles circular references. If neither object is reachable from roots, both are collected."
+    },
+    {
+      "question": "What is a common cause of memory leaks?",
+      "options": ["Using strict mode", "Accidental global variables", "Using let instead of var", "Arrow functions"],
+      "answer": 1,
+      "explanation": "Undeclared variables become global properties and persist for the application lifetime, preventing GC."
+    },
+    {
+      "question": "How do closures potentially cause memory leaks?",
+      "options": ["They always cause leaks", "They retain references to their outer scope, which can keep large objects alive", "They create circular references", "They block the event loop"],
+      "answer": 1,
+      "explanation": "A closure retains its outer scope's variables. If the closure persists (e.g., event listener), those variables stay alive."
+    },
+    {
+      "question": "Can you manually trigger garbage collection?",
+      "options": ["Yes, with gc() in all environments", "No, the engine controls GC timing", "Only in Node.js with --expose-gc", "With delete operator"],
+      "answer": 2,
+      "explanation": "You can trigger GC in Node.js with --expose-gc flag (then call global.gc()). Browsers don't expose direct GC control."
+    },
+    {
+      "question": "How does WeakMap help prevent memory leaks?",
+      "options": ["It automatically removes entries when keys are GC'd", "It stores data on disk", "It compresses values", "It limits cache size"],
+      "answer": 0,
+      "explanation": "WeakMap uses weak references for keys — if no other references exist, the key and its entry are GC'd."
+    },
+    {
+      "question": "What happens when an object becomes unreachable?",
+      "options": ["It's immediately deleted", "It becomes eligible for GC on the next cycle", "It throws an error", "It's moved to disk"],
+      "answer": 1,
+      "explanation": "Unreachable objects are eligible for GC but are not collected until the engine runs its next GC cycle."
+    },
+    {
+      "question": "What tool can help detect memory leaks in the browser?",
+      "options": ["Console.log", "Chrome DevTools Memory/Heap profiler", "CSS inspector", "Network tab"],
+      "answer": 1,
+      "explanation": "Chrome DevTools Memory panel with heap snapshots can identify objects that are retained unexpectedly."
+    },
+    {
+      "question": "What is generational garbage collection?",
+      "options": ["Collecting objects by age group", "Collecting every 10 seconds", "Collecting only strings", "Manual generation management"],
+      "answer": 0,
+      "explanation": "Generational collection separates objects by age: young (nursery) collected frequently, old (survivors) collected less often."
+    }
+  ]
+}
+;
+
+TOPICS_DATA["javascript"]["es6-features"] = {
+  "title": "ES6+ Features Overview",
+  "difficulty": "beginner",
+  "estimatedMinutes": 30,
+  "tldr": [
+    "ES6 (ES2015) was a <strong>major update</strong> to JavaScript, introducing <strong>classes, modules, arrow functions, promises, template literals, destructuring, spread/rest, let/const, and more</strong>.",
+    "Subsequent yearly releases (ES2016–ES2024) added <strong>async/await, optional chaining, nullish coalescing, array methods, and other improvements</strong>.",
+    "ES6+ features make JavaScript code more <strong>readable, maintainable, and powerful</strong> — they are essential for modern development.",
+    "Key themes: <strong>better syntax</strong> (arrow functions, template literals), <strong>better organization</strong> (modules, classes), <strong>better async</strong> (promises, async/await), and <strong>better data handling</strong> (Map, Set, Symbol, typed arrays)."
+  ],
+  "laymanDefinition": "Imagine you've been driving a car from 1995. It works, but it lacks modern features — no GPS, no backup camera, no Bluetooth. Then, in 2015, the car company releases a massive upgrade: GPS navigation, voice control, automatic parking, and smartphone integration. That's ES6. And every year since, they add smaller improvements — better voice recognition, lane assist, etc. (ES2016 through ES2024). You can still drive the old car, but the new one makes everything easier, safer, and more enjoyable. That's what ES6+ does for JavaScript.",
+  "deepDive": [
+    {
+      "heading": "ES6 Core Features (2015)",
+      "text": "ES6 introduced: let/const (block-scoped variables), arrow functions (shorter syntax, lexical this), classes (syntactic sugar over prototypes), template literals (interpolated strings), destructuring (extract values from arrays/objects), spread/rest operators, default parameters, enhanced object literals, for...of loops, Map/Set/WeakMap/WeakSet, Symbol, Promises, generators (function*), modules (import/export), iterators, and Proxy/Reflect."
+    },
+    {
+      "heading": "ES2016–ES2017 — Async Revolution",
+      "text": "ES2016 added Array.prototype.includes and the exponentiation operator (**). ES2017 was a landmark year with async/await (syntactic sugar over Promises), Object.values/Object.entries, string padding (padStart/padEnd), trailing commas in function parameters, and SharedArrayBuffer/Atomics."
+    },
+    {
+      "heading": "ES2018–ES2020 — Object and Async Improvements",
+      "text": "ES2018 added rest/spread for objects, Promise.prototype.finally, async iteration (for await...of), and RegExp improvements. ES2019 added Array.flat/flatMap, Object.fromEntries, and optional catch binding. ES2020 introduced the nullish coalescing operator (??), optional chaining (?.), BigInt, globalThis, dynamic import, Promise.allSettled, and String.matchAll."
+    },
+    {
+      "heading": "ES2021–ES2024 — Ongoing Refinements",
+      "text": "ES2021 added String.replaceAll, Promise.any, logical assignment operators (&&=, ||=, ??=), and numeric separators. ES2022 added class fields (public/private), top-level await, Array/RegExp.hasIndices, and static class blocks. ES2023 added Array.findLast/findLastIndex, Hashbang grammar, and immutable array methods (toSorted, toReversed, toSpliced, with). ES2024 added groupBy (Map.groupBy, Object.groupBy), Promise.withResolvers, and RegExp v flag."
+    },
+    {
+      "heading": "Modern JavaScript — Transpilation and Polyfills",
+      "text": "While modern engines support most ES6+ features, production code often uses transpilers (Babel) to convert modern syntax to ES5 for older browser support. Polyfills (core-js) provide runtime implementations for missing features. However, modern development increasingly targets evergreen browsers, reducing the need for transpilation."
+    }
+  ],
+  "interviewAnswer": "ES6 (ES2015) was a transformative update to JavaScript, introducing let/const, arrow functions, classes, template literals, destructuring, spread/rest, modules, Promises, generators, Map/Set/Symbol, and more. Subsequent yearly releases added async/await (ES2017), async iteration and rest/spread for objects (ES2018), flat/flatMap and Object.fromEntries (ES2019), optional chaining and nullish coalescing (ES2020), logical assignment operators and replaceAll (ES2021), class fields and top-level await (ES2022), findLast and immutable array methods (ES2023), and groupBy with Promise.withResolvers (ES2024). Key themes across releases: better syntax ergonomics, improved async patterns, enhanced data structures, and more expressive object/array operations.",
+  "interviewQuestions": [
+    {
+      "question": "What major features did ES6 (ES2015) introduce?",
+      "answer": "let/const, arrow functions, classes, template literals, destructuring, spread/rest, default parameters, enhanced object literals, for...of, Map/Set/WeakMap/WeakSet, Symbol, Promises, generators, modules, iterators, Proxy/Reflect."
+    },
+    {
+      "question": "What is the difference between let, const, and var?",
+      "answer": "var is function-scoped and hoisted. let/const are block-scoped and not hoisted (TDZ). const prevents reassignment but not mutation of objects/arrays."
+    },
+    {
+      "question": "What is the arrow function's key difference from regular functions?",
+      "answer": "Arrow functions have lexical 'this' (inherited from enclosing scope), cannot be used as constructors (no new), and have no arguments object."
+    },
+    {
+      "question": "What does optional chaining (?.) do?",
+      "answer": "Optional chaining safely accesses nested properties: obj?.prop?.nested. Returns undefined if any intermediate value is null/undefined instead of throwing."
+    },
+    {
+      "question": "What is the nullish coalescing operator (??)?",
+      "answer": "It returns the right-hand side only if the left-hand side is null or undefined, not for other falsy values like 0, '', or false."
+    },
+    {
+      "question": "What did ES2017 add?",
+      "answer": "async/await, Object.values/Object.entries, string padding (padStart/padEnd), trailing commas in function parameters."
+    },
+    {
+      "question": "What did ES2020 add?",
+      "answer": "Optional chaining (?.), nullish coalescing (??), BigInt, globalThis, dynamic import, Promise.allSettled, String.matchAll."
+    },
+    {
+      "question": "What is the difference between Promise.all and Promise.allSettled?",
+      "answer": "Promise.all rejects immediately if any promise rejects. Promise.allSettled waits for all promises to settle (resolve or reject) and returns results with status."
+    },
+    {
+      "question": "What did ES2022 add?",
+      "answer": "Class fields (public/private with #), top-level await (await at module top level without async function), static class blocks, and RegExp.hasIndices."
+    },
+    {
+      "question": "What did ES2023 add?",
+      "answer": "Array.findLast/findLastIndex, immutable array methods (toSorted, toReversed, toSpliced, with), and Hashbang grammar (#! for CLI scripts)."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 700 400\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"680\" height=\"380\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\"/><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">ES6+ Timeline — Major Features by Year</text><rect x=\"30\" y=\"65\" width=\"640\" height=\"40\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"350\" y=\"80\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">ES2015 (ES6)</text><text x=\"350\" y=\"95\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">let/const, arrow, classes, modules, Promise, Map/Set, Symbol, destructuring, spread/rest</text><rect x=\"30\" y=\"115\" width=\"640\" height=\"35\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"350\" y=\"130\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">ES2017</text><text x=\"350\" y=\"144\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">async/await, Object.values/entries, string padStart/padEnd</text><rect x=\"30\" y=\"160\" width=\"640\" height=\"35\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"350\" y=\"175\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">ES2020</text><text x=\"350\" y=\"189\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Optional chaining (?.), nullish coalescing (??), BigInt, globalThis</text><rect x=\"30\" y=\"205\" width=\"640\" height=\"35\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#e64745\" stroke-width=\"1.5\"/><text x=\"350\" y=\"220\" text-anchor=\"middle\" fill=\"#e64745\" font-size=\"12\" font-weight=\"bold\">ES2022</text><text x=\"350\" y=\"234\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Class fields (public/private #), top-level await, static blocks</text><rect x=\"30\" y=\"250\" width=\"640\" height=\"35\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#98c379\" stroke-width=\"1.5\"/><text x=\"350\" y=\"265\" text-anchor=\"middle\" fill=\"#98c379\" font-size=\"12\" font-weight=\"bold\">ES2023</text><text x=\"350\" y=\"279\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">findLast/findLastIndex, toSorted/toReversed/toSpliced/with</text><rect x=\"30\" y=\"295\" width=\"640\" height=\"35\" rx=\"4\" fill=\"#1a1d28\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"350\" y=\"310\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">ES2024</text><text x=\"350\" y=\"324\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Map.groupBy, Object.groupBy, Promise.withResolvers</text><text x=\"350\" y=\"360\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Modern JavaScript = ES6+ features with Babel/TypeScript for transpilation</text><text x=\"350\" y=\"378\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Yearly releases since ES2015 keep the language evolving</text></svg>",
+  "codeExamples": [
+    {
+      "title": "ES6 — let/const, Arrow Functions, Template Literals",
+      "useCase": "Core syntax improvements from ES6",
+      "code": "// let/const — block scoping\nconst PI = 3.14159;\nlet counter = 0;\n\nif (true) {\n  let blockScoped = 'only in this block';\n  var functionScoped = 'leaks out';\n}\n// console.log(blockScoped); // ReferenceError\nconsole.log(functionScoped); // 'leaks out'\n\n// Arrow functions — shorter, lexical this\nconst double = (n) => n * 2;\nconst greet = (name) => 'Hello, ' + name;\nconsole.log(double(5)); // 10\nconsole.log(greet('Alice')); // 'Hello, Alice'\n\n// Lexical this in arrow functions\nfunction Timer() {\n  this.seconds = 0;\n  // Arrow captures this from enclosing scope\n  setInterval(() => {\n    this.seconds++;\n    // 'this' refers to Timer instance\n  }, 1000);\n}\n\n// Template literals — string interpolation\nconst name = 'Bob';\nconst age = 30;\nconsole.log(`My name is ${name} and I am ${age} years old.`);\n\n// Multi-line strings\nconst html = `\n  <div>\n    <h1>${name}</h1>\n    <p>Age: ${age}</p>\n  </div>\n`;\n\n// Default parameters\nfunction multiply(a, b = 1) {\n  return a * b;\n}\nconsole.log(multiply(5));    // 5 (b defaults to 1)\nconsole.log(multiply(5, 2)); // 10",
+      "description": "ES6 introduced let/const for block scoping, arrow functions for concise syntax with lexical this, template literals for interpolation."
+    },
+    {
+      "title": "ES6 — Destructuring and Spread/Rest",
+      "useCase": "Pattern matching and collection operations",
+      "code": "// Array destructuring\nconst coordinates = [10, 20];\nconst [x, y] = coordinates;\nconsole.log(x, y); // 10 20\n\n// Swapping without temp variable\nlet a = 1, b = 2;\n[a, b] = [b, a];\nconsole.log(a, b); // 2 1\n\n// Object destructuring\nconst user = { name: 'Alice', age: 30, email: 'alice@example.com' };\nconst { name, age: userAge, ...rest } = user;\nconsole.log(name);    // 'Alice'\nconsole.log(userAge); // 30\nconsole.log(rest);    // { email: 'alice@example.com' }\n\n// Spread operator\nconst arr1 = [1, 2, 3];\nconst arr2 = [4, 5, 6];\nconst combined = [...arr1, ...arr2];\nconsole.log(combined); // [1, 2, 3, 4, 5, 6]\n\n// Object spread\nconst defaults = { theme: 'light', lang: 'en' };\nconst overrides = { theme: 'dark' };\nconst config = { ...defaults, ...overrides };\nconsole.log(config); // { theme: 'dark', lang: 'en' }\n\n// Rest parameters\nfunction sum(...numbers) {\n  return numbers.reduce((total, n) => total + n, 0);\n}\nconsole.log(sum(1, 2, 3, 4, 5)); // 15",
+      "description": "Destructuring extracts values from arrays/objects. Spread expands iterables. Rest collects remaining parameters or properties."
+    },
+    {
+      "title": "ES6+ — Promises and async/await",
+      "useCase": "Modern asynchronous programming",
+      "code": "// ES6: Promise\nconst fetchData = new Promise(function(resolve, reject) {\n  setTimeout(function() {\n    resolve({ id: 1, name: 'Data' });\n  }, 1000);\n});\n\nfetchData.then(function(data) {\n  console.log(data); // { id: 1, name: 'Data' }\n}).catch(function(err) {\n  console.error(err);\n});\n\n// ES2017: async/await\nasync function loadData() {\n  try {\n    const data = await fetchData;\n    console.log(data); // { id: 1, name: 'Data' }\n    return data;\n  } catch (err) {\n    console.error('Failed:', err);\n    throw err;\n  }\n}\n\nloadData();\n\n// ES2018: Promise.finally\nfetchData\n  .then(data => console.log(data))\n  .catch(err => console.error(err))\n  .finally(() => console.log('Operation complete'));\n\n// ES2020: Promise.allSettled\nconst promises = [fetchData, fetchData, Promise.reject('Error')];\nPromise.allSettled(promises).then(function(results) {\n  results.forEach(function(r) {\n    console.log(r.status, r.value || r.reason);\n  });\n});\n\n// ES2021: Promise.any (first fulfilled)\nPromise.any([Promise.reject('Err'), fetchData])\n  .then(data => console.log('First success:', data));\n\n// ES2022: top-level await (in modules)\n// const data = await fetch('https://api.example.com/data');\n// Works at module top level without async wrapper",
+      "description": "Promises (ES6) provide structured async handling. async/await (ES2017) makes async code read like synchronous. Later ES versions added Promise combinators."
+    },
+    {
+      "title": "ES2020 — Optional Chaining and Nullish Coalescing",
+      "useCase": "Safe property access and default values",
+      "code": "// Before ES2020 — verbose null checks\nfunction getStreetName(user) {\n  if (user && user.address && user.address.street) {\n    return user.address.street;\n  }\n  return 'Unknown';\n}\n\n// ES2020: Optional chaining (?.)\nfunction getStreetName2020(user) {\n  return user?.address?.street ?? 'Unknown';\n}\n\nconsole.log(getStreetName2020(null));            // 'Unknown'\nconsole.log(getStreetName2020({}));              // 'Unknown'\nconsole.log(getStreetName2020({ address: null })); // 'Unknown'\nconsole.log(getStreetName2020({ address: { street: 'Main St' } }));\n// 'Main St'\n\n// Nullish coalescing (??) — only for null/undefined\nconst value = 0;\nconsole.log(value || 'default');  // 'default' (0 is falsy)\nconsole.log(value ?? 'default');  // 0 (only null/undefined triggers default)\n\n// Practical: optional chaining with arrays\nconst firstElement = arr?.[0];\nconst methodResult = obj?.method?.();\n\n// ES2021: Logical assignment operators\nlet x = null;\nx ??= 'default'; // Assigns if x is null/undefined\n\nlet y = 0;\ny ||= 10; // Assigns if y is falsy\n\nlet z = true;\nz &&= false; // Assigns if z is truthy",
+      "description": "Optional chaining (?.) safely accesses nested properties. Nullish coalescing (??) provides defaults only for null/undefined, not other falsy values."
+    },
+    {
+      "title": "ES2022–2024 — Recent Additions",
+      "useCase": "Latest JavaScript features",
+      "code": "// ES2022: Class fields (public/private)\nclass Person {\n  // Public field\n  name = 'Anonymous';\n\n  // Private field (truly private, not in prototype)\n  #ssn;\n\n  constructor(name, ssn) {\n    this.name = name;\n    this.#ssn = ssn;\n  }\n\n  getSSN() {\n    return this.#ssn;\n  }\n\n  // Static initialization block\n  static {\n    console.log('Person class initialized');\n    this.defaultName = 'Unknown';\n  }\n}\n\nconst p = new Person('Alice', '123-45-6789');\nconsole.log(p.name); // 'Alice'\n// console.log(p.#ssn); // SyntaxError!\nconsole.log(p.getSSN()); // '123-45-6789'\n\n// ES2022: Top-level await (in modules)\n// const response = await fetch('/api/config');\n// const config = await response.json();\n\n// ES2023: Immutable array methods\nconst arr = [3, 1, 2];\nconst sorted = arr.toSorted(); // Returns new sorted array\nconsole.log(sorted); // [1, 2, 3]\nconsole.log(arr);    // [3, 1, 2] (unchanged)\n\nconst reversed = arr.toReversed();\nconst spliced = arr.toSpliced(1, 1, 99);\nconst updated = arr.with(0, 100);\n\n// ES2023: findLast/findLastIndex\nconst nums = [5, 12, 8, 130, 44];\nconst lastEven = nums.findLast(n => n % 2 === 0);\nconsole.log(lastEven); // 44\n\n// ES2024: Object.groupBy\nconst inventory = [\n  { name: 'apple', type: 'fruit' },\n  { name: 'carrot', type: 'vegetable' },\n  { name: 'banana', type: 'fruit' }\n];\n\nconst grouped = Object.groupBy(inventory, item => item.type);\nconsole.log(grouped);\n// { fruit: [{ name: 'apple' }, { name: 'banana' }],\n//   vegetable: [{ name: 'carrot' }] }\n\n// ES2024: Promise.withResolvers\nconst { promise, resolve, reject } = Promise.withResolvers();\n// Equivalent to: new Promise((res, rej) => { resolve = res; reject = rej; })",
+      "description": "Recent ES versions added private class fields, top-level await, immutable array methods, findLast, Object.groupBy, and Promise.withResolvers."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What year was ES6 (major JavaScript update) released?",
+      "options": ["2009", "2015", "2017", "2020"],
+      "answer": 1,
+      "explanation": "ES6 (also called ES2015) was released in 2015 and was the most significant update to JavaScript."
+    },
+    {
+      "question": "Which feature was NOT introduced in ES6?",
+      "options": ["Arrow functions", "let/const", "Async/await", "Classes"],
+      "answer": 2,
+      "explanation": "Async/await was introduced in ES2017 (ES8). ES6 introduced arrow functions, let/const, classes, Promises, modules, etc."
+    },
+    {
+      "question": "What is the key difference between var and let?",
+      "options": ["var is block-scoped, let is function-scoped", "let is block-scoped, var is function-scoped", "They are identical", "let cannot be reassigned"],
+      "answer": 1,
+      "explanation": "let is block-scoped (visible only within the block). var is function-scoped (visible throughout the function)."
+    },
+    {
+      "question": "What does the optional chaining operator (?.) do?",
+      "options": ["Throws if property is null", "Returns undefined if any intermediate value is null/undefined", "Creates a new property", "Chains method calls"],
+      "answer": 1,
+      "explanation": "Optional chaining (?.) safely accesses nested properties, returning undefined if any intermediate value is null or undefined."
+    },
+    {
+      "question": "What does the nullish coalescing operator (??) do?",
+      "options": ["Returns right side for any falsy value", "Returns right side only for null/undefined", "Throws on null", "Coerces values to numbers"],
+      "answer": 1,
+      "explanation": "?? returns the right operand only if the left operand is null or undefined, not for other falsy values like 0 or ''."
+    },
+    {
+      "question": "Which ES version introduced async/await?",
+      "options": ["ES6 (2015)", "ES2017", "ES2020", "ES2022"],
+      "answer": 1,
+      "explanation": "Async/await was introduced in ES2017 as part of the async revolution in JavaScript."
+    },
+    {
+      "question": "What does ES2023's toSorted() do differently from sort()?",
+      "options": ["It sorts in reverse", "It returns a new sorted array without mutating the original", "It sorts faster", "It sorts by string length"],
+      "answer": 1,
+      "explanation": "toSorted() returns a new sorted array and does not modify the original. sort() mutates the original array in place."
+    },
+    {
+      "question": "What is the difference between Promise.all and Promise.allSettled?",
+      "options": ["Promise.all rejects on first failure; Promise.allSettled waits for all to complete", "They are identical", "Promise.all accepts arrays; Promise.allSettled accepts objects", "Promise.allSettled is faster"],
+      "answer": 0,
+      "explanation": "Promise.all short-circuits on first rejection. Promise.allSettled waits for all promises to settle and returns results with status."
+    },
+    {
+      "question": "How do you declare a private field in an ES2022 class?",
+      "options": ["private field;", "_field;", "#field;", "priv field;"],
+      "answer": 2,
+      "explanation": "Private class fields use the # prefix: #field. They are truly private and inaccessible outside the class."
+    },
+    {
+      "question": "What does ES2024's Object.groupBy() do?",
+      "options": ["Groups array elements by a key function", "Sorts objects alphabetically", "Merges two objects", "Filters object properties"],
+      "answer": 0,
+      "explanation": "Object.groupBy() groups elements of an iterable based on a callback function that returns the group key."
+    }
+  ]
+}
+;
+
+
+
+// Total topics: 41

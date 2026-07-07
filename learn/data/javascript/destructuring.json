@@ -170,9 +170,9 @@
     },
     {
       "question": "Which pattern correctly swaps a and b?",
-      "options ["[a, b] = [b, a]", "a = b; b = a;", "swap(a, b)", "[b, a] = [a, b]"],
-      "answer": 1,
-      "explanation": "Oops, let me redo: [a, b] = [b, a] correctly swaps a and b using array destructuring. Option index 0 is correct."
+      "options": ["[a, b] = [b, a]", "a = b; b = a;", "swap(a, b)", "[b, a] = [a, b]"],
+      "answer": 0,
+      "explanation": "[a, b] = [b, a] correctly swaps a and b using array destructuring. Only Option A uses the destructuring pattern. Options B and C are incorrect because they don't achieve a swap."
     }
   ]
 }
