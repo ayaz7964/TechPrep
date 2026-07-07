@@ -4,7 +4,8 @@ const state = {
   currentCategory: null,
   currentTopic: null,
   topicData: null,
-  completed: JSON.parse(localStorage.getItem('tp_completed') || '{}')
+  completed: JSON.parse(localStorage.getItem('tp_completed') || '{}'),
+  searchQuery: ''
 };
 
 /* =================== HELPERS =================== */
@@ -214,6 +215,15 @@ function init() {
     return { id: c.id, name: c.name, icon: c.icon, color: c.color, description: c.description, _topics: null };
   });
 
+  // Search listener
+  var searchEl = $('#topic-search');
+  if (searchEl) {
+    searchEl.addEventListener('input', function() {
+      state.searchQuery = this.value;
+      renderSidebar();
+    });
+  }
+
   renderSidebar();
   updateProgressRing();
   updateStats();
@@ -308,11 +318,16 @@ function createPlaceholderTopic(meta) {
 /* =================== SIDEBAR =================== */
 function renderSidebar() {
   const nav = $('#category-nav');
+  const q = state.searchQuery.toLowerCase().trim();
   nav.innerHTML = state.categories.map(cat => {
     const progress = getCategoryProgress(cat.id);
     const hasTopics = cat._topics && cat._topics.length > 0;
-    const topicsHtml = hasTopics
-      ? cat._topics.map(t => {
+    const filteredTopics = hasTopics
+      ? cat._topics.filter(t => !q || t.title.toLowerCase().includes(q))
+      : [];
+    const hasVisible = q === '' || filteredTopics.length > 0;
+    const topicsHtml = filteredTopics.length > 0
+      ? filteredTopics.map(t => {
           const done = isCompleted(cat.id, t.id);
           const active = (state.currentCategory === cat.id && state.currentTopic === t.id);
           return `
@@ -322,7 +337,10 @@ function renderSidebar() {
             </div>
           `;
         }).join('')
-      : '<div style="padding:6px 56px;font-size:0.78rem;color:var(--text-muted)">No topics yet</div>';
+      : (q ? '<div style="padding:6px 56px;font-size:0.78rem;color:var(--text-muted)">No match</div>'
+           : '<div style="padding:6px 56px;font-size:0.78rem;color:var(--text-muted)">No topics yet</div>');
+
+    if (!hasVisible && q !== '') return '';
 
     return `
       <div class="cat-item">
@@ -332,7 +350,7 @@ function renderSidebar() {
           <span class="cat-progress">${progress.done}/${progress.total}</span>
           <span class="cat-arrow">▶</span>
         </div>
-        <div class="cat-topics${state.currentCategory === cat.id ? ' open' : ''}">
+        <div class="cat-topics${state.currentCategory === cat.id || q ? ' open' : ''}">
           ${topicsHtml}
         </div>
       </div>
