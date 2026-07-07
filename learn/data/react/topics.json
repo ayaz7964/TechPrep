@@ -7,39 +7,11 @@
     "file": "react-architecture.json"
   },
   {
-    "id": "react-virtual-dom",
-    "title": "React Virtual DOM",
+    "id": "react-code-splitting",
+    "title": "React Code Splitting",
     "difficulty": "intermediate",
     "estimatedMinutes": 20,
-    "file": "react-virtual-dom.json"
-  },
-  {
-    "id": "react-fiber",
-    "title": "React Fiber",
-    "difficulty": "advanced",
-    "estimatedMinutes": 30,
-    "file": "react-fiber.json"
-  },
-  {
-    "id": "react-reconciliation",
-    "title": "React Reconciliation",
-    "difficulty": "advanced",
-    "estimatedMinutes": 25,
-    "file": "react-reconciliation.json"
-  },
-  {
-    "id": "react-jsx",
-    "title": "React JSX",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "react-jsx.json"
-  },
-  {
-    "id": "react-functional-components",
-    "title": "React Functional Components",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "react-functional-components.json"
+    "file": "react-code-splitting.json"
   },
   {
     "id": "react-component-lifecycle",
@@ -49,18 +21,11 @@
     "file": "react-component-lifecycle.json"
   },
   {
-    "id": "react-props",
-    "title": "React Props",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "react-props.json"
-  },
-  {
-    "id": "react-state",
-    "title": "React State",
-    "difficulty": "beginner",
-    "estimatedMinutes": 20,
-    "file": "react-state.json"
+    "id": "react-context-api",
+    "title": "React Context API",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "react-context-api.json"
   },
   {
     "id": "react-controlled-components",
@@ -70,11 +35,67 @@
     "file": "react-controlled-components.json"
   },
   {
-    "id": "react-uncontrolled-components",
-    "title": "React Uncontrolled Components",
+    "id": "react-custom-hooks",
+    "title": "React Custom Hooks",
     "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "react-custom-hooks.json"
+  },
+  {
+    "id": "react-error-boundaries",
+    "title": "React Error Boundaries",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "react-error-boundaries.json"
+  },
+  {
+    "id": "react-fiber",
+    "title": "React Fiber",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "react-fiber.json"
+  },
+  {
+    "id": "react-form-handling",
+    "title": "React Form Handling",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "react-form-handling.json"
+  },
+  {
+    "id": "react-forward-ref",
+    "title": "React Forward Ref",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "react-forward-ref.json"
+  },
+  {
+    "id": "react-functional-components",
+    "title": "React Functional Components",
+    "difficulty": "beginner",
     "estimatedMinutes": 15,
-    "file": "react-uncontrolled-components.json"
+    "file": "react-functional-components.json"
+  },
+  {
+    "id": "react-hydration",
+    "title": "React Hydration",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "react-hydration.json"
+  },
+  {
+    "id": "react-jsx",
+    "title": "React JSX",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "react-jsx.json"
+  },
+  {
+    "id": "react-lazy-loading",
+    "title": "React Lazy Loading",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-lazy-loading.json"
   },
   {
     "id": "react-lifting-state-up",
@@ -84,6 +105,20 @@
     "file": "react-lifting-state-up.json"
   },
   {
+    "id": "react-performance-optimization",
+    "title": "React Performance Optimization",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "react-performance-optimization.json"
+  },
+  {
+    "id": "react-portal",
+    "title": "React Portal",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-portal.json"
+  },
+  {
     "id": "react-prop-drilling",
     "title": "React Prop Drilling",
     "difficulty": "intermediate",
@@ -91,11 +126,46 @@
     "file": "react-prop-drilling.json"
   },
   {
-    "id": "react-context-api",
-    "title": "React Context API",
+    "id": "react-props",
+    "title": "React Props",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "react-props.json"
+  },
+  {
+    "id": "react-protected-routes",
+    "title": "React Protected Routes",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-protected-routes.json"
+  },
+  {
+    "id": "react-react-memo",
+    "title": "React React.memo",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-react-memo.json"
+  },
+  {
+    "id": "react-react-query",
+    "title": "React React Query",
     "difficulty": "intermediate",
     "estimatedMinutes": 25,
-    "file": "react-context-api.json"
+    "file": "react-react-query.json"
+  },
+  {
+    "id": "react-react-router",
+    "title": "React React Router",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 30,
+    "file": "react-react-router.json"
+  },
+  {
+    "id": "react-reconciliation",
+    "title": "React Reconciliation",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "react-reconciliation.json"
   },
   {
     "id": "react-redux",
@@ -112,18 +182,81 @@
     "file": "react-redux-toolkit.json"
   },
   {
-    "id": "react-react-query",
-    "title": "React React Query",
-    "difficulty": "intermediate",
+    "id": "react-rendering-cycle",
+    "title": "React Rendering Cycle",
+    "difficulty": "advanced",
     "estimatedMinutes": 25,
-    "file": "react-react-query.json"
+    "file": "react-rendering-cycle.json"
   },
   {
-    "id": "react-custom-hooks",
-    "title": "React Custom Hooks",
+    "id": "react-state",
+    "title": "React State",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "react-state.json"
+  },
+  {
+    "id": "react-state-management-patterns",
+    "title": "React State Management Patterns",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "react-state-management-patterns.json"
+  },
+  {
+    "id": "react-suspense",
+    "title": "React Suspense",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-suspense.json"
+  },
+  {
+    "id": "react-uncontrolled-components",
+    "title": "React Uncontrolled Components",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "react-uncontrolled-components.json"
+  },
+  {
+    "id": "react-usecallback",
+    "title": "React useCallback",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-usecallback.json"
+  },
+  {
+    "id": "react-useeffect",
+    "title": "React useEffect",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-useeffect.json"
+  },
+  {
+    "id": "react-uselayouteffect",
+    "title": "React useLayoutEffect",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "react-uselayouteffect.json"
+  },
+  {
+    "id": "react-usememo",
+    "title": "React useMemo",
     "difficulty": "intermediate",
     "estimatedMinutes": 25,
-    "file": "react-custom-hooks.json"
+    "file": "react-usememo.json"
+  },
+  {
+    "id": "react-usereducer",
+    "title": "React useReducer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "react-usereducer.json"
+  },
+  {
+    "id": "react-useref",
+    "title": "React useRef",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "react-useref.json"
   },
   {
     "id": "react-usestate",
@@ -133,10 +266,10 @@
     "file": "react-usestate.json"
   },
   {
-    "id": "react-useeffect",
-    "title": "React useEffect",
+    "id": "react-virtual-dom",
+    "title": "React Virtual DOM",
     "difficulty": "intermediate",
     "estimatedMinutes": 20,
-    "file": "react-useeffect.json"
+    "file": "react-virtual-dom.json"
   }
 ]

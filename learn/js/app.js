@@ -299,7 +299,26 @@ var EMBEDDED = {
       { id: "react-react-query",           title: "React React Query",                difficulty: "intermediate", estimatedMinutes: 25, file: "react-react-query.json" },
       { id: "react-custom-hooks",          title: "React Custom Hooks",               difficulty: "intermediate", estimatedMinutes: 25, file: "react-custom-hooks.json" },
       { id: "react-usestate",              title: "React useState",                   difficulty: "beginner",     estimatedMinutes: 20, file: "react-usestate.json" },
-      { id: "react-useeffect",             title: "React useEffect",                  difficulty: "intermediate", estimatedMinutes: 20, file: "react-useeffect.json" }
+      { id: "react-useeffect",             title: "React useEffect",                  difficulty: "intermediate", estimatedMinutes: 20, file: "react-useeffect.json" },
+      { id: "react-uselayouteffect",       title: "React useLayoutEffect",            difficulty: "intermediate", estimatedMinutes: 20, file: "react-uselayouteffect.json" },
+      { id: "react-usememo",               title: "React useMemo",                    difficulty: "intermediate", estimatedMinutes: 25, file: "react-usememo.json" },
+      { id: "react-usecallback",           title: "React useCallback",                difficulty: "intermediate", estimatedMinutes: 20, file: "react-usecallback.json" },
+      { id: "react-useref",                title: "React useRef",                     difficulty: "beginner",     estimatedMinutes: 20, file: "react-useref.json" },
+      { id: "react-usereducer",            title: "React useReducer",                 difficulty: "intermediate", estimatedMinutes: 25, file: "react-usereducer.json" },
+      { id: "react-react-memo",            title: "React React.memo",                 difficulty: "intermediate", estimatedMinutes: 20, file: "react-react-memo.json" },
+      { id: "react-lazy-loading",          title: "React Lazy Loading",               difficulty: "intermediate", estimatedMinutes: 20, file: "react-lazy-loading.json" },
+      { id: "react-code-splitting",        title: "React Code Splitting",             difficulty: "intermediate", estimatedMinutes: 20, file: "react-code-splitting.json" },
+      { id: "react-suspense",              title: "React Suspense",                   difficulty: "intermediate", estimatedMinutes: 20, file: "react-suspense.json" },
+      { id: "react-error-boundaries",      title: "React Error Boundaries",           difficulty: "intermediate", estimatedMinutes: 25, file: "react-error-boundaries.json" },
+      { id: "react-portal",                title: "React Portal",                     difficulty: "intermediate", estimatedMinutes: 20, file: "react-portal.json" },
+      { id: "react-forward-ref",           title: "React Forward Ref",                difficulty: "advanced",     estimatedMinutes: 20, file: "react-forward-ref.json" },
+      { id: "react-rendering-cycle",       title: "React Rendering Cycle",            difficulty: "advanced",     estimatedMinutes: 25, file: "react-rendering-cycle.json" },
+      { id: "react-hydration",             title: "React Hydration",                  difficulty: "advanced",     estimatedMinutes: 25, file: "react-hydration.json" },
+      { id: "react-performance-optimization",title: "React Performance Optimization",  difficulty: "advanced",     estimatedMinutes: 30, file: "react-performance-optimization.json" },
+      { id: "react-form-handling",         title: "React Form Handling",              difficulty: "intermediate", estimatedMinutes: 25, file: "react-form-handling.json" },
+      { id: "react-react-router",          title: "React React Router",               difficulty: "intermediate", estimatedMinutes: 30, file: "react-react-router.json" },
+      { id: "react-protected-routes",      title: "React Protected Routes",           difficulty: "intermediate", estimatedMinutes: 20, file: "react-protected-routes.json" },
+      { id: "react-state-management-patterns",title: "React State Management Patterns",difficulty: "advanced",     estimatedMinutes: 30, file: "react-state-management-patterns.json" }
     ]
   }
 };
