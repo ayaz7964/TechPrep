@@ -208,16 +208,29 @@ function loadTopic(catId, topicId) {
   state.currentCategory = catId;
   state.currentTopic = topicId;
 
-  loadJSON('data/' + catId + '/' + topicMeta.file).then(function(data) {
-    state.topicData = data;
+  // First try embedded data (works reliably with file://)
+  var embeddedData = null;
+  if (typeof TOPICS_DATA !== 'undefined' && TOPICS_DATA[catId] && TOPICS_DATA[catId][topicId]) {
+    embeddedData = TOPICS_DATA[catId][topicId];
+  }
+
+  if (embeddedData) {
+    state.topicData = embeddedData;
     renderTopic();
     updateActiveTopicInSidebar();
-  }).catch(function() {
-    // Fallback: show placeholder for topics without content yet
-    state.topicData = createPlaceholderTopic(topicMeta);
-    renderTopic();
-    updateActiveTopicInSidebar();
-  });
+  } else {
+    // Fallback: load via XHR (works when served via HTTP)
+    loadJSON('data/' + catId + '/' + topicMeta.file).then(function(data) {
+      state.topicData = data;
+      renderTopic();
+      updateActiveTopicInSidebar();
+    }).catch(function() {
+      // Final fallback: show placeholder
+      state.topicData = createPlaceholderTopic(topicMeta);
+      renderTopic();
+      updateActiveTopicInSidebar();
+    });
+  }
 }
 
 function createPlaceholderTopic(meta) {
