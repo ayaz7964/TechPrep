@@ -57,15 +57,38 @@ function escapeHtml(text) {
 }
 
 function highlightCode(code) {
-  return code
-    .replace(/\b(const|let|var|function|return|if|else|for|while|class|new|this|async|await|import|export|default|from|try|catch|throw|typeof|instanceof|in|of|yield|switch|case|break|continue|do)\b/g, '<span class="hl-keyword">$1</span>')
-    .replace(/\b(true|false|null|undefined|NaN|Infinity)\b/g, '<span class="hl-builtin">$1</span>')
-    .replace(/\b(\d+\.?\d*)\b/g, '<span class="hl-number">$1</span>')
-    .replace(/\/\/.*$/gm, '<span class="hl-comment">$&</span>')
-    .replace(/\/\*[\s\S]*?\*\//g, '<span class="hl-comment">$&</span>')
-    .replace(/'[^']*'/g, '<span class="hl-string">$&</span>')
-    .replace(/"[^"]*"/g, '<span class="hl-string">$&</span>')
-    .replace(/`[^`]*`/g, '<span class="hl-string">$&</span>');
+  var placeholders = [];
+  var uid = 0;
+
+  function save(replacement) {
+    return function(match) {
+      var key = '\x00HL' + (uid++) + '\x00';
+      placeholders.push({ key: key, value: replacement(match) });
+      return key;
+    };
+  }
+
+  // 1) Escape HTML first
+  code = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // 2) Extract strings & comments into placeholders (preserve escape sequences)
+  code = code.replace(/\/\/.*$/gm, save(function(m) { return '<span class="hl-comment">' + m + '</span>'; }));
+  code = code.replace(/\/\*[\s\S]*?\*\//g, save(function(m) { return '<span class="hl-comment">' + m + '</span>'; }));
+  code = code.replace(/`[^`]*`/g, save(function(m) { return '<span class="hl-string">' + m + '</span>'; }));
+  code = code.replace(/"[^"]*"/g, save(function(m) { return '<span class="hl-string">' + m + '</span>'; }));
+  code = code.replace(/'[^']*'/g, save(function(m) { return '<span class="hl-string">' + m + '</span>'; }));
+
+  // 3) Apply keywords & numbers on code (safe — no strings/comments remain)
+  code = code.replace(/\b(const|let|var|function|return|if|else|for|while|class|new|this|async|await|import|export|default|from|try|catch|throw|typeof|instanceof|in|of|yield|switch|case|break|continue|do|void|delete)\b/g, '<span class="hl-keyword">$1</span>');
+  code = code.replace(/\b(true|false|null|undefined|NaN|Infinity)\b/g, '<span class="hl-builtin">$1</span>');
+  code = code.replace(/\b(\d+\.?\d*)\b/g, '<span class="hl-number">$1</span>');
+
+  // 4) Restore placeholders
+  for (var i = 0; i < placeholders.length; i++) {
+    code = code.split(placeholders[i].key).join(placeholders[i].value);
+  }
+
+  return code;
 }
 
 /* =================== EMBEDDED DATA (works with file://) =================== */
@@ -105,7 +128,39 @@ var EMBEDDED = {
       { id: "call",               title: "call()",                    difficulty: "intermediate",estimatedMinutes: 15, file: "call.json" },
       { id: "apply",              title: "apply()",                   difficulty: "intermediate",estimatedMinutes: 15, file: "apply.json" },
       { id: "currying",           title: "Currying",                  difficulty: "advanced",    estimatedMinutes: 25, file: "currying.json" },
-      { id: "debouncing",         title: "Debouncing & Throttling",   difficulty: "intermediate",estimatedMinutes: 20, file: "debouncing.json" }
+      { id: "debouncing",         title: "Debouncing & Throttling",   difficulty: "intermediate",estimatedMinutes: 20, file: "debouncing.json" },
+      { id: "event-delegation",   title: "Event Delegation",          difficulty: "intermediate",estimatedMinutes: 20, file: "event-delegation.json" },
+      { id: "promise-chaining",   title: "Promise Chaining",          difficulty: "intermediate",estimatedMinutes: 20, file: "promise-chaining.json" },
+      { id: "promise-combinators",title: "Promise Combinators",       difficulty: "intermediate",estimatedMinutes: 25, file: "promise-combinators.json" },
+      { id: "async-await",        title: "Async/Await",               difficulty: "intermediate",estimatedMinutes: 25, file: "async-await.json" },
+      { id: "fetch-api",          title: "Fetch API",                 difficulty: "intermediate",estimatedMinutes: 20, file: "fetch-api.json" },
+      { id: "abort-controller",   title: "AbortController",           difficulty: "intermediate",estimatedMinutes: 15, file: "abort-controller.json" },
+      { id: "error-handling",     title: "Error Handling",            difficulty: "beginner",    estimatedMinutes: 20, file: "error-handling.json" },
+      { id: "web-storage",        title: "Web Storage",               difficulty: "beginner",    estimatedMinutes: 20, file: "web-storage.json" },
+      { id: "cookies",            title: "Cookies",                   difficulty: "beginner",    estimatedMinutes: 15, file: "cookies.json" },
+      { id: "json",               title: "JSON",                      difficulty: "beginner",    estimatedMinutes: 20, file: "json.json" },
+      { id: "shallow-deep-copy",  title: "Shallow & Deep Copy",       difficulty: "intermediate",estimatedMinutes: 20, file: "shallow-deep-copy.json" },
+      { id: "spread-operator",    title: "Spread Operator",            difficulty: "beginner",    estimatedMinutes: 20, file: "spread-operator.json" },
+      { id: "rest-operator",      title: "Rest Operator",              difficulty: "beginner",    estimatedMinutes: 20, file: "rest-operator.json" },
+      { id: "destructuring",      title: "Destructuring",              difficulty: "beginner",    estimatedMinutes: 20, file: "destructuring.json" },
+      { id: "modules",            title: "Modules (import/export)",    difficulty: "intermediate",estimatedMinutes: 25, file: "modules.json" },
+      { id: "var-let-const",      title: "var, let & const",           difficulty: "beginner",    estimatedMinutes: 15, file: "var-let-const.json" },
+      { id: "arrow-functions",    title: "Arrow Functions",            difficulty: "beginner",    estimatedMinutes: 20, file: "arrow-functions.json" },
+      { id: "higher-order-functions", title: "Higher Order Functions", difficulty: "intermediate",estimatedMinutes: 20, file: "higher-order-functions.json" },
+      { id: "map",                title: "Array.map()",                difficulty: "beginner",    estimatedMinutes: 15, file: "map.json" },
+      { id: "filter",             title: "Array.filter()",             difficulty: "beginner",    estimatedMinutes: 15, file: "filter.json" },
+      { id: "reduce",             title: "Array.reduce()",             difficulty: "intermediate",estimatedMinutes: 20, file: "reduce.json" },
+      { id: "foreach",            title: "Array.forEach()",            difficulty: "beginner",    estimatedMinutes: 15, file: "foreach.json" },
+      { id: "find",               title: "Array.find()",               difficulty: "beginner",    estimatedMinutes: 15, file: "find.json" },
+      { id: "some",               title: "Array.some()",               difficulty: "beginner",    estimatedMinutes: 15, file: "some.json" },
+      { id: "every",              title: "Array.every()",              difficulty: "beginner",    estimatedMinutes: 15, file: "every.json" },
+      { id: "generator-functions", title: "Generator Functions",       difficulty: "advanced",    estimatedMinutes: 30, file: "generator-functions.json" },
+      { id: "iterators",          title: "Iterators & Iterables",      difficulty: "intermediate",estimatedMinutes: 25, file: "iterators.json" },
+      { id: "weakmap",            title: "WeakMap",                    difficulty: "advanced",    estimatedMinutes: 25, file: "weakmap.json" },
+      { id: "weakset",            title: "WeakSet",                    difficulty: "advanced",    estimatedMinutes: 20, file: "weakset.json" },
+      { id: "symbol",             title: "Symbol",                     difficulty: "advanced",    estimatedMinutes: 25, file: "symbol.json" },
+      { id: "garbage-collection", title: "Garbage Collection",         difficulty: "advanced",    estimatedMinutes: 25, file: "garbage-collection.json" },
+      { id: "es6-features",       title: "ES6+ Features Overview",    difficulty: "beginner",    estimatedMinutes: 30, file: "es6-features.json" }
     ]
   }
 };
