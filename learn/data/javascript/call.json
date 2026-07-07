@@ -1,0 +1,13 @@
+{
+  "title": "call()",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 15,
+  "tldr": ["Content for <strong>call()</strong> is being prepared."],
+  "laymanDefinition": "Detailed content for this topic is coming soon.",
+  "deepDive": [{"heading": "Coming Soon","text": "This topic is being developed."}],
+  "interviewAnswer": "Content in progress.",
+  "interviewQuestions": [{"question": "When will this content be available?","answer": "This topic is being developed."}],
+  "diagramSvg": "<svg viewBox=\"0 0 400 200\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"180\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"200\" y=\"100\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"14\">Diagram coming soon for call()</text></svg>",
+  "codeExamples": [{"title": "Coming Soon","useCase": "In Progress","code": "// Code examples for call() being prepared","description": "Check back."}],
+  "mcqQuestions": [{"question": "Sample for call()?","options": ["Option A","Option B","Option C","Option D"],"answer": 0,"explanation": "In development."}]
+}

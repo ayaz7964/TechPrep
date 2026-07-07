@@ -1,0 +1,39 @@
+{
+  "title": "Scope",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tldr": [
+    "Content for <strong>Scope</strong> is being prepared."
+  ],
+  "laymanDefinition": "Detailed content for this topic is coming soon.",
+  "deepDive": [
+    {
+      "heading": "Coming Soon",
+      "text": "This topic is being developed. Check back for a comprehensive deep dive, interview questions, code examples, and assessment."
+    }
+  ],
+  "interviewAnswer": "Content in progress.",
+  "interviewQuestions": [
+    {
+      "question": "When will this content be available?",
+      "answer": "This topic is being developed as part of the curriculum. Please check back soon."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 400 200\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"380\" height=\"180\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"200\" y=\"100\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"14\">Diagram coming soon for Scope</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Coming Soon",
+      "useCase": "In Progress",
+      "code": "// Code examples for Scope are being prepared",
+      "description": "Check back for real-world code examples."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "Sample question for Scope?",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "answer": 0,
+      "explanation": "Content being developed."
+    }
+  ]
+}

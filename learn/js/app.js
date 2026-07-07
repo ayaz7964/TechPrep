@@ -68,72 +68,173 @@ function highlightCode(code) {
     .replace(/`[^`]*`/g, '<span class="hl-string">$&</span>');
 }
 
-/* =================== FETCH DATA =================== */
-async function loadJSON(path) {
-  const res = await fetch(path);
-  if (!res.ok) throw new Error(`Failed to load ${path}`);
-  return res.json();
-}
-
-async function init() {
-  try {
-    state.categories = await loadJSON('data/categories.json');
-    renderSidebar();
-    updateProgressRing();
-    updateStats();
-
-    // Load first category by default
-    if (state.categories.length > 0) {
-      await loadCategoryTopics(state.categories[0].id);
-    }
-  } catch (err) {
-    console.error('Init error:', err);
-    $('#category-nav').innerHTML = `<div style="padding:20px;color:var(--danger)">Error loading data: ${err.message}</div>`;
+/* =================== EMBEDDED DATA (works with file://) =================== */
+var EMBEDDED = {
+  categories: [
+    { id: "javascript",  name: "JavaScript",       icon: "\u26A1", color: "#f7df1e", description: "Core JavaScript concepts, ES6+, and advanced patterns" },
+    { id: "react",       name: "React.js",          icon: "\u269B\uFE0F", color: "#61dafb", description: "React fundamentals, hooks, state management, and ecosystem" },
+    { id: "nodejs",      name: "Node.js & Express",  icon: "\uD83D\uDFE2", color: "#339933", description: "Server-side JS, Express APIs, middleware, and backend patterns" },
+    { id: "mern",        name: "MERN Stack",         icon: "\uD83E\uDDE9", color: "#4caf50", description: "Full-stack development with MongoDB, Express, React, Node.js" },
+    { id: "nextjs",      name: "Next.js",            icon: "\u25B2", color: "#000000", description: "SSR, SSG, App Router, server components, and Next.js patterns" },
+    { id: "mongodb",     name: "MongoDB",            icon: "\uD83C\uDF43", color: "#47A248", description: "NoSQL databases, aggregation, indexing, and data modeling" },
+    { id: "sql",         name: "SQL",                icon: "\uD83D\uDCC4\uFE0F", color: "#336791", description: "Relational databases, queries, normalization, and optimization" },
+    { id: "auth",        name: "Authentication & Security", icon: "\uD83D\uDD12", color: "#ff4444", description: "JWT, OAuth, sessions, encryption, and web security" },
+    { id: "system-design", name: "System Design",    icon: "\uD83C\uDFD7\uFE0F", color: "#6c5ce7", description: "Architecture patterns, scalability, microservices, and design" },
+    { id: "devops",      name: "DevOps & Cloud",     icon: "\u2601\uFE0F", color: "#0078D4", description: "Docker, AWS, CI/CD pipelines, deployment, and monitoring" },
+    { id: "git",         name: "Git & CI/CD",        icon: "\uD83D\uDD00", color: "#f05032", description: "Version control, branching strategies, and automation" },
+    { id: "dsa",         name: "DSA",                icon: "\uD83D\uDCCA", color: "#ff6b35", description: "Data structures, algorithms, problem-solving patterns" },
+    { id: "oop",         name: "OOP & CS Fundamentals", icon: "\uD83D\uDCBB", color: "#9b59b6", description: "OOP principles, design patterns, and CS core concepts" }
+  ],
+  topics: {
+    javascript: [
+      { id: "execution-context",  title: "Execution Context",         difficulty: "beginner",    estimatedMinutes: 20, file: "execution-context.json" },
+      { id: "call-stack",         title: "Call Stack",                difficulty: "beginner",    estimatedMinutes: 15, file: "call-stack.json" },
+      { id: "memory-heap",        title: "Memory Heap",               difficulty: "beginner",    estimatedMinutes: 15, file: "memory-heap.json" },
+      { id: "event-loop",         title: "Event Loop",                difficulty: "advanced",    estimatedMinutes: 35, file: "event-loop.json" },
+      { id: "micro-task-queue",   title: "Micro Task Queue",          difficulty: "intermediate",estimatedMinutes: 20, file: "micro-task-queue.json" },
+      { id: "macro-task-queue",   title: "Macro Task Queue",          difficulty: "intermediate",estimatedMinutes: 20, file: "macro-task-queue.json" },
+      { id: "hoisting",           title: "Hoisting & Scope",          difficulty: "beginner",    estimatedMinutes: 20, file: "hoisting.json" },
+      { id: "temporal-dead-zone", title: "Temporal Dead Zone",        difficulty: "intermediate",estimatedMinutes: 15, file: "temporal-dead-zone.json" },
+      { id: "scope",              title: "Scope",                     difficulty: "beginner",    estimatedMinutes: 15, file: "scope.json" },
+      { id: "lexical-scope",      title: "Lexical Scope",             difficulty: "intermediate",estimatedMinutes: 15, file: "lexical-scope.json" },
+      { id: "closures",           title: "Closures",                  difficulty: "intermediate",estimatedMinutes: 25, file: "closures.json" },
+      { id: "prototype",          title: "Prototype",                 difficulty: "advanced",    estimatedMinutes: 25, file: "prototype.json" },
+      { id: "prototype-chain",    title: "Prototype Chain",           difficulty: "advanced",    estimatedMinutes: 25, file: "prototype-chain.json" },
+      { id: "this-keyword",       title: "'this' Keyword",            difficulty: "intermediate",estimatedMinutes: 25, file: "this-keyword.json" },
+      { id: "bind",               title: "bind()",                    difficulty: "intermediate",estimatedMinutes: 20, file: "bind.json" },
+      { id: "call",               title: "call()",                    difficulty: "intermediate",estimatedMinutes: 15, file: "call.json" },
+      { id: "apply",              title: "apply()",                   difficulty: "intermediate",estimatedMinutes: 15, file: "apply.json" },
+      { id: "currying",           title: "Currying",                  difficulty: "advanced",    estimatedMinutes: 25, file: "currying.json" },
+      { id: "debouncing",         title: "Debouncing & Throttling",   difficulty: "intermediate",estimatedMinutes: 20, file: "debouncing.json" }
+    ]
   }
+};
+
+// Pre-populate completed topics
+(function preloadCompleted() {
+  var preset = {
+    "javascript": {
+      "execution-context": true, "call-stack": true, "memory-heap": true,
+      "event-loop": true, "micro-task-queue": true, "macro-task-queue": true,
+      "hoisting": true, "scope": true, "lexical-scope": true,
+      "closures": true, "prototype": true, "prototype-chain": true,
+      "this-keyword": true
+    }
+  };
+  var existing = JSON.parse(localStorage.getItem('tp_completed') || '{}');
+  var changed = false;
+  for (var cat in preset) {
+    if (!existing[cat]) { existing[cat] = {}; changed = true; }
+    for (var topic in preset[cat]) {
+      if (!existing[cat][topic]) { existing[cat][topic] = true; changed = true; }
+    }
+  }
+  if (changed) localStorage.setItem('tp_completed', JSON.stringify(existing));
+  state.completed = existing;
+})();
+
+/* =================== DATA LOADING =================== */
+function loadJSON(path) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
+    xhr.overrideMimeType('application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 0 || xhr.status === 200 || xhr.status === 304) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(new Error('Failed to load ' + path + ' (status: ' + xhr.status + ')'));
+        }
+      }
+    };
+    xhr.onerror = function() { reject(new Error('Network error loading ' + path)); };
+    try { xhr.send(null); } catch(e) { reject(e); }
+  });
 }
 
-async function loadCategoryTopics(catId) {
-  const cat = state.categories.find(c => c.id === catId);
-  if (!cat) return;
-  if (cat._topics) return; // already loaded
+function init() {
+  // Use embedded data for categories and topic lists (always works)
+  state.categories = EMBEDDED.categories.map(function(c) {
+    return { id: c.id, name: c.name, icon: c.icon, color: c.color, description: c.description, _topics: null };
+  });
 
-  try {
-    const topics = await loadJSON(`data/${cat.id}/topics.json`);
-    cat._topics = topics;
-    renderSidebar();
-    updateStats();
-    updateProgressRing();
-    // open this category
-    const catEl = $(`[data-cat-id="${cat.id}"]`);
+  renderSidebar();
+  updateProgressRing();
+  updateStats();
+
+  // Load topic lists from embedded data
+  for (var i = 0; i < state.categories.length; i++) {
+    var cat = state.categories[i];
+    cat._topics = (EMBEDDED.topics[cat.id] || []).map(function(t) { return { id: t.id, title: t.title, difficulty: t.difficulty, estimatedMinutes: t.estimatedMinutes, file: t.file }; });
+  }
+  renderSidebar();
+  updateStats();
+  updateProgressRing();
+
+  // Open first category and auto-select first topic
+  if (state.categories.length > 0) {
+    var firstCat = state.categories[0];
+    var catEl = document.querySelector('[data-cat-id="' + firstCat.id + '"]');
     if (catEl) {
       catEl.classList.add('open');
-      const topicsEl = catEl.nextElementSibling;
+      var topicsEl = catEl.nextElementSibling;
       if (topicsEl) topicsEl.classList.add('open');
     }
-  } catch (err) {
-    console.warn(`Could not load topics for ${catId}:`, err);
-    cat._topics = [];
+    if (firstCat._topics && firstCat._topics.length > 0) {
+      loadTopic(firstCat.id, firstCat._topics[0].id);
+    }
   }
 }
 
-async function loadTopic(catId, topicId) {
-  const cat = state.categories.find(c => c.id === catId);
+function loadCategoryTopics(catId) {
+  // Already loaded from embedded data
+  var cat = state.categories.find(function(c) { return c.id === catId; });
+  if (!cat) return;
+  var catEl = document.querySelector('[data-cat-id="' + cat.id + '"]');
+  if (catEl) {
+    catEl.classList.add('open');
+    var topicsEl = catEl.nextElementSibling;
+    if (topicsEl) topicsEl.classList.add('open');
+  }
+}
+
+function loadTopic(catId, topicId) {
+  var cat = state.categories.find(function(c) { return c.id === catId; });
   if (!cat || !cat._topics) return;
-  const topicMeta = cat._topics.find(t => t.id === topicId);
+  var topicMeta = cat._topics.find(function(t) { return t.id === topicId; });
   if (!topicMeta) return;
 
   state.currentCategory = catId;
   state.currentTopic = topicId;
 
-  try {
-    state.topicData = await loadJSON(`data/${catId}/${topicMeta.file}`);
+  loadJSON('data/' + catId + '/' + topicMeta.file).then(function(data) {
+    state.topicData = data;
     renderTopic();
     updateActiveTopicInSidebar();
-  } catch (err) {
-    console.error('Failed to load topic:', err);
-    $('#topic-view').style.display = 'none';
-    $('#welcome-screen').style.display = 'block';
-  }
+  }).catch(function() {
+    // Fallback: show placeholder for topics without content yet
+    state.topicData = createPlaceholderTopic(topicMeta);
+    renderTopic();
+    updateActiveTopicInSidebar();
+  });
+}
+
+function createPlaceholderTopic(meta) {
+  var title = meta.title;
+  return {
+    title: title,
+    difficulty: meta.difficulty || 'intermediate',
+    estimatedMinutes: meta.estimatedMinutes || 20,
+    tldr: ['Content for <strong>' + title + '</strong> is being prepared.'],
+    laymanDefinition: 'Detailed content for this topic is coming soon.',
+    deepDive: [{ heading: 'Coming Soon', text: 'This topic is being developed. Check back for a comprehensive deep dive, interview questions, code examples, and assessment.' }],
+    interviewAnswer: 'Content in progress.',
+    interviewQuestions: [{ question: 'When will this content be available?', answer: 'This topic is being developed as part of the curriculum. Please check back soon.' }],
+    diagramSvg: '<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="380" height="180" rx="10" fill="var(--bg-card)" stroke="var(--border)" stroke-width="1"/><text x="200" y="100" text-anchor="middle" fill="#9aa0b0" font-size="14">Diagram coming soon for ' + title + '</text></svg>',
+    codeExamples: [{ title: 'Coming Soon', useCase: 'In Progress', code: '// Code examples for ' + title + ' are being prepared', description: 'Check back for real-world code examples.' }],
+    mcqQuestions: [{ question: 'Sample question for ' + title + '?', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 0, explanation: 'Content being developed.' }]
+  };
 }
 
 /* =================== SIDEBAR =================== */

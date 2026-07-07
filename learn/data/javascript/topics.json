@@ -1,72 +1,21 @@
 [
-  {
-    "id": "closures",
-    "title": "Closures",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 25,
-    "file": "closures.json"
-  },
-  {
-    "id": "promises",
-    "title": "Promises & Async/Await",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 30,
-    "file": "promises.json"
-  },
-  {
-    "id": "hoisting",
-    "title": "Hoisting & Scope",
-    "difficulty": "beginner",
-    "estimatedMinutes": 20,
-    "file": "hoisting.json"
-  },
-  {
-    "id": "event-loop",
-    "title": "Event Loop & Concurrency",
-    "difficulty": "advanced",
-    "estimatedMinutes": 35,
-    "file": "event-loop.json"
-  },
-  {
-    "id": "prototypes",
-    "title": "Prototypes & Inheritance",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 25,
-    "file": "prototypes.json"
-  },
-  {
-    "id": "this-keyword",
-    "title": "'this' Keyword",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 25,
-    "file": "this-keyword.json"
-  },
-  {
-    "id": "array-methods",
-    "title": "Array Methods & Iterators",
-    "difficulty": "beginner",
-    "estimatedMinutes": 20,
-    "file": "array-methods.json"
-  },
-  {
-    "id": "es6-features",
-    "title": "ES6+ Features",
-    "difficulty": "beginner",
-    "estimatedMinutes": 20,
-    "file": "es6-features.json"
-  },
-  {
-    "id": "currying",
-    "title": "Currying & Partial Application",
-    "difficulty": "advanced",
-    "estimatedMinutes": 30,
-    "file": "currying.json"
-  },
-  {
-    "id": "memoization",
-    "title": "Memoization & Caching",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 25,
-    "file": "memoization.json"
-  }
+  { "id": "execution-context",  "title": "Execution Context",        "difficulty": "beginner",    "estimatedMinutes": 20, "file": "execution-context.json" },
+  { "id": "call-stack",         "title": "Call Stack",               "difficulty": "beginner",    "estimatedMinutes": 15, "file": "call-stack.json" },
+  { "id": "memory-heap",        "title": "Memory Heap",              "difficulty": "beginner",    "estimatedMinutes": 15, "file": "memory-heap.json" },
+  { "id": "event-loop",         "title": "Event Loop",               "difficulty": "advanced",    "estimatedMinutes": 35, "file": "event-loop.json" },
+  { "id": "micro-task-queue",   "title": "Micro Task Queue",         "difficulty": "intermediate","estimatedMinutes": 20, "file": "micro-task-queue.json" },
+  { "id": "macro-task-queue",   "title": "Macro Task Queue",         "difficulty": "intermediate","estimatedMinutes": 20, "file": "macro-task-queue.json" },
+  { "id": "hoisting",           "title": "Hoisting & Scope",         "difficulty": "beginner",    "estimatedMinutes": 20, "file": "hoisting.json" },
+  { "id": "temporal-dead-zone", "title": "Temporal Dead Zone",       "difficulty": "intermediate","estimatedMinutes": 15, "file": "temporal-dead-zone.json" },
+  { "id": "scope",              "title": "Scope",                    "difficulty": "beginner",    "estimatedMinutes": 15, "file": "scope.json" },
+  { "id": "lexical-scope",      "title": "Lexical Scope",            "difficulty": "intermediate","estimatedMinutes": 15, "file": "lexical-scope.json" },
+  { "id": "closures",           "title": "Closures",                 "difficulty": "intermediate","estimatedMinutes": 25, "file": "closures.json" },
+  { "id": "prototype",          "title": "Prototype",                "difficulty": "advanced",    "estimatedMinutes": 25, "file": "prototype.json" },
+  { "id": "prototype-chain",    "title": "Prototype Chain",          "difficulty": "advanced",    "estimatedMinutes": 25, "file": "prototype-chain.json" },
+  { "id": "this-keyword",       "title": "'this' Keyword",           "difficulty": "intermediate","estimatedMinutes": 25, "file": "this-keyword.json" },
+  { "id": "bind",               "title": "bind()",                   "difficulty": "intermediate","estimatedMinutes": 20, "file": "bind.json" },
+  { "id": "call",               "title": "call()",                   "difficulty": "intermediate","estimatedMinutes": 15, "file": "call.json" },
+  { "id": "apply",              "title": "apply()",                  "difficulty": "intermediate","estimatedMinutes": 15, "file": "apply.json" },
+  { "id": "currying",           "title": "Currying",                 "difficulty": "advanced",    "estimatedMinutes": 25, "file": "currying.json" },
+  { "id": "debouncing",         "title": "Debouncing & Throttling",  "difficulty": "intermediate","estimatedMinutes": 20, "file": "debouncing.json" }
 ]
