@@ -278,6 +278,28 @@ var EMBEDDED = {
       { id: "symbol",             title: "Symbol",                     difficulty: "advanced",    estimatedMinutes: 25, file: "symbol.json" },
       { id: "garbage-collection", title: "Garbage Collection",         difficulty: "advanced",    estimatedMinutes: 25, file: "garbage-collection.json" },
       { id: "es6-features",       title: "ES6+ Features Overview",    difficulty: "beginner",    estimatedMinutes: 30, file: "es6-features.json" }
+    ],
+    react: [
+      { id: "react-architecture",          title: "React SPA Architecture",           difficulty: "intermediate", estimatedMinutes: 25, file: "react-architecture.json" },
+      { id: "react-virtual-dom",           title: "React Virtual DOM",                difficulty: "intermediate", estimatedMinutes: 20, file: "react-virtual-dom.json" },
+      { id: "react-fiber",                 title: "React Fiber",                      difficulty: "advanced",     estimatedMinutes: 30, file: "react-fiber.json" },
+      { id: "react-reconciliation",        title: "React Reconciliation",             difficulty: "advanced",     estimatedMinutes: 25, file: "react-reconciliation.json" },
+      { id: "react-jsx",                   title: "React JSX",                        difficulty: "beginner",     estimatedMinutes: 15, file: "react-jsx.json" },
+      { id: "react-functional-components", title: "React Functional Components",       difficulty: "beginner",     estimatedMinutes: 15, file: "react-functional-components.json" },
+      { id: "react-component-lifecycle",   title: "React Component Lifecycle",        difficulty: "intermediate", estimatedMinutes: 20, file: "react-component-lifecycle.json" },
+      { id: "react-props",                 title: "React Props",                      difficulty: "beginner",     estimatedMinutes: 15, file: "react-props.json" },
+      { id: "react-state",                 title: "React State",                      difficulty: "beginner",     estimatedMinutes: 20, file: "react-state.json" },
+      { id: "react-controlled-components", title: "React Controlled Components",       difficulty: "intermediate", estimatedMinutes: 15, file: "react-controlled-components.json" },
+      { id: "react-uncontrolled-components",title: "React Uncontrolled Components",    difficulty: "intermediate", estimatedMinutes: 15, file: "react-uncontrolled-components.json" },
+      { id: "react-lifting-state-up",      title: "React Lifting State Up",           difficulty: "intermediate", estimatedMinutes: 20, file: "react-lifting-state-up.json" },
+      { id: "react-prop-drilling",         title: "React Prop Drilling",              difficulty: "intermediate", estimatedMinutes: 15, file: "react-prop-drilling.json" },
+      { id: "react-context-api",           title: "React Context API",                difficulty: "intermediate", estimatedMinutes: 25, file: "react-context-api.json" },
+      { id: "react-redux",                 title: "React Redux",                      difficulty: "advanced",     estimatedMinutes: 30, file: "react-redux.json" },
+      { id: "react-redux-toolkit",         title: "React Redux Toolkit",              difficulty: "advanced",     estimatedMinutes: 30, file: "react-redux-toolkit.json" },
+      { id: "react-react-query",           title: "React React Query",                difficulty: "intermediate", estimatedMinutes: 25, file: "react-react-query.json" },
+      { id: "react-custom-hooks",          title: "React Custom Hooks",               difficulty: "intermediate", estimatedMinutes: 25, file: "react-custom-hooks.json" },
+      { id: "react-usestate",              title: "React useState",                   difficulty: "beginner",     estimatedMinutes: 20, file: "react-usestate.json" },
+      { id: "react-useeffect",             title: "React useEffect",                  difficulty: "intermediate", estimatedMinutes: 20, file: "react-useeffect.json" }
     ]
   }
 };
