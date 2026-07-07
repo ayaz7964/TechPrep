@@ -1,0 +1,215 @@
+{
+  "title": "Promises & Async/Await",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 30,
+
+  "tldr": [
+    "A <strong>Promise</strong> is an object representing the eventual completion (or failure) of an asynchronous operation.",
+    "A Promise has 3 states: <strong>pending</strong>, <strong>fulfilled</strong> (resolved), or <strong>rejected</strong>.",
+    "Use <code>.then()</code> for fulfilled, <code>.catch()</code> for rejected, and <code>.finally()</code> for cleanup.",
+    "<strong>Async/Await</strong> is syntactic sugar over Promises that makes asynchronous code read like synchronous code.",
+    "An <code>async</code> function always returns a Promise. <code>await</code> pauses execution until the Promise settles."
+  ],
+
+  "laymanDefinition": "Imagine ordering a pizza. When you place the order, you get a receipt (a Promise). You don't have the pizza yet -- it's pending. When the pizza arrives, it's fulfilled. If the restaurant burns down, the order is rejected. While waiting, you can watch TV instead of standing at the counter. When the pizza arrives (the Promise resolves), you act on it. Async/await is like having a friend who says 'I'll wait at the counter for you, call me when it's ready' -- the code pauses at 'await' until the pizza is ready, but without blocking the kitchen (the main thread) from making other pizzas.",
+
+  "deepDive": [
+    {
+      "heading": "Why Promises Exist: Callback Hell",
+      "text": "Before Promises, asynchronous code used callbacks. Nested callbacks created the infamous 'callback hell' or 'pyramid of doom' -- deeply nested, hard-to-read, error-prone code. Promises introduced a flat, chainable API that separates success and error handling."
+    },
+    {
+      "heading": "Promise Lifecycle",
+      "text": "A Promise starts in the <strong>pending</strong> state. Once the async operation completes, it transitions to either <strong>fulfilled</strong> (with a value) or <strong>rejected</strong> (with a reason/error). This transition happens exactly once -- a Promise is <strong>settled</strong> and cannot change state again."
+    },
+    {
+      "heading": "Microtask Queue & Event Loop",
+      "text": "Promise callbacks (.then, .catch, .finally) are executed as <strong>microtasks</strong>, which have higher priority than regular (macrotask) callbacks like setTimeout. Microtasks are processed after each macrotask and before the next render. This means Promise callbacks execute before setTimeout callbacks, even if the Promise resolves synchronously."
+    },
+    {
+      "heading": "Async/Await Under the Hood",
+      "text": "An <code>async</code> function is compiled by the JavaScript engine into a state machine -- similar to a generator. Each <code>await</code> creates a 'suspension point'. The function is paused, the microtask is scheduled, and when the awaited Promise settles, execution resumes from where it left off. This is why async/await is syntax sugar over Promises + generators."
+    },
+    {
+      "heading": "Error Handling in Async/Await",
+      "text": "Use <code>try/catch</code> blocks to handle errors in async functions. If a Promise is rejected inside an async function without a try/catch, the async function itself returns a rejected Promise. Unhandled rejections bubble up to the global 'unhandledrejection' event."
+    },
+    {
+      "heading": "Promise Combinators",
+      "list": [
+        "<strong>Promise.all()</strong> -- Resolves when all Promises resolve. Rejects immediately if any Promise rejects (fail-fast).",
+        "<strong>Promise.allSettled()</strong> -- Resolves when all Promises settle (resolve or reject). Returns an array of {status, value/reason}.",
+        "<strong>Promise.race()</strong> -- Settles with the first Promise that settles (resolve or reject).",
+        "<strong>Promise.any()</strong> -- Resolves with the first fulfilled Promise. Rejects with AggregateError if all reject."
+      ]
+    }
+  ],
+
+  "interviewAnswer": "A Promise is an object that represents the eventual result of an asynchronous operation. It has three states: pending, fulfilled, and rejected. Promises solve the problem of callback hell by providing a composable, chainable API with centralized error handling. Async/await is syntactic sugar built on top of Promises -- an async function always returns a Promise, and the await keyword pauses the function's execution until the awaited Promise settles, without blocking the main thread. Promise callbacks execute on the microtask queue, which gives them priority over regular asynchronous callbacks. Understanding the Promise lifecycle, the microtask queue, and Promise combinators like Promise.all and Promise.allSettled is essential for writing robust asynchronous JavaScript code.",
+
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between microtasks and macrotasks? How does this affect Promise execution?",
+      "answer": "Microtasks (Promise callbacks, queueMicrotask, MutationObserver) execute after each macrotask and before the next UI render. Macrotasks (setTimeout, setInterval, I/O tasks) execute in the next iteration of the event loop. This means Promise .then() callbacks always execute before any setTimeout callbacks, even if the setTimeout delay is 0ms. <strong>Example:</strong><br/><br/><pre><code>console.log('1');\nsetTimeout(() => console.log('2'), 0);\nPromise.resolve().then(() => console.log('3'));\nconsole.log('4');\n// Output: 1, 4, 3, 2</code></pre>"
+    },
+    {
+      "question": "How does async/await work under the hood?",
+      "answer": "The JavaScript engine compiles an async function into a state machine, similar to a generator function coupled with a runner. Each 'await' creates a suspension point. The function is split into segments -- code before and after each await. When execution hits an await, it creates a .then() callback that will resume the function when the awaited Promise settles. The function's state is saved and restored between these suspension points. This is why async/await is described as 'syntactic sugar over Promises and generators'."
+    },
+    {
+      "question": "What happens if you don't await a Promise inside an async function?",
+      "answer": "The async function will continue executing immediately without waiting for the Promise to settle. The Promise will still execute (it's already started), but you lose the ability to catch its rejection or use its resolved value. The async function will return a Promise that resolves with whatever comes after the un-awaited Promise. <strong>Example:</strong><br/><br/><pre><code>async function example() {\n  Promise.reject('error'); // Unhandled rejection!\n  return 'done';\n}\nexample().then(console.log); // logs 'done' immediately</code></pre>"
+    },
+    {
+      "question": "Explain Promise.all() vs Promise.allSettled() with a real-world scenario.",
+      "answer": "<strong>Promise.all()</strong> fails fast -- it rejects as soon as any input Promise rejects. Use it when you need all operations to succeed (e.g., loading critical data for a page). <strong>Promise.allSettled()</strong> waits for all Promises to settle, regardless of outcome. Use it when you want to know the result of every operation even if some fail (e.g., batch updating user profiles where each update is independent). <strong>Example:</strong><br/><br/><pre><code>const promises = [fetch('/users'), fetch('/posts'), fetch('/invalid')];\n// Promise.all -- rejects immediately if any fails\n// Promise.allSettled -- returns status for all\nconst results = await Promise.allSettled(promises);\nresults.forEach(r => console.log(r.status, r.value || r.reason));</code></pre>"
+    },
+    {
+      "question": "How do you convert a callback-based API to a Promise-based one?",
+      "answer": "Wrap the callback call inside a new Promise constructor. In the executor function, call the async API and resolve/reject the Promise based on the callback's results. <strong>Example:</strong><br/><br/><pre><code>function readFilePromise(path) {\n  return new Promise((resolve, reject) => {\n    fs.readFile(path, 'utf8', (err, data) => {\n      if (err) reject(err);\n      else resolve(data);\n    });\n  });\n}\n// Usage:\nconst content = await readFilePromise('/path/to/file.txt');</code></pre>"
+    },
+    {
+      "question": "What is the 'Promise constructor antipattern' and how do you avoid it?",
+      "answer": "The antipattern is wrapping a Promise-returning function inside a new Promise when you already have a Promise. <strong>Bad (antipattern):</strong><br/><br/><pre><code>return new Promise((resolve, reject) => {\n  fetch(url).then(resolve).catch(reject);\n});</code></pre><br/><strong>Good:</strong><br/><br/><pre><code>return fetch(url);</code></pre><br/>The antipattern adds unnecessary nesting, loses error handling, and can cause unhandled rejections or memory leaks."
+    },
+    {
+      "question": "How does error propagation work in Promise chains vs async/await?",
+      "answer": "In Promise chains, errors propagate through the chain until they hit a .catch(). If no .catch() exists, the rejection becomes an unhandled rejection. In async/await, errors propagate via try/catch. If no try/catch is present, the async function returns a rejected Promise. Both mechanisms are equivalent -- async/await is just more readable. <strong>Promise chain:</strong><br/><br/><pre><code>fetch(url)\n  .then(res => res.json())\n  .then(data => process(data))\n  .catch(err => console.error(err));</code></pre><br/><strong>Async/await:</strong><br/><br/><pre><code>try {\n  const res = await fetch(url);\n  const data = await res.json();\n  await process(data);\n} catch (err) {\n  console.error(err);\n}</code></pre>"
+    },
+    {
+      "question": "What is Promise.race() and when would you use it?",
+      "answer": "Promise.race() returns a Promise that settles (fulfills or rejects) as soon as the first input Promise settles. Use it for timeouts: <br/><br/><pre><code>function withTimeout(promise, ms) {\n  const timeout = new Promise((_, reject) =>\n    setTimeout(() => reject(new Error('Timeout')), ms)\n  );\n  return Promise.race([promise, timeout]);\n}\n\ntry {\n  const data = await withTimeout(fetch(url), 5000);\n} catch (err) {\n  console.log('Request timed out or failed');\n}</code></pre>"
+    },
+    {
+      "question": "Explain the async/await error handling pattern with try/catch vs .catch().",
+      "answer": "In async/await, you use try/catch blocks. However, if you need to handle errors from a specific await statement differently, you can combine both approaches: <br/><br/><pre><code>async function handleMultiple() {\n  const result1 = await task1().catch(err => ({ error: err }));\n  if (result1.error) { /* handle task1 error */ }\n\n  try {\n    const result2 = await task2();\n    // process result2\n  } catch (err) {\n    // handle task2 error\n  }\n}</code></pre><br/>The choice depends on granularity needed -- per-call error handling vs. batch error handling."
+    },
+    {
+      "question": "What is 'Promise.resolve()' and when would you use it?",
+      "answer": "Promise.resolve(value) returns a Promise that is resolved with the given value. If the value is already a Promise, it returns that Promise. If it's a thenable (an object with .then), it unwraps it. If it's a plain value, it wraps it in a fulfilled Promise. <strong>Use cases:</strong> (1) Converting a value to a Promise for uniform async handling. (2) Starting a Promise chain synchronously. (3) In async function polyfills. <strong>Example:</strong><br/><br/><pre><code>// Normalize: function might return value or Promise\nfunction getUser(id) {\n  if (cache[id]) return Promise.resolve(cache[id]);\n  return fetchUserFromAPI(id);\n}</code></pre>"
+    }
+  ],
+
+  "diagramSvg": "<svg viewBox=\"0 0 700 520\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:700px;\"><defs><marker id=\"arrowP\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0, 10 3.5, 0 7\" fill=\"#6c9fff\"/></marker><marker id=\"arrowG\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0, 10 3.5, 0 7\" fill=\"#34d399\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"680\" height=\"500\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><!-- Title --><text x=\"350\" y=\"40\" text-anchor=\"middle\" fill=\"#e8eaed\" font-size=\"15\" font-weight=\"bold\">Promise Lifecycle & Event Loop Integration</text><!-- Promise States Flow --><rect x=\"40\" y=\"60\" width=\"620\" height=\"180\" rx=\"8\" fill=\"#1a1d28\" stroke=\"var(--border)\"/><text x=\"350\" y=\"82\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Promise States</text><!-- Pending --><rect x=\"80\" y=\"100\" width=\"120\" height=\"48\" rx=\"6\" fill=\"#2a2f45\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"140\" y=\"120\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\"> PENDING</text><text x=\"140\" y=\"138\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">Initial state</text><!-- Fulfilled --><rect x=\"290\" y=\"100\" width=\"120\" height=\"48\" rx=\"6\" fill=\"#2a2f45\" stroke=\"#34d399\" stroke-width=\"2\"/><text x=\"350\" y=\"120\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\"> FULFILLED</text><text x=\"350\" y=\"138\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">.then() callback</text><!-- Rejected --><rect x=\"500\" y=\"100\" width=\"120\" height=\"48\" rx=\"6\" fill=\"#2a2f45\" stroke=\"#f87171\" stroke-width=\"2\"/><text x=\"560\" y=\"120\" text-anchor=\"middle\" fill=\"#f87171\" font-size=\"12\" font-weight=\"bold\"> REJECTED</text><text x=\"560\" y=\"138\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">.catch() callback</text><!-- Arrows between states --><line x1=\"200\" y1=\"124\" x2=\"280\" y2=\"124\" stroke=\"#34d399\" stroke-width=\"2\" marker-end=\"url(#arrowG)\"/><text x=\"240\" y=\"116\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"10\">resolve(val)</text><line x1=\"200\" y1=\"140\" x2=\"280\" y2=\"140\" stroke=\"#f87171\" stroke-width=\"2\" marker-end=\"url(#arrowP)\"/><text x=\"240\" y=\"152\" text-anchor=\"middle\" fill=\"#f87171\" font-size=\"10\">reject(err)</text><!-- Once settled --><text x=\"350\" y=\"178\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"10\">A Promise can only settle ONCE. State is immutable after settlement.</text><!-- Event Loop section --><rect x=\"40\" y=\"260\" width=\"620\" height=\"220\" rx=\"8\" fill=\"#1a1d28\" stroke=\"var(--border)\"/><text x=\"350\" y=\"282\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Event Loop Execution Order</text><!-- Call Stack --><rect x=\"60\" y=\"300\" width=\"150\" height=\"160\" rx=\"6\" fill=\"#2a2f45\" stroke=\"#6c9fff\" stroke-width=\"1.5\"/><text x=\"135\" y=\"322\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"12\" font-weight=\"bold\">Call Stack</text><text x=\"75\" y=\"345\" fill=\"#e8eaed\" font-size=\"10\">sync code</text><text x=\"75\" y=\"365\" fill=\"#e8eaed\" font-size=\"10\">-> stack frames</text><text x=\"75\" y=\"385\" fill=\"#e8eaed\" font-size=\"10\">execute & pop</text><rect x=\"75\" y=\"400\" width=\"120\" height=\"30\" rx=\"4\" fill=\"rgba(108,159,255,0.1)\" stroke=\"#6c9fff\" stroke-width=\"1\"/><text x=\"135\" y=\"419\" text-anchor=\"middle\" fill=\"#6c9fff\" font-size=\"10\">1. Global code</text><!-- Microtask Queue --><rect x=\"275\" y=\"300\" width=\"150\" height=\"160\" rx=\"6\" fill=\"#2a2f45\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"350\" y=\"322\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\">Microtask Queue</text><text x=\"290\" y=\"345\" fill=\"#e8eaed\" font-size=\"10\">Promise .then()</text><text x=\"290\" y=\"365\" fill=\"#e8eaed\" font-size=\"10\">queueMicrotask</text><text x=\"290\" y=\"385\" fill=\"#e8eaed\" font-size=\"10\">MutationObserver</text><rect x=\"290\" y=\"400\" width=\"120\" height=\"30\" rx=\"4\" fill=\"rgba(251,191,36,0.1)\" stroke=\"#fbbf24\" stroke-width=\"1\"/><text x=\"350\" y=\"419\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"10\">2. Microtasks</text><!-- Macrotask Queue --><rect x=\"490\" y=\"300\" width=\"150\" height=\"160\" rx=\"6\" fill=\"#2a2f45\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"565\" y=\"322\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\">Macrotask Queue</text><text x=\"505\" y=\"345\" fill=\"#e8eaed\" font-size=\"10\">setTimeout</text><text x=\"505\" y=\"365\" fill=\"#e8eaed\" font-size=\"10\">setInterval</text><text x=\"505\" y=\"385\" fill=\"#e8eaed\" font-size=\"10\">I/O callbacks</text><rect x=\"505\" y=\"400\" width=\"120\" height=\"30\" rx=\"4\" fill=\"rgba(52,211,153,0.1)\" stroke=\"#34d399\" stroke-width=\"1\"/><text x=\"565\" y=\"419\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"10\">3. Macrotasks</text><!-- Bottom note --><text x=\"350\" y=\"470\" text-anchor=\"middle\" fill=\"#9aa0b0\" font-size=\"11\">Execution Order: Call Stack -> Microtask Queue (entirely) -> Macrotask Queue -> UI Render -> repeat</text></svg><div class=\"diagram-caption\">Promise state machine (top) and event loop queue priorities (bottom). Promise callbacks always execute in the microtask queue before macrotask callbacks.</div>",
+
+  "codeExamples": [
+    {
+      "title": "Sequential vs Parallel Async Operations",
+      "useCase": "Concurrency Patterns",
+      "code": "// Sequential (slow) -- each waits for previous\nasync function sequential() {\n  const a = await fetch('/api/a').then(r => r.json());\n  const b = await fetch('/api/b').then(r => r.json());\n  const c = await fetch('/api/c').then(r => r.json());\n  return [a, b, c];\n}\n\n// Parallel (fast) -- all start simultaneously\nasync function parallel() {\n  const [a, b, c] = await Promise.all([\n    fetch('/api/a').then(r => r.json()),\n    fetch('/api/b').then(r => r.json()),\n    fetch('/api/c').then(r => r.json())\n  ]);\n  return [a, b, c];\n}\n\n// Race -- get the fastest response\nasync function raceExample() {\n  const result = await Promise.race([\n    fetch('/api/fast').then(r => r.json()),\n    fetch('/api/backup').then(r => r.json())\n  ]);\n  return result;\n}",
+      "description": "Sequential execution is slower but preserves order. Parallel execution via Promise.all is faster but all requests fire simultaneously. Choose based on whether operations are dependent or independent."
+    },
+    {
+      "title": "Async Iterator Pattern (Pagination)",
+      "useCase": "Real-world Data Fetching",
+      "code": "async function* paginate(baseUrl, pageSize = 50) {\n  let page = 1;\n  let hasMore = true;\n\n  while (hasMore) {\n    const url = `${baseUrl}?page=${page}&limit=${pageSize}`;\n    const res = await fetch(url);\n    const data = await res.json();\n\n    if (data.items.length === 0) hasMore = false;\n    else {\n      yield data.items;\n      page++;\n    }\n  }\n}\n\n// Usage\n(async () => {\n  const pages = paginate('https://api.example.com/users');\n  for await (const users of pages) {\n    console.log(`Got ${users.length} users`);\n  }\n})();",
+      "description": "Async generators combine async/await with generators to lazily fetch paginated data. Each iteration awaits the next page before yielding."
+    },
+    {
+      "title": "Promise-based Retry with Exponential Backoff",
+      "useCase": "Resilient API Calls",
+      "code": "async function fetchWithRetry(url, options = {}) {\n  const { maxRetries = 3, baseDelay = 1000 } = options;\n\n  for (let attempt = 1; attempt <= maxRetries; attempt++) {\n    try {\n      const res = await fetch(url);\n      if (res.ok) return res;\n      if (res.status < 500 && attempt < maxRetries) {\n        throw new Error(`HTTP ${res.status}`);\n      }\n    } catch (err) {\n      if (attempt === maxRetries) throw err;\n      const delay = baseDelay * Math.pow(2, attempt - 1);\n      console.log(`Retry ${attempt}/${maxRetries} after ${delay}ms`);\n      await new Promise(r => setTimeout(r, delay));\n    }\n  }\n}\n\nawait fetchWithRetry('https://api.example.com/data', {\n  maxRetries: 5,\n  baseDelay: 500\n});",
+      "description": "Implements exponential backoff by awaiting a delayed Promise. Each retry doubles the wait time, preventing overwhelming the server during outages."
+    },
+    {
+      "title": "Promise.allSettled -- Partial Success Handling",
+      "useCase": "Bulk Operations",
+      "code": "async function updateUsers(userIds) {\n  const promises = userIds.map(id =>\n    fetch(`/api/users/${id}`, { method: 'PATCH', body: JSON.stringify({ active: true }) })\n      .then(res => ({ id, status: res.ok ? 'updated' : 'failed' }))\n      .catch(() => ({ id, status: 'failed' }))\n  );\n\n  const results = await Promise.allSettled(promises);\n  const succeeded = [];\n  const failed = [];\n\n  results.forEach(result => {\n    if (result.status === 'fulfilled') {\n      succeeded.push(result.value);\n    } else {\n      failed.push(result.reason);\n    }\n  });\n\n  return { succeeded, failed };\n}",
+      "description": "Unlike Promise.all, allSettled never short-circuits. It's ideal when you need to process partial results and report individual failures."
+    },
+    {
+      "title": "Async/Await with Timeout and Cancellation",
+      "useCase": "Timeouts & AbortController",
+      "code": "async function fetchWithTimeout(url, timeoutMs = 5000) {\n  const controller = new AbortController();\n  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);\n\n  try {\n    const response = await fetch(url, { signal: controller.signal });\n    return response;\n  } catch (err) {\n    if (err.name === 'AbortError') {\n      throw new Error(`Request timed out after ${timeoutMs}ms`);\n    }\n    throw err;\n  } finally {\n    clearTimeout(timeoutId);\n  }\n}\n\n// Usage\ntry {\n  const data = await fetchWithTimeout('https://api.example.com', 3000);\n} catch (err) {\n  console.error(err.message);\n}",
+      "description": "Combines AbortController with a timeout Promise. The finally block ensures the timeout is always cleared, preventing memory leaks."
+    }
+  ],
+
+  "mcqQuestions": [
+    {
+      "question": "What is the output? console.log('A'); setTimeout(() => console.log('B'), 0); Promise.resolve().then(() => console.log('C')); console.log('D');",
+      "options": ["A, B, C, D", "A, D, B, C", "A, D, C, B", "D, A, C, B"],
+      "answer": 2,
+      "explanation": "Synchronous code (A, D) runs first. Then microtasks (Promise .then) execute before macrotasks (setTimeout). So output is A, D, C, B."
+    },
+    {
+      "question": "What does Promise.allSettled return when one Promise rejects?",
+      "options": [
+        "An error immediately",
+        "An array of {status, value/reason} objects for all promises",
+        "The first resolved value",
+        "undefined"
+      ],
+      "answer": 1,
+      "explanation": "Promise.allSettled never short-circuits. It waits for all Promises to settle and returns an array with the outcome of each."
+    },
+    {
+      "question": "What will the following async function return? async function test() { return 42; }",
+      "options": ["42", "Promise {<fulfilled>: 42}", "undefined", "ReferenceError"],
+      "answer": 1,
+      "explanation": "An async function always returns a Promise. If the return value is not a Promise, it's wrapped in Promise.resolve()."
+    },
+    {
+      "question": "Which Promise combinator should you use when you need all operations to complete, but some may fail, and you want results from all of them?",
+      "options": ["Promise.all()", "Promise.race()", "Promise.allSettled()", "Promise.any()"],
+      "answer": 2,
+      "explanation": "Promise.allSettled() waits for every Promise to settle (resolve or reject) and returns the status for each. Promise.all() would fail-fast on first rejection."
+    },
+    {
+      "question": "What happens when you await a non-Promise value?",
+      "options": [
+        "It throws a TypeError",
+        "It's wrapped in Promise.resolve()",
+        "It returns undefined",
+        "The await is ignored"
+      ],
+      "answer": 1,
+      "explanation": "await Promise.resolve(nonPromiseValue) is implicit -- the non-Promise value is wrapped in a resolved Promise, and execution continues synchronously."
+    },
+    {
+      "question": "In the event loop, what is the correct order of execution?",
+      "options": [
+        "Macrotask -> Microtask -> Render",
+        "Microtask -> Macrotask -> Render",
+        "Call Stack -> Microtask Queue (drained) -> Macrotask -> Render",
+        "Render -> Microtask -> Macrotask"
+      ],
+      "answer": 2,
+      "explanation": "The event loop: 1) Execute synchronous code on call stack. 2) Drain the microtask queue entirely. 3) Execute one macrotask. 4) Render if needed. Repeat."
+    },
+    {
+      "question": "What will this log? Promise.reject('err').catch(v => v + ' handled').then(v => console.log(v));",
+      "options": ["err handled", "undefined", "err", "UnhandledPromiseRejection error"],
+      "answer": 0,
+      "explanation": "The .catch() returns a fulfilled Promise with 'err handled'. The .then() receives it and logs it. The rejection is properly handled."
+    },
+    {
+      "question": "Which approach correctly runs 3 async tasks in parallel?",
+      "options": [
+        "await task1(); await task2(); await task3();",
+        "await Promise.all([task1(), task2(), task3()])",
+        "task1(); task2(); task3(); await;",
+        "Promise.all([await task1(), await task2(), await task3()])"
+      ],
+      "answer": 1,
+      "explanation": "Promise.all starts all Promises simultaneously. Option A runs them sequentially. Option D would still run them sequentially due to await in array."
+    },
+    {
+      "question": "What is the purpose of the 'finally' block in a Promise chain?",
+      "options": [
+        "To handle only rejected Promises",
+        "To execute code regardless of fulfillment or rejection",
+        "To transform the resolved value",
+        "To catch specific error types"
+      ],
+      "answer": 1,
+      "explanation": ".finally() runs regardless of whether the Promise was fulfilled or rejected. It's for cleanup and does not change the resolved value or rejection reason."
+    },
+    {
+      "question": "What does this return? await Promise.resolve(1).then(x => x + 1).then(x => x * 2);",
+      "options": ["2", "3", "4", "6"],
+      "answer": 2,
+      "explanation": "Chain: resolve(1) -> then(1+1=2) -> then(2*2=4). The awaited value is 4."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "icon": "⚡",
+    "color": "#f7df1e",
+    "description": "Core JavaScript concepts, ES6+, and advanced patterns"
+  },
+  {
+    "id": "react",
+    "name": "React.js",
+    "icon": "⚛️",
+    "color": "#61dafb",
+    "description": "React fundamentals, hooks, state management, and ecosystem"
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js & Express",
+    "icon": "🟢",
+    "color": "#339933",
+    "description": "Server-side JS, Express APIs, middleware, and backend patterns"
+  },
+  {
+    "id": "mern",
+    "name": "MERN Stack",
+    "icon": "🧩",
+    "color": "#4caf50",
+    "description": "Full-stack development with MongoDB, Express, React, Node.js"
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js",
+    "icon": "▲",
+    "color": "#000000",
+    "description": "SSR, SSG, App Router, server components, and Next.js patterns"
+  },
+  {
+    "id": "mongodb",
+    "name": "MongoDB",
+    "icon": "🍃",
+    "color": "#47A248",
+    "description": "NoSQL databases, aggregation, indexing, and data modeling"
+  },
+  {
+    "id": "sql",
+    "name": "SQL",
+    "icon": "🗄️",
+    "color": "#336791",
+    "description": "Relational databases, queries, normalization, and optimization"
+  },
+  {
+    "id": "auth",
+    "name": "Authentication & Security",
+    "icon": "🔒",
+    "color": "#ff4444",
+    "description": "JWT, OAuth, sessions, encryption, and web security"
+  },
+  {
+    "id": "system-design",
+    "name": "System Design",
+    "icon": "🏗️",
+    "color": "#6c5ce7",
+    "description": "Architecture patterns, scalability, microservices, and design"
+  },
+  {
+    "id": "devops",
+    "name": "DevOps & Cloud",
+    "icon": "☁️",
+    "color": "#0078D4",
+    "description": "Docker, AWS, CI/CD pipelines, deployment, and monitoring"
+  },
+  {
+    "id": "git",
+    "name": "Git & CI/CD",
+    "icon": "🔀",
+    "color": "#f05032",
+    "description": "Version control, branching strategies, and automation"
+  },
+  {
+    "id": "dsa",
+    "name": "DSA",
+    "icon": "📊",
+    "color": "#ff6b35",
+    "description": "Data structures, algorithms, problem-solving patterns"
+  },
+  {
+    "id": "oop",
+    "name": "OOP & CS Fundamentals",
+    "icon": "💻",
+    "color": "#9b59b6",
+    "description": "OOP principles, design patterns, and CS core concepts"
+  }
+]
