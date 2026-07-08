@@ -319,6 +319,25 @@ var EMBEDDED = {
       { id: "react-react-router",          title: "React React Router",               difficulty: "intermediate", estimatedMinutes: 30, file: "react-react-router.json" },
       { id: "react-protected-routes",      title: "React Protected Routes",           difficulty: "intermediate", estimatedMinutes: 20, file: "react-protected-routes.json" },
       { id: "react-state-management-patterns",title: "React State Management Patterns",difficulty: "advanced",     estimatedMinutes: 30, file: "react-state-management-patterns.json" }
+    ],
+    nodejs: [
+      { id: "node-node-runtime",                title: "Node.js Runtime",                difficulty: "intermediate", estimatedMinutes: 25, file: "node-node-runtime.json" },
+      { id: "node-event-driven-architecture",   title: "Event Driven Architecture",      difficulty: "intermediate", estimatedMinutes: 25, file: "node-event-driven-architecture.json" },
+      { id: "node-event-loop",                  title: "Event Loop",                     difficulty: "advanced",     estimatedMinutes: 30, file: "node-event-loop.json" },
+      { id: "node-streams",                     title: "Streams",                        difficulty: "advanced",     estimatedMinutes: 30, file: "node-streams.json" },
+      { id: "node-buffers",                     title: "Buffers",                        difficulty: "intermediate", estimatedMinutes: 20, file: "node-buffers.json" },
+      { id: "node-fs-module",                   title: "File System Module",             difficulty: "intermediate", estimatedMinutes: 25, file: "node-fs-module.json" },
+      { id: "node-path-module",                 title: "Path Module",                    difficulty: "beginner",     estimatedMinutes: 15, file: "node-path-module.json" },
+      { id: "node-os-module",                   title: "OS Module",                      difficulty: "beginner",     estimatedMinutes: 15, file: "node-os-module.json" },
+      { id: "node-cluster-module",              title: "Cluster Module",                 difficulty: "advanced",     estimatedMinutes: 30, file: "node-cluster-module.json" },
+      { id: "node-child-processes",             title: "Child Processes",                difficulty: "advanced",     estimatedMinutes: 25, file: "node-child-processes.json" },
+      { id: "node-worker-threads",              title: "Worker Threads",                 difficulty: "advanced",     estimatedMinutes: 30, file: "node-worker-threads.json" },
+      { id: "node-process-object",              title: "Process Object",                 difficulty: "intermediate", estimatedMinutes: 20, file: "node-process-object.json" },
+      { id: "node-env-variables",               title: "Environment Variables",          difficulty: "beginner",     estimatedMinutes: 15, file: "node-env-variables.json" },
+      { id: "node-commonjs",                    title: "CommonJS Modules",               difficulty: "intermediate", estimatedMinutes: 20, file: "node-commonjs.json" },
+      { id: "node-es-modules",                  title: "ES Modules",                     difficulty: "advanced",     estimatedMinutes: 25, file: "node-es-modules.json" },
+      { id: "node-npm",                         title: "npm (Node Package Manager)",      difficulty: "beginner",     estimatedMinutes: 20, file: "node-npm.json" },
+      { id: "node-package-management",          title: "Package Management Ecosystem",   difficulty: "intermediate", estimatedMinutes: 20, file: "node-package-management.json" }
     ]
   }
 };

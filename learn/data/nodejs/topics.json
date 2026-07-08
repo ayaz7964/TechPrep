@@ -1,0 +1,121 @@
+[
+  {
+    "id": "node-buffers",
+    "title": "Node.js Buffers",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "node-buffers.json"
+  },
+  {
+    "id": "node-child-processes",
+    "title": "Node.js Child Processes",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "node-child-processes.json"
+  },
+  {
+    "id": "node-cluster-module",
+    "title": "Node.js Cluster Module",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "node-cluster-module.json"
+  },
+  {
+    "id": "node-commonjs",
+    "title": "Node.js CommonJS Modules",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "node-commonjs.json"
+  },
+  {
+    "id": "node-env-variables",
+    "title": "Node.js Environment Variables",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "node-env-variables.json"
+  },
+  {
+    "id": "node-es-modules",
+    "title": "Node.js ES Modules",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "node-es-modules.json"
+  },
+  {
+    "id": "node-event-driven-architecture",
+    "title": "Node.js Event Driven Architecture",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "node-event-driven-architecture.json"
+  },
+  {
+    "id": "node-event-loop",
+    "title": "Node.js Event Loop",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "node-event-loop.json"
+  },
+  {
+    "id": "node-fs-module",
+    "title": "Node.js File System Module",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "node-fs-module.json"
+  },
+  {
+    "id": "node-node-runtime",
+    "title": "Node.js Runtime",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "node-node-runtime.json"
+  },
+  {
+    "id": "node-npm",
+    "title": "npm (Node Package Manager)",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "node-npm.json"
+  },
+  {
+    "id": "node-os-module",
+    "title": "Node.js OS Module",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "node-os-module.json"
+  },
+  {
+    "id": "node-package-management",
+    "title": "Node.js Package Management Ecosystem",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "node-package-management.json"
+  },
+  {
+    "id": "node-path-module",
+    "title": "Node.js Path Module",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "node-path-module.json"
+  },
+  {
+    "id": "node-process-object",
+    "title": "Node.js Process Object",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "node-process-object.json"
+  },
+  {
+    "id": "node-streams",
+    "title": "Node.js Streams",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "node-streams.json"
+  },
+  {
+    "id": "node-worker-threads",
+    "title": "Node.js Worker Threads",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "node-worker-threads.json"
+  }
+]
