@@ -139,7 +139,7 @@ function isCompleted(catId, topicId) {
 function toggleCompleted(catId, topicId) {
   if (!state.completed[catId]) state.completed[catId] = {};
   if (state.completed[catId][topicId]) {
-    delete state.completed[catId][topicId];
+    state.completed[catId][topicId] = false;
   } else {
     state.completed[catId][topicId] = true;
   }
@@ -338,6 +338,26 @@ var EMBEDDED = {
       { id: "node-es-modules",                  title: "ES Modules",                     difficulty: "advanced",     estimatedMinutes: 25, file: "node-es-modules.json" },
       { id: "node-npm",                         title: "npm (Node Package Manager)",      difficulty: "beginner",     estimatedMinutes: 20, file: "node-npm.json" },
       { id: "node-package-management",          title: "Package Management Ecosystem",   difficulty: "intermediate", estimatedMinutes: 20, file: "node-package-management.json" }
+    ],
+    nextjs: [
+      { id: "nextjs-app-router",           title: "App Router",                    difficulty: "intermediate", estimatedMinutes: 30, file: "nextjs-app-router.json" },
+      { id: "nextjs-pages-router",         title: "Pages Router",                  difficulty: "beginner",     estimatedMinutes: 25, file: "nextjs-pages-router.json" },
+      { id: "nextjs-ssr",                  title: "Server-Side Rendering",         difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-ssr.json" },
+      { id: "nextjs-csr",                  title: "Client-Side Rendering",         difficulty: "beginner",     estimatedMinutes: 20, file: "nextjs-csr.json" },
+      { id: "nextjs-ssg",                  title: "Static Site Generation",        difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-ssg.json" },
+      { id: "nextjs-isr",                  title: "Incremental Static Regeneration",difficulty: "advanced",     estimatedMinutes: 30, file: "nextjs-isr.json" },
+      { id: "nextjs-metadata-api",         title: "Metadata API",                  difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-metadata-api.json" },
+      { id: "nextjs-route-handlers",       title: "Route Handlers",                difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-route-handlers.json" },
+      { id: "nextjs-server-components",    title: "Server Components",             difficulty: "advanced",     estimatedMinutes: 30, file: "nextjs-server-components.json" },
+      { id: "nextjs-client-components",    title: "Client Components",             difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-client-components.json" },
+      { id: "nextjs-dynamic-routes",       title: "Dynamic Routes",                difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-dynamic-routes.json" },
+      { id: "nextjs-middleware",           title: "Middleware",                    difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-middleware.json" },
+      { id: "nextjs-server-actions",       title: "Server Actions",                difficulty: "advanced",     estimatedMinutes: 30, file: "nextjs-server-actions.json" },
+      { id: "nextjs-image-optimization",   title: "Image Optimization",            difficulty: "intermediate", estimatedMinutes: 25, file: "nextjs-image-optimization.json" },
+      { id: "nextjs-caching",              title: "Caching",                       difficulty: "advanced",     estimatedMinutes: 30, file: "nextjs-caching.json" },
+      { id: "nextjs-streaming",            title: "Streaming",                     difficulty: "advanced",     estimatedMinutes: 30, file: "nextjs-streaming.json" },
+      { id: "nextjs-authentication",       title: "Authentication in Next.js",     difficulty: "advanced",     estimatedMinutes: 35, file: "nextjs-authentication.json" },
+      { id: "nextjs-deployment-vercel",    title: "Deployment on Vercel",          difficulty: "beginner",     estimatedMinutes: 25, file: "nextjs-deployment-vercel.json" }
     ]
   }
 };
@@ -358,7 +378,7 @@ var EMBEDDED = {
   for (var cat in preset) {
     if (!existing[cat]) { existing[cat] = {}; changed = true; }
     for (var topic in preset[cat]) {
-      if (!existing[cat][topic]) { existing[cat][topic] = true; changed = true; }
+      if (existing[cat][topic] === undefined) { existing[cat][topic] = true; changed = true; }
     }
   }
   if (changed) localStorage.setItem('tp_completed', JSON.stringify(existing));
