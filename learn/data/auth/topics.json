@@ -1,0 +1,130 @@
+{
+  "topics": [
+    {
+      "id": "auth-authentication",
+      "title": "Authentication",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "file": "auth-authentication.json"
+    },
+    {
+      "id": "auth-authorization",
+      "title": "Authorization",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "auth-authorization.json"
+    },
+    {
+      "id": "auth-jwt",
+      "title": "JWT (JSON Web Tokens)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-jwt.json"
+    },
+    {
+      "id": "auth-oauth",
+      "title": "OAuth 2.0",
+      "difficulty": "advanced",
+      "estimatedMinutes": 35,
+      "file": "auth-oauth.json"
+    },
+    {
+      "id": "auth-refresh-tokens",
+      "title": "Refresh Tokens",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-refresh-tokens.json"
+    },
+    {
+      "id": "auth-access-tokens",
+      "title": "Access Tokens",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "auth-access-tokens.json"
+    },
+    {
+      "id": "auth-session-auth",
+      "title": "Session Authentication",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "file": "auth-session-auth.json"
+    },
+    {
+      "id": "auth-rbac",
+      "title": "RBAC (Role-Based Access Control)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-rbac.json"
+    },
+    {
+      "id": "auth-multi-tenant",
+      "title": "Multi Tenant Security",
+      "difficulty": "advanced",
+      "estimatedMinutes": 30,
+      "file": "auth-multi-tenant.json"
+    },
+    {
+      "id": "auth-password-hashing",
+      "title": "Password Hashing",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-password-hashing.json"
+    },
+    {
+      "id": "auth-bcrypt",
+      "title": "bcrypt",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "auth-bcrypt.json"
+    },
+    {
+      "id": "auth-csrf",
+      "title": "CSRF (Cross-Site Request Forgery)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-csrf.json"
+    },
+    {
+      "id": "auth-xss",
+      "title": "XSS (Cross-Site Scripting)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-xss.json"
+    },
+    {
+      "id": "auth-sql-injection",
+      "title": "SQL Injection",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "auth-sql-injection.json"
+    },
+    {
+      "id": "auth-nosql-injection",
+      "title": "NoSQL Injection",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "auth-nosql-injection.json"
+    },
+    {
+      "id": "auth-https",
+      "title": "HTTPS (HTTP over TLS)",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "file": "auth-https.json"
+    },
+    {
+      "id": "auth-cors",
+      "title": "CORS (Cross-Origin Resource Sharing)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "auth-cors.json"
+    },
+    {
+      "id": "auth-owasp",
+      "title": "OWASP Top 10",
+      "difficulty": "advanced",
+      "estimatedMinutes": 35,
+      "file": "auth-owasp.json"
+    }
+  ]
+}
