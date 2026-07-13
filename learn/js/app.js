@@ -216,6 +216,7 @@ var EMBEDDED = {
     { id: "nodejs",      name: "Node.js & Express",  icon: "\uD83D\uDFE2", color: "#339933", description: "Server-side JS, Express APIs, middleware, and backend patterns" },
     { id: "mern",        name: "MERN Stack",         icon: "\uD83E\uDDE9", color: "#4caf50", description: "Full-stack development with MongoDB, Express, React, Node.js" },
     { id: "nextjs",      name: "Next.js",            icon: "\u25B2", color: "#000000", description: "SSR, SSG, App Router, server components, and Next.js patterns" },
+    { id: "express",     name: "Express.js",          icon: "\uD83D\uDEE0\uFE0F", color: "#68a063", description: "Express.js architecture, middleware, routing, and API development" },
     { id: "mongodb",     name: "MongoDB",            icon: "\uD83C\uDF43", color: "#47A248", description: "NoSQL databases, aggregation, indexing, and data modeling" },
     { id: "sql",         name: "SQL",                icon: "\uD83D\uDCC4\uFE0F", color: "#336791", description: "Relational databases, queries, normalization, and optimization" },
     { id: "auth",        name: "Authentication & Security", icon: "\uD83D\uDD12", color: "#ff4444", description: "JWT, OAuth, sessions, encryption, and web security" },
@@ -358,6 +359,23 @@ var EMBEDDED = {
       { id: "nextjs-streaming",            title: "Streaming",                     difficulty: "advanced",     estimatedMinutes: 30, file: "nextjs-streaming.json" },
       { id: "nextjs-authentication",       title: "Authentication in Next.js",     difficulty: "advanced",     estimatedMinutes: 35, file: "nextjs-authentication.json" },
       { id: "nextjs-deployment-vercel",    title: "Deployment on Vercel",          difficulty: "beginner",     estimatedMinutes: 25, file: "nextjs-deployment-vercel.json" }
+    ],
+    express: [
+      { id: "express-architecture",            title: "Express Architecture",           difficulty: "intermediate", estimatedMinutes: 25, file: "express-architecture.json" },
+      { id: "express-routing",                 title: "Routing",                       difficulty: "beginner",     estimatedMinutes: 20, file: "express-routing.json" },
+      { id: "express-middleware",              title: "Middleware",                    difficulty: "intermediate", estimatedMinutes: 25, file: "express-middleware.json" },
+      { id: "express-custom-middleware",       title: "Custom Middleware",             difficulty: "intermediate", estimatedMinutes: 20, file: "express-custom-middleware.json" },
+      { id: "express-error-handling",          title: "Error Handling Middleware",     difficulty: "intermediate", estimatedMinutes: 25, file: "express-error-handling.json" },
+      { id: "express-authentication-middleware",title: "Authentication Middleware",      difficulty: "intermediate", estimatedMinutes: 30, file: "express-authentication-middleware.json" },
+      { id: "express-rest-api",               title: "REST API Development",          difficulty: "intermediate", estimatedMinutes: 30, file: "express-rest-api.json" },
+      { id: "express-request-lifecycle",       title: "Request Lifecycle",            difficulty: "intermediate", estimatedMinutes: 25, file: "express-request-lifecycle.json" },
+      { id: "express-validation",             title: "Validation",                    difficulty: "intermediate", estimatedMinutes: 25, file: "express-validation.json" },
+      { id: "express-rate-limiting",           title: "Rate Limiting",                 difficulty: "intermediate", estimatedMinutes: 20, file: "express-rate-limiting.json" },
+      { id: "express-helmet",                 title: "Helmet",                        difficulty: "intermediate", estimatedMinutes: 20, file: "express-helmet.json" },
+      { id: "express-cors",                   title: "CORS",                           difficulty: "beginner",     estimatedMinutes: 20, file: "express-cors.json" },
+      { id: "express-cookie-parser",          title: "Cookie Parser",                 difficulty: "beginner",     estimatedMinutes: 15, file: "express-cookie-parser.json" },
+      { id: "express-morgan",                 title: "Morgan",                        difficulty: "beginner",     estimatedMinutes: 15, file: "express-morgan.json" },
+      { id: "express-api-versioning",          title: "API Versioning",                difficulty: "intermediate", estimatedMinutes: 20, file: "express-api-versioning.json" }
     ]
   }
 };

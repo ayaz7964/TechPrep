@@ -1,0 +1,107 @@
+[
+  {
+    "id": "express-architecture",
+    "title": "Express Architecture",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "express-architecture.json"
+  },
+  {
+    "id": "express-routing",
+    "title": "Routing",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "express-routing.json"
+  },
+  {
+    "id": "express-middleware",
+    "title": "Middleware",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "express-middleware.json"
+  },
+  {
+    "id": "express-custom-middleware",
+    "title": "Custom Middleware",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "express-custom-middleware.json"
+  },
+  {
+    "id": "express-error-handling",
+    "title": "Error Handling Middleware",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "express-error-handling.json"
+  },
+  {
+    "id": "express-authentication-middleware",
+    "title": "Authentication Middleware",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 30,
+    "file": "express-authentication-middleware.json"
+  },
+  {
+    "id": "express-rest-api",
+    "title": "REST API Development",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 30,
+    "file": "express-rest-api.json"
+  },
+  {
+    "id": "express-request-lifecycle",
+    "title": "Request Lifecycle",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "express-request-lifecycle.json"
+  },
+  {
+    "id": "express-validation",
+    "title": "Validation",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "express-validation.json"
+  },
+  {
+    "id": "express-rate-limiting",
+    "title": "Rate Limiting",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "express-rate-limiting.json"
+  },
+  {
+    "id": "express-helmet",
+    "title": "Helmet",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "express-helmet.json"
+  },
+  {
+    "id": "express-cors",
+    "title": "CORS",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "express-cors.json"
+  },
+  {
+    "id": "express-cookie-parser",
+    "title": "Cookie Parser",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "express-cookie-parser.json"
+  },
+  {
+    "id": "express-morgan",
+    "title": "Morgan",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "express-morgan.json"
+  },
+  {
+    "id": "express-api-versioning",
+    "title": "API Versioning",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "express-api-versioning.json"
+  }
+]
