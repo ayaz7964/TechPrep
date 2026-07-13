@@ -1,0 +1,144 @@
+{
+  "topics": [
+    {
+      "id": "github-actions-workflow",
+      "title": "Workflow",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-actions-workflow.json"
+    },
+    {
+      "id": "github-actions-yaml",
+      "title": "Workflow YAML Syntax",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-actions-yaml.json"
+    },
+    {
+      "id": "github-actions-events",
+      "title": "Events",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-events.json"
+    },
+    {
+      "id": "github-actions-triggers",
+      "title": "Triggers",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-triggers.json"
+    },
+    {
+      "id": "github-actions-jobs",
+      "title": "Jobs",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-jobs.json"
+    },
+    {
+      "id": "github-actions-steps",
+      "title": "Steps",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "github-actions-steps.json"
+    },
+    {
+      "id": "github-actions-runners",
+      "title": "Runners",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-runners.json"
+    },
+    {
+      "id": "github-actions-self-hosted",
+      "title": "Self-Hosted Runner",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "github-actions-self-hosted.json"
+    },
+    {
+      "id": "github-actions-matrix",
+      "title": "Matrix Builds",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-actions-matrix.json"
+    },
+    {
+      "id": "github-actions-marketplace",
+      "title": "Actions Marketplace",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-actions-marketplace.json"
+    },
+    {
+      "id": "github-actions-composite",
+      "title": "Composite Actions",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "github-actions-composite.json"
+    },
+    {
+      "id": "github-actions-reusable",
+      "title": "Reusable Workflows",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "github-actions-reusable.json"
+    },
+    {
+      "id": "github-actions-cache",
+      "title": "Cache",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-cache.json"
+    },
+    {
+      "id": "github-actions-artifacts",
+      "title": "Artifacts",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-artifacts.json"
+    },
+    {
+      "id": "github-actions-secrets",
+      "title": "Secrets",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-secrets.json"
+    },
+    {
+      "id": "github-actions-variables",
+      "title": "Variables",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "github-actions-variables.json"
+    },
+    {
+      "id": "github-actions-environments",
+      "title": "Environments",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-actions-environments.json"
+    },
+    {
+      "id": "github-actions-deployment-protection",
+      "title": "Deployment Protection Rules",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "github-actions-deployment-protection.json"
+    },
+    {
+      "id": "github-actions-scheduled",
+      "title": "Scheduled Workflows",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "github-actions-scheduled.json"
+    },
+    {
+      "id": "github-actions-conditional",
+      "title": "Conditional Execution",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-actions-conditional.json"
+    }
+  ]
+}

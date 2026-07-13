@@ -570,6 +570,10 @@ compactTopic('git-archive', 'Git Archive', 'intermediate', 10,
   [m('What does git archive include?', ['All files including .git', 'Only tracked files', 'Only untracked files', 'All files except .git'], 1, 'git archive includes only tracked files (committed). No .git, no untracked, no ignored files.')]
 );
 
+// ---- PAD TOPICS ----
+var padTopics = require('../pad-topics');
+padTopics(topics);
+
 // ---- GENERATE ----
 var dataDir = __dirname;
 var lines = [];

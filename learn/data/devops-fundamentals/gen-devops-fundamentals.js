@@ -2054,6 +2054,10 @@ addTopic('devops-change-mgmt', 'Change Management', 'intermediate', 20,
   ]
 );
 
+// ---- PAD TOPICS ----
+var padTopics = require('../pad-topics');
+padTopics(topics);
+
 // ---- GENERATE ----
 var dataDir = __dirname;
 

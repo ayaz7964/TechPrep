@@ -534,6 +534,10 @@ compactTopic('cicd-best-practices', 'CI/CD Best Practices', 'intermediate', 20,
   [m('What makes a pipeline idempotent?', ['Running once', 'Same commit always produces same result', 'Fast execution', 'Parallel stages'], 1, 'Idempotence means the same commit always produces the same build output, regardless of when or how many times it runs.')]
 );
 
+// ---- PAD TOPICS ----
+var padTopics = require('../pad-topics');
+padTopics(topics);
+
 // ---- GENERATE ----
 var dataDir = __dirname;
 var lines = [];

@@ -397,6 +397,10 @@ compactTopic('github-discussions', 'GitHub Discussions', 'beginner', 10,
   [m('What category is best for questions in Discussions?', ['General', 'Ideas', 'Q&A', 'Show and Tell'], 2, 'The Q&A category allows marking answers, making it ideal for questions and building a knowledge base.')]
 );
 
+// ---- PAD TOPICS ----
+var padTopics = require('../pad-topics');
+padTopics(topics);
+
 // ---- GENERATE ----
 var dataDir = __dirname;
 var lines = [];

@@ -1,0 +1,242 @@
+{
+  "topics": [
+    {
+      "id": "jenkins-architecture",
+      "title": "Jenkins Architecture",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-architecture.json"
+    },
+    {
+      "id": "jenkins-installation",
+      "title": "Jenkins Installation",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "jenkins-installation.json"
+    },
+    {
+      "id": "jenkins-dashboard",
+      "title": "Jenkins Dashboard",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "jenkins-dashboard.json"
+    },
+    {
+      "id": "jenkins-jobs",
+      "title": "Jenkins Jobs",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "jenkins-jobs.json"
+    },
+    {
+      "id": "jenkins-freestyle",
+      "title": "Freestyle Jobs",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "jenkins-freestyle.json"
+    },
+    {
+      "id": "jenkins-pipeline",
+      "title": "Pipeline Jobs",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-pipeline.json"
+    },
+    {
+      "id": "jenkins-multibranch",
+      "title": "Multibranch Pipeline",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-multibranch.json"
+    },
+    {
+      "id": "jenkins-jenkinsfile",
+      "title": "Jenkinsfile",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-jenkinsfile.json"
+    },
+    {
+      "id": "jenkins-declarative",
+      "title": "Declarative Pipeline",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-declarative.json"
+    },
+    {
+      "id": "jenkins-scripted",
+      "title": "Scripted Pipeline",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "jenkins-scripted.json"
+    },
+    {
+      "id": "jenkins-pipeline-stages",
+      "title": "Pipeline Stages",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "jenkins-pipeline-stages.json"
+    },
+    {
+      "id": "jenkins-build-agents",
+      "title": "Build Agents",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-build-agents.json"
+    },
+    {
+      "id": "jenkins-master-agent",
+      "title": "Master-Agent Architecture",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-master-agent.json"
+    },
+    {
+      "id": "jenkins-distributed",
+      "title": "Distributed Builds",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-distributed.json"
+    },
+    {
+      "id": "jenkins-nodes",
+      "title": "Jenkins Nodes",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "jenkins-nodes.json"
+    },
+    {
+      "id": "jenkins-plugins",
+      "title": "Jenkins Plugins",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "jenkins-plugins.json"
+    },
+    {
+      "id": "jenkins-credentials",
+      "title": "Credentials Management",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-credentials.json"
+    },
+    {
+      "id": "jenkins-shared-libraries",
+      "title": "Jenkins Shared Libraries",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "jenkins-shared-libraries.json"
+    },
+    {
+      "id": "jenkins-parameters",
+      "title": "Jenkins Parameters",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-parameters.json"
+    },
+    {
+      "id": "jenkins-triggers",
+      "title": "Jenkins Triggers",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "jenkins-triggers.json"
+    },
+    {
+      "id": "jenkins-poll-scm",
+      "title": "Poll SCM",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "jenkins-poll-scm.json"
+    },
+    {
+      "id": "jenkins-webhooks",
+      "title": "Webhooks",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-webhooks.json"
+    },
+    {
+      "id": "jenkins-build-artifacts",
+      "title": "Build Artifacts",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "jenkins-build-artifacts.json"
+    },
+    {
+      "id": "jenkins-build-history",
+      "title": "Build History",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "jenkins-build-history.json"
+    },
+    {
+      "id": "jenkins-backup",
+      "title": "Backup and Restore",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-backup.json"
+    },
+    {
+      "id": "jenkins-security",
+      "title": "Jenkins Security",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "jenkins-security.json"
+    },
+    {
+      "id": "jenkins-rbac",
+      "title": "Jenkins RBAC",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "jenkins-rbac.json"
+    },
+    {
+      "id": "jenkins-blue-ocean",
+      "title": "Blue Ocean",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "jenkins-blue-ocean.json"
+    },
+    {
+      "id": "jenkins-docker",
+      "title": "Jenkins with Docker",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-docker.json"
+    },
+    {
+      "id": "jenkins-kubernetes",
+      "title": "Jenkins with Kubernetes",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "jenkins-kubernetes.json"
+    },
+    {
+      "id": "jenkins-sonarqube",
+      "title": "Jenkins with SonarQube",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "jenkins-sonarqube.json"
+    },
+    {
+      "id": "jenkins-nexus",
+      "title": "Jenkins with Nexus",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-nexus.json"
+    },
+    {
+      "id": "jenkins-maven",
+      "title": "Jenkins with Maven",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-maven.json"
+    },
+    {
+      "id": "jenkins-gradle",
+      "title": "Jenkins with Gradle",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "jenkins-gradle.json"
+    }
+  ]
+}
