@@ -1,0 +1,172 @@
+{
+  "topics": [
+    {
+      "id": "cicd-fundamentals",
+      "title": "CI/CD Fundamentals",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "file": "cicd-fundamentals.json"
+    },
+    {
+      "id": "cicd-pipeline",
+      "title": "CI/CD Pipeline",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-pipeline.json"
+    },
+    {
+      "id": "cicd-build-automation",
+      "title": "Build Automation",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-build-automation.json"
+    },
+    {
+      "id": "cicd-test-automation",
+      "title": "Test Automation in CI/CD",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-test-automation.json"
+    },
+    {
+      "id": "cicd-code-quality",
+      "title": "Linting & Code Quality",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-code-quality.json"
+    },
+    {
+      "id": "cicd-artifacts",
+      "title": "Artifacts & Build Outputs",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-artifacts.json"
+    },
+    {
+      "id": "cicd-docker",
+      "title": "Docker in CI/CD",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-docker.json"
+    },
+    {
+      "id": "cicd-environments",
+      "title": "Environment Management",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-environments.json"
+    },
+    {
+      "id": "cicd-secrets",
+      "title": "Secrets Management in CI/CD",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-secrets.json"
+    },
+    {
+      "id": "cicd-triggers",
+      "title": "Pipeline Triggers",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "cicd-triggers.json"
+    },
+    {
+      "id": "cicd-parallel",
+      "title": "Parallel Execution",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-parallel.json"
+    },
+    {
+      "id": "cicd-caching",
+      "title": "Pipeline Caching",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-caching.json"
+    },
+    {
+      "id": "cicd-blue-green",
+      "title": "Blue-Green Deployment",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-blue-green.json"
+    },
+    {
+      "id": "cicd-canary",
+      "title": "Canary Deployment",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-canary.json"
+    },
+    {
+      "id": "cicd-rollback",
+      "title": "Rollback Strategies",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-rollback.json"
+    },
+    {
+      "id": "cicd-deploy-envs",
+      "title": "Deployment Environments & Promotion",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-deploy-envs.json"
+    },
+    {
+      "id": "cicd-iac",
+      "title": "Infrastructure as Code in CI/CD",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "cicd-iac.json"
+    },
+    {
+      "id": "cicd-monitoring",
+      "title": "Monitoring & Observability",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "cicd-monitoring.json"
+    },
+    {
+      "id": "cicd-security",
+      "title": "CI/CD Security",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "cicd-security.json"
+    },
+    {
+      "id": "cicd-notifications",
+      "title": "Pipeline Notifications",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "cicd-notifications.json"
+    },
+    {
+      "id": "cicd-jenkins",
+      "title": "Jenkins",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "cicd-jenkins.json"
+    },
+    {
+      "id": "cicd-gitlab",
+      "title": "GitLab CI/CD",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-gitlab.json"
+    },
+    {
+      "id": "cicd-circleci",
+      "title": "CircleCI",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cicd-circleci.json"
+    },
+    {
+      "id": "cicd-best-practices",
+      "title": "CI/CD Best Practices",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cicd-best-practices.json"
+    }
+  ]
+}

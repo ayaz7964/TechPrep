@@ -1,0 +1,130 @@
+{
+  "topics": [
+    {
+      "id": "github-basics",
+      "title": "GitHub Basics",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-basics.json"
+    },
+    {
+      "id": "github-repos",
+      "title": "GitHub Repositories",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-repos.json"
+    },
+    {
+      "id": "github-pull-requests",
+      "title": "Pull Requests",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-pull-requests.json"
+    },
+    {
+      "id": "github-code-reviews",
+      "title": "Code Reviews",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-code-reviews.json"
+    },
+    {
+      "id": "github-branch-protection",
+      "title": "Branch Protection Rules",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-branch-protection.json"
+    },
+    {
+      "id": "github-issues",
+      "title": "GitHub Issues",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-issues.json"
+    },
+    {
+      "id": "github-actions-basics",
+      "title": "GitHub Actions Basics",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 25,
+      "file": "github-actions-basics.json"
+    },
+    {
+      "id": "github-actions-advanced",
+      "title": "GitHub Actions Advanced",
+      "difficulty": "advanced",
+      "estimatedMinutes": 30,
+      "file": "github-actions-advanced.json"
+    },
+    {
+      "id": "github-pages",
+      "title": "GitHub Pages",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-pages.json"
+    },
+    {
+      "id": "github-wikis",
+      "title": "GitHub Wikis",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "github-wikis.json"
+    },
+    {
+      "id": "github-security",
+      "title": "GitHub Security",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-security.json"
+    },
+    {
+      "id": "github-cli",
+      "title": "GitHub CLI & Desktop",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "github-cli.json"
+    },
+    {
+      "id": "github-orgs",
+      "title": "GitHub Organizations",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "github-orgs.json"
+    },
+    {
+      "id": "github-gists",
+      "title": "GitHub Gists",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "github-gists.json"
+    },
+    {
+      "id": "github-projects",
+      "title": "GitHub Projects (Beta)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "github-projects.json"
+    },
+    {
+      "id": "github-releases",
+      "title": "GitHub Releases",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "github-releases.json"
+    },
+    {
+      "id": "github-api",
+      "title": "GitHub API & Webhooks",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "github-api.json"
+    },
+    {
+      "id": "github-discussions",
+      "title": "GitHub Discussions",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "github-discussions.json"
+    }
+  ]
+}

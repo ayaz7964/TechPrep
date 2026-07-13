@@ -1,0 +1,193 @@
+{
+  "topics": [
+    {
+      "id": "git-basics",
+      "title": "Git Basics",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "git-basics.json"
+    },
+    {
+      "id": "git-branching",
+      "title": "Git Branching",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-branching.json"
+    },
+    {
+      "id": "git-init",
+      "title": "Git Init",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-init.json"
+    },
+    {
+      "id": "git-clone",
+      "title": "Git Clone",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-clone.json"
+    },
+    {
+      "id": "git-status",
+      "title": "Git Status",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "git-status.json"
+    },
+    {
+      "id": "git-add",
+      "title": "Git Add",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "git-add.json"
+    },
+    {
+      "id": "git-commit",
+      "title": "Git Commit",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-commit.json"
+    },
+    {
+      "id": "git-push",
+      "title": "Git Push",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-push.json"
+    },
+    {
+      "id": "git-pull",
+      "title": "Git Pull",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-pull.json"
+    },
+    {
+      "id": "git-merge",
+      "title": "Git Merge",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-merge.json"
+    },
+    {
+      "id": "git-rebase",
+      "title": "Git Rebase",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-rebase.json"
+    },
+    {
+      "id": "git-stash",
+      "title": "Git Stash",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-stash.json"
+    },
+    {
+      "id": "git-cherry-pick",
+      "title": "Git Cherry Pick",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-cherry-pick.json"
+    },
+    {
+      "id": "git-revert",
+      "title": "Git Revert",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-revert.json"
+    },
+    {
+      "id": "git-reset",
+      "title": "Git Reset",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-reset.json"
+    },
+    {
+      "id": "git-tags",
+      "title": "Git Tags",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-tags.json"
+    },
+    {
+      "id": "git-hooks",
+      "title": "Git Hooks",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-hooks.json"
+    },
+    {
+      "id": "git-ignore",
+      "title": "Git Ignore",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-ignore.json"
+    },
+    {
+      "id": "git-log",
+      "title": "Git Log",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-log.json"
+    },
+    {
+      "id": "git-diff",
+      "title": "Git Diff",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-diff.json"
+    },
+    {
+      "id": "git-blame",
+      "title": "Git Blame",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-blame.json"
+    },
+    {
+      "id": "git-reflog",
+      "title": "Git Reflog",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "git-reflog.json"
+    },
+    {
+      "id": "git-bisect",
+      "title": "Git Bisect",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "git-bisect.json"
+    },
+    {
+      "id": "git-submodule",
+      "title": "Git Submodule",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "git-submodule.json"
+    },
+    {
+      "id": "git-worktree",
+      "title": "Git Worktree",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "git-worktree.json"
+    },
+    {
+      "id": "git-clean",
+      "title": "Git Clean",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 5,
+      "file": "git-clean.json"
+    },
+    {
+      "id": "git-archive",
+      "title": "Git Archive",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-archive.json"
+    }
+  ]
+}
