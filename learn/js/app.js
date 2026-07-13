@@ -441,7 +441,16 @@ var EMBEDDED = {
       { id: "sql-data-types",                title: "Data Types Deep Dive",            difficulty: "intermediate", estimatedMinutes: 25, file: "sql-data-types.json" },
       { id: "sql-partitioning",              title: "Table Partitioning",              difficulty: "advanced",     estimatedMinutes: 30, file: "sql-partitioning.json" },
       { id: "sql-pivot",                     title: "PIVOT & Crosstab Queries",        difficulty: "advanced",     estimatedMinutes: 25, file: "sql-pivot.json" },
-      { id: "sql-er-diagrams",               title: "ER Diagrams & Database Design",   difficulty: "intermediate", estimatedMinutes: 25, file: "sql-er-diagrams.json" }
+      { id: "sql-er-diagrams",               title: "ER Diagrams & Database Design",   difficulty: "intermediate", estimatedMinutes: 25, file: "sql-er-diagrams.json" },
+      { id: "sql-null-handling",              title: "NULL Handling & Three-Valued Logic",difficulty: "intermediate", estimatedMinutes: 20, file: "sql-null-handling.json" },
+      { id: "sql-lateral-joins",              title: "LATERAL Joins",                   difficulty: "advanced",     estimatedMinutes: 25, file: "sql-lateral-joins.json" },
+      { id: "sql-locking-concurrency",        title: "Locking & Concurrency",           difficulty: "intermediate", estimatedMinutes: 25, file: "sql-locking-concurrency.json" },
+      { id: "sql-pattern-matching",           title: "Advanced Pattern Matching",        difficulty: "intermediate", estimatedMinutes: 20, file: "sql-pattern-matching.json" },
+      { id: "sql-pagination",                 title: "Pagination Strategies",            difficulty: "intermediate", estimatedMinutes: 20, file: "sql-pagination.json" },
+      { id: "sql-anti-patterns",              title: "SQL Anti-Patterns",                difficulty: "intermediate", estimatedMinutes: 25, file: "sql-anti-patterns.json" },
+      { id: "sql-db-comparison",              title: "PostgreSQL vs MySQL vs SQL Server",difficulty: "beginner",     estimatedMinutes: 20, file: "sql-db-comparison.json" },
+      { id: "sql-orms",                       title: "ORMs & SQL",                      difficulty: "intermediate", estimatedMinutes: 20, file: "sql-orms.json" },
+      { id: "sql-migrations",                 title: "Database Migration & Version Control",difficulty: "intermediate",estimatedMinutes: 20, file: "sql-migrations.json" }
     ]
   }
 };

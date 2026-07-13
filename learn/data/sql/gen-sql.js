@@ -3747,6 +3747,1122 @@ addTopic('sql-er-diagrams', 'ER Diagrams & Database Design', 'intermediate', 25,
   ]
 );
 
+/* =================== TOPIC 38: NULL Handling & Three-Valued Logic =================== */
+addTopic('sql-null-handling', 'NULL Handling & Three-Valued Logic', 'intermediate', 20,
+  ['NULL represents missing or unknown data in SQL. It is not a value — it is the absence of a value.',
+   'Three-valued logic: comparisons with NULL return UNKNOWN (neither TRUE nor FALSE). WHERE filters out rows where the condition is UNKNOWN.',
+   'NULL is not equal to NULL. NULL = NULL returns UNKNOWN, not TRUE. Use IS NULL to check for NULL.',
+   'Aggregate functions (except COUNT(*)) ignore NULLs. String concatenation with NULL returns NULL (in most databases).'
+  ],
+  'NULL is like an empty box in a storage unit. You cannot tell if the box is empty by comparing it to another empty box — "is this empty box the same as that empty box?" has no meaningful answer. You need to check each box individually with IS NULL.',
+  [
+    d('NULL = NULL is Not TRUE', 'NULL = NULL evaluates to UNKNOWN, not TRUE. NULL <> NULL also evaluates to UNKNOWN. This is the most common source of SQL bugs. Use IS NULL / IS NOT NULL for NULL checks. Use IS DISTINCT FROM (PostgreSQL) for NULL-safe equality comparison.'),
+    d('Three-Valued Logic Truth Tables', 'TRUE AND UNKNOWN = UNKNOWN. FALSE AND UNKNOWN = FALSE. TRUE OR UNKNOWN = TRUE. FALSE OR UNKNOWN = UNKNOWN. NOT UNKNOWN = UNKNOWN. WHERE clause includes rows only where the condition evaluates to TRUE.'),
+    d('NULL in WHERE Clauses', 'WHERE column = NULL returns no rows (because NULL = NULL is UNKNOWN). WHERE column <> NULL also returns no rows. WHERE column IS NULL correctly finds NULL rows. Always use IS NULL/NOT NULL for NULL checks.'),
+    d('NULL in Aggregates', 'COUNT(*) counts all rows including NULLs. COUNT(column) counts non-NULL values. SUM, AVG, MIN, MAX ignore NULLs. AVG of all NULLs returns NULL. Use COALESCE: AVG(COALESCE(column, 0)) to handle NULLs.'),
+    d('NULL in Expressions', 'NULL + 5 = NULL. NULL || \'text\' = NULL (PostgreSQL). CONCAT ignores NULLs (standard SQL). CASE WHEN NULL THEN ... END — the WHEN condition is NULL, which is UNKNOWN, so it falls to ELSE. IN with NULL: NULL IN (1,2,3) returns UNKNOWN.')
+  ],
+  'NULL handling is one of the most important and misunderstood SQL concepts. Every SQL developer should understand three-valued logic, IS NULL vs = NULL, and how NULLs behave in WHERE, JOIN, aggregation, and expressions.',
+  [
+    q('What is NULL in SQL?', 'A marker indicating missing or unknown data. It is not a value — it represents the absence of a value.'),
+    q('Why does NULL = NULL return UNKNOWN?', 'NULL represents unknown. Comparing two unknown values has no meaningful result. SQL uses three-valued logic: TRUE, FALSE, UNKNOWN.'),
+    q('How do you check for NULL?', 'Use IS NULL or IS NOT NULL. Never use = NULL or <> NULL.'),
+    q('What is IS DISTINCT FROM?', 'A PostgreSQL operator that treats NULL as a comparable value. NULL IS DISTINCT FROM NULL is FALSE, unlike NULL = NULL which is UNKNOWN.'),
+    q('How do aggregate functions handle NULLs?', 'COUNT(*) includes NULLs. COUNT(column) excludes NULLs. SUM, AVG, MIN, MAX ignore NULLs.'),
+    q('What happens when NULL appears in a WHERE clause?', 'Rows where the WHERE condition evaluates to UNKNOWN (from NULL comparisons) are excluded. Only TRUE rows are included.'),
+    q('What does NULL + 5 return?', 'NULL. Any arithmetic with NULL yields NULL. Use COALESCE to provide a default.'),
+    q('What does NOT IN with NULL subquery return?', 'If the subquery returns any NULL, NOT IN returns no rows. Use NOT EXISTS instead for safe NULL handling.'),
+    q('How does CASE handle NULL?', 'CASE WHEN NULL THEN ... is UNKNOWN, so it falls to the next WHEN or ELSE. Use WHEN expr IS NULL THEN ... for explicit NULL handling.'),
+    q('What is COALESCE?', 'Returns the first non-NULL argument. COALESCE(NULL, 5, 10) returns 5. Useful for providing default values for NULL columns.')
+  ],
+  R(10,35,100,25,'#0070f3','','= NULL?','UNKNOWN') +
+  R(10,65,100,25,'#28a745','','IS NULL','Correct check') +
+  R(10,95,100,25,'#ffc107','','AND/OR','3VL logic') +
+  R(10,125,100,25,'#dc3545','','COALESCE','Default val') +
+  R(10,155,100,25,'#e83e8c','','NOT IN','NULL trap') +
+  A(110,48,140,48) + A(110,78,140,78) + A(110,108,140,108) + A(110,138,140,138) + A(110,168,140,168) +
+  R(150,35,230,155,'#17a2b8','','NULL & Three-Valued Logic','NULL is not a value. Understand three-valued logic to avoid the #1 SQL bug.') +
+  T(240,220,'NULL Handling: Three-valued logic, IS NULL, COALESCE, and the NULL pitfalls to avoid.',9,'#666','middle'),
+  [
+    e('NULL = NULL Trap', 'Demonstrating the issue.', codeBlock([
+      '-- Create test data',
+      'CREATE TABLE test (id INT, name TEXT);',
+      "INSERT INTO test VALUES (1, 'Alice'), (2, NULL);",
+      '',
+      '-- This returns NO rows:',
+      'SELECT * FROM test WHERE name = NULL;',
+      '',
+      '-- This also returns NO rows:',
+      'SELECT * FROM test WHERE name <> NULL;',
+      '',
+      '-- This correctly finds NULL rows:',
+      'SELECT * FROM test WHERE name IS NULL; -- returns id=2',
+      '',
+      '-- This finds non-NULL rows:',
+      'SELECT * FROM test WHERE name IS NOT NULL; -- returns id=1'
+    ]), 'Demonstrates why = NULL never works and IS NULL is required.'),
+    e('NOT IN vs NOT EXISTS', 'The NULL trap.', codeBlock([
+      '-- NOT IN with NULL in subquery returns nothing:',
+      'SELECT * FROM employees',
+      'WHERE dept_id NOT IN (',
+      '  SELECT id FROM departments WHERE status = \'inactive\'',
+      ');',
+      '-- If any dept id is NULL, this returns 0 rows!',
+      '',
+      '-- Safe alternative with NOT EXISTS:',
+      'SELECT * FROM employees e',
+      'WHERE NOT EXISTS (',
+      '  SELECT 1 FROM departments d',
+      "  WHERE d.id = e.dept_id AND d.status = 'inactive'",
+      ');'
+    ]), 'NOT IN with NULL subquery returns no rows — use NOT EXISTS instead.'),
+    e('COALESCE and NULLIF', 'Practical NULL handling.', codeBlock([
+      '-- COALESCE: first non-NULL value',
+      'SELECT',
+      '  name,',
+      '  COALESCE(phone, email, \'No contact\') AS contact,',
+      '  COALESCE(salary, 0) AS salary',
+      'FROM employees;',
+      '',
+      '-- NULLIF: create NULL when equal',
+      'SELECT',
+      '  department,',
+      '  SUM(salary) / NULLIF(COUNT(*), 0) AS avg_salary',
+      'FROM employees',
+      'GROUP BY department;'
+    ]), 'COALESCE provides defaults; NULLIF prevents division by zero.'),
+    e('IS DISTINCT FROM', 'NULL-safe comparison (PostgreSQL).', codeBlock([
+      '-- Regular comparison (NULL unsafe):',
+      "SELECT * FROM products WHERE price = 100; -- misses NULL prices",
+      '',
+      '-- NULL-safe comparison:',
+      "SELECT * FROM products WHERE price IS NOT DISTINCT FROM 100;",
+      '-- Returns rows where price = 100 OR price IS NULL',
+      '',
+      '-- Opposite:',
+      "SELECT * FROM products WHERE price IS DISTINCT FROM 100;",
+      '-- Returns rows where price <> 100 AND price IS NOT NULL'
+    ]), 'IS DISTINCT FROM treats NULL as a comparable value.'),
+    e('NULL in JOIN Conditions', 'How NULLs affect JOINs.', codeBlock([
+      '-- INNER JOIN with NULL FK:',
+      'SELECT e.name, d.department_name',
+      'FROM employees e',
+      'JOIN departments d ON e.dept_id = d.id;',
+      '-- Employees with NULL dept_id are EXCLUDED',
+      '',
+      '-- LEFT JOIN shows NULL dept:',
+      'SELECT e.name, d.department_name',
+      'FROM employees e',
+      'LEFT JOIN departments d ON e.dept_id = d.id;',
+      '-- NULL dept_id shows department_name as NULL'
+    ]), 'INNER JOIN silently drops rows with NULL foreign keys; LEFT JOIN preserves them.')
+  ],
+  [
+    m('What does NULL = NULL evaluate to?', ['TRUE', 'FALSE', 'UNKNOWN', 'NULL'], 2, 'NULL = NULL evaluates to UNKNOWN in three-valued logic.'),
+    m('How do you correctly check for NULL?', ['= NULL', 'IS NULL', '== NULL', 'EQUALS NULL'], 1, 'Use IS NULL to check for NULL values.'),
+    m('Which aggregate includes NULLs?', ['COUNT(column)', 'COUNT(*)', 'SUM', 'AVG'], 1, 'COUNT(*) counts all rows including NULLs.'),
+    m('What does COALESCE(NULL, 5, 10) return?', ['NULL', '5', '10', 'Error'], 1, 'COALESCE returns the first non-NULL value, which is 5.'),
+    m('What happens with NOT IN if the subquery has NULL?', ['Works normally', 'Returns no rows', 'Errors', 'Ignores NULL'], 1, 'NOT IN with NULL in the subquery returns zero rows.'),
+    m('What PostgreSQL operator is NULL-safe?', ['<=>', 'IS DISTINCT FROM', '===', 'IS NOT'], 1, 'IS DISTINCT FROM treats NULL as a comparable value.')
+  ]
+);
+
+/* =================== TOPIC 39: LATERAL Joins =================== */
+addTopic('sql-lateral-joins', 'LATERAL Joins', 'advanced', 25,
+  ['LATERAL allows a subquery in the FROM clause to reference columns from preceding FROM items, enabling row-by-row subquery execution.',
+   'Without LATERAL, subqueries in FROM execute independently. With LATERAL, they can reference columns from tables/CTEs listed before them.',
+   'LATERAL is powerful for: top-N per group, applying functions per row, and complex joins that depend on outer row values.',
+   'PostgreSQL, Oracle, and SQL Server support LATERAL. MySQL does not support it (before 8.0.14).'
+  ],
+  'A regular subquery in FROM is like a caterer who brings the same food to every table regardless of who is sitting there. A LATERAL subquery is like a chef who asks each table what they want and customizes the dish individually based on the table\'s preferences.',
+  [
+    d('Basic LATERAL Syntax', 'SELECT * FROM table1 t1, LATERAL (SELECT * FROM table2 WHERE t2.id = t1.id) sub. The LATERAL subquery runs once for each row in t1. Can also use JOIN LATERAL ... ON true for explicit join syntax.'),
+    d('Top-N Per Group with LATERAL', 'SELECT d.name, sub.* FROM departments d, LATERAL (SELECT * FROM employees WHERE dept_id = d.id ORDER BY salary DESC LIMIT 3) sub. Gets top 3 earners per department without complex window functions.'),
+    d('LATERAL with Set-Returning Functions', 'SELECT t.id, f.value FROM table t, LATERAL jsonb_array_elements(t.data) AS f(value). Expands JSON arrays per row. Also works with generate_series, unnest, and other set-returning functions.'),
+    d('LATERAL vs Correlated Subquery', 'LATERAL subqueries can return multiple columns and rows (like a table). Correlated subqueries in WHERE/SELECT return scalar values. LATERAL in FROM can reference multiple preceding tables.'),
+    d('Multiple LATERAL Subqueries', 'SELECT * FROM table t, LATERAL (SELECT ... WHERE ... = t.id) sub1, LATERAL (SELECT ... WHERE ... = sub1.id) sub2. Each subsequent LATERAL can reference all preceding FROM items.')
+  ],
+  'LATERAL is one of PostgreSQL\'s most powerful features. It enables per-row subquery execution, top-N per group queries, and clean expansion of array/JSON data. It often replaces complex window functions and correlated subqueries with more readable code.',
+  [
+    q('What is LATERAL?', 'A keyword that allows a FROM subquery to reference columns from preceding FROM items, enabling per-row execution.'),
+    q('How is LATERAL different from a regular subquery?', 'Regular subqueries in FROM execute independently. LATERAL subqueries can reference columns from tables listed before them.'),
+    q('What is the LATERAL syntax?', 'FROM table1 t1, LATERAL (SELECT ... WHERE col = t1.col) sub. Or: FROM table1 t1 JOIN LATERAL (...) sub ON true.'),
+    q('What is a common use for LATERAL?', 'Top-N per group: for each department, get top 3 employees by salary. Best performing employees per team, etc.'),
+    q('How does LATERAL work with set-returning functions?', 'LATERAL is automatically applied when using set-returning functions in FROM: FROM table, jsonb_array_elements(data).'),
+    q('Can you have multiple LATERAL subqueries?', 'Yes. Each subsequent one can reference all preceding FROM items including previous LATERAL subqueries.'),
+    q('Does MySQL support LATERAL?', 'MySQL 8.0.14+ supports LATERAL (limited). Not fully supported in older versions.'),
+    q('What is the alternative to LATERAL for top-N?', 'Window functions with ROW_NUMBER() in a subquery/CTE, then filter WHERE rn <= N. LATERAL is often more readable.'),
+    q('Can LATERAL reference CTEs?', 'Yes. WITH cte AS (...) SELECT * FROM cte, LATERAL (SELECT ... WHERE ... = cte.id).'),
+    q('Can LATERAL return multiple rows?', 'Yes. LATERAL subqueries can return multiple rows, causing the outer query to multiply rows (like JOIN).')
+  ],
+  R(10,35,120,25,'#0070f3','','FROM t1, LATERAL','Row-by-row') +
+  A(130,48,160,48) +
+  R(170,35,120,25,'#28a745','','Top-N/Group','Per group LIMIT') +
+  R(170,65,120,25,'#ffc107','','Set-Return','jsonb, unnest') +
+  R(170,95,120,25,'#dc3545','','Multiple','Chain LATERALs') +
+  R(10,100,120,25,'#e83e8c','','vs Correlated','Multi-row/col') +
+  A(290,48,320,48) + A(290,78,320,78) + A(290,108,320,108) +
+  R(330,35,150,100,'#17a2b8','','LATERAL Joins','Row-by-row subqueries that can reference preceding FROM items.') +
+  T(240,195,'LATERAL: Per-row subquery execution for top-N per group and set-returning functions.',9,'#666','middle'),
+  [
+    e('Top-N Per Department', '3 highest paid per dept.', codeBlock([
+      'SELECT d.department_name, sub.name, sub.salary',
+      'FROM departments d,',
+      'LATERAL (',
+      '  SELECT name, salary',
+      '  FROM employees',
+      '  WHERE dept_id = d.id',
+      '  ORDER BY salary DESC',
+      '  LIMIT 3',
+      ') sub',
+      'ORDER BY d.department_name, sub.salary DESC;'
+    ]), 'Gets top 3 employees per department using LATERAL. Cleaner than ROW_NUMBER() approach.'),
+    e('LATERAL with JSONB', 'Expand JSON arrays per row.', codeBlock([
+      'CREATE TABLE orders (',
+      '  id INT,',
+      '  items JSONB -- [{"product": "A", "qty": 2}, {"product": "B", "qty": 1}]',
+      ');',
+      '',
+      'SELECT o.id, item->>\'product\' AS product,',
+      '  (item->>\'qty\')::INT AS quantity',
+      'FROM orders o,',
+      'LATERAL jsonb_array_elements(o.items) AS item;'
+    ]), 'Expands JSON array into rows using LATERAL with set-returning function.'),
+    e('LATERAL with generate_series', 'Fill missing dates.', codeBlock([
+      '-- Generate last 7 days for each product',
+      "SELECT p.name, d.date",
+      'FROM products p,',
+      'LATERAL generate_series(',
+      "  CURRENT_DATE - 6, CURRENT_DATE, '1 day'",
+      ') AS d(date)',
+      'WHERE p.status = \'active\'',
+      'ORDER BY p.name, d.date;'
+    ]), 'Creates date/product cross-product using LATERAL with generate_series.'),
+    e('Multiple LATERAL References', 'Chained subqueries.', codeBlock([
+      'SELECT e.name, e.salary,',
+      '  sub1.dept_avg, sub2.company_max',
+      'FROM employees e,',
+      'LATERAL (',
+      '  SELECT AVG(salary) AS dept_avg',
+      '  FROM employees WHERE dept_id = e.dept_id',
+      ') sub1,',
+      'LATERAL (',
+      '  SELECT MAX(salary) AS company_max',
+      '  FROM employees',
+      ') sub2;'
+    ]), 'Each LATERAL subquery builds on the previous, computing per-row statistics.'),
+    e('LATERAL with LIMIT for Recommendations', 'Related products.', codeBlock([
+      'SELECT c.name AS customer, rp.name AS recommended',
+      'FROM customers c,',
+      'LATERAL (',
+      '  SELECT DISTINCT p2.name',
+      '  FROM orders o1',
+      '  JOIN order_items oi1 ON o1.id = oi1.order_id',
+      '  JOIN products p1 ON oi1.product_id = p1.id',
+      '  JOIN order_items oi2 ON oi1.product_id <> oi2.product_id',
+      '  JOIN products p2 ON oi2.product_id = p2.id',
+      '  JOIN orders o2 ON oi2.order_id = o2.id',
+      '  WHERE o1.customer_id = c.id',
+      '  AND o2.customer_id = c.id',
+      '  ORDER BY RANDOM()',
+      '  LIMIT 3',
+      ') rp;'
+    ]), 'Recommends 3 related products per customer based on purchase history.')
+  ],
+  [
+    m('What keyword enables per-row subqueries in FROM?', ['CROSS', 'LATERAL', 'ROW', 'PER ROW'], 1, 'LATERAL allows FROM subqueries to reference preceding columns.'),
+    m('What is LATERAL commonly used for?', ['Simple filtering', 'Top-N per group', 'Bulk updates', 'Table creation'], 1, 'LATERAL excels at top-N per group queries.'),
+    m('Can LATERAL return multiple rows?', ['Yes', 'No', 'Only one column', 'Only scalars'], 0, 'LATERAL subqueries can return multiple rows like a joined table.'),
+    m('What databases support LATERAL?', ['MySQL only', 'PostgreSQL, Oracle, SQL Server', 'SQLite only', 'All databases'], 1, 'PostgreSQL, Oracle, and SQL Server support LATERAL.'),
+    m('How does LATERAL differ from a correlated subquery?', ['Same thing', 'LATERAL can return multiple cols/rows', 'Correlated is faster', 'LATERAL is only for WHERE'], 1, 'LATERAL can return multiple columns and rows; correlated scalar subqueries return single values.'),
+    m('Is LATERAL automatic with set-returning functions?', ['Yes', 'No', 'Only in PostgreSQL', 'Only in Oracle'], 0, 'Set-returning functions in FROM automatically use LATERAL behavior.')
+  ]
+);
+
+/* =================== TOPIC 40: Locking & Concurrency =================== */
+addTopic('sql-locking-concurrency', 'Locking & Concurrency', 'intermediate', 25,
+  ['PostgreSQL uses Multi-Version Concurrency Control (MVCC) — each transaction sees a snapshot of data as of when it started.',
+  'Row-level locks: FOR UPDATE (write lock), FOR NO KEY UPDATE, FOR SHARE (read lock), FOR KEY SHARE.',
+  'SKIP LOCKED skips rows locked by other transactions — useful for job queues. NOWAIT errors immediately if row is locked.',
+  'Deadlocks occur when two transactions wait for each other\'s locks. PostgreSQL detects and resolves them automatically.'
+  ],
+  'Locking is like a bathroom key at a restaurant. When you use the bathroom (update a row), you lock the door (row lock). Others wait. MVCC is like a window that shows the bathroom as it was when you entered — even if someone else changes it later, you still see the old state until you leave.',
+  [
+    d('MVCC (Multi-Version Concurrency Control)', 'Each transaction sees a snapshot of data at its start time. Readers never block writers; writers never block readers. Old row versions remain visible to concurrent transactions that started before the change. Cleaned up by VACUUM.'),
+    d('Row-Level Lock Types', 'FOR UPDATE — strongest lock, prevents other transactions from updating, deleting, or locking the row. FOR NO KEY UPDATE — weaker than FOR UPDATE (allows other FOR KEY SHARE locks). FOR SHARE — read lock, prevents writes. FOR KEY SHARE — weakest, allows NO KEY UPDATE.'),
+    d('SKIP LOCKED and NOWAIT', 'SELECT ... FOR UPDATE SKIP LOCKED — skip rows locked by others, only return available rows. Perfect for job queues. SELECT ... FOR UPDATE NOWAIT — error immediately if any selected row is locked (no waiting).'),
+    d('Deadlock Detection', 'PostgreSQL checks for deadlock cycles every deadlock_timeout (default 1 second). When detected, one transaction is aborted with ERROR: deadlock detected. The aborted transaction can be retried. Prevention: consistent lock ordering.'),
+    d('Advisory Locks', 'pg_advisory_lock(key) — application-level locks not tied to rows. pg_try_advisory_lock — non-blocking attempt. Useful for coordinating across transactions or applications. Session-level or transaction-level variants.')
+  ],
+  'PostgreSQL\'s MVCC means SELECT queries never block writes and writes never block SELECTs. Row-level locking with FOR UPDATE is for explicit coordination. SKIP LOCKED is ideal for queue systems. Always design for the lowest lock level that ensures correctness.',
+  [
+    q('What is MVCC?', 'Multi-Version Concurrency Control — each transaction sees a consistent snapshot. Readers don\'t block writers.'),
+    q('What does FOR UPDATE do?', 'Locks selected rows exclusively. Other transactions cannot UPDATE, DELETE, or lock the rows until the lock is released.'),
+    q('What is the difference between FOR UPDATE and FOR SHARE?', 'FOR UPDATE is an exclusive write lock. FOR SHARE is a shared read lock — other transactions can also read-lock but cannot write-lock.'),
+    q('What does SKIP LOCKED do?', 'Skips rows that are already locked by other transactions, returning only available rows.'),
+    q('What does NOWAIT do?', 'Returns an error immediately if any selected row is locked, instead of waiting for the lock to be released.'),
+    q('What causes a deadlock?', 'Two or more transactions each holding locks that the others need. PostgreSQL detects and resolves by aborting one transaction.'),
+    q('How do you prevent deadlocks?', 'Access tables in a consistent order across all transactions. Keep transactions short. Use the lowest lock level needed.'),
+    q('What is an advisory lock?', 'An application-level lock not tied to specific rows. Useful for coordinating access to shared resources across transactions.'),
+    q('Does SELECT block INSERT?', 'No. Under MVCC, SELECT reads a snapshot. INSERT adds new rows. Readers and writers do not block each other.'),
+    q('What is the default lock timeout?', 'PostgreSQL has no default lock timeout — it waits indefinitely. Set lock_timeout in postgresql.conf or per session.')
+  ],
+  R(10,35,110,25,'#0070f3','','MVCC','Snapshots') +
+  R(10,65,110,25,'#28a745','','FOR UPDATE','Write lock') +
+  R(10,95,110,25,'#ffc107','','FOR SHARE','Read lock') +
+  R(10,125,110,25,'#dc3545','','SKIP LOCKED','Queue') +
+  R(10,155,110,25,'#e83e8c','','Deadlock','Detection') +
+  A(120,48,150,48) + A(120,78,150,78) + A(120,108,150,108) + A(120,138,150,138) + A(120,168,150,168) +
+  R(160,35,220,155,'#17a2b8','','Locking & Concurrency','MVCC, row locks, SKIP LOCKED, and deadlock handling in PostgreSQL.') +
+  T(240,220,'Locking & Concurrency: MVCC, FOR UPDATE, SKIP LOCKED, and deadlock prevention.',9,'#666','middle'),
+  [
+    e('FOR UPDATE with SKIP LOCKED', 'Job queue worker.', codeBlock([
+      '-- Worker picks next available job (queue pattern)',
+      'BEGIN;',
+      '',
+      'SELECT id, payload FROM job_queue',
+      'WHERE status = \'pending\'',
+      'ORDER BY created_at ASC',
+      'LIMIT 1',
+      'FOR UPDATE SKIP LOCKED;',
+      '',
+      '-- If row found, update status',
+      "UPDATE job_queue SET status = 'processing',",
+      '  started_at = NOW()',
+      'WHERE id = <selected_id>;',
+      '',
+      'COMMIT;',
+      '',
+      '-- SKIP LOCKED ensures workers don\'t fight over the same job'
+    ]), 'Concurrent job queue with SKIP LOCKED — each worker gets a unique job.'),
+    e('Locking for Inventory', 'Prevent overselling.', codeBlock([
+      'BEGIN;',
+      '',
+      '-- Lock the product row',
+      'SELECT quantity FROM products WHERE id = 10',
+      'FOR UPDATE;',
+      '',
+      '-- Check stock',
+      '-- quantity = 5',
+      '',
+      '-- Decrement safely',
+      'UPDATE products SET quantity = quantity - 1',
+      'WHERE id = 10 AND quantity > 0;',
+      '',
+      '-- Insert order',
+      'INSERT INTO orders (product_id, quantity)',
+      'VALUES (10, 1);',
+      '',
+      'COMMIT;'
+    ]), 'FOR UPDATE prevents two concurrent buyers from purchasing the last item.'),
+    e('NOWAIT for Immediate Feedback', 'Fail fast if locked.', codeBlock([
+      '-- Try to lock, error immediately if locked',
+      "SELECT * FROM employees WHERE id = 5",
+      "FOR UPDATE NOWAIT;",
+      '',
+      '-- If another transaction holds a lock:',
+      '-- ERROR: could not obtain lock on row in relation "employees"',
+      '-- Application catches this and retries later'
+    ]), 'NOWAIT provides immediate feedback instead of waiting for potentially long-held locks.'),
+    e('Advisory Lock for Application Coordinatio', 'Cross-session locking.', codeBlock([
+      '-- Lock application resource',
+      'SELECT pg_advisory_lock(12345);',
+      '',
+      '-- Critical section',
+      'UPDATE accounts SET balance = balance + 100 WHERE id = 1;',
+      '',
+      '-- Release lock',
+      'SELECT pg_advisory_unlock(12345);',
+      '',
+      '-- Non-blocking version:',
+      'SELECT pg_try_advisory_lock(12345);',
+      '-- Returns true if lock acquired, false if already locked'
+    ]), 'Advisory locks coordinate access across transactions without row-level locking.'),
+    e('Deadlock Example', 'How deadlocks happen.', codeBlock([
+      '-- Transaction A:',
+      'BEGIN;',
+      'UPDATE accounts SET balance = 0 WHERE id = 1;',
+      '-- (holds lock on account 1)',
+      '',
+      '-- Transaction B:',
+      'BEGIN;',
+      'UPDATE accounts SET balance = 0 WHERE id = 2;',
+      '-- (holds lock on account 2)',
+      '',
+      '-- Transaction A:',
+      'UPDATE accounts SET balance = 100 WHERE id = 2;',
+      '-- (waits for B\'s lock on account 2)',
+      '',
+      '-- Transaction B:',
+      'UPDATE accounts SET balance = 100 WHERE id = 1;',
+      '-- (waits for A\'s lock on account 1)',
+      '-- DEADLOCK! PostgreSQL kills one transaction'
+    ]), 'Classic deadlock scenario. Prevention: always lock accounts in the same order.')
+  ],
+  [
+    m('What does MVCC stand for?', ['Multi-Value Consistency Check', 'Multi-Version Concurrency Control', 'Multi-View Consistent Copy', 'Main Version Control Cache'], 1, 'MVCC stands for Multi-Version Concurrency Control.'),
+    m('What does FOR UPDATE do?', ['Read lock', 'Write (exclusive) lock', 'Table lock', 'Schema lock'], 1, 'FOR UPDATE acquires an exclusive write lock on selected rows.'),
+    m('What does SKIP LOCKED skip?', ['Locked tables', 'Locked rows', 'NULL values', 'Indexes'], 1, 'SKIP LOCKED returns only unlocked rows, skipping those with locks.'),
+    m('How does PostgreSQL handle deadlocks?', ['Ignores them', 'Detects and aborts one transaction', 'Waits forever', 'Rolls back both'], 1, 'PostgreSQL detects deadlocks automatically and aborts one transaction.'),
+    m('What lock level allows concurrent reads?', ['FOR UPDATE', 'FOR SHARE', 'FOR NO KEY UPDATE', 'All of the above'], 1, 'FOR SHARE allows other transactions to also take FOR SHARE locks.'),
+    m('What type of lock is not tied to rows?', ['Row lock', 'Table lock', 'Advisory lock', 'Page lock'], 2, 'Advisory locks are application-level locks not associated with specific rows.')
+  ]
+);
+
+/* =================== TOPIC 41: Advanced Pattern Matching =================== */
+addTopic('sql-pattern-matching', 'Advanced Pattern Matching', 'intermediate', 20,
+  ['PostgreSQL offers multiple pattern matching methods: LIKE (basic), SIMILAR TO (regex-like), POSIX regex (~), and full-text search.',
+   'LIKE: % (any sequence), _ (single char). ILIKE is case-insensitive LIKE.',
+   'SIMILAR TO: SQL standard with regex features: | (OR), * (quantifier), [chars] (character class).',
+   'POSIX Regular Expressions: ~ (matches), ~* (case-insensitive), !~ (not matches), !~* (not matches, case-insensitive).'
+  ],
+  'Pattern matching in SQL ranges from simple wildcards to full regular expressions. LIKE is like searching for a file with *.txt — simple and fast. SIMILAR TO adds OR and quantifiers. POSIX regex is the full power of regular expressions — like grep inside your database.',
+  [
+    d('LIKE and ILIKE', 'LIKE \'prefix%\' — starts with. LIKE \'%suffix\' — ends with. LIKE \'%contains%\' — contains anywhere. LIKE \'A_\' — two chars starting with A. ILIKE — case-insensitive version. Backslash escapes special chars. All patterns are full-string matches.'),
+    d('SIMILAR TO', 'Intermediate between LIKE and regex. Supports: | (alternation), * (0+ repetitions), + (1+), ? (0 or 1), [a-z] (character class), [^a-z] (negation). Must match entire string (like LIKE). Example: SIMILAR TO \'(abc|def)%\' starts with abc or def.'),
+    d('POSIX Regex (~ Operator)', '~ \'pattern\' — matches (case-sensitive). ~* \'pattern\' — matches (case-insensitive). !~ \'pattern\' — does not match. !~* \'pattern\' — does not match (case-insensitive). Partial match (unlike LIKE which requires full match).'),
+    d('Regex Functions', 'REGEXP_MATCH(string, pattern) — returns first match as text[]. REGEXP_MATCHES — returns all matches. REGEXP_REPLACE — substitution. REGEXP_SPLIT_TO_TABLE — split into rows. REGEXP_SPLIT_TO_ARRAY — split into array.'),
+    d('Performance Considerations', 'LIKE with prefix pattern (\'abc%\') can use B-tree index. ILIKE and regex patterns can use GIN or GiST indexes with pg_trgm extension. SIMILAR TO is typically slower than LIKE or regex. Avoid heavy regex on large unindexed tables.')
+  ],
+  'Use LIKE for simple wildcard matching (it is the fastest and can use indexes). Use POSIX regex (~) for complex patterns. Use SIMILAR TO mainly for SQL standard compliance — it bridges LIKE and regex. Consider pg_trgm extension for fuzzy search at scale.',
+  [
+    q('What does LIKE \'A%\' match?', 'Any string starting with A. % matches any sequence of characters.'),
+    q('What is ILIKE?', 'PostgreSQL-specific case-insensitive version of LIKE. Same syntax, but ignores case.'),
+    q('What does _ match in LIKE?', 'A single character. LIKE \'A_B\' matches any 3-char string starting with A and ending with B.'),
+    q('What is SIMILAR TO?', 'SQL standard pattern matching with simple regex features like |, *, +, and character classes.'),
+    q('What does the ~ operator do?', 'POSIX regex match. ~ \'^A.*B$\' matches strings starting with A and ending with B.'),
+    q('What is the difference between LIKE and ~?', 'LIKE requires full string match. ~ is a partial match (use ^ and $ for full match). LIKE has limited wildcards; ~ supports full regex.'),
+    q('How do you do case-insensitive regex?', 'Use ~* (tilde asterisk). !~* for negated case-insensitive match.'),
+    q('What does REGEXP_REPLACE do?', 'Replaces regex matches with replacement text. REGEXP_REPLACE(\'abc123\', \'[0-9]\', \'\', \'g\') removes digits.'),
+    q('How do you split a string into rows?', 'REGEXP_SPLIT_TO_TABLE(string, delimiter_pattern) — splits string and returns each part as a row.'),
+    q('What extension improves regex performance?', 'pg_trgm (trigram) extension enables GiST/GIN indexes for fast LIKE and regex queries.')
+  ],
+  R(10,35,100,25,'#0070f3','','LIKE/ILIKE','Basic wildcard') +
+  R(10,65,100,25,'#28a745','','SIMILAR TO','Simple regex') +
+  R(10,95,100,25,'#ffc107','','~ Operator','Full regex') +
+  R(10,125,100,25,'#dc3545','','REGEXP_*','Functions') +
+  R(10,155,100,25,'#e83e8c','','pg_trgm','Index fuzzy') +
+  A(110,48,140,48) + A(110,78,140,78) + A(110,108,140,108) + A(110,138,140,138) + A(110,168,140,168) +
+  R(150,35,230,155,'#17a2b8','','Pattern Matching','LIKE, SIMILAR TO, POSIX regex, and regex functions for text pattern matching.') +
+  T(240,220,'Pattern Matching: LIKE, SIMILAR TO, POSIX Regex — from simple wildcards to full regex.',9,'#666','middle'),
+  [
+    e('LIKE Basics', 'Common LIKE patterns.', codeBlock([
+      "SELECT name FROM employees WHERE name LIKE 'A%';    -- starts with A",
+      "SELECT name FROM employees WHERE name LIKE '%son';  -- ends with son",
+      "SELECT name FROM employees WHERE name LIKE '%mith%'; -- contains mith",
+      "SELECT name FROM employees WHERE name LIKE 'A_';     -- A + 1 char",
+      "SELECT name FROM employees WHERE name ILIKE 'alice%'; -- case-insensitive"
+    ]), 'Common LIKE patterns for different matching scenarios.'),
+    e('SIMILAR TO Examples', 'Regex-like patterns.', codeBlock([
+      "SELECT email FROM users",
+      "WHERE email SIMILAR TO '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}';",
+      '',
+      "SELECT name FROM products",
+      "WHERE name SIMILAR TO '(Pro|Ultra|Max)%';"
+    ]), 'SIMILAR TO with character classes and alternation for email validation.'),
+    e('POSIX Regex for Complex Patterns', 'Full regex power.', codeBlock([
+      '-- Valid email format (partial match)',
+      "SELECT email FROM users",
+      "WHERE email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$';",
+      '',
+      '-- Phone numbers (various formats)',
+      "SELECT phone FROM contacts",
+      "WHERE phone ~ '^\\(?[0-9]{3}\\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$';",
+      '',
+      '-- Case-insensitive search',
+      "SELECT * FROM articles WHERE body ~* 'database';"
+    ]), 'POSIX regex for complex validation and search patterns.'),
+    e('REGEXP_REPLACE and REGEXP_SPLIT', 'Text transformation.', codeBlock([
+      "-- Remove all non-numeric characters",
+      "SELECT REGEXP_REPLACE(phone, '[^0-9]', '', 'g') AS clean_phone",
+      "FROM contacts;",
+      '',
+      '-- Split comma-separated values into rows',
+      "SELECT REGEXP_SPLIT_TO_TABLE('apple,banana,cherry', ',') AS fruit;",
+      '',
+      '-- Extract all numbers from text',
+      "SELECT REGEXP_MATCHES('Order #123: $45.99', '[0-9]+', 'g') AS nums;"
+    ]), 'Regex functions for data cleaning, splitting, and extraction.'),
+    e('pg_trgm for Fuzzy Search', 'Efficient fuzzy matching.', codeBlock([
+      'CREATE EXTENSION IF NOT EXISTS pg_trgm;',
+      '',
+      '-- Create GiST index for fuzzy search',
+      'CREATE INDEX idx_names_trgm ON users',
+      'USING GIST (name gist_trgm_ops);',
+      '',
+      '-- Similarity search',
+      "SELECT *, similarity(name, 'Jonhson') AS sim",
+      'FROM users',
+      "WHERE name % 'Jonhson'  -- % operator means similar enough",
+      'ORDER BY sim DESC;',
+      '',
+      '-- Also speeds up:',
+      "SELECT * FROM users WHERE name LIKE '%mith%'; -- with index"
+    ]), 'pg_trgm extension enables fast fuzzy text search and wildcard queries at scale.')
+  ],
+  [
+    m('What does % match in LIKE?', ['One character', 'Any sequence of characters', 'A digit', 'A word'], 1, '% matches any sequence of characters (including zero).'),
+    m('What operator does POSIX regex matching?', ['~~', '~', ':=', '##'], 1, '~ is the POSIX regex match operator in PostgreSQL.'),
+    m('What is ILIKE?', ['Case-sensitive LIKE', 'Case-insensitive LIKE', 'Indexed LIKE', 'Inverse LIKE'], 1, 'ILIKE is the case-insensitive version of LIKE.'),
+    m('What extension enables fuzzy search?', ['pg_trgm', 'pg_fuzzy', 'pg_search', 'pg_similar'], 0, 'pg_trgm provides trigram-based similarity search and GiST/GIN index support.'),
+    m('What function extracts all regex matches?', ['REGEXP_MATCH', 'REGEXP_MATCHES', 'REGEXP_EXTRACT', 'REGEXP_FIND'], 1, 'REGEXP_MATCHES returns all matches (with g flag) as multiple rows.'),
+    m('What is SIMILAR TO?', ['SQL standard regex', 'Like LIKE with more features', 'PostgreSQL only', 'Same as ~ operator'], 1, 'SIMILAR TO is SQL standard with OR, quantifiers, and character classes.')
+  ]
+);
+
+/* =================== TOPIC 42: Pagination Strategies =================== */
+addTopic('sql-pagination', 'Pagination Strategies', 'intermediate', 20,
+  ['Pagination splits large result sets into pages for UI display. Two main strategies: offset-based and keyset-based (cursor).',
+   'OFFSET/LIMIT pagination: simple, but slow for large offsets because the database scans and discards rows.',
+   'Keyset pagination (cursor-based): uses WHERE conditions on sorted columns. Fast for any page depth but requires unique sort order.',
+   'For large datasets (millions of rows), keyset pagination is dramatically faster than offset pagination.'
+  ],
+  'OFFSET pagination is like reading a book by counting pages from the start each time — to get to page 1000, you still count 1-1000. Keyset pagination is like using a bookmark — you remember the last item and start from there. Much faster for deep pages.',
+  [
+    d('OFFSET/LIMIT Pagination', 'LIMIT 20 OFFSET 0 — page 1. LIMIT 20 OFFSET 40 — page 3. Simple to implement. Database must scan and discard OFFSET rows (sequential scan or index scan + skip). Performance degrades significantly at large offsets.'),
+    d('Keyset (Cursor) Pagination', 'SELECT * FROM table WHERE id > last_seen_id ORDER BY id LIMIT 20. Uses index to jump directly to the starting point. No rows are scanned and discarded. Constant performance regardless of page depth.'),
+    d('Keyset with Multiple Columns', 'WHERE (created_at, id) > (last_created_at, last_id) ORDER BY created_at, id — composite tuple comparison for tie-breaking. Requires composite unique index on the sort columns.'),
+    d('Comparison', 'OFFSET: simple, URL-friendly (?page=3), allows jumping to any page, stable page numbers. Keyset: fast at scale, no page number jumping, sort order must be stable, requires unique sort column.'),
+    d('Hybrid Approach', 'Use OFFSET for first few pages (users rarely go deep). Use keyset for deeper pages or infinite scroll. Many APIs use keyset (cursor) pagination exclusively: Twitter API, GitHub API, Stripe API.')
+  ],
+  'Choose offset pagination for small datasets and admin tables (where page jumping is needed). Choose keyset/cursor pagination for large datasets, APIs, and infinite scroll. The performance difference at scale is enormous — keyset is O(log n), offset is O(n).',
+  [
+    q('What is offset pagination?', 'LIMIT n OFFSET m — skips m rows and returns n. Simple but slow for large offsets.'),
+    q('What is keyset pagination?', 'WHERE sort_column > last_value ORDER BY sort_column LIMIT n — uses index to fast-forward.'),
+    q('Why is OFFSET slow for large offsets?', 'The database must scan and discard all OFFSET rows. Scanning 100,000 rows to show page 500 is expensive.'),
+    q('Is keyset always faster than OFFSET?', 'For deep pagination, yes. For the first few pages, the difference is negligible.'),
+    q('What is required for keyset pagination?', 'A unique sort column (or unique combination). A stable sort order. An index on the sort column.'),
+    q('Can keyset pagination jump to a specific page?', 'No. Keyset pagination cannot jump to page N arbitrarily — it requires knowing the last item of the previous page.'),
+    q('What is tuple comparison for keyset?', 'WHERE (created_at, id) > (\'2024-01-15\', 100) — compares both columns for tie-breaking. Requires composite index.'),
+    q('What APIs use cursor pagination?', 'Twitter, GitHub, Stripe, Slack — most modern APIs use cursor (keyset) pagination for their main endpoints.'),
+    q('What is the hybrid approach?', 'Use OFFSET for first few pages (users rarely go deep). Use keyset for deeper pages or infinite scrolling.'),
+    q('What is the SQL for keyset with descending order?', 'WHERE created_at < last_created_at OR (created_at = last_created_at AND id < last_id) ORDER BY created_at DESC, id DESC LIMIT n.')
+  ],
+  R(10,35,110,25,'#0070f3','','OFFSET','Skip rows') +
+  A(120,48,150,48) +
+  R(160,35,110,25,'#28a745','','LIMIT','Page size') +
+  R(10,70,110,25,'#ffc107','','Keyset','WHERE > last') +
+  R(10,105,110,25,'#dc3545','','Tuple','Multi-col') +
+  R(280,35,200,100,'#17a2b8','','Pagination','OFFSET vs Keyset. Keyset is O(log n). OFFSET is O(n). Choose wisely.') +
+  T(240,175,'Pagination: OFFSET/LIMIT vs Keyset/Cursor — performance implications at scale.',9,'#666','middle'),
+  [
+    e('OFFSET Pagination', 'Simple but slow at depth.', codeBlock([
+      '-- Page 1 (rows 1-20)',
+      'SELECT id, name, created_at',
+      'FROM employees',
+      'ORDER BY id',
+      'LIMIT 20 OFFSET 0;',
+      '',
+      '-- Page 50 (rows 981-1000)',
+      'SELECT id, name, created_at',
+      'FROM employees',
+      'ORDER BY id',
+      'LIMIT 20 OFFSET 980;',
+      '-- Database scans 1000 rows, returns 20!'
+    ]), 'OFFSET pagination — simple but inefficient for deep pages.'),
+    e('Keyset Pagination', 'Fast at any depth.', codeBlock([
+      '-- Initial query (no cursor)',
+      'SELECT id, name, created_at',
+      'FROM employees',
+      'ORDER BY id',
+      'LIMIT 20;',
+      '-- Last item: id = 20',
+      '',
+      '-- Next page (using cursor)',
+      'SELECT id, name, created_at',
+      'FROM employees',
+      'WHERE id > 20',
+      'ORDER BY id',
+      'LIMIT 20;',
+      '-- Direct index lookup — no scan!'
+    ]), 'Keyset pagination uses the id > last_seen pattern for O(log n) performance.'),
+    e('Keyset with Multiple Columns', 'Tie-breaking pagination.', codeBlock([
+      '-- Initial query',
+      'SELECT id, name, created_at',
+      'FROM employees',
+      "ORDER BY created_at DESC, id DESC",
+      'LIMIT 20;',
+      '-- Last item: created_at = \'2024-06-15\', id = 500',
+      '',
+      '-- Next page with tuple comparison',
+      'SELECT id, name, created_at',
+      'FROM employees',
+      "WHERE (created_at, id) < ('2024-06-15', 500)",
+      "ORDER BY created_at DESC, id DESC",
+      'LIMIT 20;',
+      '',
+      '-- Needs composite index on (created_at DESC, id DESC)'
+    ]), 'Tuple comparison handles ties when multiple rows share the same sort value.'),
+    e('Keyset for Forward/Backward', 'Bi-directional pagination.', codeBlock([
+      '-- Forward (next page)',
+      'SELECT * FROM employees',
+      'WHERE created_at < \'2024-06-15\'',
+      'ORDER BY created_at DESC',
+      'LIMIT 20;',
+      '',
+      '-- Backward (previous page)',
+      'SELECT * FROM employees',
+      'WHERE created_at > \'2024-06-01\'',
+      'ORDER BY created_at ASC',
+      'LIMIT 20;',
+      '',
+      '-- Reverse results on client side for display'
+    ]), 'Bi-directional keyset pagination for both next and previous page support.'),
+    e('Seek Method (Alternative)', 'WHERE on unique column.', codeBlock([
+      '-- Seek method (alternative to keyset)',
+      'SELECT * FROM employees',
+      'ORDER BY salary DESC, id ASC',
+      'LIMIT 20;',
+      '-- Cursor: salary=85000, id=42',
+      '',
+      '-- Next page:',
+      'SELECT * FROM employees',
+      'WHERE salary < 85000',
+      '   OR (salary = 85000 AND id > 42)',
+      'ORDER BY salary DESC, id ASC',
+      'LIMIT 20;',
+      '',
+      '-- Requires composite index on (salary DESC, id ASC)'
+    ]), 'Seek method handles complex ORDER BY with multiple columns and directions.')
+  ],
+  [
+    m('Why is OFFSET slow at deep pages?', ['Network latency', 'Database scans discarded rows', 'Index lookup', 'Query parsing'], 1, 'The database must scan and discard all rows up to the OFFSET value.'),
+    m('What drives keyset pagination?', ['LIMIT only', 'WHERE > last_value', 'OFFSET', 'RANDOM'], 1, 'Keyset pagination uses WHERE condition on the sort column to fast-forward.'),
+    m('What is required for keyset pagination?', ['Unique sort column', 'Table index', 'Sequential IDs', 'Both A and B'], 3, 'A unique sort column with an index is needed for reliable keyset pagination.'),
+    m('Can keyset pagination jump to page N?', ['Yes', 'No', 'Only with OFFSET', 'Only with cursors'], 1, 'Keyset pagination cannot arbitrarily jump to a specific page number.'),
+    m('What APIs commonly use cursor pagination?', ['GitHub', 'Twitter', 'Stripe', 'All of the above'], 3, 'Modern APIs use cursor (keyset) pagination for performance.'),
+    m('What comparison handles multi-column keyset?', ['AND', 'Tuple comparison', 'OR comparison', 'Subquery'], 1, 'Tuple comparison (col1, col2) > (val1, val2) handles multi-column keyset.')
+  ]
+);
+
+/* =================== TOPIC 43: SQL Anti-Patterns =================== */
+addTopic('sql-anti-patterns', 'SQL Anti-Patterns', 'intermediate', 25,
+  ['SQL anti-patterns are common design and query practices that seem reasonable but cause problems at scale.',
+   'Anti-patterns lead to poor performance, data integrity issues, maintenance nightmares, and race conditions.',
+   'Recognizing anti-patterns is a hallmark of experienced SQL developers. The goal is not just to write SQL, but to write good SQL.',
+   'Most anti-patterns have well-known solutions or better alternatives.'
+  ],
+  'SQL anti-patterns are like bad habits in cooking — putting your knives in the dishwasher seems convenient until they get dull. SELECT * seems quick until you break the frontend by adding a column. Each anti-pattern has a better way that you learn through experience.',
+  [
+    d('SELECT * in Production', 'Problem: returns unnecessary columns (wasted bandwidth), breaks when schema changes (new columns may cause errors), prevents index-only scans. Solution: explicitly list needed columns. Exception: EXISTS (SELECT 1) or COUNT(*) which optimize * effectively.'),
+    d('Implicit Columns / SELECT DISTINCT as Band-Aid', 'Problem: writing SELECT * on a JOIN and adding DISTINCT to deduplicate — hides the underlying data issue (missing join condition or unintended cross product). Solution: specify exact columns needed and fix the join logic.'),
+    d('Non-Indexed Foreign Keys', 'Problem: FK columns without indexes. Every INSERT on child table checks parent (fast enough). Every DELETE on parent checks children (full table scan on child unless indexed). Solution: always index foreign key columns.'),
+    d('Death by a Thousand ORs', 'Problem: WHERE status = \'x\' OR status = \'y\' OR status = \'z\' — multiple OR conditions on the same column. Solution: use IN (status IN (\'x\', \'y\', \'z\')) and ensure the column is indexed.'),
+    d('Using Functions on Indexed Columns in WHERE', 'Problem: WHERE YEAR(date_col) = 2024 prevents index usage (function must evaluate for every row). Solution: WHERE date_col >= \'2024-01-01\' AND date_col < \'2025-01-01\' (sargable — can use index).')
+  ],
+  'Recognizing SQL anti-patterns comes with experience. The most common ones are easy to fix and prevent. Always measure (EXPLAIN ANALYZE) before optimizing. The biggest anti-pattern is premature optimization without understanding the actual query plan.',
+  [
+    q('What is wrong with SELECT *?', 'Returns unnecessary columns (wasted bandwidth), prevents index-only scans, breaks on schema changes, and makes dependencies unclear.'),
+    q('Why should you index foreign keys?', 'DELETE on parent requires scanning child table for references. Without index, this is a full table scan. INSERT on child also checks parent.'),
+    q('What is the problem with functions in WHERE?', 'Functions on indexed columns prevent index usage (non-sargable). Database cannot use index because it would need to compute the function for every index entry.'),
+    q('What is the problem with OR conditions?', 'Multiple OR conditions on the same column are less efficient than IN. IN uses a single index lookup; OR may use multiple scans or fall back to sequential scan.'),
+    q('What is the EAV anti-pattern?', 'Entity-Attribute-Value: a general-purpose table (entity_id, attribute, value) instead of proper columns. Leads to complex queries, poor performance, and no type safety.'),
+    q('What is the God Table anti-pattern?', 'A single table with too many columns, trying to handle multiple entity types. Leads to sparse columns, confusing schema, and maintenance issues. Solution: normalize.'),
+    q('What is the implicit column problem?', 'Using SELECT * on JOINs and adding DISTINCT to remove duplicates masks incorrect join conditions. Always specify columns to make dependencies explicit.'),
+    q('What is n+1 query problem?', 'Making one query to get parent rows, then N queries to get child data for each parent. Solution: use JOIN, batch queries, or eager loading in ORMs.'),
+    q('What is metadata tribbles?', 'Adding columns for every new attribute without normalization. The table grows wider and wider with sparse columns. Solution: use JSONB for variable attributes or normalize.'),
+    q('What is the rounding error anti-pattern?', 'Using FLOAT/DOUBLE for monetary values causes rounding errors over time. Always use DECIMAL/NUMERIC for exact precision money calculations.')
+  ],
+  R(10,35,130,25,'#0070f3','','SELECT *','Bad practice') +
+  R(10,65,130,25,'#28a745','','Unindexed FK','Slow DELETE') +
+  R(10,95,130,25,'#ffc107','','Fn on col','No index use') +
+  R(10,125,130,25,'#dc3545','','EAV pattern','Complex query') +
+  R(10,155,130,25,'#e83e8c','','God Table','Too wide') +
+  A(140,48,170,48) + A(140,78,170,78) + A(140,108,170,108) + A(140,138,170,138) + A(140,168,170,168) +
+  R(180,35,200,155,'#17a2b8','','SQL Anti-Patterns','Common mistakes: SELECT *, unindexed FKs, non-sargable queries, EAV, and more.') +
+  T(240,220,'SQL Anti-Patterns: Common design and query mistakes and their better alternatives.',9,'#666','middle'),
+  [
+    e('Non-Sargable Query', 'Fix functions in WHERE.', codeBlock([
+      '-- BAD: Function on indexed column',
+      "SELECT * FROM orders",
+      "WHERE EXTRACT(YEAR FROM order_date) = 2024;",
+      '',
+      '-- GOOD: Sargable range query',
+      "SELECT * FROM orders",
+      "WHERE order_date >= '2024-01-01'",
+      "  AND order_date < '2025-01-01';",
+      '',
+      '-- Also bad:',
+      "SELECT * FROM users WHERE LOWER(email) = 'alice@x.com';",
+      '',
+      '-- Fix: expression index',
+      "CREATE INDEX ON users(LOWER(email));"
+    ]), 'Non-sargable vs sargable queries — the latter can use indexes.'),
+    e('EAV Anti-Pattern', 'Entity-Attribute-Value problem.', codeBlock([
+      '-- BAD: EAV table (anti-pattern)',
+      'CREATE TABLE product_attributes (',
+      '  product_id INT,',
+      '  attribute VARCHAR(50),',
+      '  value TEXT',
+      ');',
+      '',
+      '-- Query becomes painful:',
+      "SELECT p.name, a1.value AS color, a2.value AS weight",
+      "FROM products p",
+      "LEFT JOIN product_attributes a1",
+      "  ON a1.product_id = p.id AND a1.attribute = 'color'",
+      "LEFT JOIN product_attributes a2",
+      "  ON a2.product_id = p.id AND a2.attribute = 'weight';",
+      '',
+      '-- GOOD: Proper columns',
+      'CREATE TABLE products (',
+      '  id INT, name TEXT, color TEXT, weight DECIMAL',
+      ');'
+    ]), 'EAV leads to painful pivot queries. Normalize properly.'),
+    e('N+1 Query Problem', 'Avoid in application code.', codeBlock([
+      '// BAD: N+1 queries (application code)',
+      'const departments = await db.query("SELECT * FROM departments");',
+      'for (const dept of departments) {',
+      '  const employees = await db.query(',
+      '    "SELECT * FROM employees WHERE dept_id = " + dept.id',
+      '  );',
+      '  // 1 query for departments + N for employees',
+      '}',
+      '',
+      '// GOOD: Single JOIN query',
+      'const result = await db.query("',
+      '  SELECT d.name AS dept, e.name AS emp',
+      '  FROM departments d',
+      '  JOIN employees e ON e.dept_id = d.id',
+      '  ORDER BY d.name;',
+      '");'
+    ]), 'N+1 problem: one query for parents, N for children. Fix with JOIN or eager loading.'),
+    e('Unindexed Foreign Key', 'Index FKs for DELETE performance.', codeBlock([
+      '-- BAD: FK without index',
+      'CREATE TABLE orders (',
+      '  id SERIAL PRIMARY KEY,',
+      '  customer_id INT REFERENCES customers(id) -- no index!',
+      ');',
+      '',
+      '-- DELETE FROM customers WHERE id = 5',
+      '-- must full scan orders table to check FK reference',
+      '',
+      '-- GOOD: FK with index',
+      'CREATE INDEX idx_orders_customer ON orders(customer_id);',
+      '',
+      '-- Now DELETE is fast (index lookup on orders)'
+    ]), 'Unindexed FKs cause full table scans on parent DELETE operations.'),
+    e('Implicit DISTINCT Mask', 'Hidden join problem.', codeBlock([
+      '-- BAD: DISTINCT masking a join issue',
+      'SELECT DISTINCT c.*',
+      'FROM customers c',
+      'JOIN orders o ON c.id = o.customer_id;',
+      '-- DISTINCT is needed because customers appear multiple times',
+      '-- But why? Do we actually want all customers with orders?',
+      '',
+      '-- GOOD: Be explicit',
+      'SELECT c.* FROM customers c',
+      'WHERE EXISTS (',
+      '  SELECT 1 FROM orders o WHERE o.customer_id = c.id',
+      ');',
+      '',
+      '-- Or if duplicates are expected:',
+      'SELECT DISTINCT c.* FROM customers c',
+      'JOIN orders o ON c.id = o.customer_id'
+    ]), 'DISTINCT often masks unintended row multiplication. Use EXISTS for existence checks.')
+  ],
+  [
+    m('What is wrong with SELECT *?', ['Faster queries', 'Returns unnecessary columns', 'Uses less memory', 'Better for indexes'], 1, 'SELECT * returns unnecessary columns and prevents index-only scans.'),
+    m('What does non-sargable mean?', ['Uses indexes', 'Cannot use index efficiently', 'Very fast', 'Uses sequential scan'], 1, 'Non-sargable queries cannot use indexes because of functions on indexed columns.'),
+    m('What is the EAV anti-pattern?', ['Entity-Attribute-Value design', 'Eager loading pattern', 'Error handling pattern', 'Execution plan view'], 0, 'EAV is a general-purpose table design that leads to complex queries.'),
+    m('What problem does n+1 describe?', ['1 + N queries for parent + children', 'N + 1 table join', 'N + 1 indexes', '1 + N columns'], 0, 'N+1: one query for parents, N queries for children.'),
+    m('What is the solution to unindexed foreign keys?', ['Remove the FK', 'Add an index', 'Use a view', 'Denormalize'], 1, 'Always add an index on foreign key columns.'),
+    m('Why avoid functions on indexed columns in WHERE?', ['They error', 'They prevent index usage', 'They are slow syntax', 'They return wrong results'], 1, 'Functions on indexed columns make the query non-sargable — indexes cannot be used.')
+  ]
+);
+
+/* =================== TOPIC 44: PostgreSQL vs MySQL vs SQL Server =================== */
+addTopic('sql-db-comparison', 'PostgreSQL vs MySQL vs SQL Server', 'beginner', 20,
+  ['PostgreSQL: most advanced open-source RDBMS, strict SQL standards compliance, extensible, feature-rich.',
+   'MySQL: fast for simple read-heavy workloads, widespread LAMP stack usage, simpler replication.',
+   'SQL Server: excellent tooling (SSMS), deep .NET integration, business intelligence features.',
+   'SQLite: embedded database, zero configuration, file-based, ideal for mobile and small applications.'
+  ],
+  'Choosing a database is like choosing a vehicle. PostgreSQL is a heavy-duty truck — powerful, can handle any job, but takes more skill. MySQL is a reliable sedan — simple, fast for commuting, and easy to maintain. SQLite is a bicycle — perfect for short trips, no fuel needed.',
+  [
+    d('PostgreSQL Strengths', 'Advanced features: JSONB, full-text search, window functions, CTEs, recursion, GiST/GIN indexes, table inheritance, foreign data wrappers. Strict ACID compliance. Extensible: custom types, operators, functions. Best open-source choice for complex workloads.'),
+    d('MySQL Strengths', 'Simple and fast for basic CRUD. Widespread hosting support. Easy replication (built-in). Lighter memory footprint. Great ecosystem (WordPress, Drupal, Laravel). InnoDB with ACID. Good for read-heavy applications.'),
+    d('SQL Server Strengths', 'Best tooling: SSMS, SSIS, SSRS, SSAS. Deep .NET integration (Entity Framework). T-SQL with advanced analytics. Columnstore indexes for data warehousing. Always On availability groups. Best for Microsoft shops.'),
+    d('Feature Comparison', 'CTEs: PostgreSQL (with recursion), SQL Server (with recursion), MySQL 8+ (no recursion). Window functions: all three modern versions. JSON: PostgreSQL (JSONB best), MySQL (JSON type), SQL Server (JSON functions). Array type: PostgreSQL only.'),
+    d('Performance Characteristics', 'MySQL: faster for simple SELECT/INSERT with good indexes. PostgreSQL: faster for complex queries, joins, aggregations. SQL Server: excellent optimizer, best with large data warehouses. SQLite: fastest for single-user/small datasets.')
+  ],
+  'PostgreSQL is the best general-purpose choice for new applications — it is the most feature-rich, standards-compliant, and extensible open-source database. MySQL is a proven choice for simple web applications. SQL Server is the choice for Microsoft ecosystems.',
+  [
+    q('What is PostgreSQL best at?', 'Advanced queries, JSON, full-text search, CTEs, window functions, extensibility, and standards compliance.'),
+    q('What is MySQL best at?', 'Simple read-heavy workloads, LAMP stack applications, ubiquitous hosting support, easy replication.'),
+    q('What is SQL Server best at?', '.NET integration, BI/analytics, SSMS tooling, columnstore indexes, enterprise features.'),
+    q('Which database has the best JSON support?', 'PostgreSQL with JSONB — indexed, fast operators, binary format.'),
+    q('Does MySQL support CTEs?', 'MySQL 8.0+ supports non-recursive CTEs but not recursive CTEs.'),
+    q('Which database supports array types?', 'Only PostgreSQL has native array types among the major databases.'),
+    q('What is the best database for a new web application?', 'PostgreSQL — best combination of features, performance, and community.'),
+    q('What is SQLite best for?', 'Mobile apps, embedded systems, testing, small-scale applications, single-user desktop apps.'),
+    q('Which has the best query optimizer?', 'PostgreSQL and SQL Server both have excellent optimizers. MySQL\'s optimizer has improved significantly.'),
+    q('Which database has the best free tooling?', 'PostgreSQL: pgAdmin, DBeaver. MySQL: MySQL Workbench. SQL Server: SSMS (best overall tooling).')
+  ],
+  R(10,35,110,25,'#0070f3','','PostgreSQL','Feature-rich') +
+  R(10,65,110,25,'#28a745','','MySQL','Simple/fast') +
+  R(10,95,110,25,'#ffc107','','SQL Server','Enterprise') +
+  R(10,125,110,25,'#dc3545','','SQLite','Embedded') +
+  R(10,155,110,25,'#e83e8c','','Choose','Match needs') +
+  A(120,48,150,48) + A(120,78,150,78) + A(120,108,150,108) + A(120,138,150,138) + A(120,168,150,168) +
+  R(160,35,220,155,'#17a2b8','','Database Comparison','PostgreSQL vs MySQL vs SQL Server vs SQLite — choose the right tool.') +
+  T(240,220,'Database Comparison: Strengths, weaknesses, and use cases for each major SQL database.',9,'#666','middle'),
+  [
+    e('Feature Comparison Table', 'Key features across databases.', codeBlock([
+      '-- Feature           | PostgreSQL | MySQL  | SQL Server |',
+      '-- CTEs (Recursive) | Yes        | 8+ only| Yes        |',
+      '-- Window Functions | Yes        | 8+     | Yes        |',
+      '-- JSON/JSONB       | Yes (best) | Yes    | Functions  |',
+      '-- Array Type       | Yes        | No     | No         |',
+      '-- Full-Text Search | Excellent  | Basic  | Excellent  |',
+      '-- GIN/GiST Index   | Yes        | No     | No         |',
+      '-- FDW/Linked Srvr  | Yes (FDW)  | FEDERATED| Linked Svr|',
+      '-- Materialized View| Yes        | No     | Yes        |',
+      '-- Table Partition  | Yes        | Yes    | Yes        |',
+      '-- UUID Type        | Native     | Binary | GUID       |',
+      '-- License          | Open (MIT) | Dual   | Commercial |',
+      '-- Default Port     | 5432       | 3306   | 1433       |'
+    ]), 'Feature comparison across major SQL databases.'),
+    e('Migration Paths', 'Moving between databases.', codeBlock([
+      '-- PostgreSQL to MySQL:',
+      '--   Replace SERIAL with AUTO_INCREMENT',
+      '--   Replace || with CONCAT()',
+      '--   Replace ILIKE with LOWER() + LIKE',
+      '--   Remove RETURNING, change order',
+      '',
+      '-- MySQL to PostgreSQL:',
+      '--   Replace AUTO_INCREMENT with SERIAL',
+      '--   Replace CONCAT() with ||',
+      '--   Add explicit type casts',
+      '--   Change backtick quoting to double quotes',
+      '',
+      '-- Common gotchas:',
+      '--   LIMIT/OFFSET syntax is the same',
+      '--   JOIN syntax is standard across all',
+      '--   String comparison: PostgreSQL is case-sensitive'
+    ]), 'Key differences when migrating between databases.'),
+    e('Sample Query Comparison', 'Same query in different dialects.', codeBlock([
+      '-- PostgreSQL:',
+      "SELECT name, salary FROM employees",
+      "WHERE salary > (SELECT AVG(salary) FROM employees)",
+      "ORDER BY salary DESC LIMIT 10;",
+      '',
+      '-- MySQL (same, but backtick quoting):',
+      "SELECT `name`, `salary` FROM `employees`",
+      "WHERE `salary` > (SELECT AVG(`salary`) FROM `employees`)",
+      "ORDER BY `salary` DESC LIMIT 10;",
+      '',
+      '-- SQL Server (TOP instead of LIMIT):',
+      "SELECT TOP 10 name, salary FROM employees",
+      "WHERE salary > (SELECT AVG(salary) FROM employees)",
+      "ORDER BY salary DESC;"
+    ]), 'Syntax differences for the same query across databases.'),
+    e('Benchmarking Advice', 'How to choose.', codeBlock([
+      '-- Read-heavy web app: MySQL or PostgreSQL',
+      '-- Complex analytics/reporting: PostgreSQL or SQL Server',
+      '-- .NET / Microsoft ecosystem: SQL Server',
+      '-- Embedded / mobile: SQLite',
+      '-- Full-text search heavy: PostgreSQL',
+      '-- JSON document needs: PostgreSQL (JSONB is best)',
+      '-- Budget constrained: PostgreSQL (free, full-featured)',
+      '-- Enterprise with support needs: SQL Server or MySQL (Oracle)',
+      '',
+      '-- Best practice: benchmark with YOUR workload,',
+      '-- not generic benchmarks'
+    ]), 'Decision guide for choosing the right database for your project.'),
+    e('SQLite for Testing', 'SQLite in development.', codeBlock([
+      '-- Why SQLite for testing:',
+      '--   No server setup needed',
+      '--   In-memory option for tests',
+      '--   Fast test execution',
+      '--   File-based for easy clean-up',
+      '',
+      '-- Gotchas when using SQLite vs PostgreSQL:',
+      '--   No array type',
+      '--   Limited ALTER TABLE',
+      '--   No JSON functions (before 3.38)',
+      '--   Flexible type system (no type enforcement)',
+      '--   Different date/time functions'
+    ]), 'SQLite is ideal for testing but has important differences from PostgreSQL.')
+  ],
+  [
+    m('Which database has the best JSON support?', ['MySQL', 'PostgreSQL', 'SQL Server', 'SQLite'], 1, 'PostgreSQL with JSONB has the best JSON support with indexing and operators.'),
+    m('Which databases support recursive CTEs?', ['PostgreSQL and SQL Server', 'MySQL only', 'SQLite only', 'All of them'], 0, 'PostgreSQL and SQL Server support recursive CTEs; MySQL 8+ has non-recursive only.'),
+    m('What is SQLite best for?', ['Enterprise apps', 'Embedded/mobile', 'Web apps', 'Data warehousing'], 1, 'SQLite is ideal for embedded systems, mobile apps, and testing.'),
+    m('Which database has native array types?', ['MySQL', 'PostgreSQL', 'SQL Server', 'None'], 1, 'PostgreSQL is the only major database with native array types.'),
+    m('What port does PostgreSQL use by default?', ['3306', '5432', '1433', '27017'], 1, 'PostgreSQL default port is 5432.'),
+    m('Which database uses TOP instead of LIMIT?', ['PostgreSQL', 'MySQL', 'SQL Server', 'SQLite'], 2, 'SQL Server uses SELECT TOP n instead of LIMIT n.')
+  ]
+);
+
+/* =================== TOPIC 45: ORMs & SQL =================== */
+addTopic('sql-orms', 'ORMs & SQL', 'intermediate', 20,
+  ['Object-Relational Mappers (ORMs) bridge the gap between object-oriented programming and relational databases.',
+   'Popular ORMs: Sequelize (Node.js), Prisma (Node.js), TypeORM (TypeScript), Django ORM (Python), Entity Framework (.NET).',
+   'ORMs handle: connection pooling, query generation, migration management, relationship mapping, and type casting.',
+   'ORMs are great for CRUD but can produce inefficient queries for complex operations. Know when to drop to raw SQL.'
+  ],
+  'An ORM is like having a translator between two people who speak different languages. Your application speaks objects (JavaScript/Python classes), the database speaks tables and rows. The ORM translates: save this object → INSERT, find by id → SELECT, update fields → UPDATE.',
+  [
+    d('How ORMs Work', 'Model class maps to table. Class instances map to rows. Properties map to columns. Methods like find(), create(), update() generate SQL. Relationships defined with belongsTo, hasMany decorators. Query builder builds SQL programmatically.'),
+    d('ORM Advantages', 'Productivity: write application code, not SQL. Type safety: TypeScript/type-checking. Migration management: version-controlled schema changes. Relationship loading: eager/lazy loading with simple method calls. Connection management built-in.'),
+    d('ORM Disadvantages', 'N+1 query problem (if lazy loading). Inefficient queries (loading too much data). Complex queries are hard to express. Hidden performance costs (SELECT * by default). Learning SQL is still necessary to debug ORM-generated queries.'),
+    d('When to Use Raw SQL', 'Complex aggregations and window functions. Bulk operations. Reporting queries. Full-text search. Recursive CTEs. Performance-critical paths. Any query where you need specific index usage or query plan.'),
+    d('Common ORM Patterns', 'Eager loading: .include() or JOIN (prevents N+1). Batch operations: bulk create/update. Transactions: database-level ACID. Raw queries: .query() or .raw() for complex SQL. Pagination: built-in .paginate() or manual limit/offset.')
+  ],
+  'ORMs are essential for productivity but are not a replacement for SQL knowledge. Use ORMs for 80% of queries (simple CRUD). Use raw SQL for the 20% that are complex or performance-critical. Always check the actual SQL that your ORM generates.',
+  [
+    q('What is an ORM?', 'Object-Relational Mapper — bridges application objects with database tables by auto-generating SQL from code.'),
+    q('What are popular Node.js ORMs?', 'Sequelize (oldest, mature), Prisma (modern, type-safe), TypeORM (TypeScript-first), Knex (query builder).'),
+    q('What is the N+1 problem in ORMs?', 'Loading parent objects triggers N child queries (one per parent). Solved by eager loading (.include() or JOIN).'),
+    q('Why might an ORM be inefficient?', 'SELECT * by default, loading unnecessary columns. Generating multiple queries instead of JOINs. Not using indexes optimally.'),
+    q('When should you use raw SQL instead of ORM?', 'Complex aggregations, window functions, recursive CTEs, bulk operations, reporting queries.'),
+    q('What does eager loading do?', 'Loads related data in a single query using JOINs, preventing the N+1 problem.'),
+    q('What is a migration in ORM context?', 'Version-controlled schema changes. Migrations are code files that describe table creation, alteration, and seeding.'),
+    q('What is a query builder?', 'A programmatic API for constructing SQL queries (like Knex). More control than ORM but less verbose than raw SQL.'),
+    q('Does every ORM support raw SQL?', 'Yes. All major ORMs provide a way to execute raw SQL for complex queries.'),
+    q('Should you learn SQL if you use an ORM?', 'Absolutely. Debugging ORM issues requires understanding the generated SQL. Complex queries need raw SQL. Performance tuning requires knowledge of indexes and query plans.')
+  ],
+  R(10,35,120,25,'#0070f3','','ORM Layer','App <-> DB') +
+  A(130,48,160,48) +
+  R(170,35,120,25,'#28a745','','CRUD','Auto SQL') +
+  R(170,65,120,25,'#ffc107','','Complex','Raw SQL') +
+  R(170,95,120,25,'#dc3545','','N+1','Eager load') +
+  R(10,95,120,25,'#e83e8c','','Migration','Schema versions') +
+  A(290,48,320,48) + A(290,78,320,78) + A(290,108,320,108) +
+  R(330,35,150,100,'#17a2b8','','ORMs & SQL','ORMs for productivity. Raw SQL for performance. Know both.') +
+  T(240,195,'ORMs & SQL: Understanding ORM-generated SQL and knowing when to drop to raw queries.',9,'#666','middle'),
+  [
+    e('Sequelize Example', 'Node.js ORM in action.', codeBlock([
+      '// Model definition',
+      'const User = sequelize.define(\'User\', {',
+      '  name: DataTypes.STRING,',
+      '  email: { type: DataTypes.STRING, unique: true },',
+      '  salary: DataTypes.DECIMAL(10,2)',
+      '});',
+      '',
+      '// ORM generates:',
+      '// CREATE TABLE "Users" (',
+      '//   id SERIAL PRIMARY KEY,',
+      '//   name VARCHAR(255),',
+      '//   email VARCHAR(255) UNIQUE,',
+      '//   salary DECIMAL(10,2),',
+      '//   createdAt TIMESTAMPTZ,',
+      '//   updatedAt TIMESTAMPTZ',
+      '// );'
+    ]), 'Sequelize model definition and the SQL it generates.'),
+    e('Prisma Example', 'Modern type-safe ORM.', codeBlock([
+      '// Schema (schema.prisma)',
+      'model User {',
+      '  id    Int     @id @default(autoincrement())',
+      '  name  String',
+      '  posts Post[]',
+      '}',
+      '',
+      'model Post {',
+      '  id      Int  @id @default(autoincrement())',
+      '  title   String',
+      '  userId  Int',
+      '  user    User @relation(fields: [userId], references: [id])',
+      '}',
+      '',
+      '// Query with eager loading:',
+      '// const users = await prisma.user.findMany({',
+      '//   include: { posts: true }',
+      '// });',
+      '// Generates: SELECT u.*, p.* FROM User u LEFT JOIN Post p ...'
+    ]), 'Prisma schema and eager loading prevents N+1 queries.'),
+    e('N+1 vs Eager Loading', 'Critical ORM pattern.', codeBlock([
+      '// BAD: N+1 queries',
+      'const orders = await Order.findAll(); // 1 query',
+      'for (const order of orders) {',
+      '  const customer = await order.getCustomer(); // N queries!',
+      '}',
+      '// Total: 1 + N queries (slow!)',
+      '',
+      '// GOOD: Eager loading',
+      'const orders = await Order.findAll({',
+      '  include: [Customer]  // LEFT JOIN, 1 query',
+      '});',
+      '// Total: 1 query (fast!)'
+    ]), 'Eager loading prevents the N+1 problem by using JOINs.'),
+    e('Raw SQL in ORM', 'When ORM is not enough.', codeBlock([
+      '// Prisma raw query',
+      'const result = await prisma.$queryRaw`',
+      '  SELECT department, COUNT(*) as count,',
+      '    AVG(salary) as avg_salary',
+      '  FROM employees',
+      '  GROUP BY department',
+      '  HAVING COUNT(*) > 5',
+      '  ORDER BY avg_salary DESC',
+      '`;',
+      '',
+      '// TypeORM raw query',
+      'const result = await connection.query(`',
+      '  WITH ranked AS (',
+      '    SELECT *, ROW_NUMBER() OVER (',
+      '      PARTITION BY dept_id ORDER BY salary DESC',
+      '    ) AS rn FROM employees',
+      '  ) SELECT * FROM ranked WHERE rn <= 3',
+      '`);'
+    ]), 'Raw SQL in ORMs for complex queries like aggregations and window functions.'),
+    e('Migration Example', 'Version-controlled schema.', codeBlock([
+      '// Migration file (Sequelize)',
+      'module.exports = {',
+      '  up: async (queryInterface, Sequelize) => {',
+      '    await queryInterface.createTable(\'Tasks\', {',
+      '      id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },',
+      '      title: { type: Sequelize.STRING, allowNull: false },',
+      '      status: { type: Sequelize.ENUM(\'todo\', \'done\') },',
+      '      userId: {',
+      '        type: Sequelize.INTEGER,',
+      '        references: { model: \'Users\', key: \'id\' },',
+      '        onDelete: \'CASCADE\'',
+      '      }',
+      '    });',
+      '  },',
+      '  down: async (queryInterface) => {',
+      '    await queryInterface.dropTable(\'Tasks\');',
+      '  }',
+      '};'
+    ]), 'Migrations provide version-controlled, reversible schema changes.')
+  ],
+  [
+    m('What does ORM stand for?', ['Object-Relational Mapping', 'Object-Relational Model', 'Object-Resource Mapper', 'Online Relational Manager'], 0, 'ORM stands for Object-Relational Mapping.'),
+    m('What problem does eager loading solve?', ['Slow queries', 'N+1 queries', 'Connection pooling', 'Type safety'], 1, 'Eager loading with .include() or JOIN prevents N+1 query problems.'),
+    m('When should you use raw SQL over ORM?', ['Simple CRUD', 'Complex aggregations/window functions', 'Model definitions', 'Migration creation'], 1, 'Use raw SQL for complex queries like aggregations, window functions, and recursive CTEs.'),
+    m('What is a migration?', ['Schema versioning', 'Data backup', 'Query optimization', 'Connection management'], 0, 'Migrations are version-controlled, reversible schema changes.'),
+    m('Which is a modern type-safe ORM for Node.js?', ['Sequelize', 'Prisma', 'Mongoose', 'Knex'], 1, 'Prisma is a modern type-safe ORM for Node.js and TypeScript.'),
+    m('Why should you learn SQL if you use an ORM?', ['No need', 'To debug and optimize ORM queries', 'ORMs are always perfect', 'SQL is obsolete'], 1, 'Understanding SQL is essential for debugging ORM-generated queries and writing efficient raw queries.')
+  ]
+);
+
+/* =================== TOPIC 46: Database Migration & Version Control =================== */
+addTopic('sql-migrations', 'Database Migration & Version Control', 'intermediate', 20,
+  ['Database migrations are version-controlled scripts that evolve the database schema over time in a reproducible way.',
+   'Migrations solve: shared schema across environments, team collaboration on schema changes, rollback capability, and deployment automation.',
+   'Tools: node-pg-migrate, Flyway (Java), Alembic (Python), ActiveRecord Migrations (Rails), golang-migrate.',
+   'Best practice: one migration per change, always test both up and down, never modify existing migrations.'
+  ],
+  'Migrations are like Git for your database schema. Just as you commit code changes incrementally, you create migration files for each schema change. "Up" applies the change, "down" reverts it. This means you can reproduce any version of your schema at any point in time.',
+  [
+    d('Migration Structure', 'Each migration has: up function (apply change) and down function (revert change). Naming: YYYYMMDDHHMMSS_description.sql or versioned numbers (001_create_users.sql). Tools track which migrations have been applied using a migrations table.'),
+    d('Migration Workflow', 'Create migration → review → apply to dev → test → apply to staging → apply to production. Never modify an applied migration (create a new one to fix). Always test down before deploying up (ensures rollback works).'),
+    d('Common Migration Types', 'CREATE/ALTER/DROP TABLE. Add/drop columns. Add/drop indexes. Add/drop constraints (FK, UNIQUE). Data migrations (backfill, transform). Seed data (reference data, test data).'),
+    d('Database Version Table', 'Tools create a schema_migrations (or _migrations) table that records which migrations have been applied. Columns: version (unique ID), name, applied_at (timestamp), checksum. This table must never be modified manually.'),
+    d('Migration Safety', 'Always have a tested down migration. Avoid locking large tables — use CONCURRENTLY for indexes. Test on a copy of production data. Have a rollback plan. For zero-downtime deployments: expand → migrate → contract pattern.')
+  ],
+  'Database migrations are essential for professional software development. They make schema changes repeatable, reviewable, and reversible. The investment in a good migration workflow pays back enormously in reduced deployment stress and incident recovery time.',
+  [
+    q('What is a database migration?', 'A version-controlled, reversible script that changes the database schema.'),
+    q('Why use migrations?', 'Reproducible schema across environments. Team collaboration. Rollback capability. Deployment automation.'),
+    q('What is the up function?', 'Applies the migration — creates tables, adds columns, creates indexes, etc.'),
+    q('What is the down function?', 'Reverts the migration — drops tables, removes columns, drops indexes.'),
+    q('Should you modify an applied migration?', 'Never. Create a new migration to fix issues. Applied migrations are immutable history.'),
+    q('What is a data migration?', 'A migration that transforms existing data — backfilling new columns, splitting fields, correcting values.'),
+    q('What is a seed migration?', 'Populates reference data: countries, status values, admin users.'),
+    q('What is the expand-migrate-contract pattern?', 'Zero-downtime migration: add new column (expand), migrate data gradually, remove old column (contract).'),
+    q('What tool is commonly used with Node.js?', 'node-pg-migrate, Knex.js migrations, Sequelize migrations, Prisma migrations.'),
+    q('How do you test a migration?', 'Apply up, verify schema/data, apply down, verify schema is restored. Test on a copy of production data.')
+  ],
+  R(10,35,110,25,'#0070f3','','Up','Apply change') +
+  R(10,65,110,25,'#28a745','','Down','Revert') +
+  R(10,95,110,25,'#ffc107','','Test','Verify both') +
+  R(10,125,110,25,'#dc3545','','Deploy','Environments') +
+  R(10,155,110,25,'#e83e8c','','Immutable','Never modify') +
+  A(120,48,150,48) + A(120,78,150,78) + A(120,108,150,108) + A(120,138,150,138) + A(120,168,150,168) +
+  R(160,35,220,155,'#17a2b8','','Migrations & Versioning','Version-controlled, reversible, and testable schema evolution.') +
+  T(240,220,'Database Migrations: Version-controlled schema changes with up/down for reproducibility.',9,'#666','middle'),
+  [
+    e('Basic Migration (node-pg-migrate)', 'Create users table.', codeBlock([
+      "exports.up = (pgm) => {",
+      "  pgm.createTable('users', {",
+      "    id: 'id', // serial primary key",
+      "    name: { type: 'varchar(100)', notNull: true },",
+      "    email: { type: 'varchar(255)', unique: true, notNull: true },",
+      "    created_at: { type: 'timestamptz', default: pgm.func('now()') }",
+      "  });",
+      "};",
+      '',
+      "exports.down = (pgm) => {",
+      "  pgm.dropTable('users');",
+      "};"
+    ]), 'Basic create table migration with up (create) and down (drop).'),
+    e('Adding a Column Migration', 'Schema evolution.', codeBlock([
+      '// 002_add_salary_to_users.js',
+      "exports.up = (pgm) => {",
+      "  pgm.addColumn('users', {",
+      "    salary: { type: 'decimal(10,2)', default: 0 }",
+      "  });",
+      '};',
+      '',
+      "exports.down = (pgm) => {",
+      "  pgm.dropColumn('users', 'salary');",
+      "};",
+      '',
+      '// Applied order: 001_create_users, 002_add_salary_to_users'
+    ]), 'Incremental schema change — adding a column in a new migration.'),
+    e('Data Migration Example', 'Backfill data.', codeBlock([
+      '// 003_backfill_full_name.js',
+      "exports.up = async (pgm) => {",
+      "  // Backfill full_name from first_name + last_name",
+      "  await pgm.sql(`",
+      "    UPDATE users",
+      "    SET full_name = TRIM(",
+      "      COALESCE(first_name, '') || ' ' || COALESCE(last_name, '')",
+      "    )",
+      "    WHERE full_name IS NULL;",
+      "  `);",
+      "};",
+      '',
+      "exports.down = (pgm) => {",
+      "  // Data migration down is often left empty or reversed",
+      "  pgm.sql(`UPDATE users SET full_name = NULL`);",
+      "};"
+    ]), 'Data migration for backfilling a new column from existing data.'),
+    e('Migration for Index with CONCURRENTLY', 'Zero-downtime index.', codeBlock([
+      '// 004_add_index_concurrently.js',
+      "exports.up = async (pgm) => {",
+      "  // CREATE INDEX CONCURRENTLY does not lock the table",
+      "  await pgm.sql(`",
+      "    CREATE INDEX CONCURRENTLY idx_users_email",
+      "    ON users (email);",
+      "  `);",
+      "};",
+      '',
+      "exports.down = async (pgm) => {",
+      "  await pgm.sql(`",
+      "    DROP INDEX CONCURRENTLY IF EXISTS idx_users_email;",
+      "  `);",
+      "};"
+    ]), 'CONCURRENTLY allows index creation without locking the table for writes.'),
+    e('Migrations Table', 'How tools track state.', codeBlock([
+      '-- Tools create a tracking table:',
+      'SELECT * FROM schema_migrations;',
+      '',
+      '-- Output:',
+      '-- version  |        applied_at',
+      '-- ---------+----------------------------',
+      '-- 001      | 2024-01-15 10:00:00+00',
+      '-- 002      | 2024-01-20 14:30:00+00',
+      '-- 003      | 2024-02-01 09:15:00+00',
+      '',
+      '-- To see pending migrations:',
+      'SELECT * FROM migrations_to_apply();',
+      '',
+      '-- Never manually modify this table!'
+    ]), 'The schema_migrations table tracks which migrations have been applied.')
+  ],
+  [
+    m('What is the up function in a migration?', ['Reverts changes', 'Applies changes', 'Seeds data', 'Drops tables'], 1, 'The up function applies the schema change.'),
+    m('What is the down function for?', ['Reverting the change', 'Applying again', 'Checking status', 'Optimizing'], 0, 'The down function reverts the change made by up.'),
+    m('Should you modify an applied migration?', ['Yes', 'No, create a new one', 'Only the down', 'Only for bugs'], 1, 'Never modify an applied migration — create a new one to fix issues.'),
+    m('What pattern enables zero-downtime migrations?', ['Up and down', 'Expand-migrate-contract', 'Forward only', 'Rolling update'], 1, 'Expand-migrate-contract: add new, migrate data, remove old.'),
+    m('What table tracks applied migrations?', ['pg_tables', 'schema_migrations', 'applied_migrations', 'versions'], 1, 'Migration tools create a schema_migrations table.'),
+    m('Which keyword avoids table locking when creating an index?', ['ONLINE', 'CONCURRENTLY', 'LOCK FREE', 'ASYNC'], 1, 'CREATE INDEX CONCURRENTLY avoids table locks.')
+  ]
+);
+
 // ---- GENERATE ----
 var dataDir = __dirname;
 
