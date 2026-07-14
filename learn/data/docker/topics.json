@@ -1,0 +1,662 @@
+{
+  "topics": [
+    {
+      "id": "docker-what-is-docker",
+      "title": "What is Docker?",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-what-is-docker.json"
+    },
+    {
+      "id": "docker-vs-vm",
+      "title": "Docker vs Virtual Machines",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "docker-vs-vm.json"
+    },
+    {
+      "id": "docker-architecture",
+      "title": "Docker Architecture",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-architecture.json"
+    },
+    {
+      "id": "docker-installation",
+      "title": "Docker Installation",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-installation.json"
+    },
+    {
+      "id": "docker-commands",
+      "title": "Docker Commands",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "docker-commands.json"
+    },
+    {
+      "id": "docker-hub",
+      "title": "Docker Hub",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-hub.json"
+    },
+    {
+      "id": "docker-images-basics",
+      "title": "Docker Images (Basics)",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "docker-images-basics.json"
+    },
+    {
+      "id": "docker-containers-basics",
+      "title": "Docker Containers (Basics)",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "docker-containers-basics.json"
+    },
+    {
+      "id": "docker-registry",
+      "title": "Docker Registry",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-registry.json"
+    },
+    {
+      "id": "docker-engine",
+      "title": "Docker Engine",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-engine.json"
+    },
+    {
+      "id": "docker-daemon",
+      "title": "Docker Daemon",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-daemon.json"
+    },
+    {
+      "id": "docker-client-server",
+      "title": "Docker Client-Server Model",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-client-server.json"
+    },
+    {
+      "id": "docker-object-labels",
+      "title": "Docker Object Labels",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-object-labels.json"
+    },
+    {
+      "id": "docker-image-layers",
+      "title": "Image Layers",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-image-layers.json"
+    },
+    {
+      "id": "docker-image-creation",
+      "title": "Image Creation",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-image-creation.json"
+    },
+    {
+      "id": "docker-dockerfile-vs-image",
+      "title": "Dockerfile vs Image",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-dockerfile-vs-image.json"
+    },
+    {
+      "id": "docker-image-tagging",
+      "title": "Image Tagging",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-image-tagging.json"
+    },
+    {
+      "id": "docker-image-size",
+      "title": "Image Size",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-image-size.json"
+    },
+    {
+      "id": "docker-image-security",
+      "title": "Image Security",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "docker-image-security.json"
+    },
+    {
+      "id": "docker-image-distribution",
+      "title": "Image Distribution",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-image-distribution.json"
+    },
+    {
+      "id": "docker-image-caching",
+      "title": "Image Caching",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-image-caching.json"
+    },
+    {
+      "id": "docker-multi-stage-builds",
+      "title": "Multi-Stage Builds",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "docker-multi-stage-builds.json"
+    },
+    {
+      "id": "docker-image-versioning",
+      "title": "Image Versioning",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-image-versioning.json"
+    },
+    {
+      "id": "docker-base-images",
+      "title": "Base Images",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-base-images.json"
+    },
+    {
+      "id": "docker-alpine-images",
+      "title": "Alpine Images",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-alpine-images.json"
+    },
+    {
+      "id": "docker-distroless-images",
+      "title": "Distroless Images",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-distroless-images.json"
+    },
+    {
+      "id": "docker-container-lifecycle",
+      "title": "Container Lifecycle",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-container-lifecycle.json"
+    },
+    {
+      "id": "docker-run-vs-exec",
+      "title": "docker run vs docker exec",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-run-vs-exec.json"
+    },
+    {
+      "id": "docker-port-mapping",
+      "title": "Port Mapping",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-port-mapping.json"
+    },
+    {
+      "id": "docker-volume-mounts",
+      "title": "Volume Mounts",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-volume-mounts.json"
+    },
+    {
+      "id": "docker-environment-variables",
+      "title": "Environment Variables",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-environment-variables.json"
+    },
+    {
+      "id": "docker-resource-limits",
+      "title": "Resource Limits",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-resource-limits.json"
+    },
+    {
+      "id": "docker-container-networking",
+      "title": "Container Networking",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-container-networking.json"
+    },
+    {
+      "id": "docker-container-logs",
+      "title": "Container Logs",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-container-logs.json"
+    },
+    {
+      "id": "docker-container-health",
+      "title": "Container Health Checks",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-container-health.json"
+    },
+    {
+      "id": "docker-restart-policies",
+      "title": "Restart Policies",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-restart-policies.json"
+    },
+    {
+      "id": "docker-container-cleanup",
+      "title": "Container Cleanup",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-container-cleanup.json"
+    },
+    {
+      "id": "docker-container-security",
+      "title": "Container Security",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "docker-container-security.json"
+    },
+    {
+      "id": "docker-container-orchestration",
+      "title": "Container Orchestration",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-container-orchestration.json"
+    },
+    {
+      "id": "docker-dockerfile-syntax",
+      "title": "Dockerfile Syntax",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-dockerfile-syntax.json"
+    },
+    {
+      "id": "docker-from",
+      "title": "FROM Instruction",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-from.json"
+    },
+    {
+      "id": "docker-run",
+      "title": "RUN Instruction",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-run.json"
+    },
+    {
+      "id": "docker-copy-vs-add",
+      "title": "COPY vs ADD",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-copy-vs-add.json"
+    },
+    {
+      "id": "docker-cmd-vs-entrypoint",
+      "title": "CMD vs ENTRYPOINT",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-cmd-vs-entrypoint.json"
+    },
+    {
+      "id": "docker-workdir",
+      "title": "WORKDIR Instruction",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-workdir.json"
+    },
+    {
+      "id": "docker-env",
+      "title": "ENV Instruction",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-env.json"
+    },
+    {
+      "id": "docker-expose",
+      "title": "EXPOSE Instruction",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-expose.json"
+    },
+    {
+      "id": "docker-volume",
+      "title": "VOLUME Instruction",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-volume.json"
+    },
+    {
+      "id": "docker-user",
+      "title": "USER Instruction",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-user.json"
+    },
+    {
+      "id": "docker-label",
+      "title": "LABEL Instruction",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-label.json"
+    },
+    {
+      "id": "docker-arg",
+      "title": "ARG Instruction",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-arg.json"
+    },
+    {
+      "id": "docker-multi-stage",
+      "title": "Multi-Stage Builds (Dockerfile)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "docker-multi-stage.json"
+    },
+    {
+      "id": "docker-what-is-compose",
+      "title": "What is Docker Compose?",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-what-is-compose.json"
+    },
+    {
+      "id": "docker-compose-yml",
+      "title": "docker-compose.yml Structure",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-compose-yml.json"
+    },
+    {
+      "id": "docker-compose-services",
+      "title": "Compose Services",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-services.json"
+    },
+    {
+      "id": "docker-compose-networks",
+      "title": "Compose Networks",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-networks.json"
+    },
+    {
+      "id": "docker-compose-volumes",
+      "title": "Compose Volumes",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-volumes.json"
+    },
+    {
+      "id": "docker-compose-environment",
+      "title": "Compose Environment",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-environment.json"
+    },
+    {
+      "id": "docker-compose-depends-on",
+      "title": "Depends On",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-depends-on.json"
+    },
+    {
+      "id": "docker-compose-ports",
+      "title": "Compose Ports",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-compose-ports.json"
+    },
+    {
+      "id": "docker-compose-build",
+      "title": "Compose Build",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-build.json"
+    },
+    {
+      "id": "docker-compose-profiles",
+      "title": "Compose Profiles",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-compose-profiles.json"
+    },
+    {
+      "id": "docker-compose-extends",
+      "title": "Compose Extends",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-extends.json"
+    },
+    {
+      "id": "docker-compose-watch",
+      "title": "Compose Watch",
+      "difficulty": "advanced",
+      "estimatedMinutes": 10,
+      "file": "docker-compose-watch.json"
+    },
+    {
+      "id": "docker-compose-production",
+      "title": "Compose in Production",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "docker-compose-production.json"
+    },
+    {
+      "id": "docker-volumes",
+      "title": "Docker Volumes",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-volumes.json"
+    },
+    {
+      "id": "docker-bind-mounts",
+      "title": "Bind Mounts",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-bind-mounts.json"
+    },
+    {
+      "id": "docker-tmpfs-mounts",
+      "title": "tmpfs Mounts",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-tmpfs-mounts.json"
+    },
+    {
+      "id": "docker-volume-drivers",
+      "title": "Volume Drivers",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "docker-volume-drivers.json"
+    },
+    {
+      "id": "docker-backup-restore",
+      "title": "Volume Backup and Restore",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-backup-restore.json"
+    },
+    {
+      "id": "docker-storage-drivers",
+      "title": "Storage Drivers",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-storage-drivers.json"
+    },
+    {
+      "id": "docker-union-filesystem",
+      "title": "Union File System",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-union-filesystem.json"
+    },
+    {
+      "id": "docker-copy-on-write",
+      "title": "Copy-on-Write",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-copy-on-write.json"
+    },
+    {
+      "id": "docker-layer-caching",
+      "title": "Layer Caching (Storage)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-layer-caching.json"
+    },
+    {
+      "id": "docker-volume-vs-bind",
+      "title": "Volume vs Bind Mount",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-volume-vs-bind.json"
+    },
+    {
+      "id": "docker-nfs-volumes",
+      "title": "NFS Volumes",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "docker-nfs-volumes.json"
+    },
+    {
+      "id": "docker-volume-plugins",
+      "title": "Volume Plugins",
+      "difficulty": "advanced",
+      "estimatedMinutes": 10,
+      "file": "docker-volume-plugins.json"
+    },
+    {
+      "id": "docker-storage-best-practices",
+      "title": "Storage Best Practices",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-storage-best-practices.json"
+    },
+    {
+      "id": "docker-bridge-network",
+      "title": "Bridge Network",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-bridge-network.json"
+    },
+    {
+      "id": "docker-host-network",
+      "title": "Host Network",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-host-network.json"
+    },
+    {
+      "id": "docker-overlay-network",
+      "title": "Overlay Network",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "docker-overlay-network.json"
+    },
+    {
+      "id": "docker-macvlan-network",
+      "title": "Macvlan Network",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "docker-macvlan-network.json"
+    },
+    {
+      "id": "docker-none-network",
+      "title": "None Network",
+      "difficulty": "beginner",
+      "estimatedMinutes": 5,
+      "file": "docker-none-network.json"
+    },
+    {
+      "id": "docker-port-publishing",
+      "title": "Port Publishing",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-port-publishing.json"
+    },
+    {
+      "id": "docker-dns",
+      "title": "DNS in Docker",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-dns.json"
+    },
+    {
+      "id": "docker-network-drivers",
+      "title": "Network Drivers",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-network-drivers.json"
+    },
+    {
+      "id": "docker-custom-networks",
+      "title": "Custom Networks",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "docker-custom-networks.json"
+    },
+    {
+      "id": "docker-container-communication",
+      "title": "Container Communication",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-container-communication.json"
+    },
+    {
+      "id": "docker-network-security",
+      "title": "Network Security",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "docker-network-security.json"
+    },
+    {
+      "id": "docker-ingress-network",
+      "title": "Ingress Network",
+      "difficulty": "advanced",
+      "estimatedMinutes": 10,
+      "file": "docker-ingress-network.json"
+    },
+    {
+      "id": "docker-network-troubleshooting",
+      "title": "Network Troubleshooting",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-network-troubleshooting.json"
+    },
+    {
+      "id": "docker-containerization-best-practices",
+      "title": "Containerization Best Practices",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "docker-containerization-best-practices.json"
+    },
+    {
+      "id": "docker-application-containerization",
+      "title": "Application Containerization",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "docker-application-containerization.json"
+    },
+    {
+      "id": "docker-complete-cicd",
+      "title": "Complete CI/CD Pipeline with Docker",
+      "difficulty": "advanced",
+      "estimatedMinutes": 45,
+      "file": "docker-complete-cicd.json"
+    }
+  ]
+}

@@ -1,0 +1,772 @@
+[
+  {
+    "id": "k8s-architecture",
+    "title": "Kubernetes Architecture",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "k8s-architecture.json"
+  },
+  {
+    "id": "k8s-cluster",
+    "title": "Cluster",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-cluster.json"
+  },
+  {
+    "id": "k8s-control-plane",
+    "title": "Control Plane",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-control-plane.json"
+  },
+  {
+    "id": "k8s-worker-node",
+    "title": "Worker Node",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-worker-node.json"
+  },
+  {
+    "id": "k8s-apiserver",
+    "title": "kube-apiserver",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-apiserver.json"
+  },
+  {
+    "id": "k8s-scheduler",
+    "title": "kube-scheduler",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-scheduler.json"
+  },
+  {
+    "id": "k8s-controller-manager",
+    "title": "kube-controller-manager",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-controller-manager.json"
+  },
+  {
+    "id": "k8s-etcd",
+    "title": "etcd",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-etcd.json"
+  },
+  {
+    "id": "k8s-kubelet",
+    "title": "kubelet",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-kubelet.json"
+  },
+  {
+    "id": "k8s-kube-proxy",
+    "title": "kube-proxy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-kube-proxy.json"
+  },
+  {
+    "id": "k8s-container-runtime",
+    "title": "Container Runtime",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-container-runtime.json"
+  },
+  {
+    "id": "k8s-pod",
+    "title": "Pod",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-pod.json"
+  },
+  {
+    "id": "k8s-replicaset",
+    "title": "ReplicaSet",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-replicaset.json"
+  },
+  {
+    "id": "k8s-deployment",
+    "title": "Deployment",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-deployment.json"
+  },
+  {
+    "id": "k8s-statefulset",
+    "title": "StatefulSet",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-statefulset.json"
+  },
+  {
+    "id": "k8s-daemonset",
+    "title": "DaemonSet",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-daemonset.json"
+  },
+  {
+    "id": "k8s-job",
+    "title": "Job",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-job.json"
+  },
+  {
+    "id": "k8s-cronjob",
+    "title": "CronJob",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-cronjob.json"
+  },
+  {
+    "id": "k8s-namespace",
+    "title": "Namespace",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-namespace.json"
+  },
+  {
+    "id": "k8s-service",
+    "title": "Service",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-service.json"
+  },
+  {
+    "id": "k8s-configmap",
+    "title": "ConfigMap",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-configmap.json"
+  },
+  {
+    "id": "k8s-secret",
+    "title": "Secret",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-secret.json"
+  },
+  {
+    "id": "k8s-persistent-volume",
+    "title": "Persistent Volume",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-persistent-volume.json"
+  },
+  {
+    "id": "k8s-persistent-volume-claim",
+    "title": "Persistent Volume Claim",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-persistent-volume-claim.json"
+  },
+  {
+    "id": "k8s-storage-class",
+    "title": "Storage Class",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-storage-class.json"
+  },
+  {
+    "id": "k8s-ingress",
+    "title": "Ingress",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-ingress.json"
+  },
+  {
+    "id": "k8s-network-policy",
+    "title": "Network Policy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-network-policy.json"
+  },
+  {
+    "id": "k8s-service-account",
+    "title": "Service Account",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-service-account.json"
+  },
+  {
+    "id": "k8s-resource-quota",
+    "title": "ResourceQuota",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-resource-quota.json"
+  },
+  {
+    "id": "k8s-limit-range",
+    "title": "LimitRange",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-limit-range.json"
+  },
+  {
+    "id": "k8s-pod-lifecycle",
+    "title": "Pod Lifecycle",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-pod-lifecycle.json"
+  },
+  {
+    "id": "k8s-init-containers",
+    "title": "Init Containers",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-init-containers.json"
+  },
+  {
+    "id": "k8s-sidecar-containers",
+    "title": "Sidecar Containers",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-sidecar-containers.json"
+  },
+  {
+    "id": "k8s-multi-container-pods",
+    "title": "Multi-container Pods",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-multi-container-pods.json"
+  },
+  {
+    "id": "k8s-pod-scheduling",
+    "title": "Pod Scheduling",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-pod-scheduling.json"
+  },
+  {
+    "id": "k8s-pod-affinity",
+    "title": "Pod Affinity",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-pod-affinity.json"
+  },
+  {
+    "id": "k8s-anti-affinity",
+    "title": "Anti-Affinity",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "k8s-anti-affinity.json"
+  },
+  {
+    "id": "k8s-taints",
+    "title": "Taints",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-taints.json"
+  },
+  {
+    "id": "k8s-tolerations",
+    "title": "Tolerations",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-tolerations.json"
+  },
+  {
+    "id": "k8s-pod-priority",
+    "title": "Pod Priority",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-pod-priority.json"
+  },
+  {
+    "id": "k8s-pdb",
+    "title": "Pod Disruption Budget",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-pdb.json"
+  },
+  {
+    "id": "k8s-rolling-updates",
+    "title": "Rolling Updates",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-rolling-updates.json"
+  },
+  {
+    "id": "k8s-rollback",
+    "title": "Rollback",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-rollback.json"
+  },
+  {
+    "id": "k8s-replica-management",
+    "title": "Replica Management",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-replica-management.json"
+  },
+  {
+    "id": "k8s-deployment-strategy",
+    "title": "Deployment Strategy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-deployment-strategy.json"
+  },
+  {
+    "id": "k8s-canary-deployment",
+    "title": "Canary Deployment",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-canary-deployment.json"
+  },
+  {
+    "id": "k8s-blue-green-deployment",
+    "title": "Blue Green Deployment",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-blue-green-deployment.json"
+  },
+  {
+    "id": "k8s-clusterip",
+    "title": "ClusterIP",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-clusterip.json"
+  },
+  {
+    "id": "k8s-nodeport",
+    "title": "NodePort",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-nodeport.json"
+  },
+  {
+    "id": "k8s-loadbalancer",
+    "title": "LoadBalancer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-loadbalancer.json"
+  },
+  {
+    "id": "k8s-externalname",
+    "title": "ExternalName",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-externalname.json"
+  },
+  {
+    "id": "k8s-headless-service",
+    "title": "Headless Service",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-headless-service.json"
+  },
+  {
+    "id": "k8s-service-discovery",
+    "title": "Service Discovery",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-service-discovery.json"
+  },
+  {
+    "id": "k8s-configmap-create",
+    "title": "Create ConfigMap",
+    "difficulty": "beginner",
+    "estimatedMinutes": 5,
+    "file": "k8s-configmap-create.json"
+  },
+  {
+    "id": "k8s-configmap-env",
+    "title": "Environment Variables",
+    "difficulty": "beginner",
+    "estimatedMinutes": 5,
+    "file": "k8s-configmap-env.json"
+  },
+  {
+    "id": "k8s-configmap-volume",
+    "title": "Mount as Volume",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-configmap-volume.json"
+  },
+  {
+    "id": "k8s-configmap-update",
+    "title": "Update ConfigMap",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-configmap-update.json"
+  },
+  {
+    "id": "k8s-secret-opaque",
+    "title": "Opaque Secret",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-secret-opaque.json"
+  },
+  {
+    "id": "k8s-secret-tls",
+    "title": "TLS Secret",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-secret-tls.json"
+  },
+  {
+    "id": "k8s-secret-regcred",
+    "title": "Docker Registry Secret",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-secret-regcred.json"
+  },
+  {
+    "id": "k8s-secret-encryption",
+    "title": "Secret Encryption",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "k8s-secret-encryption.json"
+  },
+  {
+    "id": "k8s-secret-management",
+    "title": "Secret Management",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "k8s-secret-management.json"
+  },
+  {
+    "id": "k8s-storage-pv",
+    "title": "Persistent Volumes",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-storage-pv.json"
+  },
+  {
+    "id": "k8s-storage-pvc",
+    "title": "Persistent Volume Claims",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-storage-pvc.json"
+  },
+  {
+    "id": "k8s-dynamic-provisioning",
+    "title": "Dynamic Provisioning",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-dynamic-provisioning.json"
+  },
+  {
+    "id": "k8s-csi-drivers",
+    "title": "CSI Drivers",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "k8s-csi-drivers.json"
+  },
+  {
+    "id": "k8s-storage-local",
+    "title": "Local Storage",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-storage-local.json"
+  },
+  {
+    "id": "k8s-storage-cloud",
+    "title": "Cloud Storage",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-storage-cloud.json"
+  },
+  {
+    "id": "k8s-ingress-controller",
+    "title": "Ingress Controller",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-ingress-controller.json"
+  },
+  {
+    "id": "k8s-nginx-ingress",
+    "title": "NGINX Ingress",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-nginx-ingress.json"
+  },
+  {
+    "id": "k8s-traefik",
+    "title": "Traefik",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-traefik.json"
+  },
+  {
+    "id": "k8s-haproxy",
+    "title": "HAProxy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-haproxy.json"
+  },
+  {
+    "id": "k8s-ingress-tls",
+    "title": "TLS",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-ingress-tls.json"
+  },
+  {
+    "id": "k8s-ssl-certificates",
+    "title": "SSL Certificates",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-ssl-certificates.json"
+  },
+  {
+    "id": "k8s-host-routing",
+    "title": "Host Routing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-host-routing.json"
+  },
+  {
+    "id": "k8s-path-routing",
+    "title": "Path Routing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-path-routing.json"
+  },
+  {
+    "id": "k8s-hpa",
+    "title": "Horizontal Pod Autoscaler (HPA)",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-hpa.json"
+  },
+  {
+    "id": "k8s-vpa",
+    "title": "Vertical Pod Autoscaler (VPA)",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-vpa.json"
+  },
+  {
+    "id": "k8s-cluster-autoscaler",
+    "title": "Cluster Autoscaler",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "k8s-cluster-autoscaler.json"
+  },
+  {
+    "id": "k8s-scaling-manual",
+    "title": "Manual Scaling",
+    "difficulty": "beginner",
+    "estimatedMinutes": 5,
+    "file": "k8s-scaling-manual.json"
+  },
+  {
+    "id": "k8s-auto-scaling",
+    "title": "Auto Scaling",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "k8s-auto-scaling.json"
+  },
+  {
+    "id": "k8s-cluster-networking",
+    "title": "Cluster Networking",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-cluster-networking.json"
+  },
+  {
+    "id": "k8s-dns",
+    "title": "DNS",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-dns.json"
+  },
+  {
+    "id": "k8s-coredns",
+    "title": "CoreDNS",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-coredns.json"
+  },
+  {
+    "id": "k8s-cni",
+    "title": "CNI",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-cni.json"
+  },
+  {
+    "id": "k8s-calico",
+    "title": "Calico",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-calico.json"
+  },
+  {
+    "id": "k8s-flannel",
+    "title": "Flannel",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-flannel.json"
+  },
+  {
+    "id": "k8s-weave",
+    "title": "Weave",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-weave.json"
+  },
+  {
+    "id": "k8s-istio",
+    "title": "Istio",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-istio.json"
+  },
+  {
+    "id": "k8s-linkerd",
+    "title": "Linkerd",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-linkerd.json"
+  },
+  {
+    "id": "k8s-service-mesh",
+    "title": "Service Mesh",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-service-mesh.json"
+  },
+  {
+    "id": "k8s-lb-internal",
+    "title": "Internal Load Balancer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-lb-internal.json"
+  },
+  {
+    "id": "k8s-lb-external",
+    "title": "External Load Balancer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-lb-external.json"
+  },
+  {
+    "id": "k8s-lb-layer4",
+    "title": "Layer 4 Load Balancer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-lb-layer4.json"
+  },
+  {
+    "id": "k8s-lb-layer7",
+    "title": "Layer 7 Load Balancer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-lb-layer7.json"
+  },
+  {
+    "id": "k8s-lb-round-robin",
+    "title": "Round Robin",
+    "difficulty": "beginner",
+    "estimatedMinutes": 5,
+    "file": "k8s-lb-round-robin.json"
+  },
+  {
+    "id": "k8s-lb-least-connections",
+    "title": "Least Connections",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 5,
+    "file": "k8s-lb-least-connections.json"
+  },
+  {
+    "id": "k8s-lb-sticky-sessions",
+    "title": "Sticky Sessions",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-lb-sticky-sessions.json"
+  },
+  {
+    "id": "k8s-lb-health-checks",
+    "title": "Health Checks",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-lb-health-checks.json"
+  },
+  {
+    "id": "k8s-nginx-basics",
+    "title": "NGINX Basics",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-nginx-basics.json"
+  },
+  {
+    "id": "k8s-nginx-reverse-proxy",
+    "title": "Reverse Proxy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-nginx-reverse-proxy.json"
+  },
+  {
+    "id": "k8s-nginx-load-balancer",
+    "title": "Load Balancer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-nginx-load-balancer.json"
+  },
+  {
+    "id": "k8s-nginx-ssl",
+    "title": "SSL/TLS",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-nginx-ssl.json"
+  },
+  {
+    "id": "k8s-nginx-https",
+    "title": "HTTPS",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-nginx-https.json"
+  },
+  {
+    "id": "k8s-nginx-url-rewrite",
+    "title": "URL Rewrite",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-nginx-url-rewrite.json"
+  },
+  {
+    "id": "k8s-nginx-compression",
+    "title": "Compression",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-nginx-compression.json"
+  },
+  {
+    "id": "k8s-nginx-caching",
+    "title": "Caching",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "k8s-nginx-caching.json"
+  },
+  {
+    "id": "k8s-nginx-rate-limiting",
+    "title": "Rate Limiting",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-nginx-rate-limiting.json"
+  },
+  {
+    "id": "k8s-nginx-static-files",
+    "title": "Static File Hosting",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-nginx-static-files.json"
+  },
+  {
+    "id": "k8s-nginx-ingress",
+    "title": "NGINX Ingress Controller",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "k8s-nginx-ingress.json"
+  }
+]
