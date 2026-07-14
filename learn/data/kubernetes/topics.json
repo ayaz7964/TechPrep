@@ -84,46 +84,11 @@
     "file": "k8s-pod.json"
   },
   {
-    "id": "k8s-replicaset",
-    "title": "ReplicaSet",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "k8s-replicaset.json"
-  },
-  {
-    "id": "k8s-deployment",
-    "title": "Deployment",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "k8s-deployment.json"
-  },
-  {
-    "id": "k8s-statefulset",
-    "title": "StatefulSet",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "k8s-statefulset.json"
-  },
-  {
-    "id": "k8s-daemonset",
-    "title": "DaemonSet",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "k8s-daemonset.json"
-  },
-  {
     "id": "k8s-job",
     "title": "Job",
     "difficulty": "beginner",
     "estimatedMinutes": 10,
     "file": "k8s-job.json"
-  },
-  {
-    "id": "k8s-cronjob",
-    "title": "CronJob",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "k8s-cronjob.json"
   },
   {
     "id": "k8s-namespace",
@@ -173,6 +138,41 @@
     "difficulty": "intermediate",
     "estimatedMinutes": 10,
     "file": "k8s-storage-class.json"
+  },
+  {
+    "id": "k8s-replicaset",
+    "title": "ReplicaSet",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-replicaset.json"
+  },
+  {
+    "id": "k8s-deployment",
+    "title": "Deployment",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-deployment.json"
+  },
+  {
+    "id": "k8s-statefulset",
+    "title": "StatefulSet",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-statefulset.json"
+  },
+  {
+    "id": "k8s-daemonset",
+    "title": "DaemonSet",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "k8s-daemonset.json"
+  },
+  {
+    "id": "k8s-cronjob",
+    "title": "CronJob",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "k8s-cronjob.json"
   },
   {
     "id": "k8s-ingress",
@@ -763,10 +763,17 @@
     "file": "k8s-nginx-static-files.json"
   },
   {
-    "id": "k8s-nginx-ingress",
+    "id": "k8s-nginx-ingress-controller",
     "title": "NGINX Ingress Controller",
     "difficulty": "advanced",
     "estimatedMinutes": 20,
-    "file": "k8s-nginx-ingress.json"
+    "file": "k8s-nginx-ingress-controller.json"
+  },
+  {
+    "id": "k8s-ci-cd-pipeline",
+    "title": "Kubernetes CI/CD Pipeline",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "k8s-ci-cd-pipeline.json"
   }
 ]

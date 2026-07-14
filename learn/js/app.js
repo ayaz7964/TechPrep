@@ -846,7 +846,8 @@ var EMBEDDED = {
       { id: "k8s-nginx-caching",  title: "Caching",         difficulty: "intermediate",    estimatedMinutes: 10, file: "k8s-nginx-caching.json" },
       { id: "k8s-nginx-rate-limiting",  title: "Rate Limiting",         difficulty: "intermediate",    estimatedMinutes: 15, file: "k8s-nginx-rate-limiting.json" },
       { id: "k8s-nginx-static-files",  title: "Static File Hosting",         difficulty: "beginner",    estimatedMinutes: 10, file: "k8s-nginx-static-files.json" },
-      { id: "k8s-nginx-ingress",  title: "NGINX Ingress Controller",         difficulty: "advanced",    estimatedMinutes: 20, file: "k8s-nginx-ingress.json" }
+      { id: "k8s-nginx-ingress-controller",  title: "NGINX Ingress Controller",         difficulty: "advanced",    estimatedMinutes: 20, file: "k8s-nginx-ingress-controller.json" },
+      { id: "k8s-ci-cd-pipeline",  title: "Kubernetes CI/CD Pipeline",         difficulty: "advanced",    estimatedMinutes: 30, file: "k8s-ci-cd-pipeline.json" }
     ]
   }
 };
