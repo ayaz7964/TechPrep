@@ -237,6 +237,13 @@
       "difficulty": "intermediate",
       "estimatedMinutes": 15,
       "file": "jenkins-gradle.json"
+    },
+    {
+      "id": "jenkins-complete-cicd",
+      "title": "Complete CI/CD Pipeline with Jenkins",
+      "difficulty": "advanced",
+      "estimatedMinutes": 45,
+      "file": "jenkins-complete-cicd.json"
     }
   ]
 }

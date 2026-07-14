@@ -598,7 +598,8 @@ var EMBEDDED = {
       { id: "github-actions-environments", title: "Environments", difficulty: "intermediate", estimatedMinutes: 20, file: "github-actions-environments.json" },
       { id: "github-actions-deployment-protection", title: "Deployment Protection Rules", difficulty: "advanced", estimatedMinutes: 15, file: "github-actions-deployment-protection.json" },
       { id: "github-actions-scheduled", title: "Scheduled Workflows", difficulty: "intermediate", estimatedMinutes: 10, file: "github-actions-scheduled.json" },
-      { id: "github-actions-conditional", title: "Conditional Execution", difficulty: "intermediate", estimatedMinutes: 15, file: "github-actions-conditional.json" }
+      { id: "github-actions-conditional", title: "Conditional Execution", difficulty: "intermediate", estimatedMinutes: 15, file: "github-actions-conditional.json" },
+      { id: "github-actions-complete-cicd", title: "Complete CI/CD Pipeline with GitHub Actions", difficulty: "advanced", estimatedMinutes: 45, file: "github-actions-complete-cicd.json" }
     ],
     jenkins: [
       { id: "jenkins-architecture", title: "Jenkins Architecture", difficulty: "intermediate", estimatedMinutes: 20, file: "jenkins-architecture.json" },
@@ -634,7 +635,8 @@ var EMBEDDED = {
       { id: "jenkins-sonarqube", title: "Jenkins with SonarQube", difficulty: "intermediate", estimatedMinutes: 20, file: "jenkins-sonarqube.json" },
       { id: "jenkins-nexus", title: "Jenkins with Nexus", difficulty: "intermediate", estimatedMinutes: 15, file: "jenkins-nexus.json" },
       { id: "jenkins-maven", title: "Jenkins with Maven", difficulty: "intermediate", estimatedMinutes: 15, file: "jenkins-maven.json" },
-      { id: "jenkins-gradle", title: "Jenkins with Gradle", difficulty: "intermediate", estimatedMinutes: 15, file: "jenkins-gradle.json" }
+      { id: "jenkins-gradle", title: "Jenkins with Gradle", difficulty: "intermediate", estimatedMinutes: 15, file: "jenkins-gradle.json" },
+      { id: "jenkins-complete-cicd", title: "Complete CI/CD Pipeline with Jenkins", difficulty: "advanced", estimatedMinutes: 45, file: "jenkins-complete-cicd.json" }
     ]
   }
 };

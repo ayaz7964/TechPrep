@@ -139,6 +139,13 @@
       "difficulty": "intermediate",
       "estimatedMinutes": 15,
       "file": "github-actions-conditional.json"
+    },
+    {
+      "id": "github-actions-complete-cicd",
+      "title": "Complete CI/CD Pipeline with GitHub Actions",
+      "difficulty": "advanced",
+      "estimatedMinutes": 45,
+      "file": "github-actions-complete-cicd.json"
     }
   ]
 }
