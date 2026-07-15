@@ -1,212 +1,214 @@
-[
-  {
-    "id": "cdn-fundamentals",
-    "title": "CDN Fundamentals",
-    "difficulty": "beginner",
-    "estimatedMinutes": 20,
-    "file": "cdn-fundamentals.json"
-  },
-  {
-    "id": "cdn-edge-servers",
-    "title": "Edge Servers",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "cdn-edge-servers.json"
-  },
-  {
-    "id": "cdn-edge-locations",
-    "title": "Edge Locations",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "cdn-edge-locations.json"
-  },
-  {
-    "id": "cdn-origin-server",
-    "title": "Origin Server",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "cdn-origin-server.json"
-  },
-  {
-    "id": "cdn-cache-hit",
-    "title": "Cache Hit",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "cdn-cache-hit.json"
-  },
-  {
-    "id": "cdn-cache-miss",
-    "title": "Cache Miss",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "cdn-cache-miss.json"
-  },
-  {
-    "id": "cdn-cache-invalidation",
-    "title": "Cache Invalidation",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-cache-invalidation.json"
-  },
-  {
-    "id": "cdn-cache-control-headers",
-    "title": "Cache-Control Headers",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-cache-control-headers.json"
-  },
-  {
-    "id": "cdn-ttl",
-    "title": "TTL (Time To Live)",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "cdn-ttl.json"
-  },
-  {
-    "id": "cdn-dynamic-content",
-    "title": "Dynamic Content",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-dynamic-content.json"
-  },
-  {
-    "id": "cdn-static-content",
-    "title": "Static Content",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "cdn-static-content.json"
-  },
-  {
-    "id": "cdn-image-optimization",
-    "title": "Image Optimization",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-image-optimization.json"
-  },
-  {
-    "id": "cdn-compression",
-    "title": "Compression",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "cdn-compression.json"
-  },
-  {
-    "id": "cdn-brotli",
-    "title": "Brotli",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "cdn-brotli.json"
-  },
-  {
-    "id": "cdn-gzip",
-    "title": "Gzip",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "cdn-gzip.json"
-  },
-  {
-    "id": "cdn-http-2",
-    "title": "HTTP/2",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-http-2.json"
-  },
-  {
-    "id": "cdn-http-3",
-    "title": "HTTP/3",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "cdn-http-3.json"
-  },
-  {
-    "id": "cdn-security",
-    "title": "CDN Security",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-security.json"
-  },
-  {
-    "id": "cdn-geo-routing",
-    "title": "Geo Routing",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "cdn-geo-routing.json"
-  },
-  {
-    "id": "cdn-geo-blocking",
-    "title": "Geo Blocking",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "cdn-geo-blocking.json"
-  },
-  {
-    "id": "cdn-ddos-protection",
-    "title": "DDoS Protection",
-    "difficulty": "advanced",
-    "estimatedMinutes": 25,
-    "file": "cdn-ddos-protection.json"
-  },
-  {
-    "id": "cdn-waf-integration",
-    "title": "WAF Integration",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "cdn-waf-integration.json"
-  },
-  {
-    "id": "cdn-signed-urls",
-    "title": "Signed URLs",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "cdn-signed-urls.json"
-  },
-  {
-    "id": "cdn-signed-cookies",
-    "title": "Signed Cookies",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "cdn-signed-cookies.json"
-  },
-  {
-    "id": "cdn-cloudflare",
-    "title": "Cloudflare CDN",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-cloudflare.json"
-  },
-  {
-    "id": "cdn-aws-cloudfront",
-    "title": "AWS CloudFront",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 25,
-    "file": "cdn-aws-cloudfront.json"
-  },
-  {
-    "id": "cdn-azure-cdn",
-    "title": "Azure CDN",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-azure-cdn.json"
-  },
-  {
-    "id": "cdn-google-cloud-cdn",
-    "title": "Google Cloud CDN",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-google-cloud-cdn.json"
-  },
-  {
-    "id": "cdn-fastly",
-    "title": "Fastly",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "cdn-fastly.json"
-  },
-  {
-    "id": "cdn-akamai",
-    "title": "Akamai",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "cdn-akamai.json"
-  }
-]
+{
+  "topics": [
+    {
+      "id": "cdn-fundamentals",
+      "title": "CDN Fundamentals",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "file": "cdn-fundamentals.json"
+    },
+    {
+      "id": "cdn-edge-servers",
+      "title": "Edge Servers",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-edge-servers.json"
+    },
+    {
+      "id": "cdn-edge-locations",
+      "title": "Edge Locations",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-edge-locations.json"
+    },
+    {
+      "id": "cdn-origin-server",
+      "title": "Origin Server",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-origin-server.json"
+    },
+    {
+      "id": "cdn-cache-hit",
+      "title": "Cache Hit",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "cdn-cache-hit.json"
+    },
+    {
+      "id": "cdn-cache-miss",
+      "title": "Cache Miss",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "cdn-cache-miss.json"
+    },
+    {
+      "id": "cdn-cache-invalidation",
+      "title": "Cache Invalidation",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-cache-invalidation.json"
+    },
+    {
+      "id": "cdn-cache-control-headers",
+      "title": "Cache-Control Headers",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-cache-control-headers.json"
+    },
+    {
+      "id": "cdn-ttl",
+      "title": "TTL (Time To Live)",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-ttl.json"
+    },
+    {
+      "id": "cdn-dynamic-content",
+      "title": "Dynamic Content",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-dynamic-content.json"
+    },
+    {
+      "id": "cdn-static-content",
+      "title": "Static Content",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "cdn-static-content.json"
+    },
+    {
+      "id": "cdn-image-optimization",
+      "title": "Image Optimization",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-image-optimization.json"
+    },
+    {
+      "id": "cdn-compression",
+      "title": "Compression",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-compression.json"
+    },
+    {
+      "id": "cdn-brotli",
+      "title": "Brotli",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-brotli.json"
+    },
+    {
+      "id": "cdn-gzip",
+      "title": "Gzip",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "cdn-gzip.json"
+    },
+    {
+      "id": "cdn-http-2",
+      "title": "HTTP/2",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-http-2.json"
+    },
+    {
+      "id": "cdn-http-3",
+      "title": "HTTP/3",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "cdn-http-3.json"
+    },
+    {
+      "id": "cdn-security",
+      "title": "CDN Security",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-security.json"
+    },
+    {
+      "id": "cdn-geo-routing",
+      "title": "Geo Routing",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-geo-routing.json"
+    },
+    {
+      "id": "cdn-geo-blocking",
+      "title": "Geo Blocking",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-geo-blocking.json"
+    },
+    {
+      "id": "cdn-ddos-protection",
+      "title": "DDoS Protection",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "cdn-ddos-protection.json"
+    },
+    {
+      "id": "cdn-waf-integration",
+      "title": "WAF Integration",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "cdn-waf-integration.json"
+    },
+    {
+      "id": "cdn-signed-urls",
+      "title": "Signed URLs",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-signed-urls.json"
+    },
+    {
+      "id": "cdn-signed-cookies",
+      "title": "Signed Cookies",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-signed-cookies.json"
+    },
+    {
+      "id": "cdn-cloudflare",
+      "title": "Cloudflare",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-cloudflare.json"
+    },
+    {
+      "id": "cdn-aws-cloudfront",
+      "title": "AWS CloudFront",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-aws-cloudfront.json"
+    },
+    {
+      "id": "cdn-azure-cdn",
+      "title": "Azure CDN",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-azure-cdn.json"
+    },
+    {
+      "id": "cdn-gcp-cdn",
+      "title": "Google Cloud CDN",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "cdn-gcp-cdn.json"
+    },
+    {
+      "id": "cdn-fastly",
+      "title": "Fastly",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-fastly.json"
+    },
+    {
+      "id": "cdn-akamai",
+      "title": "Akamai",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "cdn-akamai.json"
+    }
+  ]
+}
