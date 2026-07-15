@@ -1,0 +1,212 @@
+[
+  {
+    "id": "dsa-arrays",
+    "title": "Arrays",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "dsa-arrays.json"
+  },
+  {
+    "id": "dsa-linked-lists",
+    "title": "Linked Lists",
+    "difficulty": "beginner",
+    "estimatedMinutes": 20,
+    "file": "dsa-linked-lists.json"
+  },
+  {
+    "id": "dsa-stacks",
+    "title": "Stacks",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "dsa-stacks.json"
+  },
+  {
+    "id": "dsa-queues",
+    "title": "Queues",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "dsa-queues.json"
+  },
+  {
+    "id": "dsa-hash-tables",
+    "title": "Hash Tables",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-hash-tables.json"
+  },
+  {
+    "id": "dsa-trees",
+    "title": "Trees",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-trees.json"
+  },
+  {
+    "id": "dsa-binary-trees",
+    "title": "Binary Trees",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-binary-trees.json"
+  },
+  {
+    "id": "dsa-bst",
+    "title": "Binary Search Trees",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-bst.json"
+  },
+  {
+    "id": "dsa-heaps",
+    "title": "Heaps",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-heaps.json"
+  },
+  {
+    "id": "dsa-graphs",
+    "title": "Graphs",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "dsa-graphs.json"
+  },
+  {
+    "id": "dsa-dfs",
+    "title": "DFS (Depth-First Search)",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-dfs.json"
+  },
+  {
+    "id": "dsa-bfs",
+    "title": "BFS (Breadth-First Search)",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-bfs.json"
+  },
+  {
+    "id": "dsa-dynamic-programming",
+    "title": "Dynamic Programming",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "dsa-dynamic-programming.json"
+  },
+  {
+    "id": "dsa-recursion",
+    "title": "Recursion",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-recursion.json"
+  },
+  {
+    "id": "dsa-backtracking",
+    "title": "Backtracking",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "dsa-backtracking.json"
+  },
+  {
+    "id": "dsa-greedy",
+    "title": "Greedy Algorithms",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-greedy.json"
+  },
+  {
+    "id": "dsa-divide-conquer",
+    "title": "Divide and Conquer",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-divide-conquer.json"
+  },
+  {
+    "id": "dsa-sorting",
+    "title": "Sorting Algorithms",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "dsa-sorting.json"
+  },
+  {
+    "id": "dsa-searching",
+    "title": "Searching Algorithms",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "dsa-searching.json"
+  },
+  {
+    "id": "dsa-two-pointers",
+    "title": "Two Pointers",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "dsa-two-pointers.json"
+  },
+  {
+    "id": "dsa-sliding-window",
+    "title": "Sliding Window",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "dsa-sliding-window.json"
+  },
+  {
+    "id": "dsa-prefix-sum",
+    "title": "Prefix Sum",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "dsa-prefix-sum.json"
+  },
+  {
+    "id": "dsa-bit-manipulation",
+    "title": "Bit Manipulation",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "dsa-bit-manipulation.json"
+  },
+  {
+    "id": "dsa-trie",
+    "title": "Trie",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "dsa-trie.json"
+  },
+  {
+    "id": "dsa-union-find",
+    "title": "Union Find",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "dsa-union-find.json"
+  },
+  {
+    "id": "dsa-topological-sort",
+    "title": "Topological Sort",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "dsa-topological-sort.json"
+  },
+  {
+    "id": "dsa-shortest-path",
+    "title": "Shortest Path",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "dsa-shortest-path.json"
+  },
+  {
+    "id": "dsa-min-spanning-tree",
+    "title": "Minimum Spanning Tree",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "dsa-min-spanning-tree.json"
+  },
+  {
+    "id": "dsa-string-matching",
+    "title": "String Matching",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "dsa-string-matching.json"
+  },
+  {
+    "id": "dsa-time-complexity",
+    "title": "Time Complexity",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "dsa-time-complexity.json"
+  }
+]

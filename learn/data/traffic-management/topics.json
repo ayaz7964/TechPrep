@@ -1,0 +1,170 @@
+[
+  {
+    "id": "tm-reverse-proxy",
+    "title": "Reverse Proxy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "tm-reverse-proxy.json"
+  },
+  {
+    "id": "tm-forward-proxy",
+    "title": "Forward Proxy",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-forward-proxy.json"
+  },
+  {
+    "id": "tm-api-gateway",
+    "title": "API Gateway",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "tm-api-gateway.json"
+  },
+  {
+    "id": "tm-load-balancing",
+    "title": "Load Balancing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "tm-load-balancing.json"
+  },
+  {
+    "id": "tm-traffic-routing",
+    "title": "Traffic Routing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-traffic-routing.json"
+  },
+  {
+    "id": "tm-path-routing",
+    "title": "Path Routing",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "tm-path-routing.json"
+  },
+  {
+    "id": "tm-host-routing",
+    "title": "Host Routing",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "tm-host-routing.json"
+  },
+  {
+    "id": "tm-dns-routing",
+    "title": "DNS Routing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-dns-routing.json"
+  },
+  {
+    "id": "tm-geo-routing",
+    "title": "Geo Routing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-geo-routing.json"
+  },
+  {
+    "id": "tm-traffic-splitting",
+    "title": "Traffic Splitting",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-traffic-splitting.json"
+  },
+  {
+    "id": "tm-canary-routing",
+    "title": "Canary Routing",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "tm-canary-routing.json"
+  },
+  {
+    "id": "tm-blue-green-routing",
+    "title": "Blue Green Routing",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "tm-blue-green-routing.json"
+  },
+  {
+    "id": "tm-session-affinity",
+    "title": "Session Affinity",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-session-affinity.json"
+  },
+  {
+    "id": "tm-sticky-sessions",
+    "title": "Sticky Sessions",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-sticky-sessions.json"
+  },
+  {
+    "id": "tm-circuit-breaker",
+    "title": "Circuit Breaker",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "tm-circuit-breaker.json"
+  },
+  {
+    "id": "tm-retry-policies",
+    "title": "Retry Policies",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-retry-policies.json"
+  },
+  {
+    "id": "tm-failover",
+    "title": "Failover",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "tm-failover.json"
+  },
+  {
+    "id": "tm-disaster-recovery",
+    "title": "Disaster Recovery",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "tm-disaster-recovery.json"
+  },
+  {
+    "id": "tm-active-active",
+    "title": "Active-Active",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "tm-active-active.json"
+  },
+  {
+    "id": "tm-active-passive",
+    "title": "Active-Passive",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "tm-active-passive.json"
+  },
+  {
+    "id": "tm-health-checks",
+    "title": "Health Checks",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-health-checks.json"
+  },
+  {
+    "id": "tm-heartbeat",
+    "title": "Heartbeat",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 10,
+    "file": "tm-heartbeat.json"
+  },
+  {
+    "id": "tm-latency-routing",
+    "title": "Latency Based Routing",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "tm-latency-routing.json"
+  },
+  {
+    "id": "tm-weighted-routing",
+    "title": "Weighted Routing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "tm-weighted-routing.json"
+  }
+]

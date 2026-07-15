@@ -1,0 +1,44 @@
+[
+  {
+    "id": "log-centralized",
+    "title": "Centralized Logging",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "log-centralized.json"
+  },
+  {
+    "id": "log-structured",
+    "title": "Structured Logging",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "log-structured.json"
+  },
+  {
+    "id": "log-aggregation",
+    "title": "Log Aggregation",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "log-aggregation.json"
+  },
+  {
+    "id": "log-rotation",
+    "title": "Log Rotation",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "log-rotation.json"
+  },
+  {
+    "id": "log-levels",
+    "title": "Log Levels",
+    "difficulty": "beginner",
+    "estimatedMinutes": 10,
+    "file": "log-levels.json"
+  },
+  {
+    "id": "log-shipping",
+    "title": "Log Shipping",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "log-shipping.json"
+  }
+]

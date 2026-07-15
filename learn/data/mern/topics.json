@@ -1,0 +1,107 @@
+[
+  {
+    "id": "mern-architecture",
+    "title": "MERN Architecture",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "mern-architecture.json"
+  },
+  {
+    "id": "mern-setup",
+    "title": "MERN Stack Setup",
+    "difficulty": "beginner",
+    "estimatedMinutes": 15,
+    "file": "mern-setup.json"
+  },
+  {
+    "id": "mern-rest-api",
+    "title": "REST API with MERN",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 25,
+    "file": "mern-rest-api.json"
+  },
+  {
+    "id": "mern-authentication",
+    "title": "MERN Authentication",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "mern-authentication.json"
+  },
+  {
+    "id": "mern-file-upload",
+    "title": "File Upload in MERN",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "mern-file-upload.json"
+  },
+  {
+    "id": "mern-deployment",
+    "title": "MERN Deployment",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "mern-deployment.json"
+  },
+  {
+    "id": "mern-state-management",
+    "title": "MERN State Management",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "mern-state-management.json"
+  },
+  {
+    "id": "mern-real-time",
+    "title": "Real-Time with Socket.io",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "mern-real-time.json"
+  },
+  {
+    "id": "mern-testing",
+    "title": "MERN Testing",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "mern-testing.json"
+  },
+  {
+    "id": "mern-performance",
+    "title": "MERN Performance",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "mern-performance.json"
+  },
+  {
+    "id": "mern-security",
+    "title": "MERN Security",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "mern-security.json"
+  },
+  {
+    "id": "mern-graphql",
+    "title": "MERN + GraphQL",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "mern-graphql.json"
+  },
+  {
+    "id": "mern-docker",
+    "title": "MERN with Docker",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "mern-docker.json"
+  },
+  {
+    "id": "mern-ci-cd",
+    "title": "MERN CI/CD Pipeline",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "mern-ci-cd.json"
+  },
+  {
+    "id": "mern-monitoring",
+    "title": "MERN Monitoring",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "mern-monitoring.json"
+  }
+]

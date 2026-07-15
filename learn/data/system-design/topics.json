@@ -1,0 +1,170 @@
+[
+  {
+    "id": "sd-interview",
+    "title": "System Design Interview",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "sd-interview.json"
+  },
+  {
+    "id": "sd-scalability",
+    "title": "Scalability",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "sd-scalability.json"
+  },
+  {
+    "id": "sd-microservices",
+    "title": "Microservices Architecture",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "sd-microservices.json"
+  },
+  {
+    "id": "sd-monolithic",
+    "title": "Monolithic Architecture",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "sd-monolithic.json"
+  },
+  {
+    "id": "sd-load-balancing",
+    "title": "Load Balancing",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "sd-load-balancing.json"
+  },
+  {
+    "id": "sd-caching",
+    "title": "Caching Strategies",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "sd-caching.json"
+  },
+  {
+    "id": "sd-database-sharding",
+    "title": "Database Sharding",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "sd-database-sharding.json"
+  },
+  {
+    "id": "sd-database-replication",
+    "title": "Database Replication",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "sd-database-replication.json"
+  },
+  {
+    "id": "sd-cdn",
+    "title": "Content Delivery Network",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "sd-cdn.json"
+  },
+  {
+    "id": "sd-message-queues",
+    "title": "Message Queues",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 20,
+    "file": "sd-message-queues.json"
+  },
+  {
+    "id": "sd-event-driven",
+    "title": "Event-Driven Architecture",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "sd-event-driven.json"
+  },
+  {
+    "id": "sd-cap-theorem",
+    "title": "CAP Theorem",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "sd-cap-theorem.json"
+  },
+  {
+    "id": "sd-consistency-patterns",
+    "title": "Consistency Patterns",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "sd-consistency-patterns.json"
+  },
+  {
+    "id": "sd-bloom-filters",
+    "title": "Bloom Filters",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "sd-bloom-filters.json"
+  },
+  {
+    "id": "sd-consistent-hashing",
+    "title": "Consistent Hashing",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "sd-consistent-hashing.json"
+  },
+  {
+    "id": "sd-rate-limiting",
+    "title": "Rate Limiting",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "sd-rate-limiting.json"
+  },
+  {
+    "id": "sd-circuit-breaker",
+    "title": "Circuit Breaker Pattern",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "sd-circuit-breaker.json"
+  },
+  {
+    "id": "sd-leader-election",
+    "title": "Leader Election",
+    "difficulty": "advanced",
+    "estimatedMinutes": 15,
+    "file": "sd-leader-election.json"
+  },
+  {
+    "id": "sd-distributed-transactions",
+    "title": "Distributed Transactions",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "sd-distributed-transactions.json"
+  },
+  {
+    "id": "sd-id-generation",
+    "title": "ID Generation",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 15,
+    "file": "sd-id-generation.json"
+  },
+  {
+    "id": "sd-url-shortener",
+    "title": "Design URL Shortener",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "sd-url-shortener.json"
+  },
+  {
+    "id": "sd-pastebin",
+    "title": "Design Pastebin",
+    "difficulty": "advanced",
+    "estimatedMinutes": 20,
+    "file": "sd-pastebin.json"
+  },
+  {
+    "id": "sd-chat-system",
+    "title": "Design Chat System",
+    "difficulty": "advanced",
+    "estimatedMinutes": 25,
+    "file": "sd-chat-system.json"
+  },
+  {
+    "id": "sd-design-twitter",
+    "title": "Design Twitter Feed",
+    "difficulty": "advanced",
+    "estimatedMinutes": 30,
+    "file": "sd-design-twitter.json"
+  }
+]
