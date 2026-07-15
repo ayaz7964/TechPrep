@@ -1,93 +1,95 @@
-[
-  {
-    "id": "ag-kong",
-    "title": "Kong",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "ag-kong.json"
-  },
-  {
-    "id": "ag-nginx-gateway",
-    "title": "NGINX API Gateway",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "ag-nginx-gateway.json"
-  },
-  {
-    "id": "ag-ambassador",
-    "title": "Ambassador",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "ag-ambassador.json"
-  },
-  {
-    "id": "ag-traefik",
-    "title": "Traefik",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "ag-traefik.json"
-  },
-  {
-    "id": "ag-aws-api-gateway",
-    "title": "AWS API Gateway",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "ag-aws-api-gateway.json"
-  },
-  {
-    "id": "ag-rate-limiting",
-    "title": "Rate Limiting",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "ag-rate-limiting.json"
-  },
-  {
-    "id": "ag-authentication",
-    "title": "Authentication",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "ag-authentication.json"
-  },
-  {
-    "id": "ag-authorization",
-    "title": "Authorization",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "ag-authorization.json"
-  },
-  {
-    "id": "ag-api-keys",
-    "title": "API Keys",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "ag-api-keys.json"
-  },
-  {
-    "id": "ag-jwt-validation",
-    "title": "JWT Validation",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "ag-jwt-validation.json"
-  },
-  {
-    "id": "ag-oauth",
-    "title": "OAuth",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "ag-oauth.json"
-  },
-  {
-    "id": "ag-logging",
-    "title": "Logging",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "ag-logging.json"
-  },
-  {
-    "id": "ag-metrics",
-    "title": "Metrics",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "ag-metrics.json"
-  }
-]
+{
+  "topics": [
+    {
+      "id": "ag-kong",
+      "title": "Kong",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "ag-kong.json"
+    },
+    {
+      "id": "ag-nginx-gateway",
+      "title": "NGINX API Gateway",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "ag-nginx-gateway.json"
+    },
+    {
+      "id": "ag-ambassador",
+      "title": "Ambassador",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "ag-ambassador.json"
+    },
+    {
+      "id": "ag-traefik",
+      "title": "Traefik",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "ag-traefik.json"
+    },
+    {
+      "id": "ag-aws-api-gateway",
+      "title": "AWS API Gateway",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "ag-aws-api-gateway.json"
+    },
+    {
+      "id": "ag-rate-limiting",
+      "title": "Rate Limiting",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "ag-rate-limiting.json"
+    },
+    {
+      "id": "ag-authentication",
+      "title": "Authentication",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "ag-authentication.json"
+    },
+    {
+      "id": "ag-authorization",
+      "title": "Authorization",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "ag-authorization.json"
+    },
+    {
+      "id": "ag-api-keys",
+      "title": "API Keys",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "ag-api-keys.json"
+    },
+    {
+      "id": "ag-jwt-validation",
+      "title": "JWT Validation",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 18,
+      "file": "ag-jwt-validation.json"
+    },
+    {
+      "id": "ag-oauth",
+      "title": "OAuth",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "ag-oauth.json"
+    },
+    {
+      "id": "ag-logging",
+      "title": "Logging",
+      "difficulty": "beginner",
+      "estimatedMinutes": 13,
+      "file": "ag-logging.json"
+    },
+    {
+      "id": "ag-metrics",
+      "title": "Metrics",
+      "difficulty": "beginner",
+      "estimatedMinutes": 14,
+      "file": "ag-metrics.json"
+    }
+  ]
+}

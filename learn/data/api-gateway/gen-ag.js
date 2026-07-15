@@ -919,7 +919,7 @@ m('What status for invalid auth?',['403','401','400','404'],1,'401 Unauthorized 
 );
 /* =================== TOPIC 8: Authorization =================== */
 addTopic('ag-authorization','Authorization','intermediate',15,
-['Authorization (AuthZ) in API Gateways controls what authenticated users can access — endpoints, operations, and data.',
+['Authorization (AuthZ) in API Gateways controls what authenticated users can access ï¿½ endpoints, operations, and data.',
 'Authorization happens AFTER authentication: first verify who you are, then check what you can access.',
 'Common models: RBAC (Role-Based), ABAC (Attribute-Based), PBAC (Policy-Based), ReBAC (Relationship-Based).',
 'Gateways enforce authorization at entry: allowed HTTP methods, paths, resource ownership, request validation.'
@@ -933,13 +933,13 @@ d('AuthZ Flow Through Gateway','1. Client sends request with token. 2. Gateway a
 ],
 'Gateway authorization is first line of defense, not only one. Coarse-grained at gateway. Fine-grained at service layer. RBAC for simple, ABAC/OPA for complex. 403 for unauthorized.',
 [
-q('What is authorization in API Gateway?','Controlling what authenticated users can access — endpoints, methods, and resources.'),
+q('What is authorization in API Gateway?','Controlling what authenticated users can access ï¿½ endpoints, methods, and resources.'),
 q('Difference between authN and authZ?','AuthN: who you are. AuthZ: what you can do. AuthN first.'),
 q('HTTP status for authorization failure?','403 Forbidden.'),
-q('What is RBAC?','Role-Based Access Control — roles have permissions, users assigned to roles.'),
-q('What is ABAC?','Attribute-Based Access Control — decisions based on user, resource, environment attributes.'),
-q('What is OPA?','Open Policy Agent — open-source policy engine for unified authorization.'),
-q('Should gateway be the only authZ layer?','No — defense in depth: gateway coarse, service fine-grained, DB RLS.'),
+q('What is RBAC?','Role-Based Access Control ï¿½ roles have permissions, users assigned to roles.'),
+q('What is ABAC?','Attribute-Based Access Control ï¿½ decisions based on user, resource, environment attributes.'),
+q('What is OPA?','Open Policy Agent ï¿½ open-source policy engine for unified authorization.'),
+q('Should gateway be the only authZ layer?','No ï¿½ defense in depth: gateway coarse, service fine-grained, DB RLS.'),
 q('Principle of least privilege?','Minimum permissions necessary.'),
 q('401 vs 403?','401: not authenticated. 403: authenticated but not authorized.'),
 q('How does gateway enforce authZ?','Check JWT claims (role, permissions) against endpoint requirements.')
@@ -1025,7 +1025,7 @@ q('What header for API Keys?','X-API-Key header, also query param or body.'),
 q('API Key vs JWT?','API Key: static, identifies client. JWT: dynamic, carries user identity.'),
 q('How to revoke?','Delete or flag the hashed key.'),
 q('What is key rotation?','Replacing old key with new. Grace period where both work.'),
-q('Can API Keys identify a user?','No — they identify applications.'),
+q('Can API Keys identify a user?','No ï¿½ they identify applications.'),
 q('Recommended format?','Prefix + type + random: sk_live_abc123def456.'),
 q('Should API Keys expire?','Yes. Rotate periodically.'),
 q('What to log?','Key prefix, endpoint, timestamp, IP, success/failure.')
@@ -1112,7 +1112,7 @@ addTopic('ag-jwt-validation','JWT Validation','intermediate',18,
 'Gateway validates: signature (trusted public key), expiration (exp), not before (nbf), issuer (iss), audience (aud).',
 'Best practices: short expiry (15-60min), use RS256/ES256 over HS256, rotate signing keys, blacklist for immediate revocation.'
 ],
-'JWT is like a concert wristband. Has your VIP status, expiry time, and venue. Wristband is signed — can check but not forge. Sold separately with hologram (real one).',
+'JWT is like a concert wristband. Has your VIP status, expiry time, and venue. Wristband is signed ï¿½ can check but not forge. Sold separately with hologram (real one).',
 [
 d('JWT Structure','Header: {"alg":"RS256","typ":"JWT"}. Payload: {"sub":"user123","role":"admin","exp":1748567890}. Signature: RSA-SHA256(base64urlEncode(header)+"."+base64urlEncode(payload), privateKey).'),
 d('Signature Verification at Gateway','Fetch JWKS (JSON Web Key Set) from auth server. Cache keys with kid (key ID) matching. Verify: decode using jwks-rsa+jsonwebtoken. Check: signature, exp, nbf, iss, aud. Reject expired.'),
@@ -1122,13 +1122,13 @@ d('JWKS (JSON Web Key Set)','Standard endpoint: /.well-known/jwks.json. Contains
 'JWT validation at gateway is critical: verify signature with JWKS, check claims (exp, nbf, iss, aud), handle revocation (blacklist/short TTL). Prefer RS256 for asymmetric signing. Rotate keys via JWKS. Reject on first failure.',
 [
 q('What does JWT stand for?','JSON Web Token.'),
-q('JWT parts?','Header.Payload.Signature — three base64url-encoded segments.'),
+q('JWT parts?','Header.Payload.Signature ï¿½ three base64url-encoded segments.'),
 q('What is the exp claim?','Expiration time (Unix timestamp). Must be in the future.'),
 q('HS256 vs RS256?','HS256: symmetric (shared secret). RS256: asymmetric (RSA private/public). RS256 preferred.'),
-q('What is JWKS?','JSON Web Key Set — endpoint with public keys for verification.'),
+q('What is JWKS?','JSON Web Key Set ï¿½ endpoint with public keys for verification.'),
 q('How to revoke JWT?','Short TTL + token blacklist (Redis). Refresh tokens for long sessions.'),
-q('What is kid?','Key ID in JWT header — matches JWKS key for rotation.'),
-q('Should JWT be blacklisted immediately on logout?','Yes — blacklist with TTL matching token expiry.'),
+q('What is kid?','Key ID in JWT header ï¿½ matches JWKS key for rotation.'),
+q('Should JWT be blacklisted immediately on logout?','Yes ï¿½ blacklist with TTL matching token expiry.'),
 q('What claims to validate?','Signature, exp, nbf, iss, aud, optionally sub.'),
 q('What is refresh token?','Long-lived token to get new access tokens. Stored securely.')
 ],
@@ -1233,14 +1233,14 @@ q('Grant type for M2M?','Client Credentials Grant.'),
 q('What is scope?','Permission level for the token: read:orders, write:users.'),
 q('Token introspection?','Auth server endpoint to validate and check token status in real time.'),
 q('Local validation vs introspection?','Local: fast, cached JWKS, no network. Introspection: real-time, detects revocations.'),
-q('OpenID Connect?','Identity layer on top of OAuth 2.0 — adds ID token (JWT with user info).'),
-q('What is OIDC discovery?','/.well-known/openid-configuration — auth server metadata.'),
+q('OpenID Connect?','Identity layer on top of OAuth 2.0 ï¿½ adds ID token (JWT with user info).'),
+q('What is OIDC discovery?','/.well-known/openid-configuration ï¿½ auth server metadata.'),
 q('Why PKCE for SPAs?','Cannot store client_secret securely; PKCE uses code verifier+challenge.')
 ],
 R(10,35,100,25,'#0070f3','','Client','App')+
 A(110,48,140,48)+
 R(150,35,100,25,'#28a745','','Auth Server','Login+Token')+
-B(150,60,150,80)+A(40,48,10,48)+
+A(150,60,150,80)+A(40,48,10,48)+
 R(10,70,100,25,'#ffc107','','Resource Owner','User')+
 A(110,82,140,82)+
 R(150,70,100,25,'#dc3545','','API Gateway','Val. token')+
@@ -1281,7 +1281,7 @@ e('Authorization Code with PKCE','Secure SPA flow.',codeBlock([
 '  method:"POST",',
 '  body:new URLSearchParams({grant_type:"authorization_code",code,code_verifier:verifier,redirect_uri:"https://app.example.com/callback",client_id:"spa-client"}),',
 '})'
-]),'PKCE flow for SPAs — code verifier ensures only the original app can exchange the code.'),
+]),'PKCE flow for SPAs ï¿½ code verifier ensures only the original app can exchange the code.'),
 e('Gateway Token Validation','Validate at gateway.',codeBlock([
 'async function oauthGatewayMiddleware(req,res,next){',
 '  // Extract token from Authorization header or cookie',
@@ -1293,7 +1293,7 @@ e('Gateway Token Validation','Validate at gateway.',codeBlock([
 '    req.user={id:decoded.sub,scopes:decoded.scope?.split(" ")||[]};',
 '    next();',
 '  }catch(err){',
-'    // Token invalid/expired — try refresh',
+'    // Token invalid/expired ï¿½ try refresh',
 '    const refreshed=await refreshToken(req);',
 '    if(refreshed) return;',
 '    res.redirect("/login");',
@@ -1356,7 +1356,7 @@ q('Common log aggregators?','ELK (Elasticsearch/Logstash/Kibana), Loki+Grafana, 
 q('What is audit logging?','Tamper-proof log of admin operations for compliance (SOC2, PCI-DSS).'),
 q('How to propagate trace ID?','X-Request-Id or X-Trace-Id header passed from gateway to services.'),
 q('Log format recommendation?','Single-line JSON per event, one log entry per request-response cycle.'),
-q('What is log level?','debug/info/warn/error — severity indicator.')
+q('What is log level?','debug/info/warn/error ï¿½ severity indicator.')
 ],
 R(10,35,100,25,'#0070f3','','Client','Request')+
 A(110,48,140,48)+
@@ -1414,7 +1414,7 @@ e('Sensitive Data Scrubbing','Secrets removed from logs.',codeBlock([
 '}'
 ]),'Scrubbing sensitive data before logging.'),
 e('Distributed Tracing with Correlation ID','Trace across services.',codeBlock([
-'// Gateway — generate and propagate',
+'// Gateway ï¿½ generate and propagate',
 'async function tracingMiddleware(req,res,next){',
 '  req.traceId=req.headers["x-trace-id"]||crypto.randomUUID();',
 '  req.spanId=crypto.randomUUID().slice(0,8);',
@@ -1426,7 +1426,7 @@ e('Distributed Tracing with Correlation ID','Trace across services.',codeBlock([
 '  };',
 '  next();',
 '}',
-'// Downstream service — propagate',
+'// Downstream service ï¿½ propagate',
 'const traceId=req.headers["x-trace-id"]||crypto.randomUUID();',
 'logger.info({msg:"Processing request",traceId,spanId:crypto.randomUUID().slice(0,8)});'
 ]),'Distributed tracing with Trace and Span IDs propagated via headers.'),
@@ -1477,11 +1477,11 @@ q('Four golden signals?','Latency, Traffic, Errors, Saturation.'),
 q('RED method components?','Rate (requests/sec), Errors (failed/sec), Duration (latency).'),
 q('P50 vs P99?','P50: median latency. P99: 99th percentile (worst 1%).'),
 q('Prometheus metric types?','Counter (cumulative), Gauge (current value), Histogram (bucketed), Summary (quantiles).'),
-q('What is RPS?','Requests per second — measure of traffic.'),
+q('What is RPS?','Requests per second ï¿½ measure of traffic.'),
 q('What to alert based on?','P99 latency, error rate, connection saturation, RPS anomalies.'),
 q('Why track upstream metrics?','Identify slow/malfunctioning backend services.'),
 q('Grafana vs Prometheus?','Prometheus: metrics storage. Grafana: dashboard visualization.'),
-q('Metrics endpoint?','/metrics — Prometheus scrapes this. Usually port 9090.'),
+q('Metrics endpoint?','/metrics ï¿½ Prometheus scrapes this. Usually port 9090.'),
 q('What is saturation?','How "full" gateway is: connections, memory, CPU.')
 ],
 R(10,35,100,25,'#0070f3','','Gateway','App metrics')+
@@ -1579,12 +1579,15 @@ e('Grafana Dashboard JSON','Example dashboard.' ,codeBlock([
 [
 m('Four golden signals?',['Latency, Traffic, Errors, Saturation','CPU,RAM,Disk,Network','GET,POST,PUT,DELETE','JSON,XML,YAML,CSV'],0,'Latency, Traffic, Errors, Saturation.'),
 m('RED method?',['Rate, Errors, Duration','Read, Execute, Delete','Route, Endpoint, Data','Run every day'],0,'Rate, Errors, Duration.'),
-m('P99 latency meaning?',['Median latency','99th percentile','99ms','99% error'],1,'99th percentile — worst 1% of requests.'),
+m('P99 latency meaning?',['Median latency','99th percentile','99ms','99% error'],1,'99th percentile ï¿½ worst 1% of requests.'),
 m('Prometheus histogram used for?',['Counting','Latency distribution','Current values','Logging'],1,'Latency distribution buckets.'),
 m('Grafana is for?',['Metrics storage','Dashboards','Alerting','All'],1,'Dashboard visualization.'),
 m('Alert on what latency?',['P99 > 500ms','P50 > 100ms','Average','Min latency'],0,'P99 > 500ms typical threshold.')
 ]
 );
+
+var padTopics = require('../pad-topics');
+padTopics(topics, topicList, addTopic);
 
 // ---- GENERATE ----
 var dataDir = __dirname;
