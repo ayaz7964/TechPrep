@@ -1,142 +1,144 @@
-[
-  {
-    "id": "oop-basics",
-    "title": "OOP Basics",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "oop-basics.json"
-  },
-  {
-    "id": "oop-encapsulation",
-    "title": "Encapsulation",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "oop-encapsulation.json"
-  },
-  {
-    "id": "oop-inheritance",
-    "title": "Inheritance",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "oop-inheritance.json"
-  },
-  {
-    "id": "oop-polymorphism",
-    "title": "Polymorphism",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-polymorphism.json"
-  },
-  {
-    "id": "oop-abstraction",
-    "title": "Abstraction",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-abstraction.json"
-  },
-  {
-    "id": "oop-solid",
-    "title": "SOLID Principles",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "oop-solid.json"
-  },
-  {
-    "id": "oop-single-responsibility",
-    "title": "Single Responsibility",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-single-responsibility.json"
-  },
-  {
-    "id": "oop-open-closed",
-    "title": "Open-Closed Principle",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-open-closed.json"
-  },
-  {
-    "id": "oop-liskov",
-    "title": "Liskov Substitution",
-    "difficulty": "advanced",
-    "estimatedMinutes": 15,
-    "file": "oop-liskov.json"
-  },
-  {
-    "id": "oop-interface-segregation",
-    "title": "Interface Segregation",
-    "difficulty": "advanced",
-    "estimatedMinutes": 15,
-    "file": "oop-interface-segregation.json"
-  },
-  {
-    "id": "oop-dependency-inversion",
-    "title": "Dependency Inversion",
-    "difficulty": "advanced",
-    "estimatedMinutes": 15,
-    "file": "oop-dependency-inversion.json"
-  },
-  {
-    "id": "oop-design-patterns",
-    "title": "Design Patterns",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "oop-design-patterns.json"
-  },
-  {
-    "id": "oop-singleton",
-    "title": "Singleton Pattern",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-singleton.json"
-  },
-  {
-    "id": "oop-factory",
-    "title": "Factory Pattern",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-factory.json"
-  },
-  {
-    "id": "oop-observer",
-    "title": "Observer Pattern",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-observer.json"
-  },
-  {
-    "id": "oop-strategy",
-    "title": "Strategy Pattern",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-strategy.json"
-  },
-  {
-    "id": "oop-decorator",
-    "title": "Decorator Pattern",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-decorator.json"
-  },
-  {
-    "id": "oop-computer-arch",
-    "title": "Computer Architecture",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "oop-computer-arch.json"
-  },
-  {
-    "id": "oop-operating-systems",
-    "title": "Operating Systems",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-operating-systems.json"
-  },
-  {
-    "id": "oop-networking-basics",
-    "title": "Networking Basics",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "oop-networking-basics.json"
-  }
-]
+{
+  "topics": [
+    {
+      "id": "oop-basics",
+      "title": "OOP Basics",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "oop-basics.json"
+    },
+    {
+      "id": "oop-encapsulation",
+      "title": "Encapsulation",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "oop-encapsulation.json"
+    },
+    {
+      "id": "oop-inheritance",
+      "title": "Inheritance",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "oop-inheritance.json"
+    },
+    {
+      "id": "oop-polymorphism",
+      "title": "Polymorphism",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-polymorphism.json"
+    },
+    {
+      "id": "oop-abstraction",
+      "title": "Abstraction",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-abstraction.json"
+    },
+    {
+      "id": "oop-solid",
+      "title": "SOLID Principles",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "oop-solid.json"
+    },
+    {
+      "id": "oop-single-responsibility",
+      "title": "Single Responsibility",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-single-responsibility.json"
+    },
+    {
+      "id": "oop-open-closed",
+      "title": "Open-Closed Principle",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-open-closed.json"
+    },
+    {
+      "id": "oop-liskov",
+      "title": "Liskov Substitution",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "oop-liskov.json"
+    },
+    {
+      "id": "oop-interface-segregation",
+      "title": "Interface Segregation",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "oop-interface-segregation.json"
+    },
+    {
+      "id": "oop-dependency-inversion",
+      "title": "Dependency Inversion",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "oop-dependency-inversion.json"
+    },
+    {
+      "id": "oop-design-patterns",
+      "title": "Design Patterns",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "oop-design-patterns.json"
+    },
+    {
+      "id": "oop-singleton",
+      "title": "Singleton Pattern",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-singleton.json"
+    },
+    {
+      "id": "oop-factory",
+      "title": "Factory Pattern",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-factory.json"
+    },
+    {
+      "id": "oop-observer",
+      "title": "Observer Pattern",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-observer.json"
+    },
+    {
+      "id": "oop-strategy",
+      "title": "Strategy Pattern",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-strategy.json"
+    },
+    {
+      "id": "oop-decorator",
+      "title": "Decorator Pattern",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-decorator.json"
+    },
+    {
+      "id": "oop-computer-arch",
+      "title": "Computer Architecture",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "oop-computer-arch.json"
+    },
+    {
+      "id": "oop-operating-systems",
+      "title": "Operating Systems",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-operating-systems.json"
+    },
+    {
+      "id": "oop-networking-basics",
+      "title": "Networking Basics",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "oop-networking-basics.json"
+    }
+  ]
+}

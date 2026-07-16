@@ -1,142 +1,144 @@
-[
-  {
-    "id": "git-workflow",
-    "title": "Git Workflows",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "git-workflow.json"
-  },
-  {
-    "id": "git-branching",
-    "title": "Branching Strategies",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "git-branching.json"
-  },
-  {
-    "id": "git-merge",
-    "title": "Git Merge",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-merge.json"
-  },
-  {
-    "id": "git-rebase",
-    "title": "Git Rebase",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "git-rebase.json"
-  },
-  {
-    "id": "git-stash",
-    "title": "Git Stash",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "git-stash.json"
-  },
-  {
-    "id": "git-tag",
-    "title": "Git Tags",
-    "difficulty": "beginner",
-    "estimatedMinutes": 10,
-    "file": "git-tag.json"
-  },
-  {
-    "id": "git-submodule",
-    "title": "Git Submodules",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-submodule.json"
-  },
-  {
-    "id": "git-hooks",
-    "title": "Git Hooks",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-hooks.json"
-  },
-  {
-    "id": "git-bisect",
-    "title": "Git Bisect",
-    "difficulty": "advanced",
-    "estimatedMinutes": 15,
-    "file": "git-bisect.json"
-  },
-  {
-    "id": "git-revert",
-    "title": "Git Revert",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 10,
-    "file": "git-revert.json"
-  },
-  {
-    "id": "git-reset",
-    "title": "Git Reset",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-reset.json"
-  },
-  {
-    "id": "git-cherry-pick",
-    "title": "Git Cherry-Pick",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-cherry-pick.json"
-  },
-  {
-    "id": "git-pull-request",
-    "title": "Pull Requests",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "git-pull-request.json"
-  },
-  {
-    "id": "git-code-review",
-    "title": "Code Review",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-code-review.json"
-  },
-  {
-    "id": "git-ci-cd-pipeline",
-    "title": "CI/CD Pipeline",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "git-ci-cd-pipeline.json"
-  },
-  {
-    "id": "git-ci-cd-tools",
-    "title": "CI/CD Tools",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-ci-cd-tools.json"
-  },
-  {
-    "id": "git-build-automation",
-    "title": "Build Automation",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "git-build-automation.json"
-  },
-  {
-    "id": "git-test-automation",
-    "title": "Test Automation",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "git-test-automation.json"
-  },
-  {
-    "id": "git-deployment-automation",
-    "title": "Deployment Automation",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "git-deployment-automation.json"
-  },
-  {
-    "id": "git-release-mgmt",
-    "title": "Release Management",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "git-release-mgmt.json"
-  }
-]
+{
+  "topics": [
+    {
+      "id": "git-workflow",
+      "title": "Git Workflows",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-workflow.json"
+    },
+    {
+      "id": "git-branching",
+      "title": "Branching Strategies",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-branching.json"
+    },
+    {
+      "id": "git-merge",
+      "title": "Git Merge",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-merge.json"
+    },
+    {
+      "id": "git-rebase",
+      "title": "Git Rebase",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-rebase.json"
+    },
+    {
+      "id": "git-stash",
+      "title": "Git Stash",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-stash.json"
+    },
+    {
+      "id": "git-tag",
+      "title": "Git Tags",
+      "difficulty": "beginner",
+      "estimatedMinutes": 10,
+      "file": "git-tag.json"
+    },
+    {
+      "id": "git-submodule",
+      "title": "Git Submodules",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-submodule.json"
+    },
+    {
+      "id": "git-hooks",
+      "title": "Git Hooks",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-hooks.json"
+    },
+    {
+      "id": "git-bisect",
+      "title": "Git Bisect",
+      "difficulty": "advanced",
+      "estimatedMinutes": 15,
+      "file": "git-bisect.json"
+    },
+    {
+      "id": "git-revert",
+      "title": "Git Revert",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 10,
+      "file": "git-revert.json"
+    },
+    {
+      "id": "git-reset",
+      "title": "Git Reset",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-reset.json"
+    },
+    {
+      "id": "git-cherry-pick",
+      "title": "Git Cherry-Pick",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-cherry-pick.json"
+    },
+    {
+      "id": "git-pull-request",
+      "title": "Pull Requests",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "git-pull-request.json"
+    },
+    {
+      "id": "git-code-review",
+      "title": "Code Review",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-code-review.json"
+    },
+    {
+      "id": "git-ci-cd-pipeline",
+      "title": "CI/CD Pipeline",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-ci-cd-pipeline.json"
+    },
+    {
+      "id": "git-ci-cd-tools",
+      "title": "CI/CD Tools",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-ci-cd-tools.json"
+    },
+    {
+      "id": "git-build-automation",
+      "title": "Build Automation",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-build-automation.json"
+    },
+    {
+      "id": "git-github-actions",
+      "title": "GitHub Actions",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "git-github-actions.json"
+    },
+    {
+      "id": "git-lfs",
+      "title": "Git LFS (Large File Storage)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "git-lfs.json"
+    },
+    {
+      "id": "git-best-practices",
+      "title": "Git Best Practices",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "git-best-practices.json"
+    }
+  ]
+}

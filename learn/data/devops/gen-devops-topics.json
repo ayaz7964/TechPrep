@@ -1,0 +1,122 @@
+[
+  {
+    "id": "devops-culture",
+    "title": "DevOps Culture",
+    "diff": "beginner",
+    "min": 15
+  },
+  {
+    "id": "devops-cloud-computing",
+    "title": "Cloud Computing",
+    "diff": "beginner",
+    "min": 15
+  },
+  {
+    "id": "devops-aws-ec2",
+    "title": "AWS EC2",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-aws-s3",
+    "title": "AWS S3",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-aws-lambda",
+    "title": "AWS Lambda",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-aws-vpc",
+    "title": "AWS VPC",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-iac",
+    "title": "Infrastructure as Code",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-terraform",
+    "title": "Terraform",
+    "diff": "intermediate",
+    "min": 25
+  },
+  {
+    "id": "devops-cloudformation",
+    "title": "CloudFormation",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-ansible",
+    "title": "Ansible",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-puppet",
+    "title": "Puppet",
+    "diff": "intermediate",
+    "min": 15
+  },
+  {
+    "id": "devops-chef",
+    "title": "Chef",
+    "diff": "intermediate",
+    "min": 15
+  },
+  {
+    "id": "devops-config-mgmt",
+    "title": "Configuration Management",
+    "diff": "intermediate",
+    "min": 15
+  },
+  {
+    "id": "devops-containerization",
+    "title": "Containerization",
+    "diff": "intermediate",
+    "min": 20
+  },
+  {
+    "id": "devops-orchestration",
+    "title": "Orchestration",
+    "diff": "advanced",
+    "min": 20
+  },
+  {
+    "id": "devops-cloud-migration",
+    "title": "Cloud Migration",
+    "diff": "advanced",
+    "min": 20
+  },
+  {
+    "id": "devops-hybrid-cloud",
+    "title": "Hybrid Cloud",
+    "diff": "advanced",
+    "min": 20
+  },
+  {
+    "id": "devops-multi-cloud",
+    "title": "Multi-Cloud Strategy",
+    "diff": "advanced",
+    "min": 20
+  },
+  {
+    "id": "devops-cost-optimization",
+    "title": "Cloud Cost Optimization",
+    "diff": "intermediate",
+    "min": 15
+  },
+  {
+    "id": "devops-cloud-security",
+    "title": "Cloud Security",
+    "diff": "advanced",
+    "min": 20
+  }
+]

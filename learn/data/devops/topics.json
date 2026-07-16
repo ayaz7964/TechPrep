@@ -1,142 +1,144 @@
-[
-  {
-    "id": "devops-culture",
-    "title": "DevOps Culture",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "devops-culture.json"
-  },
-  {
-    "id": "devops-cloud-computing",
-    "title": "Cloud Computing",
-    "difficulty": "beginner",
-    "estimatedMinutes": 15,
-    "file": "devops-cloud-computing.json"
-  },
-  {
-    "id": "devops-aws-ec2",
-    "title": "AWS EC2",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-aws-ec2.json"
-  },
-  {
-    "id": "devops-aws-s3",
-    "title": "AWS S3",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-aws-s3.json"
-  },
-  {
-    "id": "devops-aws-lambda",
-    "title": "AWS Lambda",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-aws-lambda.json"
-  },
-  {
-    "id": "devops-aws-vpc",
-    "title": "AWS VPC",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-aws-vpc.json"
-  },
-  {
-    "id": "devops-iac",
-    "title": "Infrastructure as Code",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-iac.json"
-  },
-  {
-    "id": "devops-terraform",
-    "title": "Terraform",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 25,
-    "file": "devops-terraform.json"
-  },
-  {
-    "id": "devops-cloudformation",
-    "title": "CloudFormation",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-cloudformation.json"
-  },
-  {
-    "id": "devops-ansible",
-    "title": "Ansible",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-ansible.json"
-  },
-  {
-    "id": "devops-puppet",
-    "title": "Puppet",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "devops-puppet.json"
-  },
-  {
-    "id": "devops-chef",
-    "title": "Chef",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "devops-chef.json"
-  },
-  {
-    "id": "devops-config-mgmt",
-    "title": "Configuration Management",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "devops-config-mgmt.json"
-  },
-  {
-    "id": "devops-containerization",
-    "title": "Containerization",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 20,
-    "file": "devops-containerization.json"
-  },
-  {
-    "id": "devops-orchestration",
-    "title": "Orchestration",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "devops-orchestration.json"
-  },
-  {
-    "id": "devops-cloud-migration",
-    "title": "Cloud Migration",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "devops-cloud-migration.json"
-  },
-  {
-    "id": "devops-hybrid-cloud",
-    "title": "Hybrid Cloud",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "devops-hybrid-cloud.json"
-  },
-  {
-    "id": "devops-multi-cloud",
-    "title": "Multi-Cloud Strategy",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "devops-multi-cloud.json"
-  },
-  {
-    "id": "devops-cost-optimization",
-    "title": "Cloud Cost Optimization",
-    "difficulty": "intermediate",
-    "estimatedMinutes": 15,
-    "file": "devops-cost-optimization.json"
-  },
-  {
-    "id": "devops-cloud-security",
-    "title": "Cloud Security",
-    "difficulty": "advanced",
-    "estimatedMinutes": 20,
-    "file": "devops-cloud-security.json"
-  }
-]
+{
+  "topics": [
+    {
+      "id": "devops-culture",
+      "title": "DevOps Culture",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "devops-culture.json"
+    },
+    {
+      "id": "devops-cloud-computing",
+      "title": "Cloud Computing",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "devops-cloud-computing.json"
+    },
+    {
+      "id": "devops-continuous-integration",
+      "title": "Continuous Integration (CI)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-continuous-integration.json"
+    },
+    {
+      "id": "devops-continuous-delivery",
+      "title": "Continuous Delivery & Deployment (CD)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-continuous-delivery.json"
+    },
+    {
+      "id": "devops-infrastructure-as-code",
+      "title": "Infrastructure as Code (IaC)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-infrastructure-as-code.json"
+    },
+    {
+      "id": "devops-containerization",
+      "title": "Containerization (Docker)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-containerization.json"
+    },
+    {
+      "id": "devops-orchestration",
+      "title": "Orchestration (Kubernetes)",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "devops-orchestration.json"
+    },
+    {
+      "id": "devops-monitoring-logging",
+      "title": "Monitoring & Logging",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-monitoring-logging.json"
+    },
+    {
+      "id": "devops-cicd-tools",
+      "title": "CI/CD Tools & Pipeline Design",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-cicd-tools.json"
+    },
+    {
+      "id": "devops-git-version-control",
+      "title": "Git & Version Control",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "file": "devops-git-version-control.json"
+    },
+    {
+      "id": "devops-configuration-management",
+      "title": "Configuration Management",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-configuration-management.json"
+    },
+    {
+      "id": "devops-cloud-providers",
+      "title": "Cloud Providers (AWS/Azure/GCP)",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-cloud-providers.json"
+    },
+    {
+      "id": "devops-service-mesh",
+      "title": "Service Mesh",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "devops-service-mesh.json"
+    },
+    {
+      "id": "devops-microservices",
+      "title": "Microservices Architecture",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "devops-microservices.json"
+    },
+    {
+      "id": "devops-security",
+      "title": "Security & DevSecOps",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "devops-security.json"
+    },
+    {
+      "id": "devops-site-reliability",
+      "title": "Site Reliability Engineering (SRE)",
+      "difficulty": "advanced",
+      "estimatedMinutes": 25,
+      "file": "devops-site-reliability.json"
+    },
+    {
+      "id": "devops-gitops",
+      "title": "GitOps",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "devops-gitops.json"
+    },
+    {
+      "id": "devops-chaos-engineering",
+      "title": "Chaos Engineering",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "devops-chaos-engineering.json"
+    },
+    {
+      "id": "devops-serverless",
+      "title": "Serverless Computing",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 20,
+      "file": "devops-serverless.json"
+    },
+    {
+      "id": "devops-agile-project-management",
+      "title": "Agile & Project Management",
+      "difficulty": "intermediate",
+      "estimatedMinutes": 15,
+      "file": "devops-agile-project-management.json"
+    }
+  ]
+}
