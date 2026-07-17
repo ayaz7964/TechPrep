@@ -2744,68 +2744,106 @@ addTopic('git-build-automation', 'Build Automation', 'intermediate', 20,
 );
 
 
-/* =================== TOPIC 18: GitHub Actions =================== */
-addTopic('git-github-actions', 'GitHub Actions', 'intermediate', 20,
-  ['GitHub Actions is a CI/CD and automation platform integrated into GitHub. It allows triggering workflows on events like push PR creation issue comments and more.',
-   'Workflows are YAML files in .github/workflows/ defining jobs that run on runners. Each job contains steps that can run commands actions or scripts.',
-   'Key concepts: workflow (automated process) job (set of steps on same runner) step (individual task) action (reusable unit) runner (VM that executes jobs) event (trigger like push).',
-   'Marketplace provides 10000+ pre-built actions. Matrix builds test across multiple OS/versions. Artefacts allow sharing files between jobs. Secrets store sensitive data.'
+/* =================== TOPIC 18: Test Automation =================== */
+addTopic('git-test-automation', 'Test Automation', 'intermediate', 20,
+  ['Test automation is the practice of using software tools to execute pre-scripted tests on a codebase automatically rather than manually.',
+   'Automated tests run on every push in CI/CD pipelines catching regressions early. Key types: unit tests (isolated functions) integration tests (component interaction) end-to-end tests (full user workflows).',
+   'Key frameworks: Jest Mocha (JS) JUnit (Java) PyTest (Python) Selenium Cypress Playwright (browser). Tests should be fast deterministic and isolated from external services.',
+   'Best practices: test pyramid (many unit few e2e) arrange-act-act pattern avoid test interdependence mock external services and aim for >80% coverage on critical paths.'
   ],
-  'GitHub Actions is like a fully automated factory assembly line attached to your GitHub repo. When a new part arrives (code push) the factory automatically starts the assembly line (workflow) moving through quality checks (linting) testing stations (unit tests) and packaging (build) before shipping the product (deployment).',
+  'Test automation is like a robot quality inspector on an assembly line. Instead of a human checking every tenth widget the robot checks EVERY widget instantly. It never gets tired never misses a defect and works 24/7. The initial setup takes effort but once running it catches problems that would otherwise reach the customer.',
   [
-    d('Workflow Structure', 'Workflows are YAML files in .github/workflows/. Structure: name (display name) on (trigger events) jobs (map of job definitions). Each job has runs-on (runner type) steps (array of tasks). Steps can use actions with uses: or run commands with run:. Jobs run in parallel by default; use needs: for sequential execution.'),
-    d('Events and Triggers', 'Common triggers: push (branch/tags) pull_request (opened/synchronized) schedule (cron) workflow_dispatch (manual) release (published). Fine-grained: push: branches: [main] paths: [src/**]. Multiple events in array. Repository dispatch for external events.'),
-    d('Actions and Marketplace', 'Actions are reusable units. Types: container actions (Docker) JavaScript actions (fast local) composite actions (combine steps). Popular: actions/checkout actions/setup-node actions/cache actions/upload-artifact. Version pinning with @v1 @v1.2.3 or @<sha>.'),
-    d('Matrix Builds', 'Matrix strategy runs jobs across multiple OS/version combinations. Example: strategy: matrix: os: [ubuntu-latest windows-latest] node: [16 18 20]. Jobs run in parallel. Use fail-fast: true to cancel all if one fails. Max 256 jobs per workflow.'),
-    d('Secrets and Environments', 'Secrets stored in Settings > Secrets > Actions. Accessed via ${{ secrets.MY_SECRET }}. Environment: protect deployments with required reviewers. Environment secrets override org/repo level. OIDC for cloud provider auth without static credentials.')
+    d('Test Pyramid', 'Unit tests (70%): test individual functions/classes. Fast (ms) run on every save. Integration tests (20%): test component interaction database file system. Slower but catch API contract issues. End-to-end tests (10%): test full user flows in browser. Slow (seconds) but catch real user-facing bugs.'),
+    d('Unit Testing Best Practices', 'Test one thing per test. Use descriptive names: test("should return user when valid id"). Arrange-Act-Assert pattern. Mock external dependencies (HTTP DB). Test edge cases: empty input null undefined boundaries. Avoid testing implementation details test behavior. Use code coverage to find untested paths.'),
+    d('Integration Testing', 'Test real interactions between components: API endpoints database queries file I/O. Use test containers for databases. Run against a test environment not production. Integration tests catch: schema mismatches incorrect API contracts broken serialization. Slower than unit tests but higher confidence.'),
+    d('End-to-End Testing', 'Browser tests that simulate real user interactions. Tools: Cypress Playwright Selenium. Test critical user journeys: login signup checkout search. Run against staging environment. Flaky tests are the biggest challenge. Use retry mechanisms and independent test data.'),
+    d('CI/CD Test Integration', 'Unit tests: run on every push (fast). Integration tests: run on PR to main (medium). E2E tests: run on merge to main (slow). Parallel test execution across multiple CI runners. Test splitting: distribute tests by file/execution time. Fail fast: cancel CI if a critical test fails.')
   ],
-  'GitHub Actions provides powerful CI/CD directly in GitHub. Structure workflows as YAML in .github/workflows/. Use matrix builds for cross-platform testing. Leverage Marketplace actions. Secure secrets with encrypted secrets and OIDC. Start simple then add complexity as needed.',
+  'Test automation is non-negotiable for CI/CD. Start with unit tests they give the best speed-value ratio. Add integration tests for critical paths. Add a few E2E tests for key user journeys. Keep tests fast and reliable. A flaky test is worse than no test because it erodes trust in the pipeline.',
   [
-    q('What is GitHub Actions?', 'CI/CD and automation platform integrated into GitHub for building testing and deploying code.'),
-    q('Where are workflow files stored?', 'In .github/workflows/ directory as YAML files.'),
-    q('What is a job in GitHub Actions?', 'A set of steps that execute on the same runner. Jobs can run in parallel or sequentially.'),
-    q('What is an action?', 'A reusable unit of automation available from the Marketplace or custom-built.'),
-    q('How do you trigger a workflow on pull requests?', 'on: pull_request: types: [opened synchronize]'),
-    q('What does actions/checkout do?', 'Checks out your repository so the workflow can access it.'),
-    q('How do you run a workflow manually?', 'Use workflow_dispatch event and trigger from GitHub UI or API.'),
-    q('What is a matrix build?', 'Running the same job across multiple OS/version combinations in parallel.'),
-    q('How do you store secrets in GitHub Actions?', 'In Settings > Secrets > Actions accessed via ${{ secrets.NAME }}'),
-    q('What is OIDC in GitHub Actions?', 'OpenID Connect for authenticating to cloud providers without storing static credentials.')
+    q('What is test automation?', 'Using software tools to execute pre-scripted tests automatically on each code change.'),
+    q('What are the three main test types?', 'Unit (isolated functions) Integration (component interaction) E2E (full user workflows).'),
+    q('What is the test pyramid?', 'Many unit tests (70%) some integration tests (20%) few E2E tests (10%).'),
+    q('What is the Arrange-Act-Assert pattern?', 'AAA: set up test data (Arrange) execute the code (Act) verify the result (Assert).'),
+    q('Why mock external dependencies in tests?', 'To make tests fast deterministic and isolated from network/database failures.'),
+    q('What is a flaky test?', 'A test that sometimes passes and sometimes fails without code changes. Undermines CI reliability.'),
+    q('What is code coverage?', 'A metric measuring what percentage of code is executed during tests. Not a quality guarantee.'),
+    q('What is parallel test execution?', 'Running multiple test files simultaneously across CI runners to reduce total test time.'),
+    q('What is the difference between Cypress and Playwright?', 'Both are E2E frameworks. Cypress is JS-only with better debugging. Playwright supports multiple languages and browsers.'),
+    q('What is a test fixture?', 'A fixed state of data used as a baseline for running tests ensuring test reproducibility.')
   ],
-  R(10,35,120,25,"#0070f3","","Git Push","Triggers workflow") +
-  A(130,48,160,48) +
-  R(170,35,120,50,"#28a745","","Workflow","YAML in .github/workflows/") +
-  A(170,60,130,100) + A(170,85,130,100) +
-  R(10,95,120,25,"#dc3545","","Job 1: Lint","Run linter") +
-  R(10,125,120,25,"#ffc107","","Job 2: Test","Run tests") +
-  R(10,155,120,25,"#e83e8c","","Job 3: Deploy","Deploy artifact") +
-  R(150,95,140,85,"#17a2b8","","GitHub Actions","Automated CI/CD pipeline triggered by git events. Matrix builds and parallel jobs.") +
-  T(100,210,"GitHub Actions: CI/CD automation integrated into GitHub. YAML-driven workflows triggered by git events.",9,"#666","middle"),
+  R(10,35,100,25,"#0070f3","","Unit (70%)","Fast ms") +
+  A(110,48,130,48) +
+  R(140,35,100,25,"#28a745","","Integration (20%)","Medium s") +
+  A(240,48,260,48) +
+  R(10,70,100,25,"#dc3545","","E2E (10%)","Slow seconds") +
+  R(140,70,100,25,"#ffc107","","CI Pipeline","Automated per push") +
+  R(140,100,100,25,"#e83e8c","","Parallel","Multiple runners") +
+  R(10,100,100,25,"#6610f2","","Coverage",">80% critical paths") +
+  R(260,35,220,150,"#17a2b8","","Test Automation","Automated testing in CI/CD: unit integration E2E. Fast reliable deterministic. Pyramid principle.") +
+  T(100,210,"Test Automation: Automated tests in CI/CD. Unit Integration E2E pyramid. Fast deterministic isolated.",9,"#666","middle"),
   [
-    e('Basic Workflow', 'Simple CI workflow.', codeBlock([
-      "# .github/workflows/ci.yml",
-      "name: CI",
-      "on:",
-      "  push:",
-      "    branches: [main]",
-      "  pull_request:",
-      "    branches: [main]",
+    e('Unit Test Example (Jest)', 'Test a function in isolation.', codeBlock([
+      "// math.js",
+      "function divide(a, b) {",
+      "  if (b === 0) throw new Error('Cannot divide by zero');",
+      "  return a / b;",
+      "}",
       "",
-      "jobs:",
-      "  build:",
-      "    runs-on: ubuntu-latest",
-      "    steps:",
-      "      - uses: actions/checkout@v4",
-      "      - uses: actions/setup-node@v4",
-      "        with:",
-      "          node-version: 18",
-      "      - run: npm ci",
-      "      - run: npm test",
-      "      - run: npm run build"
-    ]), 'Basic CI workflow triggered on push and PR to main branch.'),
-    e('Matrix Build', 'Test across multiple versions.', codeBlock([
-      "# .github/workflows/test.yml",
-      "name: Matrix Test",
+      "// math.test.js",
+      "describe('divide', () => {",
+      "  test('divides positive numbers', () => {",
+      "    expect(divide(10, 2)).toBe(5);",
+      "  });",
+      "",
+      "  test('throws on zero divisor', () => {",
+      "    expect(() => divide(10, 0)).toThrow('Cannot divide by zero');",
+      "  });",
+      "",
+      "  test('handles negative numbers', () => {",
+      "    expect(divide(-10, 2)).toBe(-5);",
+      "  });",
+      "",
+      "  test('handles decimal results', () => {",
+      "    expect(divide(7, 3)).toBeCloseTo(2.333, 3);",
+      "  });",
+      "});"
+    ]), 'Unit test example with Jest covering normal edge case and error paths.'),
+    e('Integration Test (Supertest)', 'Test an API endpoint.', codeBlock([
+      "const request = require('supertest');",
+      "const app = require('./app');",
+      "",
+      "describe('POST /api/users', () => {",
+      "  test('creates a new user', async () => {",
+      "    const res = await request(app)",
+      "      .post('/api/users')",
+      "      .send({ name: 'Alice', email: 'alice@test.com' });",
+      "",
+      "    expect(res.status).toBe(201);",
+      "    expect(res.body).toHaveProperty('id');",
+      "    expect(res.body.name).toBe('Alice');",
+      "  });",
+      "",
+      "  test('rejects duplicate email', async () => {",
+      "    const res = await request(app)",
+      "      .post('/api/users')",
+      "      .send({ name: 'Bob', email: 'alice@test.com' });",
+      "",
+      "    expect(res.status).toBe(409);",
+      "    expect(res.body.error).toContain('exists');",
+      "  });",
+      "",
+      "  test('validates required fields', async () => {",
+      "    const res = await request(app)",
+      "      .post('/api/users')",
+      "      .send({});",
+      "",
+      "    expect(res.status).toBe(400);",
+      "  });",
+      "});"
+    ]), 'Integration test for a REST API endpoint covering success error and validation cases.'),
+    e('CI Test Configuration (GitHub Actions)', 'Run tests in CI pipeline.', codeBlock([
+      "name: Test Suite",
       "on: [push, pull_request]",
       "",
       "jobs:",
@@ -2813,20 +2851,241 @@ addTopic('git-github-actions', 'GitHub Actions', 'intermediate', 20,
       "    runs-on: ubuntu-latest",
       "    strategy:",
       "      matrix:",
-      "        node: [16, 18, 20]",
-      "        os: [ubuntu-latest, windows-latest]",
-      "    runs-on: ${{ matrix.os }}",
+      "        node: [18, 20]",
+      "",
       "    steps:",
       "      - uses: actions/checkout@v4",
       "      - uses: actions/setup-node@v4",
       "        with:",
-      "          node-version: ${{ matrix.node }}",
+      "          node-version: \${{ matrix.node }}",
       "      - run: npm ci",
-      "      - run: npm test"
-    ]), 'Matrix builds run tests across 3 Node versions and 2 OS platforms in parallel.'),
-    e('Deployment Workflow', 'Deploy to production.', codeBlock([
-      "# .github/workflows/deploy.yml",
-      "name: Deploy",
+      "      - run: npm run lint",
+      "      - run: npm test -- --coverage",
+      "      - uses: codecov/codecov-action@v3",
+      "      - run: npm run test:integration",
+      "        if: github.ref == 'refs/heads/main'"
+    ]), 'CI pipeline running lint unit tests with coverage and integration tests on main.'),
+    e('Mocking External Dependencies', 'Isolate tests from external services.', codeBlock([
+      "// user-service.test.js",
+      "jest.mock('./email-service');",
+      "const { sendWelcomeEmail } = require('./email-service');",
+      "const { createUser } = require('./user-service');",
+      "",
+      "test('sends welcome email on user creation', async () => {",
+      "  sendWelcomeEmail.mockResolvedValue(true);",
+      "",
+      "  const user = await createUser({ name: 'Alice', email: 'a@b.com' });",
+      "",
+      "  expect(sendWelcomeEmail).toHaveBeenCalledWith(user.email);",
+      "  expect(sendWelcomeEmail).toHaveBeenCalledTimes(1);",
+      "});",
+      "",
+      "test('handles email failure gracefully', async () => {",
+      "  sendWelcomeEmail.mockRejectedValue(new Error('SMTP down'));",
+      "",
+      "  const user = await createUser({ name: 'Bob', email: 'b@c.com' });",
+      "",
+      "  expect(user).toBeDefined();",
+      "  expect(console.error).toHaveBeenCalled();",
+      "});"
+    ]), 'Mock external services to make tests deterministic and fast.'),
+    e('Parallel Test Execution (Jest)', 'Run tests faster in parallel.', codeBlock([
+      "// jest.config.js",
+      "module.exports = {",
+      "  maxWorkers: '50%',  // Use 50% of CPU cores",
+      "  testMatch: ['**/*.test.js'],",
+      "  testTimeout: 10000,",
+      "  bail: 1,  // Stop after first failure in CI",
+      "  verbose: true,",
+      "",
+      "  // Shard tests across CI runners",
+      "  // --shard=1/4 on first of 4 runners",
+      "};",
+      "",
+      "# Run in CI with sharding:",
+      "# npx jest --shard=\${{ matrix.shard }}/4",
+      "#",
+      "# Split by file:",
+      "# npx jest --listTests | split -l 10",
+      "#",
+      "# Use jest --onlyChanged for local dev",
+      "# jest --changedSince=main"
+    ]), 'Parallel test execution with Jest sharding distributes tests across CI runners for speed.')
+  ],
+  [
+    m('What is the test pyramid?', ['All tests are equal', 'Many unit some integration few E2E', 'Only E2E tests', 'Only unit tests'], 1, 'Test pyramid: many unit tests (fast) some integration medium E2E (few slow).'),
+    m('What is the Arrange-Act-Assert pattern?', ['Setup execute verify', 'Act arrange assert', 'Assert act arrange', 'Random order'], 0, 'AAA: Arrange (setup) Act (execute) Assert (verify).'),
+    m('Why mock external services?', ['Make tests faster', 'Tests become deterministic and fast', 'Less code to write', 'Better coverage'], 1, 'Mocking makes tests deterministic by removing external dependencies and network calls.'),
+    m('What is a flaky test?', ['A consistently passing test', 'A test that intermittently fails', 'A very slow test', 'A new test'], 1, 'Flaky tests pass/fail unpredictably undermining CI reliability and developer trust.'),
+    m('What is code coverage?', ['Percentage of code executed by tests', 'Number of test files', 'Test execution time', 'Number of assertions'], 0, 'Code coverage measures how much of the codebase is executed during tests.'),
+    m('What is the benefit of parallel test execution?', ['Fewer tests needed', 'Reduced total CI test time', 'Better coverage', 'Simpler tests'], 1, 'Parallel execution dramatically reduces total CI pipeline time by running tests across multiple runners.')
+  ]
+);
+
+/* =================== TOPIC 19: Deployment Automation =================== */
+addTopic('git-deployment-automation', 'Deployment Automation', 'advanced', 20,
+  ['Deployment automation is the practice of automatically releasing software changes to production environments without manual intervention.',
+   'Key components: CI/CD pipeline build artifacts artifact registry deployment strategies (blue-green canary rolling) and health checks with auto-rollback.',
+   'Tools: GitHub Actions GitLab CI Jenkins ArgoCD (GitOps) Terraform (infrastructure) Docker Kubernetes. Modern deployments target containers/orchestrators.',
+   'Best practices: immutable infrastructure (never modify a running server replace it) infrastructure as code zero-downtime deployments and feature flags for gradual rollouts.'
+  ],
+  'Deployment automation is like an autopilot system for an airplane. You set the destination (production) and the autopilot handles takeoff (build) navigation (pipeline gates) landing (deploy) and even go-arounds (rollback) if conditions are unsafe. The pilot monitors but does not manually fly. Manual deployment is like flying by hand every time exhausting and error-prone.',
+  [
+    d('Deployment Strategies', 'Blue-Green: two identical environments switch traffic. Zero downtime. Canary: gradual traffic shift 1% 5% 10% 100%. Risk mitigation. Rolling: replace instances one by one. Good for clusters. Recreate: stop old start new. Simple but downtime. Choose based on risk tolerance and infrastructure.'),
+    d('Immutable Infrastructure', 'Never patch a running server. Instead build a new image and replace. Benefits: consistent environments no configuration drift easy rollback (deploy previous image). Implemented via: Docker images AMIs VM snapshots. Coupled with IaC (Terraform Pulumi CloudFormation) for full reproducibility.'),
+    d('Infrastructure as Code (IaC)', 'Define infrastructure in version-controlled config files. Tools: Terraform (multi-cloud) Pulumi (programmable) AWS CDK (TypeScript) Ansible (config management). Benefits: reviewable auditable repeatable. IaC + immutable infrastructure = full environment reproducibility.'),
+    d('Rollback Strategies', 'Automatic rollback on health check failure. Strategies: revert to previous deployment (blue-green) scale up previous canary group (canary) re-run previous CI build (rolling). Database rollbacks: backward-compatible migrations or feature flags. Always test rollback procedure.'),
+    d('GitOps Pattern', 'Git is the single source of truth for deployment state. Tools: ArgoCD Flux (Kubernetes). Agent in cluster syncs to desired state in Git. Changes via PR to Git repo. Benefits: audit trail review process automatic drift correction. Declarative: desired state vs actual state.')
+  ],
+  'Deployment automation is the final frontier of CI/CD maturity. Start with simple scripts then adopt blue-green or canary deployments. Use immutable infrastructure and IaC for reproducibility. Implement health checks and auto-rollback. GitOps provides the highest level of auditability and control for Kubernetes environments.',
+  [
+    q('What is deployment automation?', 'Automatically releasing software changes to production without manual intervention.'),
+    q('What is blue-green deployment?', 'Two identical environments. Switch traffic from blue (old) to green (new). Instant rollback.'),
+    q('What is canary deployment?', 'Gradually shift traffic to new version: 1% 5% 10% 100%. Monitor each step.'),
+    q('What is immutable infrastructure?', 'Never modify running servers. Build new images and replace. Configuration drift eliminated.'),
+    q('What is Infrastructure as Code?', 'Defining infrastructure (servers networks) in version-controlled config files.'),
+    q('What is GitOps?', 'Git as single source of truth for deployment state. Agent syncs cluster to desired state in Git.'),
+    q('What is automatic rollback?', 'Deploy health checks abort deployment and revert if checks fail.'),
+    q('What is zero-downtime deployment?', 'Deploying without interrupting service. Achieved via blue-green rolling or canary strategies.'),
+    q('What is a deployment artifact?', 'The versioned deployable unit: Docker image compiled binary or deployment package.'),
+    q('What is a health check endpoint?', 'A URL (e.g. /health) that returns the application status. Used by load balancers and deploy pipelines.')
+  ],
+  R(10,35,100,25,"#0070f3","","Build","Compile + test") +
+  A(110,48,130,48) +
+  R(140,35,100,25,"#28a745","","Package","Docker image") +
+  A(240,48,260,48) +
+  R(10,70,100,25,"#dc3545","","Blue-Green","Switch traffic") +
+  R(140,70,100,25,"#ffc107","","Canary","Gradual rollout") +
+  R(10,105,100,25,"#e83e8c","","Health Check","Verify deployment") +
+  R(140,105,100,25,"#6610f2","","Rollback","Auto-revert") +
+  R(260,35,220,150,"#17a2b8","","Deployment Automation","Automated release pipeline: build to package to deploy. Blue-green canary rolling. Health checks rollback.") +
+  T(100,210,"Deployment Automation: Blue-green canary rolling deployments. Health checks auto-rollback immutable infrastructure.",9,"#666","middle"),
+  [
+    e('Blue-Green Deployment Script', 'Switch traffic between environments.', codeBlock([
+      "#!/bin/bash",
+      "# Blue-Green deployment",
+      "",
+      "# Variables",
+      'BLUE_URL="https://blue.app.com/health"',
+      'GREEN_URL="https://green.app.com/health"',
+      "ACTIVE_COLOR=$(cat /deploy/active-color.txt)",
+      "",
+      "# Deploy to inactive environment",
+      'if [ "$ACTIVE_COLOR" = "blue" ]; then',
+      '  NEW_COLOR="green"',
+      "else",
+      '  NEW_COLOR="blue"',
+      "fi",
+      "",
+      'echo "Deploying to $NEW_COLOR..."',
+      "./deploy-to.sh $NEW_COLOR",
+      "",
+      "# Health check the new environment",
+      "sleep 10",
+      'STATUS=$(curl -s -o /dev/null -w "%{http_code}"',
+      '  "${NEW_COLOR^^}_URL")',
+      "",
+      'if [ "$STATUS" != "200" ]; then',
+      '  echo "Health check failed rolling back"',
+      "  exit 1",
+      "fi",
+      "",
+      "# Switch traffic",
+      'echo "Switching traffic to $NEW_COLOR"',
+      'echo "$NEW_COLOR" > /deploy/active-color.txt',
+      "./update-load-balancer.sh $NEW_COLOR",
+      "",
+      'echo "Deployment to $NEW_COLOR complete"'
+    ]), 'Blue-green deployment script deploys to inactive environment health checks then switches traffic.'),
+    e('Canary Deployment with Kubernetes', 'Gradual rollout in K8s.', codeBlock([
+      "# Kubernetes canary deployment",
+      "apiVersion: apps/v1",
+      "kind: Deployment",
+      "metadata:",
+      "  name: myapp-canary",
+      "spec:",
+      "  replicas: 1  # 10% of main 10 replicas",
+      "  selector:",
+      "    matchLabels:",
+      "      app: myapp",
+      "      track: canary",
+      "  template:",
+      "    metadata:",
+      "      labels:",
+      "        app: myapp",
+      "        track: canary",
+      "    spec:",
+      "      containers:",
+      "      - name: myapp",
+      "        image: myapp:1.2.3-canary",
+      "        readinessProbe:",
+      "          httpGet:",
+      "            path: /health",
+      "            port: 8080",
+      "",
+      "# Service splits traffic via label selector",
+      "# Canary gets 1 replica = ~10% traffic",
+      "# Monitor errors for 10 minutes",
+      "# If OK scale canary to 10 then scale down main"
+    ]), 'Kubernetes canary deployment using replicas for traffic splitting between versions.'),
+    e('Terraform IaC Example', 'Define infrastructure as code.', codeBlock([
+      "# main.tf - AWS infrastructure",
+      'provider "aws" {',
+      '  region = "us-east-1"',
+      "}",
+      "",
+      'resource "aws_ecs_cluster" "main" {',
+      '  name = "myapp-cluster"',
+      "}",
+      "",
+      'resource "aws_ecs_service" "app" {',
+      '  name            = "myapp"',
+      '  cluster         = aws_ecs_cluster.main.id',
+      '  task_definition = aws_ecs_task_definition.app.arn',
+      '  desired_count   = 3',
+      '  launch_type     = "FARGATE"',
+      "",
+      "  network_configuration {",
+      "    subnets         = aws_subnet.private[*].id",
+      "    security_groups = [aws_security_group.app.id]",
+      "  }",
+      "",
+      "  deployment_controller {",
+      '    type = "CODE_DEPLOY"  # Blue-green',
+      "  }",
+      "}"
+    ]), 'Terraform defines AWS ECS infrastructure as code for repeatable deployments.'),
+    e('ArgoCD GitOps Application', 'GitOps deployment with ArgoCD.', codeBlock([
+      "# argocd-application.yaml",
+      "apiVersion: argoproj.io/v1alpha1",
+      "kind: Application",
+      "metadata:",
+      "  name: myapp",
+      "  namespace: argocd",
+      "spec:",
+      "  project: default",
+      "  source:",
+      "    repoURL: https://github.com/company/myapp-config.git",
+      "    targetRevision: HEAD",
+      "    path: k8s/production",
+      "  destination:",
+      "    server: https://kubernetes.default.svc",
+      "    namespace: production",
+      "  syncPolicy:",
+      "    automated:",
+      "      prune: true  # Remove resources not in Git",
+      "      selfHeal: true  # Revert manual changes",
+      "    syncOptions:",
+      "      - CreateNamespace=true",
+      "",
+      "# GitOps flow:",
+      "# 1. Update k8s/production/deployment.yaml in Git",
+      "# 2. PR review and merge to main",
+      "# 3. ArgoCD detects drift and syncs cluster",
+      "# 4. Cluster matches desired state in Git"
+    ]), 'ArgoCD Application resource defines GitOps deployment with auto-sync and self-healing.'),
+    e('CI/CD Deployment Pipeline', 'Full deploy pipeline with rollback.', codeBlock([
+      "name: Deploy to Production",
       "on:",
       "  push:",
       "    branches: [main]",
@@ -2837,356 +3096,226 @@ addTopic('git-github-actions', 'GitHub Actions', 'intermediate', 20,
       "    environment: production",
       "    steps:",
       "      - uses: actions/checkout@v4",
-      "      - uses: actions/setup-node@v4",
-      "        with:",
-      "          node-version: 18",
-      "      - run: npm ci",
-      "      - run: npm run build",
-      "      - name: Deploy to Server",
+      "",
+      "      - name: Build and push Docker image",
       "        run: |",
-      "          rsync -avz --delete dist/",
-      "            user@server:/var/www/app/",
-      "        env:",
-      "          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}"
-    ]), 'Deploy workflow with production environment and SSH key secret.'),
-    e('Scheduled Workflow', 'Run on a schedule.', codeBlock([
-      "# .github/workflows/cleanup.yml",
-      "name: Nightly Cleanup",
+      "          docker build -t myapp:\${{ github.sha }} .",
+      "          docker push myapp:\${{ github.sha }}",
+      "",
+      "      - name: Deploy to staging",
+      "        run: ./deploy.sh staging \${{ github.sha }}",
+      "",
+      "      - name: Staging health check",
+      "        run: |",
+      '          for i in {1..12}; do',
+      '            STATUS=\$(curl -s -o /dev/null -w "%{http_code}" https://staging.myapp.com/health)',
+      '            if [ "\$STATUS" = "200" ]; then exit 0; fi',
+      "            sleep 5",
+      "          done",
+      "          exit 1",
+      "",
+      "      - name: Promote to production",
+      "        run: ./deploy.sh production \${{ github.sha }}",
+      "",
+      "      - name: Post-deploy health check",
+      "        run: |",
+      "          if ! curl -f https://myapp.com/health; then",
+      "            ./rollback.sh production",
+      "            exit 1",
+      "          fi"
+    ]), 'Full deployment pipeline with staging verification and production rollout with health check.')
+  ],
+  [
+    m('What is blue-green deployment?', ['Gradual traffic shift', 'Two environments switch traffic', 'Replace instances one by one', 'Stop and start'], 1, 'Blue-green uses two identical environments and switches traffic between them for zero-downtime.'),
+    m('What is canary deployment?', ['Deploy all at once', 'Gradual traffic shift to new version', 'Two environments', 'Manual deployment'], 1, 'Canary gradually shifts traffic from old to new version monitoring each step.'),
+    m('What is immutable infrastructure?', ['Patch running servers', 'Replace servers never modify', 'Manual configuration', 'Shared hosting'], 1, 'Immutable infrastructure builds new images and replaces servers instead of patching running ones.'),
+    m('What is Infrastructure as Code?', ['Manual server setup', 'Infrastructure defined in version-controlled files', 'Graphical UI tools', 'Shell scripts only'], 1, 'IaC defines infrastructure in code enabling review repeatability and audit trails.'),
+    m('What is GitOps?', ['Git as deployment source of truth', 'Git as backup tool', 'Git for code only', 'Git for documentation'], 0, 'GitOps uses Git as the single source of truth for deployment state with automatic cluster sync.'),
+    m('What triggers automatic rollback?', ['Deployment complete', 'Health check failure', 'New PR opened', 'Code review approved'], 1, 'Automatic rollback triggers when health checks fail after deployment.')
+  ]
+);
+
+/* =================== TOPIC 20: Release Management =================== */
+addTopic('git-release-mgmt', 'Release Management', 'intermediate', 15,
+  ['Release management is the process of planning scheduling and controlling software builds through different stages to production.',
+   'Key elements: semantic versioning (MAJOR.MINOR.PATCH) release branches release notes changelogs and version bumping in CI/CD.',
+   'Release lifecycle: feature development to release branch to QA/stabilization to production release to hotfix if needed. Each release is tagged and immutable.',
+   'Tools: GitHub Releases GitLab Releases semantic-release (automated) release-drafter (auto-changelog). Releases should be automated version-bump merge to main and tag.'
+  ],
+  'Release management is like a train schedule. Features are passengers waiting at the station (develop branch). Every two weeks a train (release branch) departs. Tickets are checked (QA testing). Passengers who miss the train wait for the next one. Sometimes an emergency express train (hotfix) runs on a special schedule. Each train has a unique number (version tag).',
+  [
+    d('Semantic Versioning (SemVer)', 'MAJOR: breaking changes (v2.0.0). MINOR: new features backward compatible (v1.1.0). PATCH: bug fixes backward compatible (v1.0.1). Pre-release: v1.0.0-beta.1 v1.0.0-rc.1. Build metadata: v1.0.0+build.456. Version defined in package.json or equivalent.'),
+    d('Release Branch Strategy', 'Git Flow: release/v1.2 branched from develop. Only bug fixes and release tasks (no new features). Merged to main (tagged) and develop. GitHub Flow: no release branches. Tag on main after merge. Trunk-Based: release branches from main for stabilization.'),
+    d('Changelog Generation', 'Conventional commits enable automated changelog. feat: adds to Features section. fix: adds to Bug Fixes. breaking changes: highlighted. Tools: conventional-changelog release-drafter semantic-release. Format: Keep a Changelog. Each release links to diff and release notes.'),
+    d('Release Automation (semantic-release)', 'Fully automated release process. Analyzes commits since last release. Determines next version (major/minor/patch). Generates changelog. Creates Git tag. Publishes to npm/registry. Creates GitHub Release. Requires conventional commit format.'),
+    d('Hotfix Management', 'Hotfix branch from main (or production tag). Fix the critical bug. Merge back to main (tag new patch version). Merge back to develop (if using Git Flow). Hotfixes skip the normal release cycle. Version bump: patch version (v1.0.1). Hotfixes should be rare; they indicate release process improvement needed.')
+  ],
+  'Release management brings predictability to shipping software. Use semantic versioning. Automate version bumps and changelogs with conventional commits and semantic-release. Use release branches for stabilization. Hotfixes should be rare. A good release process reduces stress and increases confidence in deployments.',
+  [
+    q('What is release management?', 'Planning scheduling and controlling software builds through stages to production.'),
+    q('What is semantic versioning?', 'MAJOR.MINOR.PATCH: breaking changes new features backward compatible bug fixes backward compatible.'),
+    q('What is a release branch?', 'A branch for stabilizing a release. Only bug fixes and release tasks. Merged to main and develop.'),
+    q('What are release notes?', 'Documentation accompanying a release listing features fixes and breaking changes.'),
+    q('What is semantic-release?', 'An automated release tool that determines version generates changelog creates tag and publishes.'),
+    q('What is a changelog?', 'A curated list of notable changes for each version of a project.'),
+    q('What is a hotfix?', 'An urgent fix for a production issue. Branched from main merged back and tagged as patch version.'),
+    q('What triggers a MAJOR version bump?', 'Breaking changes that are not backward compatible.'),
+    q('What triggers a MINOR version bump?', 'New features that are backward compatible.'),
+    q('What triggers a PATCH version bump?', 'Bug fixes that are backward compatible.')
+  ],
+  R(10,35,100,25,"#0070f3","","Feature Dev","Develop branch") +
+  A(110,48,130,48) +
+  R(140,35,100,25,"#28a745","","Release Branch","Stabilize QA") +
+  A(240,48,260,48) +
+  R(10,70,100,25,"#dc3545","","Tag v1.0.0","Immutable marker") +
+  R(140,70,100,25,"#ffc107","","Deploy Prod","Release to users") +
+  R(10,105,100,25,"#e83e8c","","Changelog","Document changes") +
+  R(140,105,100,25,"#6610f2","","Hotfix","Patch production") +
+  R(260,35,220,150,"#17a2b8","","Release Management","Semantic versioning release branches changelogs hotfixes. Automated with semantic-release and conventional commits.") +
+  T(100,210,"Release Management: Plan schedule control releases. Semantic versioning release branches changelogs hotfix automation.",9,"#666","middle"),
+  [
+    e('Semantic Release Configuration', 'Automated release setup.', codeBlock([
+      "// release.config.js",
+      "module.exports = {",
+      "  branches: ['main', { name: 'next', prerelease: true }],",
+      "  plugins: [",
+      "    '@semantic-release/commit-analyzer',",
+      "    '@semantic-release/release-notes-generator',",
+      "    '@semantic-release/changelog',",
+      '    ["@semantic-release/npm", { npmPublish: true }],',
+      '    "@semantic-release/github",',
+      '    ["@semantic-release/git", {',
+      "      assets: ['package.json', 'CHANGELOG.md'],",
+      '      message: "chore(release): \${nextRelease.version} [skip ci]"',
+      "    }]",
+      "  ]",
+      "};",
+      "",
+      "# CI step:",
+      "# npx semantic-release"
+    ]), 'semantic-release config: analyzes commits bumps version generates changelog creates tag and GitHub release.'),
+    e('Changelog Generation (conventional-changelog)', 'Auto-generate changelog.', codeBlock([
+      "# Install conventional-changelog-cli",
+      "# npm install -g conventional-changelog-cli",
+      "",
+      "# Generate changelog from conventional commits",
+      "conventional-changelog -p angular -i CHANGELOG.md -s",
+      "",
+      "# Output format:",
+      "# # Changelog",
+      "# ",
+      "# ## [1.2.0] - 2024-03-15",
+      "# ",
+      "# ### Features",
+      "# * add payment gateway ([a1b2c3d])",
+      "# * add search functionality ([b2c3d4e])",
+      "# ",
+      "# ### Bug Fixes",
+      "# * fix login timeout ([c3d4e5f])",
+      "# * fix memory leak ([d4e5f6g])",
+      "# ",
+      "# ### Breaking Changes",
+      "# * upgrade to API v2 ([e5f6g7h])",
+      "",
+      "# Use release-drafter for GitHub:",
+      "# .github/release-drafter.yml"
+    ]), 'conventional-changelog generates release notes automatically from conventional commit messages.'),
+    e('GitHub Release Workflow', 'Automated release on tag push.', codeBlock([
+      "name: Create Release",
       "on:",
-      "  schedule:",
-      "    - cron: '0 2 * * *'  # Daily at 2am UTC",
+      "  push:",
+      "    tags:",
+      '      - "v*"',
       "",
       "jobs:",
-      "  cleanup:",
+      "  release:",
       "    runs-on: ubuntu-latest",
+      "    permissions:",
+      "      contents: write",
       "    steps:",
       "      - uses: actions/checkout@v4",
-      "      - name: Clean old artifacts",
+      "",
+      "      - name: Generate release notes",
+      "        id: notes",
       "        run: |",
-      "          # Delete workflow runs older than 30 days",
-      "          gh api -X GET repos/${{ github.repository }}/actions/runs",
-      "          --paginate -q '.workflow_runs[]",
-      '          | select(.created_at < (now - 30*86400))',
-      "          | .id' | xargs -I{} gh api -X DELETE",
-      "          repos/${{ github.repository }}/actions/runs/{}"
-    ]), 'Scheduled workflow using cron syntax for nightly maintenance tasks.'),
-    e('Reusable Workflow', 'Call another workflow.', codeBlock([
-      "# .github/workflows/deploy.yml (caller)",
-      "name: Deploy",
-      "on: [workflow_dispatch]",
+      "          PREV_TAG=\$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo '')",
+      '          NOTES=$(conventional-changelog -p angular)',
+      '          echo "notes<<EOF" >> \$GITHUB_OUTPUT',
+      '          echo "\$NOTES" >> \$GITHUB_OUTPUT',
+      '          echo "EOF" >> \$GITHUB_OUTPUT',
       "",
-      "jobs:",
-      "  call-deploy:",
-      "    uses: org/shared-workflows/.github/workflows/deploy.yml@v1",
-      "    with:",
-      "      environment: production",
-      "    secrets:",
-      "      cloud-token: ${{ secrets.CLOUD_TOKEN }}"
-    ]), 'Reusable workflows allow calling shared workflow definitions from other repos.')
-  ],
-  [
-    m('What is the core file format for GitHub Actions?', ['JSON', 'YAML', 'XML', 'TOML'], 1, 'Workflows are defined in YAML files stored in .github/workflows/.'),
-    m('Where are workflow files stored?', ['src/', 'config/', '.github/workflows/', 'workflows/'], 2, 'Workflow YAML files must be in the .github/workflows/ directory.'),
-    m('What does actions/checkout do?', ['Installs Node.js', 'Checks out the repository', 'Runs tests', 'Deploys code'], 1, 'actions/checkout checks out your repository so the workflow can access the code.'),
-    m('How do you run a workflow manually?', ['On push', 'Using workflow_dispatch event', 'On schedule', 'On pull request'], 1, 'workflow_dispatch allows manual triggering from GitHub UI or API.'),
-    m('What is a matrix strategy?', ['Running one job', 'Running across multiple OS/version combos', 'Matrix of dependencies', 'Organization chart'], 1, 'Matrix strategy runs the same job across multiple combinations of OS and runtime versions.'),
-    m('What happens when a secret expires?', ['Workflow fails', 'Secret is regenerated', 'Workflow uses empty value', 'GitHub notifies admin'], 0, 'Accessing an undefined/unset secret results in an empty string which may cause workflow failure.')
-  ]
-);
-
-
-/* =================== TOPIC 19: Git LFS =================== */
-addTopic('git-lfs', 'Git LFS (Large File Storage)', 'intermediate', 15,
-  ['Git LFS replaces large files (binaries, images, audio, datasets) with text pointers in the repository while storing the actual content on a remote server.',
-   'Standard Git repos bloat with large files making clone/fetch slow. LFS stores the large file content separately and only downloads it on checkout for the files you need.',
-   'Install: git lfs install (one-time). Track patterns: git lfs track "*.psd". .gitattributes stores tracking rules. LFS files appear as pointer files in the repo: version https://git-lfs.github.com/spec/v1 oid sha256:<hash> size <bytes>.',
-   'LFS supports: file locking (prevent concurrent edits on binaries) smudge/filter filters (transparent checkout/stage) and integration with GitHub GitLab Bitbucket (each has storage/bandwidth quotas).'
-  ],
-  'Git LFS is like a coat check at a fancy restaurant. You hand over your heavy coat (large file) at the entrance and get a small ticket (pointer file) to keep at your table. Your table stays uncluttered (repo stays small). When you leave (checkout) you exchange the ticket for your coat. Without LFS you would drag your heavy coat everywhere.',
-  [
-    d('How LFS Works', 'Git LFS uses smudge/filter filters. On git checkout: smudge filter replaces pointer file with actual content from LFS store. On git add: clean filter detects LFS-tracked files and replaces staged content with pointer. The LFS server stores the actual blob. Pointers are tiny text files (under 100 bytes).'),
-    d('Tracking Patterns', 'git lfs track "*.psd" adds pattern to .gitattributes. Multiple patterns for different types. LFS also tracks by file size: git lfs migrate import --include="*.zip" --everything. Verify tracked: git lfs ls-files. Check tracking config: git lfs track (shows all patterns).'),
-    d('LFS and Remote Hosting', 'GitHub: 2 GB storage 50 GB bandwidth/month free. GitLab: varies by tier. Bitbucket: 2 GB storage. Self-hosted options: GitLab CE/EE, Gitea, custom server. LFS content is not in git packfiles; stored separately. Cloning with LFS: git lfs clone (faster than regular clone + lfs pull).'),
-    d('File Locking', 'LFS file locking prevents merge conflicts on binary files. git lfs lock <file> (lock exclusive). git lfs unlock <file> (release). Check locks: git lfs locks. Others cannot push changes to a locked file. Required for binary workflows.'),
-    d('Migrating Existing Repos', 'git lfs migrate import --include="*.zip" --everything (converts existing history). Rewrites commits to reference LFS. Not recommended for shared branches. Alternative: BFG Repo-Cleaner for simpler migration. git lfs migrate info --top=10 shows largest files.')
-  ],
-  'Git LFS is essential for repos with large binary files. Install with git lfs install. Track patterns with git lfs track. Use file locking for binary collaboration. Be aware of hosting quotas. Migrate carefully on shared branches. For very large assets consider alternatives like DVC or artifact storage.',
-  [
-    q('What is Git LFS?', 'Git extension for handling large files by replacing them with text pointers while storing actual content on a remote server.'),
-    q('How does LFS store files?', 'Pointer files (text with SHA256 hash) in git repo; actual content on LFS server.'),
-    q('How do you track a pattern with LFS?', 'git lfs track "*.psd" adds the pattern to .gitattributes.'),
-    q('What is the LFS pointer file format?', 'version <url> oid sha256:<hash> size <bytes> - a small text file under 100 bytes.'),
-    q('What are LFS bandwidth quotas on GitHub?', '2 GB storage and 50 GB bandwidth per month free.'),
-    q('What is LFS file locking?', 'Exclusive lock to prevent concurrent edits on binary files. git lfs lock <file>.'),
-    q('How do you migrate existing files to LFS?', 'git lfs migrate import --include="*.zip" --everything.'),
-    q('What is git lfs ls-files?', 'Lists all files currently tracked by LFS in the current checkout.'),
-    q('Can LFS be self-hosted?', 'Yes, with GitLab CE/EE, Gitea, or a custom LFS server.'),
-    q('Does LFS work with submodules?', 'Yes, but each submodule needs its own LFS setup and tracking.')
-  ],
-  R(10,35,120,25,"#0070f3","","Git Add","Stages file") +
-  A(130,48,160,48) +
-  R(170,35,150,25,"#28a745","","Clean Filter","Replaces with pointer") +
-  A(170,60,130,100) +
-  R(10,95,120,50,"#dc3545","","Pointer File","Small text with SHA256") +
-  R(10,150,120,25,"#e83e8c","","LFS Server","Stores actual blob") +
-  R(150,95,140,25,"#ffc107","","Smudge Filter","Restores on checkout") +
-  R(150,125,140,50,"#17a2b8","","Git LFS","Replaces large files with pointers. Actual content stored on LFS server. Transparent smudge/filter during checkout/stage.") +
-  T(100,210,"Git LFS: Large File Storage replaces binaries with small pointers. Install: git lfs install. Track: git lfs track pattern.",9,"#666","middle"),
-  [
-    e('Setup and Track', 'Initialize LFS and track patterns.', codeBlock([
-      "# Install LFS (one-time per machine)",
-      "git lfs install",
-      "",
-      "# Track file patterns",
-      "git lfs track \"*.psd\"",
-      'git lfs track "*.zip"',
-      'git lfs track "*.mp4"',
-      "",
-      "# Verify .gitattributes",
-      "cat .gitattributes",
-      "# *.psd filter=lfs diff=lfs merge=lfs -text",
-      "# *.zip filter=lfs diff=lfs merge=lfs -text",
-      "",
-      "# Add and commit as normal",
-      "git add .gitattributes design.psd",
-      'git commit -m "add LFS tracking and design file"',
-      "git push"
-    ]), 'Initialize LFS tracking for file patterns. The .gitattributes file stores the tracking rules.'),
-    e('File Locking', 'Prevent concurrent edits on binaries.', codeBlock([
-      "# Lock a file exclusively",
-      "git lfs lock design.psd",
-      "# Locked design.psd",
-      "",
-      "# Check current locks",
-      "git lfs locks",
-      "# design.psd  user@example.com  ID:123",
-      "",
-      "# Unlock when done",
-      "git lfs unlock design.psd",
-      "",
-      "# Force unlock (admin)",
-      "git lfs unlock design.psd --force",
-      "",
-      "# Other users trying to lock:",
-      "# Lock failed: File is locked by user@example.com"
-    ]), 'LFS file locking prevents merge conflicts on binary files by allowing exclusive write access.'),
-    e('Migrate Existing History', 'Convert files in history to LFS.', codeBlock([
-      "# See largest files",
-      "git lfs migrate info --top=10",
-      "",
-      "# Migrate specific patterns",
-      "git lfs migrate import \\",
-      '  --include="*.zip,*.tar.gz" \\',
-      "  --everything",
-      "",
-      "# Migrate recent history only",
-      "git lfs migrate import \\",
-      '  --include="*.psd" \\',
-      "  --include-ref=main~5..main",
-      "",
-      "# Force push after migration",
-      "git push --force origin main"
-    ]), 'Migrate existing files to LFS. Warning: rewrites history. Use carefully on shared branches.'),
-    e('Clone with LFS', 'Clone repos that use LFS.', codeBlock([
-      "# Standard clone (LFS pointers only)",
-      "git clone https://github.com/user/repo.git",
-      "# LFS files are downloaded on checkout",
-      "",
-      "# Clone with all LFS files",
-      "GIT_LFS_SKIP_SMUDGE=0 git clone ...",
-      "",
-      "# LFS clone (deprecated but faster)",
-      "git lfs clone https://github.com/user/repo.git",
-      "",
-      "# Pull LFS files after clone",
-      "git lfs pull",
-      "",
-      "# Check LFS files status",
-      "git lfs ls-files --all"
-    ]), 'Cloning repos with LFS. Use git lfs pull to download actual content after checkout.'),
-    e('LFS with CI/CD', 'Use LFS in CI pipelines.', codeBlock([
-      "# GitHub Actions workflow with LFS",
-      "name: Build with LFS",
-      "on: [push]",
-      "",
-      "jobs:",
-      "  build:",
-      "    runs-on: ubuntu-latest",
-      "    steps:",
-      "      - uses: actions/checkout@v4",
+      "      - name: Create GitHub Release",
+      "        uses: softprops/action-gh-release@v1",
       "        with:",
-      "          lfs: true  # Auto-pull LFS files",
-      "      - uses: actions/setup-node@v4",
-      "      - run: npm ci",
-      "      - run: npm test",
+      "          body: \${{ steps.notes.outputs.notes }}",
+      "          draft: false",
+      "          prerelease: \${{ contains(github.ref, '-') }}"
+    ]), 'GitHub Actions workflow that creates a release with auto-generated notes when a version tag is pushed.'),
+    e('Release Branch Workflow (Git Flow)', 'Manage release branches.', codeBlock([
+      "# Start a release",
+      "git checkout develop",
+      "git checkout -b release/v1.2.0",
       "",
-      "# Or manually:",
-      "# - run: git lfs pull",
-      "# - run: git lfs checkout"
-    ]), 'CI/CD pipelines need explicit LFS pull. GitHub Actions supports lfs: true in checkout action.')
-  ],
-  [
-    m('What does Git LFS replace?', ['Small text files', 'Large binary files with pointers', 'Commit messages', 'Branch references'], 1, 'LFS replaces large binary files with small text pointers while storing actual content remotely.'),
-    m('How do you track a file pattern with LFS?', ['git lfs add', 'git lfs track', 'git lfs init', 'git lfs start'], 1, 'git lfs track "*.psd" adds LFS tracking for a pattern in .gitattributes.'),
-    m('What is an LFS pointer file?', ['Empty file', 'Small text with hash and size', 'Copy of the original file', 'Symbolic link'], 1, 'A pointer file contains the version, OID (SHA256 hash), and size of the large file.'),
-    m('What is LFS file locking for?', ['Delete protection', 'Prevent concurrent binary edits', 'Access control', 'Backup'], 1, 'File locking provides exclusive write access to binary files to prevent merge conflicts.'),
-    m('How do you migrate existing files to LFS?', ['Move files manually', 'git lfs migrate import', 'Delete and re-add', 'Use BFG only'], 1, 'git lfs migrate import converts existing tracked files in history to LFS pointers.'),
-    m('What is the GitHub free LFS quota?', ['10 GB storage', '2 GB storage 50 GB bandwidth/month', 'Unlimited', '5 GB storage'], 1, 'GitHub provides 2 GB LFS storage and 50 GB bandwidth per month on free plans.')
-  ]
-);
-
-
-/* =================== TOPIC 20: Git Best Practices =================== */
-addTopic('git-best-practices', 'Git Best Practices', 'beginner', 15,
-  ['Write meaningful commit messages: conventional format (type: description) with 50-char subject line and body explaining what and why not how.',
-   'Commit often with small logical changes. Each commit should be a self-contained unit that passes tests. Avoid mixing unrelated changes in one commit.',
-   'Branch strategy: use feature branches off main. Keep branches short-lived (days not weeks). Rebase or merge to keep up to date. Delete branches after merge.',
-   'Never force push to shared branches. Use git revert for shared history. Review PRs promptly. Keep PRs small (<400 lines). Use .gitignore and .gitattributes properly.'
-  ],
-  'Git best practices are like keeping a well-organized workshop. Every tool (commit) has its place and purpose. You clean up (delete branches) after each project. You label everything clearly (commit messages). You don\'t leave half-finished projects scattered around (short-lived branches). Your future self will thank you when searching for that specific screwdriver (bug fix) from six months ago.',
-  [
-    d('Commit Message Conventions', 'Format: <type>(<scope>): <subject> (50 chars). Body: blank line then what and why. Types: feat fix docs style refactor perf test chore ci build. Example: feat(auth): add OAuth2 login. Why: git log git blame changelog generation release notes.'),
-    d('Atomic Commits', 'One logical change per commit. If you need to fix a bug AND refactor code do two commits. Benefits: easy revert easier bisect cleaner history simpler code review. Test each commit. Use git add -p for partial staging.'),
-    d('Branching Strategies', 'GitHub Flow: main + feature branches (simple). Git Flow: develop main feature release hotfix branches (structured). Trunk-Based: short feature branches merge to main multiple times daily. Choose based on team size release cadence and deployment frequency.'),
-    d('Code Review and PR Etiquette', 'Review within 24 hours. Focus on logic correctness design and security not formatting. Use automated tools for linting. Write descriptive PR titles and link issues. Request specific reviewers via CODEOWNERS. Respond to feedback quickly.'),
-    d('Repository Hygiene', '.gitignore: ignore build artifacts dependencies IDE files OS files. .gitattributes: normalize line endings define LFS patterns. README: setup instructions contribution guide. LICENSE: choose open source license. Templates: PR template issue template. Branch protection: require CI pass require reviews.')
-  ],
-  'Good git practices separate professional teams from amateurs. Write meaningful commit messages. Make atomic commits. Choose a branching strategy that fits your workflow. Review PRs promptly and constructively. Keep your repo clean with .gitignore and branch protection. Force push only on your own branches.',
-  [
-    q('What is the conventional commit format?', '<type>(<scope>): <subject> (50 chars) with body explaining what and why. Types: feat fix docs refactor test chore.'),
-    q('What is an atomic commit?', 'A commit containing one self-contained logical change that passes tests.'),
-    q('What is GitHub Flow?', 'Simple branching: main + feature branches. Feature branches merge to main via PR.'),
-    q('What is Trunk-Based Development?', 'Short-lived feature branches merged to main multiple times per day.'),
-    q('Why avoid force push on shared branches?', 'It rewrites history causing divergence for other developers who have pulled the old history.'),
-    q('What is the recommended review turnaround?', 'Within 24 hours to keep the team moving.'),
-    q('What should .gitignore contain?', 'Build artifacts, dependencies (node_modules), IDE files, OS files, environment secrets.'),
-    q('What is branch protection?', 'Rules preventing direct pushes to important branches requiring PRs reviews and CI passes.'),
-    q('How do you fix a mistake on a shared branch?', 'Use git revert (creates new commit undoing changes) not git reset (rewrites history).'),
-    q('What is the recommended PR size?', 'Under 400 lines changed for effective review.')
-  ],
-  R(10,35,100,50,"#0070f3","","Good Commit","Meaningful message\nAtomic changes") +
-  R(10,90,100,25,"#28a745","","Branching","Feature branches\nShort-lived") +
-  R(10,120,100,25,"#dc3545","","PR Review","Small PRs\n24h turnaround") +
-  R(10,150,100,25,"#e83e8c","","Repository","Clean .gitignore\nBranch protection") +
-  R(130,35,180,140,"#17a2b8","","Git Best Practices","Meaningful commits | Atomic changes | Feature branching | Small PRs | Prompt reviews | Clean repos | Branch protection | Never force push shared branches | Revert not reset | Automate with CI/CD") +
-  T(100,210,"Git Best Practices: meaningful commits atomic changes feature branching clean repos review culture automation.",9,"#666","middle"),
-  [
-    e('Commit Message Convention', 'Write clear commit messages.', codeBlock([
-      "# Good commit message:",
-      "feat(auth): add OAuth2 login flow",
+      "# Stabilize (only bug fixes)",
+      'git commit -m "fix: correct payment calculation"',
+      'git commit -m "fix: update API rate limit"',
       "",
-      "Implement OAuth2 authorization code flow",
-      "with PKCE for mobile clients.",
+      "# Version bump in release branch",
+      'echo "v1.2.0" > VERSION',
+      "git add VERSION",
+      'git commit -m "chore: bump version to 1.2.0"',
       "",
-      "- Add passport-oauth2 strategy",
-      "- Configure token refresh",
-      "- Add state parameter validation",
-      "",
-      "Closes #123",
-      "",
-      "# Bad commit message:",
-      "git commit -m \"fixed stuff\"",
-      "git commit -m \"update\"",
-      "git commit -m \"asdf\""
-    ]), 'Conventional commit format: type(scope): subject. Body explains what and why.'),
-    e('Atomic Commits Workflow', 'Make small focused commits.', codeBlock([
-      "# Bad: mixed changes in one commit",
-      "git add src/auth.js src/payment.js",
-      "git commit -m \"fix auth and payment bugs\"",
-      "",
-      "# Good: separate commits",
-      'git add src/auth.js',
-      'git commit -m "fix(auth): validate token expiry"',
-      "",
-      'git add src/payment.js',
-      'git commit -m "fix(payment): handle gateway timeout"',
-      "",
-      "# Use interactive staging",
-      "git add -p src/feature.js",
-      "# Stage only related hunks",
-      "# Leave unrelated changes unstaged"
-    ]), 'Atomic commits: one logical change per commit. Use git add -p for interactive partial staging.'),
-    e('Branch Protection Rules', 'Protect important branches.', codeBlock([
-      "# GitHub branch protection settings:",
-      "# Settings > Branches > Add rule",
-      "",
-      "# Required protections:",
-      "# - Require pull request before merging",
-      "# - Require approvals (1-2 reviewers)",
-      "# - Dismiss stale reviews",
-      "# - Require status checks (CI passes)",
-      "# - Require branches up to date",
-      "# - Require signed commits",
-      "# - Require linear history",
-      "# - Include administrators",
-      "",
-      "# Protected branches: main, develop, release/*"
-    ]), 'Branch protection enforces PR reviews CI passes and up-to-date requirements on important branches.'),
-    e('.gitignore Setup', 'Proper ignore file.', codeBlock([
-      "# Node.js .gitignore",
-      "node_modules/",
-      "dist/",
-      "build/",
-      ".env",
-      ".env.*",
-      "",
-      "# IDE",
-      ".vscode/",
-      ".idea/",
-      "*.swp",
-      "*.swo",
-      "",
-      "# OS",
-      ".DS_Store",
-      "Thumbs.db",
-      "",
-      "# Logs",
-      "*.log",
-      "npm-debug.log*",
-      "",
-      "# Testing",
-      "coverage/",
-      ".nyc_output/"
-    ]), 'Comprehensive .gitignore prevents committing build artifacts IDE files OS files and secrets.'),
-    e('Git Workflow with Rebase', 'Keep clean history.', codeBlock([
-      "# Start from main",
+      "# Merge to main and tag",
       "git checkout main",
-      "git pull --rebase",
+      "git merge --no-ff release/v1.2.0",
+      'git tag -a v1.2.0 -m "Release v1.2.0"',
+      "git push origin main --tags",
       "",
-      "# Create feature branch",
-      "git checkout -b feat/payment",
+      "# Merge back to develop",
+      "git checkout develop",
+      "git merge --no-ff release/v1.2.0",
       "",
-      "# Work and commit",
-      'git add .',
-      'git commit -m "feat(payment): add stripe integration"',
-      "",
-      "# Update branch with rebase",
-      "git fetch origin",
-      "git rebase origin/main",
-      "",
-      "# Or merge instead:",
-      "git merge origin/main",
-      "",
-      "# Create PR and merge to main",
-      "# After PR is merged:",
+      "# Delete release branch",
+      "git branch -d release/v1.2.0"
+    ]), 'Git Flow release branch workflow: branch stabilize merge to main tag and merge back to develop.'),
+    e('Hotfix Workflow', 'Emergency production fix.', codeBlock([
+      "# From main (or production tag)",
       "git checkout main",
-      "git pull --rebase",
-      "git branch -d feat/payment"
-    ]), 'Keep feature branches updated with rebase or merge. Delete branches after merging PR.')
+      "git checkout -b hotfix/critical-security",
+      "",
+      "# Fix the critical bug",
+      'git commit -m "fix: patch SQL injection vulnerability"',
+      "",
+      "# Merge to main and tag patch",
+      "git checkout main",
+      "git merge --no-ff hotfix/critical-security",
+      'git tag -a v1.0.1 -m "Hotfix v1.0.1"',
+      "git push origin main --tags",
+      "",
+      "# If using Git Flow merge to develop too",
+      "git checkout develop",
+      "git merge --no-ff hotfix/critical-security",
+      "",
+      "# The hotfix version bump is a PATCH",
+      "# v1.0.0 -> v1.0.1 (not v1.1.0)"
+    ]), 'Hotfix workflow: branch from main fix merge to main tag patch version and merge back to develop.')
   ],
   [
-    m('What is the conventional commit format?', ['verb-noun', 'type(scope): subject', 'subject-body', 'action-item'], 1, 'Conventional format: type(scope): subject with optional body.'),
-    m('What are atomic commits?', ['Large batches of changes', 'One logical change per commit', 'Automatic commits', 'Binary commits'], 1, 'Atomic commits contain one self-contained logical change that passes tests.'),
-    m('Why avoid force push on shared branches?', ['Git does not allow it', 'Rewrites history breaking others', 'It is slow', 'It costs money'], 1, 'Force push rewrites history causing divergence for other developers.'),
-    m('What is the recommended PR size?', ['Under 100 lines', 'Under 400 lines', 'Under 1000 lines', 'Any size'], 1, 'PRs under 400 lines are optimal for effective thorough review.'),
-    m('What should be in .gitignore?', ['Source code', 'Build artifacts and dependencies', 'Documentation', 'Readme'], 1, '.gitignore should contain build artifacts, dependencies, IDE files, OS files, and secrets.'),
-    m('How do you fix a mistake on a shared branch?', ['git reset --hard', 'git revert', 'Delete the branch', 'git commit --amend'], 1, 'Use git revert on shared branches as it creates a new commit that undoes changes without rewriting history.')
+    m('What is semantic versioning?', ['Random version numbers', 'MAJOR.MINOR.PATCH with meaning', 'Date-based versions', 'Build numbers only'], 1, 'SemVer defines version meaning: MAJOR (breaking) MINOR (feature) PATCH (fix).'),
+    m('What is a release branch?', ['Branch for daily work', 'Stabilization branch before release', 'Branch for experiments', 'Branch for documentation'], 1, 'Release branch stabilizes a release with only bug fixes before merging to main.'),
+    m('What does semantic-release do?', ['Manual release process', 'Automated version bump changelog tag release', 'Code formatting', 'Test runner'], 1, 'semantic-release fully automates the release process from commit analysis to publishing.'),
+    m('What triggers a MAJOR version?', ['Bug fixes', 'Breaking changes', 'New features', 'Documentation updates'], 1, 'MAJOR version increments when backward-incompatible changes are introduced.'),
+    m('What is a hotfix?', ['A new feature', 'An urgent production bug fix', 'A code refactor', 'A version upgrade'], 1, 'Hotfix is an urgent fix for a production issue branched from main and tagged as patch.'),
+    m('What should release notes include?', ['Only version number', 'Features fixes and breaking changes', 'Full commit log', 'Random updates'], 1, 'Release notes should summarize features bug fixes and breaking changes for the release.')
   ]
 );
 
 
 // ---- GENERATE ----
 var dataDir = __dirname;
+
+var padTopics = require('../pad-topics');
+padTopics(topics);
 
 var lines = [];
 lines.push('var TOPICS_DATA = TOPICS_DATA || {};');

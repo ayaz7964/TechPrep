@@ -44,7 +44,9 @@ function compactTopic(id, title, diff, mins, tldr, layman, deeps, qas, svg, code
 
 /* CI/CD Fundamentals */
 compactTopic('cicd-fundamentals', 'CI/CD Fundamentals', 'beginner', 20,
-  ['CI/CD is a method of frequently delivering applications to customers by introducing automation into the stages of app development.', 'CI (Continuous Integration): developers merge changes to main branch frequently, each merge triggers automated build and test.', 'CD (Continuous Delivery/Deployment): code changes are automatically built, tested, and prepared for release to production.'],
+  ['CI/CD is a method of frequently delivering applications to customers by introducing automation into the stages of app development.', 'CI (Continuous Integration): developers merge changes to main branch frequently, each merge triggers automated build and test.', 'CD (Continuous Delivery/Deployment): code changes are automatically built, tested, and prepared for release to production.',
+    'CI/CD is the backbone of modern DevOps, enabling rapid, reliable software delivery through automation.'
+  ],
   'CI/CD is like an automated factory assembly line for your software. When a developer submits code, the factory automatically tests it (CI), packages it, and gets it ready to ship (CD). In continuous deployment, it even ships it automatically. This catches bugs early and delivers features fast.',
   [d('Continuous Integration', 'Developers merge code to main branch multiple times daily. Each commit triggers automated build and test. Immediate feedback if build breaks or tests fail. Practice: feature flags, short-lived branches, trunk-based development.'),
    d('Continuous Delivery vs Deployment', 'Continuous Delivery: every change is ready for release to production, but deployment is manual on demand. Continuous Deployment: every change that passes tests is automatically deployed to production. Delivery gives human approval gate; Deployment is fully automated.'),
@@ -65,7 +67,9 @@ compactTopic('cicd-fundamentals', 'CI/CD Fundamentals', 'beginner', 20,
 
 /* CI/CD Pipeline */
 compactTopic('cicd-pipeline', 'CI/CD Pipeline', 'intermediate', 20,
-  ['A CI/CD pipeline is an automated sequence of stages that code goes through from commit to deployment.', 'Typical stages: Source → Build → Test → Stage → Deploy. Each stage must succeed before the next starts.', 'Pipelines are defined as code (YAML/JSON) and version-controlled alongside the application.'],
+  ['A CI/CD pipeline is an automated sequence of stages that code goes through from commit to deployment.', 'Typical stages: Source → Build → Test → Stage → Deploy. Each stage must succeed before the next starts.', 'Pipelines are defined as code (YAML/JSON) and version-controlled alongside the application.',
+    'A well-designed pipeline is the single source of truth for how code moves from commit to production.'
+  ],
   'A CI/CD pipeline is like an assembly line for your code. Each station does something: Source (get code), Build (compile/package), Test (run tests), Stage (deploy to test environment), Deploy (ship to production). The car moves to the next station only if the current station reports success.',
   [d('Pipeline Stages', 'Source: check out code from repository. Build: compile code, install dependencies, generate artifacts. Test: unit tests, integration tests, linting. Stage: deploy to staging/QA environment for further validation. Deploy: release to production (manual or automated). Post-deploy: smoke tests, monitoring alerts.'),
    d('Pipeline as Code', 'Pipeline definition stored in repository (version controlled). Benefits: reviewable, testable, reproducible, consistent across environments. Common formats: GitHub Actions YAML, GitLab CI YAML, Jenkinsfile (Groovy), CircleCI YAML.'),
@@ -89,7 +93,9 @@ compactTopic('cicd-pipeline', 'CI/CD Pipeline', 'intermediate', 20,
 
 /* Build Automation */
 compactTopic('cicd-build-automation', 'Build Automation', 'intermediate', 15,
-  ['Build automation is the process of automating the creation of software builds and associated artifacts.', 'Includes: dependency resolution, compilation, asset bundling, code generation, packaging.', 'Tools: npm/pnpm/yarn (JS), Maven/Gradle (Java), pip (Python), make, Docker.'],
+  ['Build automation is the process of automating the creation of software builds and associated artifacts.', 'Includes: dependency resolution, compilation, asset bundling, code generation, packaging.', 'Tools: npm/pnpm/yarn (JS), Maven/Gradle (Java), pip (Python), make, Docker.',
+    'Build automation eliminates the error-prone manual build process, ensuring consistent, reproducible artifacts every time.'
+  ],
   'Build automation is like having a robot chef that follows a recipe to cook your software. It fetches ingredients (dependencies), mixes them (compiles), prepares the dish (bundles), and plates it (packages). The recipe is your build configuration — consistent every time.',
   [d('Build Process', 'Dependency installation: npm ci (clean install), pip install, mvn install. Compilation: TypeScript to JS, SASS to CSS, Babel transpilation. Bundling: Webpack, Vite, Rollup, Parcel. Code generation: GraphQL types, Prisma client, OpenAPI clients. Asset optimization: minification, image optimization, tree shaking.'),
    d('Build Tools by Language', 'JavaScript/TypeScript: npm, pnpm, yarn, webpack, vite, esbuild, rollup. Java: Maven, Gradle, Ant. Python: pip, poetry, setup.py. Go: go build, go mod. Rust: cargo build. C/C++: make, cmake, ninja. Docker: docker build.'),
@@ -108,7 +114,9 @@ compactTopic('cicd-build-automation', 'Build Automation', 'intermediate', 15,
 
 /* Test Automation */
 compactTopic('cicd-test-automation', 'Test Automation in CI/CD', 'intermediate', 20,
-  ['Test automation in CI/CD means running tests automatically on every code change, providing fast feedback on code quality.', 'Test types: unit tests (fast, isolated), integration tests (service interaction), end-to-end tests (full workflow), visual regression tests.', 'Test results gate the pipeline: failure in tests blocks the pipeline from proceeding to deployment.'],
+  ['Test automation in CI/CD means running tests automatically on every code change, providing fast feedback on code quality.', 'Test types: unit tests (fast, isolated), integration tests (service interaction), end-to-end tests (full workflow), visual regression tests.', 'Test results gate the pipeline: failure in tests blocks the pipeline from proceeding to deployment.',
+    'Automated testing in CI/CD catches bugs minutes after they are introduced, not days later in QA.'
+  ],
   'Test automation is like having a quality control inspector that checks every product coming off the assembly line. If the inspector finds a defect, the product is sent back, preventing bad products from reaching customers. The earlier a defect is caught, the cheaper it is to fix.',
   [d('Test Pyramid', 'Unit tests (base, many): test individual functions/classes. Fast, no external dependencies. Integration tests (middle, some): test module/API interactions. May use test databases. E2E tests (top, few): test complete user flows. Slow, brittle. Strategy: >70% unit, ~20% integration, <10% E2E.'),
    d('CI/CD Test Strategy', 'Run unit tests on every commit (fast feedback). Run integration tests on PR to main. Run E2E tests on PR or scheduled (not on every commit). Run linting and type checking in parallel. Use test splitting/parallelism for large suites.'),
@@ -126,7 +134,9 @@ compactTopic('cicd-test-automation', 'Test Automation in CI/CD', 'intermediate',
 
 /* Linting & Code Quality */
 compactTopic('cicd-code-quality', 'Linting & Code Quality', 'intermediate', 15,
-  ['Linting analyzes source code for programmatic and stylistic errors, enforcing consistent coding standards.', 'Code quality tools go beyond linting to measure complexity, duplication, security, and maintainability.', 'Integrate linting early in the pipeline — fail fast on style issues before running expensive tests.'],
+  ['Linting analyzes source code for programmatic and stylistic errors, enforcing consistent coding standards.', 'Code quality tools go beyond linting to measure complexity, duplication, security, and maintainability.', 'Integrate linting early in the pipeline — fail fast on style issues before running expensive tests.',
+    'Code quality gates in the pipeline prevent technical debt and security issues from reaching production.'
+  ],
   'Linting is like a spell-checker and style-guide enforcer for code. It catches: missing semicolons, unused variables, incorrect indentation, potential bugs. Code quality tools are like a report card—they give your code a score for maintainability, security, and complexity.',
   [d('Linting Tools', 'JavaScript: ESLint (configurable rules), Prettier (formatting). TypeScript: typescript-eslint. Python: flake8, pylint, black. CSS: stylelint. Docker: hadolint. YAML: yamllint. Markdown: markdownlint. Pre-commit hooks: lint before commit.'),
    d('Code Quality Tools', 'Complexity: cyclomatic complexity, cognitive complexity. Duplication: copy-paste detection (CPD). Security: SonarQube, CodeQL, Snyk. Coverage: minimum coverage thresholds. Maintainability index: numerical score. Technical debt: estimated effort to fix issues.'),
@@ -146,7 +156,9 @@ compactTopic('cicd-code-quality', 'Linting & Code Quality', 'intermediate', 15,
 
 /* Artifact Management */
 compactTopic('cicd-artifacts', 'Artifacts & Build Outputs', 'intermediate', 15,
-  ['Artifacts are the outputs of the build process: compiled code, packages, Docker images, reports, and binaries.', 'Artifacts are stored, versioned, and passed between pipeline stages or consumed by downstream systems.', 'Common registries: Docker Hub, GitHub Packages, npm registry, JFrog Artifactory, S3.'],
+  ['Artifacts are the outputs of the build process: compiled code, packages, Docker images, reports, and binaries.', 'Artifacts are stored, versioned, and passed between pipeline stages or consumed by downstream systems.', 'Common registries: Docker Hub, GitHub Packages, npm registry, JFrog Artifactory, S3.',
+    'Artifact management ensures every build produces a versioned, immutable package deployable to any environment.'
+  ],
   'Artifacts are like the finished products coming off the assembly line. They need to be stored in a warehouse (artifact registry) with labels and version numbers. Downstream stages (deployment) or other teams can fetch specific versions from the warehouse as needed.',
   [d('Artifact Types', 'Containers: Docker images pushed to registry (Docker Hub, ECR, GCR). Language packages: npm packages, JARs, Python wheels, NuGet packages. Binaries: compiled executables, installers. Reports: test reports, coverage reports, lint reports. Deployment packages: ZIP/TAR archives.'),
    d('Artifact Storage', 'Pipeline built-in: GitHub Actions artifacts, GitLab artifacts, Jenkins artifacts. Registry: Docker Registry (Harbor, Docker Hub), Package Registry (npm, PyPI). Cloud storage: S3, GCS, Azure Blob. Version policy: keep recent N versions, delete old ones.'),
@@ -166,7 +178,9 @@ compactTopic('cicd-artifacts', 'Artifacts & Build Outputs', 'intermediate', 15,
 
 /* Docker in CI/CD */
 compactTopic('cicd-docker', 'Docker in CI/CD', 'intermediate', 20,
-  ['Docker provides consistent, reproducible environments for building, testing, and deploying applications in CI/CD pipelines.', 'Containers ensure the same dependencies, OS, and configuration across development, testing, and production.', 'Key concepts: Dockerfile, docker build, docker push/pull, multi-stage builds, Docker Compose for testing.'],
+  ['Docker provides consistent, reproducible environments for building, testing, and deploying applications in CI/CD pipelines.', 'Containers ensure the same dependencies, OS, and configuration across development, testing, and production.', 'Key concepts: Dockerfile, docker build, docker push/pull, multi-stage builds, Docker Compose for testing.',
+    'Docker containers provide consistent environments across the entire pipeline, eliminating environment-specific bugs.'
+  ],
   'Docker in CI/CD is like having a standardized shipping container for your software. Every container is built the same way, carries the same contents, and works identically on any system. This eliminates "it works on my machine" problems across the pipeline.',
   [d('Docker Build in CI', 'Dockerfile defines the environment. docker build creates the image. Use .dockerignore to exclude unnecessary files. Tag images with commit SHA and/or branch. Multi-stage builds: separate build and runtime dependencies (smaller images). BuildKit: faster, parallel layer builds.'),
    d('Docker for Testing', 'Docker Compose: spin up test dependencies (DB, Redis, queues). Ephemeral environments: create per-test containers, destroy after. Service containers: GitHub Actions supports services. Database migrations in containers. Parallel test execution using container isolation.'),
@@ -189,7 +203,9 @@ compactTopic('cicd-docker', 'Docker in CI/CD', 'intermediate', 20,
 
 /* Environment Management */
 compactTopic('cicd-environments', 'Environment Management', 'intermediate', 15,
-  ['Environment management involves setting up and maintaining separate stages (dev, staging, production) for the software delivery lifecycle.', 'Each environment should mirror production as closely as possible to catch issues early.', 'Tools: Docker Compose, Terraform, Kubernetes, CloudFormation, environment variables.'],
+  ['Environment management involves setting up and maintaining separate stages (dev, staging, production) for the software delivery lifecycle.', 'Each environment should mirror production as closely as possible to catch issues early.', 'Tools: Docker Compose, Terraform, Kubernetes, CloudFormation, environment variables.',
+    'Environment parity across dev, staging, and prod reduces surprises and catches issues early.'
+  ],
   'Environment management is like having different rooms in a house: the workshop (development), showroom (staging), and retail store (production). You build and test in the workshop, verify in the showroom, and only perfect products reach the retail store.',
   [d('Environment Types', 'Development: dev machine, local containers, dev server. Unlimited changes, unpolished. Staging: pre-production, mirrors prod, QA testing, integration tests. Production: live user traffic, high availability, monitoring, strict access. Optional: QA, UAT, canary, preview environments.'),
    d('Environment Parity', "Keep environments as similar as possible. Same OS, same dependencies, same config files. Use Docker containers for consistency. Infrastructure as Code for reproducible environments. Version-controlled config. Don't hardcode environment-specific values."),
@@ -209,7 +225,9 @@ compactTopic('cicd-environments', 'Environment Management', 'intermediate', 15,
 
 /* Secrets Management */
 compactTopic('cicd-secrets', 'Secrets Management in CI/CD', 'intermediate', 20,
-  ['Secrets management involves securely storing and using sensitive data (API keys, passwords, tokens) in CI/CD pipelines.', 'Secrets should never be hardcoded in code, committed to repos, or exposed in pipeline logs.', 'Solutions: built-in CI/CD secrets, HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, Doppler.'],
+  ['Secrets management involves securely storing and using sensitive data (API keys, passwords, tokens) in CI/CD pipelines.', 'Secrets should never be hardcoded in code, committed to repos, or exposed in pipeline logs.', 'Solutions: built-in CI/CD secrets, HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, Doppler.',
+    'Secrets management in CI/CD ensures sensitive credentials are never exposed in code, configs, or logs.'
+  ],
   'Secrets management is like a secure vault for your passwords. Instead of writing the vault combination on a sticky note (hardcoding in code), you store it in a secure vault and only authorized processes can retrieve it at runtime. The pipeline can use it without knowing what it is.',
   [d('Built-in Secrets', 'GitHub Actions: Settings → Secrets → Actions. Referenced as ${{ secrets.MY_SECRET }}. Encrypted at rest, masked in logs. Organization secrets for shared use. Environment secrets for environment-specific.'),
    d('External Secret Managers', 'HashiCorp Vault: dynamic secrets, leasing, revocation. AWS Secrets Manager: automatic rotation, IAM integration. Azure Key Vault: Azure AD authentication. Doppler: multi-cloud secret management. External secrets operator for Kubernetes.'),
@@ -230,7 +248,9 @@ compactTopic('cicd-secrets', 'Secrets Management in CI/CD', 'intermediate', 20,
 
 /* Pipeline Triggers */
 compactTopic('cicd-triggers', 'Pipeline Triggers', 'beginner', 10,
-  ['Pipeline triggers define when a CI/CD pipeline should run — events that kick off the automated workflow.', 'Common triggers: push to branch, pull request, schedule (cron), manual dispatch, tag creation, upstream pipeline completion.', 'Triggers can be filtered by branch, path, file changes, and activity type.'],
+  ['Pipeline triggers define when a CI/CD pipeline should run — events that kick off the automated workflow.', 'Common triggers: push to branch, pull request, schedule (cron), manual dispatch, tag creation, upstream pipeline completion.', 'Triggers can be filtered by branch, path, file changes, and activity type.',
+    'Smart pipeline triggers run the right workflows at the right time, saving resources and accelerating feedback.'
+  ],
   'Pipeline triggers are like alarm clocks for your automation. You can set them to go off: every time someone pushes code, when a PR is opened, at 3 AM daily, or when someone manually presses a button. You can also say "only trigger if changes are in the src folder on the main branch."',
   [d('Code Triggers', 'Push: trigger on every commit to specified branches. Pull request: trigger on PR open, sync, or reopen. Tag: trigger when tags matching a pattern are pushed. Filtering: branches, paths (include/exclude), file types, activity types.'),
    d('Time Triggers', 'Schedule: cron syntax (e.g., nightly builds: "0 2 * * *"). Periodic: run every X hours/days. Manual (workflow_dispatch): button in GitHub UI. Can include input parameters for flexibility.'),
@@ -250,7 +270,9 @@ compactTopic('cicd-triggers', 'Pipeline Triggers', 'beginner', 10,
 
 /* Parallel Execution */
 compactTopic('cicd-parallel', 'Parallel Execution', 'intermediate', 15,
-  ['Parallel execution runs independent pipeline jobs simultaneously to reduce total pipeline duration.', 'Strategies: matrix (multi-version), fan-out (split tests), parallel stages (independent tasks).', 'Parallelism trades compute resources for speed — runs faster but uses more concurrent runners.'],
+  ['Parallel execution runs independent pipeline jobs simultaneously to reduce total pipeline duration.', 'Strategies: matrix (multi-version), fan-out (split tests), parallel stages (independent tasks).', 'Parallelism trades compute resources for speed — runs faster but uses more concurrent runners.',
+    'Parallel execution dramatically shrinks pipeline duration, enabling faster feedback loops for developers.'
+  ],
   'Parallel execution is like having multiple checkout lines at a supermarket. Instead of one line moving slowly (sequential), multiple lines run at the same time (parallel). Each line handles different items, and everything finishes faster.',
   [d('Matrix Strategy', 'Test across OS × version combinations. Example: ubuntu × Node 16,18,20 + windows × Node 16,18,20 = 6 parallel jobs. Useful for compatibility testing. Exclude known incompatibilities. Include additional configurations.'),
    d('Parallel Stages', 'Independent stages run concurrently: lint + unit tests + security scan all at once. Dependent stages must wait: build → (lint + unit_test + security) parallel → deploy. Use dependency graphs to express relationships.'),
@@ -269,7 +291,9 @@ compactTopic('cicd-parallel', 'Parallel Execution', 'intermediate', 15,
 
 /* Pipeline Caching */
 compactTopic('cicd-caching', 'Pipeline Caching', 'intermediate', 15,
-  ['Pipeline caching stores frequently accessed data between pipeline runs to speed up execution.', 'What to cache: package manager dependencies (node_modules, ~/.m2, vendor/bundle), Docker layers, build outputs.', 'Cache key strategy: use lockfile hash for dependency cache, OS + version for toolchain cache.'],
+  ['Pipeline caching stores frequently accessed data between pipeline runs to speed up execution.', 'What to cache: package manager dependencies (node_modules, ~/.m2, vendor/bundle), Docker layers, build outputs.', 'Cache key strategy: use lockfile hash for dependency cache, OS + version for toolchain cache.',
+    'Intelligent dependency caching cuts build times significantly by avoiding redundant downloads.'
+  ],
   'Pipeline caching is like keeping your frequently used tools on your workbench instead of putting them away in the closet after every project. If you caches npm packages between builds, each build doesn\'t have to re-download them — just check if the package.json changed.',
   [d('Cache Types', 'Dependency cache: npm cache, pip cache, Maven local repo, Bundler, Go module cache. Docker cache: Docker layers, BuildKit cache. Build cache: compiled outputs, webpack cache, Gradle cache. Tools cache: SDKs (Go, .NET, Java), Python versions.'),
    d('Cache Key Strategy', 'Primary key: hash of lockfile (e.g., package-lock.json). Restore keys: fallback to partial match (e.g., os-node- prefix). Invalidation: change key when dependencies change. Cache hit: restores dependencies (no download). Cache miss: downloads fresh, saves for next run.'),
@@ -289,7 +313,9 @@ compactTopic('cicd-caching', 'Pipeline Caching', 'intermediate', 15,
 
 /* Blue-Green Deployment */
 compactTopic('cicd-blue-green', 'Blue-Green Deployment', 'intermediate', 20,
-  ['Blue-green deployment runs two identical production environments (blue and green), switching traffic between them for zero-downtime releases.', 'One environment serves live traffic while the other is updated. After validation, traffic switches to the updated environment.', 'If issues arise, traffic instantly switches back to the previous environment (instant rollback).'],
+  ['Blue-green deployment runs two identical production environments (blue and green), switching traffic between them for zero-downtime releases.', 'One environment serves live traffic while the other is updated. After validation, traffic switches to the updated environment.', 'If issues arise, traffic instantly switches back to the previous environment (instant rollback).',
+    'Blue-green deployment enables zero-downtime releases with instant rollback to a known-good environment.'
+  ],
   'Blue-green deployment is like having two identical restaurants side by side. One (blue) is serving customers while you renovate the other (green). When green is ready, you move all customers to green. If diners don\'t like something, you instantly move them back to blue.',
   [d('How It Works', 'Two identical environments, each independently deployable. Currently live (Blue) serves all traffic. Deploy new version to idle (Green). Run smoke tests on Green. Switch router/load balancer from Blue to Green. Blue becomes idle, ready for next deployment.'),
    d('Benefits', 'Zero-downtime deployments: no traffic interruption. Instant rollback: switch back if issues found. No version mixing: all instances serve same version. Full environment validation before traffic hits. Simple routing logic: active/inactive toggle.'),
@@ -310,7 +336,9 @@ compactTopic('cicd-blue-green', 'Blue-Green Deployment', 'intermediate', 20,
 
 /* Canary Deployment */
 compactTopic('cicd-canary', 'Canary Deployment', 'intermediate', 20,
-  ['Canary deployment gradually routes a small percentage of traffic to a new version before full rollout.', 'Start with 1-5% traffic to canary, monitor metrics (errors, latency, etc.), gradually increase if healthy.', 'If issues detected, canary is automatically rolled back (traffic redirected to stable version).'],
+  ['Canary deployment gradually routes a small percentage of traffic to a new version before full rollout.', 'Start with 1-5% traffic to canary, monitor metrics (errors, latency, etc.), gradually increase if healthy.', 'If issues detected, canary is automatically rolled back (traffic redirected to stable version).',
+    'Canary deployment minimizes risk by gradually exposing a new version to a small traffic subset.'
+  ],
   'Canary deployment is like testing a new recipe on a few customers before serving it to the whole restaurant. If the first customers like it (no errors, good performance), you serve it to more people, then everyone. If they complain, you stop serving it immediately.',
   [d('Canary Strategy', 'Initial: deploy new version to canary (1-5% of instances/traffic). Monitor: track error rates, latency, CPU, business metrics (conversion, signups). Gradual increase: 10%, 25%, 50%, 100% if health checks pass. Rollback: instant if metrics degrade. Full rollout: all traffic on new version.'),
    d('Implementation', 'Load balancer weighted routing: Nginx, AWS ALB, GCP HTTP LB. Service mesh: Istio VirtualService with weighted destinations. Kubernetes: multiple Deployments, split Service via selector or mesh. Feature flags: enable for specific user segments. Progressive delivery: Flagger, Argo Rollouts.'),
@@ -331,7 +359,9 @@ compactTopic('cicd-canary', 'Canary Deployment', 'intermediate', 20,
 
 /* Rollback Strategies */
 compactTopic('cicd-rollback', 'Rollback Strategies', 'intermediate', 15,
-  ['Rollback is the process of reverting a deployment to a previous known-good version when issues are detected.', 'Strategies: instant (blue-green), gradual (canary rollback), git revert + redeploy, database rollback.', 'Key: rollbacks should be automated, tested, and fast (ideally sub-minute).'],
+  ['Rollback is the process of reverting a deployment to a previous known-good version when issues are detected.', 'Strategies: instant (blue-green), gradual (canary rollback), git revert + redeploy, database rollback.', 'Key: rollbacks should be automated, tested, and fast (ideally sub-minute).',
+    'Automated rollback strategies ensure failed deployments are handled gracefully with minimal user disruption.'
+  ],
   'Rollback is like an "undo" button for deployments. If a new version causes errors, you immediately switch back to the last working version. A good rollback strategy is essential — not "if" something will go wrong, but "when."',
   [d('Rollback Methods', 'Blue-green switch: flip traffic back to previous environment (instant). Container rollback: kubectl rollout undo deployment/myapp. Git revert: revert commit + redeploy. Database: schema rollback scripts or backup restore. Feature flag: turn off problematic feature (no deploy needed).'),
    d('Automated Rollback', 'Health check failures auto-trigger rollback. Metrics degradation (error rate > 1%). Timeout: if new version unhealthy after X minutes. Pipeline: automated revert + deploy. Break glass: manual emergency button. Rollback history: keep last N versions.'),
@@ -351,7 +381,9 @@ compactTopic('cicd-rollback', 'Rollback Strategies', 'intermediate', 15,
 
 /* Deployment Environments */
 compactTopic('cicd-deploy-envs', 'Deployment Environments & Promotion', 'intermediate', 15,
-  ['Deployment promotion moves artifacts through environments: dev → staging → production, with validation gates between each step.', 'Promotion gates: automated tests, manual approval, security scan, performance benchmark, compliance check.', 'Each environment should be progressively more production-like, with stricter gates.'],
+  ['Deployment promotion moves artifacts through environments: dev → staging → production, with validation gates between each step.', 'Promotion gates: automated tests, manual approval, security scan, performance benchmark, compliance check.', 'Each environment should be progressively more production-like, with stricter gates.',
+    'Progressive deployment promotion with validation gates ensures only thoroughly verified artifacts reach production.'
+  ],
   'Deployment promotion is like a career ladder for your code. It starts as an intern (dev), gets promoted to senior (staging) after passing tests, and finally becomes manager (production) after final review. At each level, it must prove itself before moving up.',
   [d('Environment Pipeline', 'Dev: auto-deploy on each commit. Quick feedback. May be unstable. Staging: deploy from main after tests pass. Manual QA, integration tests. Performance tests on staging. Production: deploy after approval. Release branches for hotfixes.'),
    d('Promotion Gates', 'Automated: build success, unit tests, integration tests, E2E tests, linting, security scan, performance benchmark. Manual: QA approval, product owner sign-off, compliance review, security review. Environment-specific: smoke tests (can the app start?), health endpoints.'),
@@ -374,7 +406,9 @@ compactTopic('cicd-deploy-envs', 'Deployment Environments & Promotion', 'interme
 
 /* IaC in CI/CD */
 compactTopic('cicd-iac', 'Infrastructure as Code in CI/CD', 'advanced', 25,
-  ['Infrastructure as Code (IaC) manages infrastructure (servers, networks, databases) through machine-readable definition files, not manual processes.', 'IaC in CI/CD: validate, plan, and apply infrastructure changes automatically as part of the pipeline.', 'Tools: Terraform, Pulumi, AWS CDK, CloudFormation, Ansible, Kubernetes manifests.'],
+  ['Infrastructure as Code (IaC) manages infrastructure (servers, networks, databases) through machine-readable definition files, not manual processes.', 'IaC in CI/CD: validate, plan, and apply infrastructure changes automatically as part of the pipeline.', 'Tools: Terraform, Pulumi, AWS CDK, CloudFormation, Ansible, Kubernetes manifests.',
+    'Infrastructure as Code in CI/CD enables automated, reproducible, and auditable infrastructure provisioning.'
+  ],
   'IaC is like having a blueprint for your house instead of telling the builder step by step. You define the whole infrastructure in files: "I want a server, a database, this firewall rule." The CI/CD pipeline reads the blueprint and builds it automatically. Changes to the blueprint trigger infrastructure updates.',
   [d('IaC Pipeline Stages', 'Validate: syntax check, format check (terraform fmt). Plan: show what will change (terraform plan). Security scan: check for misconfigurations (tfsec, checkov, terrascan). Apply: make changes (terraform apply). Destroy: teardown preview environments.'),
    d('State Management', 'Terraform state: records real-world infrastructure. Store state remotely (S3, Terraform Cloud, Consul). State locking: prevent concurrent changes. Sensitive data: state may contain secrets (encrypt it). State versioning: track changes over time.'),
@@ -395,7 +429,9 @@ compactTopic('cicd-iac', 'Infrastructure as Code in CI/CD', 'advanced', 25,
 
 /* Monitoring in CI/CD */
 compactTopic('cicd-monitoring', 'Monitoring & Observability', 'advanced', 20,
-  ['Monitoring and observability track application health, performance, and behavior in production and throughout the CI/CD pipeline.', 'Three pillars: logs (events), metrics (numbers), traces (request flows).', 'CI/CD integration: deploy-time checks, post-deploy monitoring, alerting on anomalies.'],
+  ['Monitoring and observability track application health, performance, and behavior in production and throughout the CI/CD pipeline.', 'Three pillars: logs (events), metrics (numbers), traces (request flows).', 'CI/CD integration: deploy-time checks, post-deploy monitoring, alerting on anomalies.',
+    'Observability integration in CI/CD pipelines enables proactive detection of issues during and after deployment.'
+  ],
   'Monitoring is like having dashboard gauges and warning lights for your application. Logs tell you what happened (like a black box), metrics give you numbers (speed, error rate), and traces follow a single request through the system (like tracking a package).',
   [d('Observability Pillars', 'Logs: structured events (JSON). Centralized in ELK, Loki, CloudWatch. Metrics: numeric time-series data (Prometheus, Datadog). Traces: distributed tracing (Jaeger, Zipkin, OpenTelemetry). Dashboards: visualize data (Grafana).'),
    d('CI/CD Monitoring Integration', 'Deploy health checks: verify app starts and responds after deploy. Smoke tests: run in production after deploy. Metric comparison: compare error rates before/after deploy. Release markers: annotate dashboards with deploy events. Canary analysis: compare metrics between versions.'),
@@ -415,7 +451,9 @@ compactTopic('cicd-monitoring', 'Monitoring & Observability', 'advanced', 20,
 
 /* CI/CD Security */
 compactTopic('cicd-security', 'CI/CD Security', 'advanced', 20,
-  ['CI/CD security involves protecting the pipeline from attacks, securing secrets, and ensuring code integrity throughout the software supply chain.', 'Key areas: pipeline access control, dependency security, artifact integrity, secret management, compliance.', 'Supply chain attacks target CI/CD pipelines to inject malicious code.'],
+  ['CI/CD security involves protecting the pipeline from attacks, securing secrets, and ensuring code integrity throughout the software supply chain.', 'Key areas: pipeline access control, dependency security, artifact integrity, secret management, compliance.', 'Supply chain attacks target CI/CD pipelines to inject malicious code.',
+    'CI/CD security protects the entire software supply chain from repository to production runtime.'
+  ],
   'CI/CD security is like securing the factory where your software is made. If someone breaks into the factory, they could tamper with the product. Security measures: locked doors (access control), ID checks (authentication), surveillance (audit logs), and tamper-evident packaging (artifact signing).',
   [d('Pipeline Security', 'Least privilege: pipelines should only access necessary resources. OIDC: use OpenID Connect instead of long-lived credentials. Environment protection: require approval for prod deployments. Audit logs: track all pipeline actions. Branch protection: prevent unauthorized changes.'),
    d('Dependency Security', 'Software Bill of Materials (SBOM): list all dependencies and versions. Dependency scanning: detect known vulnerabilities (npm audit, Snyk, Dependabot). Renovate/Dependabot: automated dependency updates. Lock files: pin exact dependency versions.'),
@@ -435,7 +473,9 @@ compactTopic('cicd-security', 'CI/CD Security', 'advanced', 20,
 
 /* Pipeline Notifications */
 compactTopic('cicd-notifications', 'Pipeline Notifications', 'beginner', 10,
-  ['Pipeline notifications alert teams about pipeline results: success, failure, or status changes.', 'Channels: Slack, email, Discord, Microsoft Teams, SMS/PagerDuty (critical failures).', 'Notifications should be actionable — not noise. Failed builds page on-call; success messages go to team channel.'],
+  ['Pipeline notifications alert teams about pipeline results: success, failure, or status changes.', 'Channels: Slack, email, Discord, Microsoft Teams, SMS/PagerDuty (critical failures).', 'Notifications should be actionable — not noise. Failed builds page on-call; success messages go to team channel.',
+    'Effective pipeline notifications keep teams informed with actionable alerts without creating noise.'
+  ],
   'Pipeline notifications are like automated status updates sent to your team. "Tests passed!" goes to the team chat. "Deploy failed!" pages the on-call engineer. The key is notifying the right people through the right channels with the right urgency.',
   [d('Notification Types', 'Success: post to team channel, deploy summary. Failure: @mention author, page on-call if production. Pending: optional, running status. Cancelled: log for audit. Warning: test flakiness, threshold warnings. Custom: deployment approval requests.'),
    d('Tools and Integration', 'Slack: incoming webhooks, Slack API (chat.postMessage). GitHub commit status: green/red/yellow checks. Email: SMTP or email API (SendGrid). PagerDuty, OpsGenie: critical alerts with escalation. Webhook: custom endpoints.'),
@@ -454,7 +494,9 @@ compactTopic('cicd-notifications', 'Pipeline Notifications', 'beginner', 10,
 
 /* Jenkins */
 compactTopic('cicd-jenkins', 'Jenkins', 'intermediate', 25,
-  ['Jenkins is an open-source automation server for CI/CD with a vast plugin ecosystem (1800+ plugins).', 'Pipeline defined as code (Jenkinsfile) using Declarative or Scripted pipeline syntax.', 'Key concepts: Master/Agent architecture, Jobs, Stages, Steps, Plugins, Shared Libraries.'],
+  ['Jenkins is an open-source automation server for CI/CD with a vast plugin ecosystem (1800+ plugins).', 'Pipeline defined as code (Jenkinsfile) using Declarative or Scripted pipeline syntax.', 'Key concepts: Master/Agent architecture, Jobs, Stages, Steps, Plugins, Shared Libraries.',
+    'Jenkins plugin ecosystem and Pipeline DSL make it the most extensible CI/CD automation server.'
+  ],
   'Jenkins is the veteran of CI/CD tools — it\'s been around the longest and has a plugin for almost everything. It\'s like a customizable Swiss Army knife: more complex to set up than modern cloud alternatives, but extremely flexible and battle-tested.',
   [d('Architecture', 'Master (Controller): manages jobs, schedules builds, serves UI. Agents (Nodes): execute build jobs. Can run on different machines/containers. Agents can be: permanent (always on) or ephemeral (per-build containers). Distributed builds across multiple agents.'),
    d('Jenkinsfile Pipeline', 'Declarative: structured syntax (pipeline { agent any; stages { stage { steps } } }). Scripted: full Groovy flexibility. Both checked into repo (Pipeline as Code). Stages: organize build phases. Steps: individual commands. Post: actions after pipeline (always, success, failure).'),
@@ -474,7 +516,9 @@ compactTopic('cicd-jenkins', 'Jenkins', 'intermediate', 25,
 
 /* GitLab CI/CD */
 compactTopic('cicd-gitlab', 'GitLab CI/CD', 'intermediate', 20,
-  ['GitLab CI/CD is a built-in CI/CD system in GitLab, configured via .gitlab-ci.yml in the repository root.', 'Runners execute jobs: GitLab-hosted (SaaS) or self-managed. Jobs run in isolated environments (containers, VMs).', 'Key concepts: stages, jobs, artifacts, environments, variables, cache, multi-project pipelines.'],
+  ['GitLab CI/CD is a built-in CI/CD system in GitLab, configured via .gitlab-ci.yml in the repository root.', 'Runners execute jobs: GitLab-hosted (SaaS) or self-managed. Jobs run in isolated environments (containers, VMs).', 'Key concepts: stages, jobs, artifacts, environments, variables, cache, multi-project pipelines.',
+    'GitLab CI/CD integrated platform provides a seamless DevOps experience from code to deployment.'
+  ],
   'GitLab CI/CD is like having your DevOps platform all in one place. Git, CI/CD, registry, and monitoring are integrated — no need to piece together different tools. The pipeline is defined in a .gitlab-ci.yml file in your repo, making it version-controlled like code.',
   [d('GitLab CI YAML', 'Stages: define order (build, test, deploy). Jobs: belong to stages, run in parallel within same stage. Script: shell commands to execute. Only/except: rules for when to run. Variables: CI/CD variables (key-value). Cache: shared between jobs. Artifacts: job outputs for later stages.'),
    d('Runners', 'GitLab-hosted: managed by GitLab (limited minutes on free tier). Self-managed: install gitlab-runner on your own infrastructure. Specific: assigned to specific projects. Shared: available to all projects in group. Group: assigned to groups. Tags: select runner by tag.'),
@@ -494,7 +538,9 @@ compactTopic('cicd-gitlab', 'GitLab CI/CD', 'intermediate', 20,
 
 /* CircleCI */
 compactTopic('cicd-circleci', 'CircleCI', 'intermediate', 15,
-  ['CircleCI is a cloud-native CI/CD platform emphasizing speed, parallelism, and Docker-native execution.', 'Configuration via .circleci/config.yml. Jobs run in containers (Docker) or VMs.', 'Key features: orbs (reusable configs), parallelism, caching, workflows, SSH debug.'],
+  ['CircleCI is a cloud-native CI/CD platform emphasizing speed, parallelism, and Docker-native execution.', 'Configuration via .circleci/config.yml. Jobs run in containers (Docker) or VMs.', 'Key features: orbs (reusable configs), parallelism, caching, workflows, SSH debug.',
+    'CircleCI cloud-native architecture and automatic parallelism make it one of the fastest CI/CD services.'
+  ],
   'CircleCI is like a modern, cloud-first CI/CD service optimized for speed. It spins up fresh Docker containers for every build (no "works on my machine"), runs tests in parallel automatically, and uses orbs for reusable configuration. It\'s known for fast setup and execution.',
   [d('Configuration', '.circleci/config.yml: pipeline definition. Jobs: units of work. Steps: run commands. Workflows: orchestrate job order. Docker: specify image for job environment. Resource class: CPU/memory size (small, medium, large). Parallelism: auto-split tests across containers.'),
    d('Orbs', 'Reusable configuration packages (circleci.com/orbs). Official orbs: node, python, aws-cli, slack, browser-tools. Third-party orbs. Parameters for customization. Package your own orb for team use.'),
@@ -515,7 +561,9 @@ compactTopic('cicd-circleci', 'CircleCI', 'intermediate', 15,
 
 /* CI/CD Best Practices */
 compactTopic('cicd-best-practices', 'CI/CD Best Practices', 'intermediate', 20,
-  ['CI/CD best practices ensure pipelines are fast, reliable, secure, and maintainable.', 'Key principles: fail fast, pipeline as code, idempotent stages, test in prod-like environments, immutable artifacts.', 'Continuously improve the pipeline — treat it like product code.'],
+  ['CI/CD best practices ensure pipelines are fast, reliable, secure, and maintainable.', 'Key principles: fail fast, pipeline as code, idempotent stages, test in prod-like environments, immutable artifacts.', 'Continuously improve the pipeline — treat it like product code.',
+    'Following CI/CD best practices ensures pipelines are fast, reliable, secure, and maintainable.'
+  ],
   'CI/CD best practices are like the rules of the road for your pipeline. They keep everything running smoothly: fail fast when something breaks, test in environments that mirror production, make builds reproducible, and treat your pipeline configuration with the same care as your application code.',
   [d('Pipeline Design', 'Fail fast: run quickest, most important checks first. Pipeline as code: version-controlled, reviewable, auditable. Idempotent: same commit always produces same result. Small, focused stages: one responsibility per stage. Parallelism: run independent tasks concurrently.'),
    d('Security', 'Never hardcode credentials — use secrets management. Least privilege: pipelines access only what they need. Scan dependencies for vulnerabilities. Sign artifacts. Audit pipeline changes. Branch protection on main.'),

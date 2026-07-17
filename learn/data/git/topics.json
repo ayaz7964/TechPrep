@@ -120,25 +120,25 @@
       "file": "git-build-automation.json"
     },
     {
-      "id": "git-github-actions",
-      "title": "GitHub Actions",
+      "id": "git-test-automation",
+      "title": "Test Automation",
       "difficulty": "intermediate",
       "estimatedMinutes": 20,
-      "file": "git-github-actions.json"
+      "file": "git-test-automation.json"
     },
     {
-      "id": "git-lfs",
-      "title": "Git LFS (Large File Storage)",
+      "id": "git-deployment-automation",
+      "title": "Deployment Automation",
+      "difficulty": "advanced",
+      "estimatedMinutes": 20,
+      "file": "git-deployment-automation.json"
+    },
+    {
+      "id": "git-release-mgmt",
+      "title": "Release Management",
       "difficulty": "intermediate",
       "estimatedMinutes": 15,
-      "file": "git-lfs.json"
-    },
-    {
-      "id": "git-best-practices",
-      "title": "Git Best Practices",
-      "difficulty": "beginner",
-      "estimatedMinutes": 15,
-      "file": "git-best-practices.json"
+      "file": "git-release-mgmt.json"
     }
   ]
 }

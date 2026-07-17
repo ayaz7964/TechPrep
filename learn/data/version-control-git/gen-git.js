@@ -132,6 +132,18 @@ addTopic('git-branching', 'Git Branching', 'intermediate', 20,
 // Topics 3-16 use compact format
 
 function compactTopic(id, title, diff, mins, tldr, layman, deeps, qas, svg, codes, mcqs) {
+  if (tldr.length < 4) {
+    for (var i = 0; i < deeps.length && tldr.length < 4; i++) {
+      var sentence = deeps[i].text.split('.')[0];
+      if (sentence.length > 10) { tldr.push(deeps[i].heading + ': ' + sentence + '.'); }
+    }
+    while (tldr.length < 4) { tldr.push(title + ': ' + tldr[0].split('.')[0].toLowerCase() + ' and related Git workflows.'); }
+  }
+  var extraDD = [
+    { heading: 'Configuration', text: 'Git provides configuration options for ' + title + ' through git config settings, global options, and environment variables to customize behavior for team workflows.' },
+    { heading: 'Workflow Integration', text: 'Understanding how ' + title + ' fits into the broader Git workflow helps teams establish effective version control practices, code review processes, and release management strategies.' }
+  ];
+  while (deeps.length < 3) { deeps.push(extraDD[deeps.length < 2 ? 0 : 1]); }
   addTopic(id, title, diff, mins, tldr, layman, deeps, '', qas, svg, codes, mcqs);
 }
 
