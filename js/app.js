@@ -332,7 +332,12 @@ var EMBEDDED = {
       { id: "react-form-handling",         title: "React Form Handling",              difficulty: "intermediate", estimatedMinutes: 25, file: "react-form-handling.json" },
       { id: "react-react-router",          title: "React React Router",               difficulty: "intermediate", estimatedMinutes: 30, file: "react-react-router.json" },
       { id: "react-protected-routes",      title: "React Protected Routes",           difficulty: "intermediate", estimatedMinutes: 20, file: "react-protected-routes.json" },
-      { id: "react-state-management-patterns",title: "React State Management Patterns",difficulty: "advanced",     estimatedMinutes: 30, file: "react-state-management-patterns.json" }
+      { id: "react-state-management-patterns",title: "React State Management Patterns",difficulty: "advanced",     estimatedMinutes: 30, file: "react-state-management-patterns.json" },
+      { id: "react-zustand",                 title: "Zustand State Management",          difficulty: "intermediate", estimatedMinutes: 25, file: "react-zustand.json" },
+      { id: "react-testing",                 title: "React Testing Library",             difficulty: "intermediate", estimatedMinutes: 30, file: "react-testing.json" },
+      { id: "react-hoc",                     title: "Higher-Order Components",           difficulty: "advanced",     estimatedMinutes: 25, file: "react-hoc.json" },
+      { id: "react-render-props",            title: "Render Props Pattern",              difficulty: "advanced",     estimatedMinutes: 20, file: "react-render-props.json" },
+      { id: "react-server-components",       title: "React Server Components",           difficulty: "advanced",     estimatedMinutes: 30, file: "react-server-components.json" }
     ],
     nodejs: [
       { id: "node-node-runtime",                title: "Node.js Runtime",                difficulty: "intermediate", estimatedMinutes: 25, file: "node-node-runtime.json" },

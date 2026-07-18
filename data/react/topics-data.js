@@ -6119,3 +6119,898 @@ TOPICS_DATA["react"]["react-virtual-dom"] = {
   ]
 };
 
+TOPICS_DATA["react"]["react-zustand"] = {
+  "id": "react-zustand",
+  "title": "Zustand State Management",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "Zustand is a lightweight, minimal state management library for React with a simple hook-based API.",
+    "No boilerplate: no providers, no reducers, no actions — just a store created via create().",
+    "Stores return a hook that gives direct access to state and setter functions.",
+    "Built-in support for middleware (persist, devtools, immer) and selectors for performance."
+  ],
+  "laymanDefinition": "Zustand is like a shared whiteboard in an office. Anyone (component) can walk up and write or erase something directly without filling out forms (actions) or going through a receptionist (reducer). The whiteboard is always visible to everyone, and changes appear instantly. Unlike Redux which is like a bank vault requiring official forms, Zustand is like a shared notebook — fast, simple, and direct.",
+  "deepDive": [
+    {
+      "heading": "Creating a Store",
+      "text": "Zustand stores are created with create(callback) where the callback receives set and get. The set function merges state (like React setState). The store returns a custom hook. Example: const useStore = create((set, get) => ({ count: 0, increment: () => set(state => ({ count: state.count + 1 })) })). No Provider wrapper needed — the hook is used directly in any component. Multiple stores are created by calling create() multiple times, each independent."
+    },
+    {
+      "heading": "Using Store in Components",
+      "text": "Components access store state by calling the store hook: const count = useStore(state => state.count). Selector functions enable fine-grained subscriptions — the component only re-renders when the selected slice changes. Without a selector, the entire store is subscribed. You can also destructure multiple values: const { count, increment } = useStore(). For equality, Zustand uses Object.is by default, or you can pass a custom equality function."
+    },
+    {
+      "heading": "Async Actions and Middleware",
+      "text": "Async actions are straightforward — just use async/await inside the store: fetchUsers: async () => { set({ loading: true }); const data = await api.getUsers(); set({ users: data, loading: false }); }. Middleware wraps the store: persist (localStorage/AsyncStorage), immer (mutable syntax), devtools (Redux DevTools), and subscribeWithSelector. Example: const useStore = create(persist(devtools(storeLogic), { name: \"app-state\" }))."
+    },
+    {
+      "heading": "Zustand vs Context vs Redux",
+      "text": "Context API re-renders ALL consumers when any value changes, requiring manual splitting. Redux has heavy boilerplate (actions, reducers, dispatch). Zustand provides selector-based subscriptions (no extra re-renders), zero boilerplate, and no provider nesting. For small-to-medium apps, Zustand is often the best choice. For large enterprise apps with complex async workflows and multiple teams, Redux Toolkit's structure and devtools may still be preferred. Zustand bundles to ~1KB minified vs Redux Toolkit's ~12KB."
+    },
+    {
+      "heading": "Advanced Patterns",
+      "text": "Slices pattern: split large stores into multiple slice files and combine them. Computed values: derive state outside the store using useMemo or selector functions. Actions outside React: call store.getState() or store.setState() directly. Subscriptions: useStore.subscribe(listener) for external integrations. Immer middleware enables mutable syntax: set(produce(state => { state.count++ }))."
+    }
+  ],
+  "interviewAnswer": "Zustand is a lightweight state management library for React that provides a hook-based API with no boilerplate. Stores are created via create() and return a custom hook. Components subscribe to specific state slices via selectors, preventing unnecessary re-renders. Zustand supports middleware (persist, devtools, immer), async actions, and multiple independent stores. Unlike Context, Zustand provides selector-based subscriptions. Unlike Redux, it requires no action types, reducers, or Provider wrappers. Zustand is ideal for small-to-medium apps where simplicity matters.",
+  "interviewQuestions": [
+    {
+      "question": "How is Zustand different from Redux?",
+      "answer": "Zustand has no boilerplate: no action types, no reducers, no Provider wrapper. Stores are created with create() and used directly as hooks. State updates use direct setters instead of dispatch. Selectors provide fine-grained subscriptions. Bundle size is ~1KB vs Redux Toolkit's ~12KB."
+    },
+    {
+      "question": "How do selectors work in Zustand?",
+      "answer": "The store hook accepts a selector function: useStore(state => state.count). The component only re-renders when the selected value changes. This is similar to Redux's useSelector but built directly into the store. No selector = subscribe to entire store."
+    },
+    {
+      "question": "How do you handle async operations in Zustand?",
+      "answer": "Async functions are defined directly in the store using set(): fetchUsers: async () => { set({ loading: true }); const data = await api.get(); set({ users: data, loading: false }); }. No middleware needed for basic async."
+    },
+    {
+      "question": "What middleware does Zustand support?",
+      "answer": "persist (localStorage/AsyncStorage), immer (mutable syntax), devtools (Redux DevTools integration), subscribeWithSelector, and redux (compatible with Redux middleware). Middleware wraps the store: create(persist(devtools(store)))"
+    },
+    {
+      "question": "How do you handle multiple slices/domains with Zustand?",
+      "answer": "Option 1: create multiple independent stores (recommended). Option 2: use the slices pattern — define each slice as a function that receives set/get and returns its state + actions, then combine them into one store."
+    },
+    {
+      "question": "How does Zustand prevent unnecessary re-renders?",
+      "answer": "Through selector-based subscriptions. A component that uses useStore(state => state.count) only re-renders when count changes. Other state changes in the same store do not trigger re-render. Zustand uses Object.is for equality by default."
+    },
+    {
+      "question": "Can Zustand be used outside React?",
+      "answer": "Yes. store.getState() and store.setState() work outside React components. This is useful for integrating with non-React code, router transitions, or event handlers. store.subscribe(listener) enables external subscriptions."
+    },
+    {
+      "question": "What is the Immer middleware in Zustand?",
+      "answer": "Allows mutable update syntax while maintaining immutability: set(produce(state => { state.items.push(newItem) })). This simplifies updates to deeply nested state without spread operators."
+    },
+    {
+      "question": "How does Zustand compare to Context API?",
+      "answer": "Context re-renders ALL consumers when the context value changes. Zustand provides selector-based subscriptions — only components consuming the changed slice re-render. Zustand also avoids Provider nesting and works outside React."
+    },
+    {
+      "question": "How do you test Zustand stores?",
+      "answer": "Stores are plain functions — test them directly: create store, call actions, assert state. No component wrapping needed. For component tests, render the component normally — Zustand integrates naturally with React Testing Library."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 320\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:650px;\"><defs><marker id=\"zArr\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0,10 3.5,0 7\" fill=\"#6c9fff\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"630\" height=\"300\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"325\" y=\"38\" fill=\"#e8eaed\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">Zustand Architecture</text><rect x=\"40\" y=\"55\" width=\"150\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"115\" y=\"83\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Component A</text><rect x=\"250\" y=\"55\" width=\"150\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"325\" y=\"83\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Component B</text><rect x=\"460\" y=\"55\" width=\"150\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"535\" y=\"83\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Component C</text><line x1=\"115\" y1=\"105\" x2=\"115\" y2=\"145\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#zArr)\"/><line x1=\"325\" y1=\"105\" x2=\"325\" y2=\"145\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#zArr)\"/><line x1=\"535\" y1=\"105\" x2=\"535\" y2=\"145\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#zArr)\"/><rect x=\"40\" y=\"150\" width=\"570\" height=\"80\" rx=\"8\" fill=\"#1a1d28\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"325\" y=\"175\" fill=\"#34d399\" font-size=\"13\" font-weight=\"bold\" text-anchor=\"middle\">Zustand Store (single or multiple)</text><text x=\"325\" y=\"195\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">create((set, get) =&gt; ({ state, actions }))</text><text x=\"325\" y=\"215\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">Selectors: useStore(s =&gt; s.count) — fine-grained subscriptions</text><line x1=\"115\" y1=\"230\" x2=\"115\" y2=\"260\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#zArr)\"/><line x1=\"535\" y1=\"230\" x2=\"535\" y2=\"260\" stroke=\"#f87171\" stroke-width=\"2\" marker-end=\"url(#zArr)\"/><rect x=\"40\" y=\"260\" width=\"570\" height=\"30\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#f87171\" stroke-width=\"1.5\"/><text x=\"325\" y=\"280\" fill=\"#f87171\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">Middleware: persist (localStorage) | devtools | immer | subscribeWithSelector</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic Zustand Counter",
+      "useCase": "Simple state with direct access",
+      "code": "import { create } from \"zustand\";\n\nconst useCounterStore = create((set) => ({\n  count: 0,\n  increment: () => set((state) => ({ count: state.count + 1 })),\n  decrement: () => set((state) => ({ count: state.count - 1 })),\n  reset: () => set({ count: 0 })\n}));\n\nfunction Counter() {\n  const count = useCounterStore((s) => s.count);\n  const { increment, decrement, reset } = useCounterStore();\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={increment}>+</button>\n      <button onClick={decrement}>-</button>\n      <button onClick={reset}>Reset</button>\n    </div>\n  );\n}",
+      "description": "No Provider needed. Store hook used directly. Selector ensures minimal re-renders."
+    },
+    {
+      "title": "Async Store with API Fetch",
+      "useCase": "Data fetching with loading state",
+      "code": "import { create } from \"zustand\";\n\nconst useUserStore = create((set) => ({\n  user: null,\n  loading: false,\n  error: null,\n  fetchUser: async (id) => {\n    set({ loading: true, error: null });\n    try {\n      const res = await fetch(`/api/users/${id}`);\n      const data = await res.json();\n      set({ user: data, loading: false });\n    } catch (err) {\n      set({ error: err.message, loading: false });\n    }\n  },\n}));\n\nfunction UserProfile({ userId }) {\n  const { user, loading, error, fetchUser } = useUserStore();\n  useEffect(() => { fetchUser(userId); }, [userId]);\n  if (loading) return <Spinner />;\n  if (error) return <Error msg={error} />;\n  return <div>{user.name}</div>;\n}",
+      "description": "Async actions are defined directly in the store. No middleware needed for basic async."
+    },
+    {
+      "title": "Persist Middleware",
+      "useCase": "Save state to localStorage",
+      "code": "import { create } from \"zustand\";\nimport { persist } from \"zustand/middleware\";\n\nconst useAuthStore = create(\n  persist(\n    (set) => ({\n      token: null,\n      user: null,\n      login: async (email, password) => {\n        const res = await authApi.login(email, password);\n        set({ token: res.token, user: res.user });\n      },\n      logout: () => set({ token: null, user: null }),\n    }),\n    { name: \"auth-storage\" } // localStorage key\n  )\n);",
+      "description": "persist middleware automatically syncs store state to localStorage. On reload, state is rehydrated."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does Zustand's create() return?",
+      "options": [
+        "A provider component",
+        "A custom hook",
+        "A reducer",
+        "A context object"
+      ],
+      "answer": 1,
+      "explanation": "create() returns a custom hook that provides direct access to store state and actions."
+    },
+    {
+      "question": "How do selectors help performance?",
+      "options": [
+        "They cache API responses",
+        "Component only re-renders when selected value changes",
+        "They memoize all functions",
+        "They reduce bundle size"
+      ],
+      "answer": 1,
+      "explanation": "Selector-based subscriptions ensure components only re-render when their specific slice of state changes."
+    },
+    {
+      "question": "Which Zustand middleware saves state to localStorage?",
+      "options": [
+        "devtools",
+        "persist",
+        "immer",
+        "subscribeWithSelector"
+      ],
+      "answer": 1,
+      "explanation": "persist middleware automatically saves and rehydrates state from localStorage."
+    },
+    {
+      "question": "Does Zustand require a Provider wrapper?",
+      "options": [
+        "Yes, always",
+        "No, never",
+        "Only for TypeScript",
+        "Only for async"
+      ],
+      "answer": 1,
+      "explanation": "Zustand does NOT require any Provider. The store hook is used directly in components."
+    },
+    {
+      "question": "How does Zustand handle async actions?",
+      "options": [
+        "Requires Redux Thunk",
+        "Async functions defined directly in the store using set()",
+        "Requires Saga middleware",
+        "Async is not supported"
+      ],
+      "answer": 1,
+      "explanation": "Async actions are plain async functions inside the store definition that call set() on completion."
+    },
+    {
+      "question": "What is the bundle size advantage of Zustand over Redux Toolkit?",
+      "options": [
+        "10x smaller (~1KB vs ~12KB)",
+        "Same size",
+        "Larger",
+        "No difference"
+      ],
+      "answer": 0,
+      "explanation": "Zustand is approximately 1KB minified vs Redux Toolkit at approximately 12KB."
+    },
+    {
+      "question": "How do you create multiple independent state domains?",
+      "options": [
+        "Use combineReducers",
+        "Create multiple stores via separate create() calls",
+        "Use Provider nesting",
+        "Use createContext"
+      ],
+      "answer": 1,
+      "explanation": "Each create() call creates an independent store. Multiple stores are recommended for separate domains."
+    }
+  ]
+};
+
+TOPICS_DATA["react"]["react-testing"] = {
+  "id": "react-testing",
+  "title": "React Testing Library",
+  "difficulty": "intermediate",
+  "estimatedMinutes": 30,
+  "tldr": [
+    "React Testing Library (RTL) is a testing utility focused on testing components as users interact with them.",
+    "Guiding principle: test behavior, not implementation. Query elements by accessibility (role, label, text), not internal details.",
+    "RTL integrates with Jest or Vitest. Key helpers: render(), screen, fireEvent, waitFor, act.",
+    "Avoid testing internal state, prop types, or implementation details — test rendered output and user interactions."
+  ],
+  "laymanDefinition": "React Testing Library is like a robot user who tests your app by doing what a real person would do: clicking buttons, typing into fields, reading text on screen. It never looks at the internal wiring of your components (state, props). If the robot can complete the task by interacting with the UI the same way a human would, the test passes. This means your tests break only when functionality actually breaks — not when you refactor internal code.",
+  "deepDive": [
+    {
+      "heading": "Core Philosophy: Testing by Behavior",
+      "text": "RTL's guiding principle is \"the more your tests resemble the way your software is used, the more confidence they can give you.\" Query elements by accessibility roles (button, textbox, heading), label text, aria attributes, or displayed text. Never query by component name, state variable, or CSS class. Use getByRole as the primary query (most accessible), then getByLabelText, getByPlaceholderText, getByText, getByDisplayValue. Use queryBy for non-existence checks. Use findBy for async elements that appear after a delay."
+    },
+    {
+      "heading": "Rendering and Querying",
+      "text": "render(<MyComponent props={...} />) renders into a DOM container. screen.getByRole('button', { name: /submit/i }) finds the submit button. screen.getByLabelText(/email/i) finds input associated with an email label. screen.getByText('Hello World') finds text elements. screen.getByTestId('my-id') is the escape hatch — prefer accessible queries first. Multiple matches throw an error; use getAllBy for multiple expected matches. screen.debug() prints the current DOM for debugging."
+    },
+    {
+      "heading": "User Interactions and Events",
+      "text": "fireEvent.click(element) dispatches DOM events. For realistic interactions, prefer @testing-library/user-event: const user = userEvent.setup(); await user.click(button); await user.type(input, 'text'); await user.selectOptions(select, 'option'). user-event fires more realistic event sequences (focus, blur, keyDown, keyUp, click, change) compared to raw fireEvent. Always await user-event methods since they return promises."
+    },
+    {
+      "heading": "Async Patterns: waitFor and findBy",
+      "text": "For testing asynchronous UI (loading states, data fetching), use screen.findByRole('button', { name: /submit/i }) which returns a promise that resolves when the element appears (default timeout 1000ms). Alternatively, await waitFor(() => expect(screen.getByText('Loaded')).toBeInTheDocument()). For negative assertions, use waitFor with expect to eventually evaluate. Mock API calls with msw (Mock Service Worker) for realistic network mocking."
+    },
+    {
+      "heading": "Mocking and Best Practices",
+      "text": "Mock external dependencies: wrap API calls in custom hooks and mock at the hook level. Use msw for network-level mocking — it intercepts actual fetch requests. Mock child components sparingly. Test accessibility: toHaveAccessibleName, toHaveAccessibleDescription. Use jest-dom matchers: toBeInTheDocument(), toHaveTextContent(), toHaveClass(), toBeDisabled(), toBeChecked(). Group tests by user behavior: describe('when user submits form'). Avoid testing internal state — test the UI output instead."
+    }
+  ],
+  "interviewAnswer": "React Testing Library tests components from a user's perspective. The core principle is testing behavior not implementation. Queries prioritize accessibility: getByRole > getByLabelText > getByText > getByTestId. Use fireEvent for simple events, user-event for realistic interactions. Use waitFor/findBy for async. Mock external dependencies with msw (Mock Service Worker). Use jest-dom for custom matchers. Never test internal state, props, or implementation — test what renders and how it responds to interaction. This ensures tests provide real confidence and don't break on refactoring.",
+  "interviewQuestions": [
+    {
+      "question": "What is the guiding philosophy of React Testing Library?",
+      "answer": "Test behavior, not implementation. Tests should resemble how the software is used — query by accessibility, interact realistically, assert on visible output. This gives confidence that the app works for users, not just that internal code runs."
+    },
+    {
+      "question": "What are the different query types and their priority order?",
+      "answer": "getByRole (most preferred, accessible) → getByLabelText → getByPlaceholderText → getByText → getByDisplayValue → getByAltText → getByTitle → getByTestId (last resort). getBy throws if not found, queryBy returns null, findBy returns a promise for async."
+    },
+    {
+      "question": "How do you test async operations like data fetching?",
+      "answer": "Use screen.findByRole() which returns a promise that resolves when the element appears. Or await waitFor(() => expect(...).toBeInTheDocument()). For network mocking, use msw to intercept fetch requests at the network level for the most realistic tests."
+    },
+    {
+      "question": "What is the difference between fireEvent and user-event?",
+      "answer": "fireEvent dispatches a single DOM event (e.g., click). user-event simulates the full user interaction sequence: focus, keyDown, keyUp, click, blur, change — more realistic. user-event methods return promises and should be awaited. Prefer user-event for realistic tests."
+    },
+    {
+      "question": "When would you use getByTestId?",
+      "answer": "As a last resort when no accessible query works — custom components without roles, non-semantic elements, or dynamically generated content where text/role queries are impractical. Avoid overusing it — it tests implementation details."
+    },
+    {
+      "question": "How do you test form submission?",
+      "answer": "Use userEvent.type() for each input, then userEvent.click() the submit button. Assert on the submitted data, navigation, or success message. For forms with validation, test valid and invalid states. Use screen.getByRole('alert') for error messages."
+    },
+    {
+      "question": "What are jest-dom matchers and why use them?",
+      "answer": "Custom matchers from @testing-library/jest-dom: toBeInTheDocument(), toHaveTextContent(), toHaveClass(), toBeDisabled(), toBeChecked(), toBeVisible(), etc. They provide better error messages and are more semantic than raw Jest matchers."
+    },
+    {
+      "question": "How do you test a component that uses React Context?",
+      "answer": "Render the component wrapped in the Provider with the desired value: render(<ThemeProvider value={theme}><MyComponent /></ThemeProvider>). Alternatively, create a helper that wraps components with common providers. Test that the component renders correctly based on context values."
+    },
+    {
+      "question": "What is the act() utility in testing?",
+      "answer": "act() ensures all React updates (state changes, effects) are flushed and applied before assertions. React Testing Library automatically wraps renders and user interactions in act(). Only use it manually for custom scenarios like testing effects outside RTL's scope."
+    },
+    {
+      "question": "How do you test error boundaries?",
+      "answer": "Render a component that throws, then assert the fallback UI renders. Use a test helper component that throws on demand. Assert that the error boundary catches the error and displays the fallback using screen.getByRole('alert') or similar."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 300\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:650px;\"><defs><marker id=\"tArr\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0,10 3.5,0 7\" fill=\"#6c9fff\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"630\" height=\"280\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"325\" y=\"38\" fill=\"#e8eaed\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">React Testing Library Workflow</text><rect x=\"50\" y=\"55\" width=\"180\" height=\"45\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"140\" y=\"82\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">1. render(component)</text><line x1=\"230\" y1=\"78\" x2=\"290\" y2=\"78\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#tArr)\"/><rect x=\"290\" y=\"55\" width=\"180\" height=\"45\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"380\" y=\"82\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">2. Query Elements (getByRole)</text><line x1=\"470\" y1=\"78\" x2=\"530\" y2=\"78\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#tArr)\"/><rect x=\"530\" y=\"55\" width=\"70\" height=\"45\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"565\" y=\"82\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">3. Interact</text><line x1=\"565\" y1=\"100\" x2=\"565\" y2=\"140\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#tArr)\"/><line x1=\"380\" y1=\"100\" x2=\"380\" y2=\"140\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#tArr)\"/><rect x=\"50\" y=\"145\" width=\"550\" height=\"45\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"325\" y=\"172\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">4. Assert: expect(element).toBeInTheDocument() / toHaveTextContent() / toBeDisabled()</text><line x1=\"325\" y1=\"190\" x2=\"325\" y2=\"215\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#tArr)\"/><rect x=\"50\" y=\"220\" width=\"550\" height=\"45\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#f87171\" stroke-width=\"1.5\"/><text x=\"325\" y=\"247\" fill=\"#f87171\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Key: Test behavior, not implementation — no state/prop checking, query by accessibility</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Testing a Counter Component",
+      "useCase": "Basic component interaction",
+      "code": "import { render, screen } from \"@testing-library/react\";\nimport userEvent from \"@testing-library/user-event\";\nimport Counter from \"./Counter\";\n\ndescribe(\"Counter\", () => {\n  it(\"increments count when button is clicked\", async () => {\n    const user = userEvent.setup();\n    render(<Counter />);\n    const button = screen.getByRole(\"button\", { name: /increment/i });\n    await user.click(button);\n    expect(screen.getByText(/count: 1/i)).toBeInTheDocument();\n  });\n\n  it(\"decrements count when decrement clicked\", async () => {\n    const user = userEvent.setup();\n    render(<Counter />);\n    await user.click(screen.getByRole(\"button\", { name: /decrement/i }));\n    expect(screen.getByText(/count: -1/i)).toBeInTheDocument();\n  });\n});",
+      "description": "Tests simulate user clicks and assert on rendered output. No internal state checking."
+    },
+    {
+      "title": "Testing Form Submission with Async",
+      "useCase": "Form with API call",
+      "code": "import { render, screen, waitFor } from \"@testing-library/react\";\nimport userEvent from \"@testing-library/user-event\";\nimport { http, HttpResponse } from \"msw\";\nimport { setupServer } from \"msw/node\";\nimport LoginForm from \"./LoginForm\";\n\nconst server = setupServer(\n  http.post(\"/api/login\", () => {\n    return HttpResponse.json({ token: \"abc\" });\n  })\n);\n\nbeforeAll(() => server.listen());\nafterEach(() => server.resetHandlers());\nafterAll(() => server.close());\n\nit(\"shows success message on valid login\", async () => {\n  const user = userEvent.setup();\n  render(<LoginForm />);\n  await user.type(screen.getByLabelText(/email/i), \"test@test.com\");\n  await user.type(screen.getByLabelText(/password/i), \"password123\");\n  await user.click(screen.getByRole(\"button\", { name: /login/i }));\n  await waitFor(() => {\n    expect(screen.getByText(/welcome/i)).toBeInTheDocument();\n  });\n});",
+      "description": "msw intercepts the network request. userEvent provides realistic interaction. waitFor handles async assertions."
+    },
+    {
+      "title": "Testing Accessible Queries",
+      "useCase": "Best practice query patterns",
+      "code": "// Prefer role queries first\nscreen.getByRole(\"button\", { name: /submit/i });\nscreen.getByRole(\"heading\", { name: /welcome/i });\nscreen.getByRole(\"textbox\", { name: /email/i });\nscreen.getByRole(\"combobox\", { name: /country/i });\nscreen.getByRole(\"alert\"); // error/success messages\nscreen.getByRole(\"progressbar\"); // loading state\n\n// Label association\nscreen.getByLabelText(/email/i);\n\n// Text content\nscreen.getByText(\"Total: $50.00\");\n\n// For non-existence\nexpect(screen.queryByRole(\"alert\")).not.toBeInTheDocument();\n\n// For async appearance\nconst btn = await screen.findByRole(\"button\", { name: /retry/i });",
+      "description": "Always prefer the most accessible query. Role queries ensure your components are accessible to screen readers."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is the primary query to prefer in React Testing Library?",
+      "options": [
+        "getByTestId",
+        "getByRole",
+        "getByClassName",
+        "querySelector"
+      ],
+      "answer": 1,
+      "explanation": "getByRole is the most accessible and preferred query. It encourages semantic, accessible components."
+    },
+    {
+      "question": "What does findBy return?",
+      "options": [
+        "An element or null",
+        "A promise that resolves when the element appears",
+        "An array of elements",
+        "undefined"
+      ],
+      "answer": 1,
+      "explanation": "findBy queries return a promise that resolves when the element appears (with timeout)."
+    },
+    {
+      "question": "What is the purpose of user-event over fireEvent?",
+      "options": [
+        "Faster execution",
+        "More realistic event sequences (focus, blur, key events)",
+        "Less code required",
+        "Better error messages"
+      ],
+      "answer": 1,
+      "explanation": "user-event simulates the full realistic interaction sequence, not just a single event."
+    },
+    {
+      "question": "What is the best way to mock API calls in RTL tests?",
+      "options": [
+        "Jest mock for fetch",
+        "msw (Mock Service Worker)",
+        "Mock component props",
+        "jest.mock for axios"
+      ],
+      "answer": 1,
+      "explanation": "msw intercepts at the network level, providing the most realistic test setup without mocking internal code."
+    },
+    {
+      "question": "Which matcher checks if an element exists in the document?",
+      "options": [
+        "toBeVisible",
+        "toBeInTheDocument",
+        "toExist",
+        "toBePresent"
+      ],
+      "answer": 1,
+      "explanation": "toBeInTheDocument() from jest-dom checks if the element is in the DOM."
+    },
+    {
+      "question": "What should you NOT test with React Testing Library?",
+      "options": [
+        "Rendered output",
+        "User interactions",
+        "Accessibility",
+        "Internal state and implementation details"
+      ],
+      "answer": 3,
+      "explanation": "RTL philosophy is to test behavior, not implementation — never test state values, prop types, or internal methods."
+    },
+    {
+      "question": "What does render() return in RTL?",
+      "options": [
+        "A rendered component",
+        "An object with container, unmount, and rerender utilities",
+        "A DOM element",
+        "Nothing"
+      ],
+      "answer": 1,
+      "explanation": "render() returns utilities for container access, unmounting, and re-rendering."
+    }
+  ]
+};
+
+TOPICS_DATA["react"]["react-hoc"] = {
+  "id": "react-hoc",
+  "title": "Higher-Order Components",
+  "difficulty": "advanced",
+  "estimatedMinutes": 25,
+  "tldr": [
+    "A Higher-Order Component (HOC) is a function that takes a component and returns an enhanced component.",
+    "HOCs are a pattern to reuse component logic: authentication, logging, data fetching, styling.",
+    "The pattern: const EnhancedComponent = withFeature(WrappedComponent). Name conventionally starts with \"with\".",
+    "HOCs compose via nesting: withAuth(withLogger(MyComponent)). Avoid HOCs for new code — prefer hooks instead."
+  ],
+  "laymanDefinition": "A Higher-Order Component is like a gift-wrapping service. You give them your plain box (component), and they wrap it with fancy paper, add a bow, and attach a gift tag (extra props/behavior). You get back a wrapped component that looks nicer and has additional features, but the original box is still inside. The wrapper doesn't change what's inside — it just adds decoration around it.",
+  "deepDive": [
+    {
+      "heading": "Basic HOC Pattern",
+      "text": "A HOC is a function that receives a component and returns a new component that renders the original component with additional props. Example: function withLogger(WrappedComponent) { return function Enhanced(props) { console.log('Rendering with props:', props); return <WrappedComponent {...props} />; }; }. The HOC can add state, lifecycle methods, event handlers, or modify props before passing them down. The wrapped component receives all original props plus any injected props."
+    },
+    {
+      "heading": "Common Use Cases",
+      "text": "Authentication: withAuth redirects unauthenticated users to login. Data fetching: withData fetches data and passes it as props. Logging: withLogger logs renders and prop changes. Styling: withStyles injects CSS classes or inline styles. Permission: withPermission checks user roles and conditionally renders. Redux's connect() is a classic HOC that injects state and dispatch as props. React Router's withRouter injects location, match, history."
+    },
+    {
+      "heading": "Composing HOCs",
+      "text": "Multiple HOCs are composed via nesting: withAuth(withLogger(withData(MyComponent))). For better readability, use compose utility (from Redux or lodash): compose(withAuth, withLogger, withData)(MyComponent). The order matters — innermost HOC wraps the base component, outermost HOC is applied last. Each HOC adds a layer of wrapper components in the React devtools tree, which can make debugging harder."
+    },
+    {
+      "heading": "HOC Pitfalls and Best Practices",
+      "text": "(1) Copy static methods: the wrapped component's static methods are lost; use hoist-non-react-statics. (2) Forward refs: refs don't pass through HOCs; use React.forwardRef. (3) Display name: set displayName for debugging — withLogger.displayName = `withLogger(${getDisplayName(WrappedComponent)})`. (4) Don't mutate the original component — return a new wrapper component. (5) Pass unrelated props through via {...props}. (6) Prefer hooks over HOCs for new code — hooks are simpler, more composable, and don't create wrapper nesting."
+    },
+    {
+      "heading": "Migrating from HOCs to Hooks",
+      "text": "The same logic can usually be expressed as a custom hook: function useLogger(props) { useEffect(() => { console.log('Props changed:', props); }); } then used directly: function MyComponent(props) { useLogger(props); return <div>...</div>; }. Hooks avoid wrapper nesting, are easier to type with TypeScript, and don't have the static method/ref forwarding issues. However, HOCs remain useful for cross-cutting concerns in class components and for libraries that need to inject props declaratively."
+    }
+  ],
+  "interviewAnswer": "A Higher-Order Component is a function that takes a component and returns a new component with additional props or behavior. It's a pattern for reusing component logic: withAuth, withLogger, withData. HOCs compose via nesting or compose(). Key considerations: copy static methods, forward refs, set display names, and don't mutate the original. For new code, prefer React hooks over HOCs — hooks are simpler, compose naturally without nesting, and avoid the static method/ref forwarding issues. HOCs remain relevant for class components and library APIs.",
+  "interviewQuestions": [
+    {
+      "question": "What is a Higher-Order Component?",
+      "answer": "A function that takes a component and returns an enhanced component with additional props or behavior. Example: const Enhanced = withHOC(Base)."
+    },
+    {
+      "question": "What are common use cases for HOCs?",
+      "answer": "Authentication (withAuth), data fetching (withData), logging (withLogger), styling (withStyles), permission checks, Redux connect(), React Router withRouter."
+    },
+    {
+      "question": "How do you compose multiple HOCs?",
+      "answer": "Nesting: withAuth(withLogger(MyComponent)). Or using a compose utility: compose(withAuth, withLogger)(MyComponent). The order matters — each adds a wrapper layer."
+    },
+    {
+      "question": "What are the main pitfalls with HOCs?",
+      "answer": "(1) Static methods are lost — use hoist-non-react-statics. (2) Refs don't pass through — use React.forwardRef. (3) Debugging is harder due to wrapper nesting. (4) Display names need manual setting."
+    },
+    {
+      "question": "Why do hooks replace HOCs?",
+      "answer": "Hooks are simpler, compose naturally without nesting, don't require static method copying, work seamlessly with refs, and are easier to type with TypeScript. Custom hooks like useAuth() or useData() replace HOC patterns."
+    },
+    {
+      "question": "How do you handle refs in HOCs?",
+      "answer": "Use React.forwardRef to pass refs through the HOC to the wrapped component: function withLogger(WrappedComponent) { return React.forwardRef((props, ref) => <WrappedComponent ref={ref} {...props} />); }."
+    },
+    {
+      "question": "What is the display name convention for HOCs?",
+      "answer": "Set a custom displayName for debugging: EnhancedComponent.displayName = `withLogger(${getDisplayName(WrappedComponent)})`. Helper: function getDisplayName(WC) { return WC.displayName || WC.name || \"Component\"; }."
+    },
+    {
+      "question": "Can HOCs be used with functional components?",
+      "answer": "Yes. HOCs wrap both class and functional components. However, hooks are preferred for new functional component code as they achieve the same results with less complexity."
+    },
+    {
+      "question": "How does Redux's connect() work as a HOC?",
+      "answer": "connect(mapStateToProps, mapDispatchToProps)(Component) returns an enhanced component that subscribes to the Redux store and injects state and dispatch as props. It handles optimizations like selector memoization and re-render prevention."
+    },
+    {
+      "question": "What is the difference between HOC and Render Props?",
+      "answer": "HOC: function that returns a new component wrapping the input. Render Props: a component that accepts a function prop to render its content. HOCs add wrapper layers, render props don't. Both are superseded by hooks for most use cases."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 320\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:650px;\"><defs><marker id=\"hArr\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0,10 3.5,0 7\" fill=\"#6c9fff\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"630\" height=\"300\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"325\" y=\"38\" fill=\"#e8eaed\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">Higher-Order Component Pattern</text><rect x=\"40\" y=\"55\" width=\"200\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"140\" y=\"80\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">withAuth(WrappedComponent)</text><line x1=\"140\" y1=\"95\" x2=\"140\" y2=\"125\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#hArr)\"/><rect x=\"40\" y=\"125\" width=\"200\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"140\" y=\"150\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">withLogger(WrappedComponent)</text><line x1=\"140\" y1=\"165\" x2=\"140\" y2=\"195\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#hArr)\"/><rect x=\"40\" y=\"195\" width=\"200\" height=\"40\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"140\" y=\"220\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">WrappedComponent</text><line x1=\"240\" y1=\"215\" x2=\"310\" y2=\"175\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#hArr)\"/><text x=\"350\" y=\"160\" fill=\"#9aa0b0\" font-size=\"11\" text-anchor=\"middle\">Enhanced props flow</text><text x=\"350\" y=\"175\" fill=\"#9aa0b0\" font-size=\"11\" text-anchor=\"middle\">(original + injected)</text><line x1=\"240\" y1=\"215\" x2=\"310\" y2=\"255\" stroke=\"#f87171\" stroke-width=\"2\" marker-end=\"url(#hArr)\"/><rect x=\"310\" y=\"245\" width=\"250\" height=\"30\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#f87171\" stroke-width=\"1.5\"/><text x=\"435\" y=\"265\" fill=\"#f87171\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">HOC concerns: static methods, refs, displayName</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Simple withLogger HOC",
+      "useCase": "Logging component renders",
+      "code": "function withLogger(WrappedComponent) {\n  function Enhanced(props) {\n    useEffect(() => {\n      console.log(\"Rendered:\", WrappedComponent.name, props);\n    });\n    return <WrappedComponent {...props} />;\n  }\n  Enhanced.displayName = `withLogger(${getDisplayName(WrappedComponent)})`;\n  return Enhanced;\n}\n\nconst LoggedButton = withLogger(Button);",
+      "description": "HOC wraps component, adds logging behavior. displayName helps debugging."
+    },
+    {
+      "title": "withAuth Authentication HOC",
+      "useCase": "Protecting routes",
+      "code": "function withAuth(WrappedComponent) {\n  function Enhanced(props) {\n    const { user, loading } = useAuth();\n    if (loading) return <Spinner />;\n    if (!user) return <Navigate to=\"/login\" />;\n    return <WrappedComponent user={user} {...props} />;\n  }\n  return Enhanced;\n}\n\nconst ProtectedDashboard = withAuth(Dashboard);\n\n// Usage in router:\n<Route path=\"/dashboard\" element={<ProtectedDashboard />} />",
+      "description": "HOC handles authentication logic. Unauthenticated users are redirected."
+    },
+    {
+      "title": "withData Data Fetching HOC",
+      "useCase": "Injecting fetched data as props",
+      "code": "function withData(fetchFn, dataProp = \"data\") {\n  return function(WrappedComponent) {\n    function Enhanced(props) {\n      const [data, setData] = useState(null);\n      const [loading, setLoading] = useState(true);\n      useEffect(() => {\n        setLoading(true);\n        fetchFn(props).then((result) => {\n          setData(result);\n          setLoading(false);\n        });\n      }, []);\n      const injected = { [dataProp]: data, loading };\n      return <WrappedComponent {...props} {...injected} />;\n    }\n    return Enhanced;\n  };\n}\n\nconst UserProfileWithData = withData(fetchUser, \"user\")(UserProfile);",
+      "description": "HOC fetches data and injects it as prop. Configurable: fetch function and prop name."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What does a Higher-Order Component return?",
+      "options": [
+        "A React element",
+        "A new component with enhanced behavior",
+        "A hook",
+        "A context provider"
+      ],
+      "answer": 1,
+      "explanation": "HOC is a function that returns a new component wrapping the input with additional behavior."
+    },
+    {
+      "question": "Why should you copy static methods in HOCs?",
+      "options": [
+        "Better performance",
+        "Static methods are lost when wrapping — use hoist-non-react-statics",
+        "Static methods are automatically inherited",
+        "Static methods are not needed"
+      ],
+      "answer": 1,
+      "explanation": "The wrapper component does not inherit static methods from the wrapped component."
+    },
+    {
+      "question": "How do you handle refs in HOCs?",
+      "options": [
+        "Refs work automatically",
+        "Use React.forwardRef to forward refs through the HOC",
+        "HOCs cannot use refs",
+        "Ignore refs"
+      ],
+      "answer": 1,
+      "explanation": "React.forwardRef allows the HOC to forward refs to the wrapped component."
+    },
+    {
+      "question": "What is the modern alternative to HOCs?",
+      "options": [
+        "Class components",
+        "React hooks",
+        "Render props",
+        "Context API"
+      ],
+      "answer": 1,
+      "explanation": "React hooks are the recommended modern alternative — they are simpler and more composable."
+    },
+    {
+      "question": "How are multiple HOCs composed?",
+      "options": [
+        "Using + operator",
+        "Via nesting or compose() utility",
+        "Using HOC.add() method",
+        "They cannot be composed"
+      ],
+      "answer": 1,
+      "explanation": "HOCs compose via nesting: HOC1(HOC2(Component)) or compose(HOC1, HOC2)(Component)."
+    },
+    {
+      "question": "What naming convention do HOCs follow?",
+      "options": [
+        "Prefix \"hoc\"",
+        "Prefix \"with\" (e.g., withAuth)",
+        "Suffix \"HOC\"",
+        "No convention"
+      ],
+      "answer": 1,
+      "explanation": "HOCs conventionally start with the prefix \"with\" (e.g., withAuth, withLogger, withRouter)."
+    },
+    {
+      "question": "What issue does HOC nesting cause in development?",
+      "options": [
+        "Slower performance",
+        "Deeper component tree in React DevTools, harder debugging",
+        "Larger bundle size",
+        "Cannot use TypeScript"
+      ],
+      "answer": 1,
+      "explanation": "Each HOC adds a wrapper component layer, making the React DevTools tree deeper and harder to debug."
+    }
+  ]
+};
+
+TOPICS_DATA["react"]["react-render-props"] = {
+  "id": "react-render-props",
+  "title": "Render Props Pattern",
+  "difficulty": "advanced",
+  "estimatedMinutes": 20,
+  "tldr": [
+    "Render Props is a pattern where a component receives a function as a prop (usually called render or children) that returns React elements.",
+    "The component calls the render function with its internal state, giving the parent control over what gets rendered.",
+    "Common example: React Router's Route component which passes route params to its render function.",
+    "Hooks have largely replaced render props for shareable logic, but the pattern is still important for understanding React composition."
+  ],
+  "laymanDefinition": "Render Props is like having a custom cake shop where you provide an empty cake base (the component), and the customer gives you a recipe function that describes exactly how they want their cake decorated. The shop handles the baking (internal logic), then passes you the baked cake so you can add your own frosting. You control the final decoration, while the shop handles the complexity of baking.",
+  "deepDive": [
+    {
+      "heading": "How Render Props Work",
+      "text": "A component with a render prop accepts a function as a prop. Inside its render, it calls the function, passing relevant state/data as arguments. The function returns JSX. Example: <DataProvider render={data => <div>{data.name}</div>} />. The component controls the logic, the parent controls the rendering. The prop can be named \"render\" or \"children\" (when used as a function child pattern: <DataProvider>{data => <div>{data.name}</div>}</DataProvider>)."
+    },
+    {
+      "heading": "Render Props vs HOC",
+      "text": "Render Props: component calls a function prop to render, the parent controls the output. HOC: wraps the component, injects props. Render Props are more flexible because the parent controls rendering at the usage site. However, render props can create deeply nested callbacks (\"wrapper hell\"). HOCs add wrapper components in the tree but keep the usage site flat. Both are superseded by hooks for logic reuse, but render props remain useful for context-like patterns where a parent controls rendering of child UI."
+    },
+    {
+      "heading": "Common Real-World Examples",
+      "text": "React Router's Route: <Route path=\"/user\" render={props => <User {...props} />} />. React Motion's Motion: <Motion style={{x: spring(10)}}>{interpolated => <div style={interpolated} />}</Motion>. Formik's <Formik> component uses render props to give form state. React Context's Consumer was a render prop before hooks: <ThemeContext.Consumer>{theme => <div>{theme}</div>}</ThemeContext.Consumer>."
+    },
+    {
+      "heading": "Performance Considerations",
+      "text": "Render prop functions create new function references on each render, which can break PureComponent/memo optimizations. Solutions: (1) Define the render function as a class method or useCallback. (2) Use React.memo on the child. (3) Pass stable references when possible. (4) Consider whether the re-render is actually causing a performance problem before optimizing. React's reconciliation handles most cases efficiently."
+    },
+    {
+      "heading": "Render Props with React.memo",
+      "text": "When using render props with React.memo, the memo comparison fails because the render function is a new reference each time. To optimize: (1) Use useCallback for the render function in the parent. (2) Extract the render function outside the component. (3) The render prop component can implement shouldComponentUpdate (class) or use useMemo (hooks) to compare the render result. In practice, this level of optimization is rarely needed unless rendering large lists or complex trees."
+    }
+  ],
+  "interviewAnswer": "Render Props is a pattern where a component receives a function prop (render or children) that returns React elements. The component calls the function with its internal state, giving the parent control over rendering. Common examples: React Router Route render prop, React Context Consumer. Render Props offer more flexibility than HOCs (parent controls rendering at usage site) but can create nested callback patterns. Hooks are the recommended modern alternative for logic reuse, but the render props pattern is still important for understanding React composition and is used in some library APIs.",
+  "interviewQuestions": [
+    {
+      "question": "What is the Render Props pattern?",
+      "answer": "A component receives a function prop (render/children) that returns React elements. The component calls this function with its internal state, delegating rendering control to the parent."
+    },
+    {
+      "question": "How is Render Props different from HOC?",
+      "answer": "Render Props: parent controls rendering at the usage site via a function prop. HOC: wraps the component at definition time, injecting props. Render Props are more flexible at the call site but can create nested callbacks. Hooks replace both."
+    },
+    {
+      "question": "What is the function child pattern in Render Props?",
+      "answer": "Using children as the render function: <Provider>{value => <Child value={value} />}</Provider>. The component renders props.children(value) instead of props.render(value). It's a syntactic variation of the same pattern."
+    },
+    {
+      "question": "What are real-world examples of Render Props?",
+      "answer": "React Router's Route render prop, React Context Consumer, Formik's Formik component render prop, React Motion's Motion component."
+    },
+    {
+      "question": "What performance concern exists with Render Props?",
+      "answer": "Render functions create new references each render, potentially breaking PureComponent/memo optimizations. Use useCallback or define functions outside the render path to mitigate."
+    },
+    {
+      "question": "Why did hooks replace Render Props?",
+      "answer": "Hooks provide the same logic reuse without the nesting/callback overhead. useMyHook() gives direct access to state and logic without wrapping components or passing render functions."
+    },
+    {
+      "question": "Can you use Render Props with functional components?",
+      "answer": "Yes. Both the provider component and the render function can be functional components. The pattern works identically in class and functional components."
+    },
+    {
+      "question": "What is the \"wrapper hell\" concern with Render Props?",
+      "answer": "Deeply nested render prop calls create pyramid-shaped code: <A>{a => <B b={a}>{c => <C c={c}>...</C></B></A>. This is harder to read and maintain. Hooks avoid this entirely."
+    },
+    {
+      "question": "How does TypeScript work with Render Props?",
+      "answer": "The component is generic over the render function's return type: function Provider<T>(props: { render: (value: T) => ReactNode, value: T }). The render function's parameter type is inferred from the component's internal type."
+    },
+    {
+      "question": "When would you still use Render Props today?",
+      "answer": "In library APIs where the user needs to control rendering while the library manages logic. For example, virtualization libraries (react-virtualized), drag-and-drop libraries (react-dnd), and some chart libraries use render props for flexible rendering."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 600 280\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:600px;\"><defs><marker id=\"rArr\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0,10 3.5,0 7\" fill=\"#6c9fff\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"580\" height=\"260\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"300\" y=\"38\" fill=\"#e8eaed\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">Render Props Pattern</text><rect x=\"30\" y=\"55\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"150\" y=\"82\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Parent Component</text><line x1=\"270\" y1=\"80\" x2=\"330\" y2=\"80\" stroke=\"#f87171\" stroke-width=\"2\" marker-end=\"url(#rArr)\"/><text x=\"300\" y=\"68\" fill=\"#f87171\" font-size=\"9\" text-anchor=\"middle\">passes render function</text><rect x=\"330\" y=\"55\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"450\" y=\"82\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Provider Component</text><line x1=\"450\" y1=\"105\" x2=\"450\" y2=\"145\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#rArr)\"/><text x=\"300\" y=\"128\" fill=\"#9aa0b0\" font-size=\"9\" text-anchor=\"middle\">calls render(state)</text><rect x=\"330\" y=\"145\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"450\" y=\"172\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Renders: {render(state)}</text><line x1=\"330\" y1=\"170\" x2=\"270\" y2=\"170\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#rArr)\"/><text x=\"300\" y=\"185\" fill=\"#6c9fff\" font-size=\"9\" text-anchor=\"middle\">returns JSX</text><rect x=\"30\" y=\"145\" width=\"240\" height=\"50\" rx=\"6\" fill=\"#1a1d28\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"150\" y=\"172\" fill=\"#34d399\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Custom JSX from render function</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Basic Mouse Position Tracker",
+      "useCase": "Render Props for shared mouse logic",
+      "code": "function MouseTracker({ render }) {\n  const [position, setPosition] = useState({ x: 0, y: 0 });\n\n  useEffect(() => {\n    function handleMouseMove(e) {\n      setPosition({ x: e.clientX, y: e.clientY });\n    }\n    window.addEventListener(\"mousemove\", handleMouseMove);\n    return () => window.removeEventListener(\"mousemove\", handleMouseMove);\n  }, []);\n\n  return render(position);\n}\n\n// Usage:\n<MouseTracker\n  render={({ x, y }) => (\n    <div>The mouse is at ({x}, {y})</div>\n  )}\n/>",
+      "description": "The MouseTracker component handles mouse event logic. The parent controls what UI renders."
+    },
+    {
+      "title": "Function Child Pattern",
+      "useCase": "Using children as render prop",
+      "code": "function DataFetcher({ url, children }) {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    fetch(url)\n      .then(res => res.json())\n      .then(result => {\n        setData(result);\n        setLoading(false);\n      });\n  }, [url]);\n\n  return children({ data, loading });\n}\n\n// Usage with function child:\n<DataFetcher url=\"/api/users\">\n  {({ data, loading }) => (\n    loading ? <Spinner /> : <UserList users={data} />\n  )}\n</DataFetcher>",
+      "description": "Using children as the render function creates a more natural JSX structure."
+    },
+    {
+      "title": "Toggle Component with Render Props",
+      "useCase": "Stateful toggle behavior",
+      "code": "function Toggle({ render }) {\n  const [on, setOn] = useState(false);\n  const toggle = () => setOn(prev => !prev);\n  return render({ on, toggle });\n}\n\n// Reusable toggle with custom UI:\n<Toggle\n  render={({ on, toggle }) => (\n    <div>\n      <Switch checked={on} onChange={toggle} />\n      <p>The switch is {on ? \"ON\" : \"OFF\"}</p>\n      <button onClick={toggle}>Toggle</button>\n    </div>\n  )}\n/>",
+      "description": "Toggle logic is encapsulated. The parent fully controls how the toggle state is displayed."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is the Render Props pattern?",
+      "options": [
+        "A component that renders props directly",
+        "A component that calls a function prop with its internal state to render",
+        "A function that returns a component",
+        "A pattern for styling"
+      ],
+      "answer": 1,
+      "explanation": "Render Props delegates rendering control to the parent via a function prop called with internal state."
+    },
+    {
+      "question": "What is the function child pattern?",
+      "options": [
+        "A component with a child function component",
+        "Using props.children as the render function",
+        "Calling setState with a function",
+        "A controlled component pattern"
+      ],
+      "answer": 1,
+      "explanation": "Function child pattern uses children prop as the render function: <Provider>{value => <UI />}</Provider>."
+    },
+    {
+      "question": "What replaced Render Props in modern React?",
+      "options": [
+        "Class components",
+        "React hooks",
+        "ComponentDidCatch",
+        "setState"
+      ],
+      "answer": 1,
+      "explanation": "React hooks provide the same logic reuse without nesting or callback patterns."
+    },
+    {
+      "question": "How is Render Props different from HOC?",
+      "options": [
+        "No difference",
+        "Render Props give parent control over rendering at usage site; HOC wraps at definition time",
+        "HOC is more flexible",
+        "Render Props are only for classes"
+      ],
+      "answer": 1,
+      "explanation": "Render Props delegate rendering to the parent at call site. HOCs inject props at definition time."
+    },
+    {
+      "question": "What is a performance concern with Render Props?",
+      "options": [
+        "Infinite loops",
+        "New function reference each render breaks PureComponent/memo optimization",
+        "Memory leaks",
+        "Slow mounting"
+      ],
+      "answer": 1,
+      "explanation": "Render functions create new references each render, preventing memoization. Mitigate with useCallback."
+    },
+    {
+      "question": "Which React API used a Consumer render prop before hooks?",
+      "options": [
+        "React.memo",
+        "React.createRef",
+        "React Context Consumer",
+        "React.Suspense"
+      ],
+      "answer": 2,
+      "explanation": "React Context's Consumer used the render prop pattern: <Consumer>{value => ...}</Consumer>."
+    },
+    {
+      "question": "What is \"wrapper hell\" in Render Props?",
+      "options": [
+        "Too many wrapper components in JSX",
+        "Deeply nested render function callbacks creating pyramid code",
+        "Multiple HOCs wrapping a component",
+        "Circular dependencies"
+      ],
+      "answer": 1,
+      "explanation": "Deep nesting of render props creates hard-to-read pyramid code: <A>{a => <B b={a}>...}"
+    }
+  ]
+};
+
+TOPICS_DATA["react"]["react-server-components"] = {
+  "id": "react-server-components",
+  "title": "React Server Components",
+  "difficulty": "advanced",
+  "estimatedMinutes": 30,
+  "tldr": [
+    "React Server Components (RSC) are components that run and render on the server, sending only the resulting HTML/UI to the client.",
+    "RSCs can directly access databases, file systems, and backend APIs without exposing sensitive logic to the client.",
+    "Server Components can fetch data at the component level without useEffect, SWR, or React Query — just async/await directly.",
+    "RSCs reduce client-side JavaScript bundle size because their dependencies never ship to the browser."
+  ],
+  "laymanDefinition": "React Server Components are like a chef who prepares the complex parts of a meal in the kitchen (server) and only sends the finished dish to the dining table (client). The diner never sees the raw ingredients, the chef's recipes, or the cooking process. They just see the beautiful plated dish. Regular client components are like a DIY meal kit — the ingredients and instructions are sent to the table, and the diner cooks it themselves. Server Components make apps faster by doing the heavy lifting on the server.",
+  "deepDive": [
+    {
+      "heading": "What Are Server Components?",
+      "text": "Server Components are React components that execute exclusively on the server. They can be async, directly access databases, read files, and call internal APIs. The result is serialized as a special format (RSC payload) and streamed to the client. Server Components never re-render on the client — they have no state, no effects, no browser APIs. This dramatically reduces client-side JavaScript. In Next.js, Server Components are the default in the App Router — every component is a Server Component unless you add \"use client\" directive."
+    },
+    {
+      "heading": "Server Components vs Client Components",
+      "text": "Server Components: run on server, async, direct DB/FS access, no state/effects, smaller bundle. Client Components: run in browser, useState/useEffect, browser APIs, interactivity. The \"use client\" directive marks the boundary. Server Components can import and render Client Components. Client Components cannot import Server Components (but can receive Server Components as children via props or composition patterns). The key optimization: keep expensive dependencies (markdown parsers, date libraries) in Server Components — they never ship to the client."
+    },
+    {
+      "heading": "Data Fetching in Server Components",
+      "text": "Server Components can use async/await directly at the component level: async function Page() { const posts = await db.query(\"SELECT * FROM posts\"); return <PostList posts={posts} />; }. No useEffect, no SWR, no loading state boilerplate. The server suspends while the data fetches, then streams the result. This eliminates the waterfall problem where a component fetches, renders, then its child fetches — all fetching happens in parallel on the server. Data fetching is secure — credentials stay on the server."
+    },
+    {
+      "heading": "Performance and Bundle Size Benefits",
+      "text": "Server Components reduce client bundle size because their dependencies (libraries, utilities) never ship to the browser. Example: a markdown parser used in a Server Component is not included in the client bundle. The RSC payload is a compact binary format. Combined with streaming, the client can progressively render content as it arrives. Server Components also eliminate the need for API endpoints for internal data — the component fetches directly from the database. This simplifies the architecture and reduces network round trips."
+    },
+    {
+      "heading": "Limitations and Caveats",
+      "text": "Server Components cannot: use state/effects, handle user interactions, access browser APIs, use context (for now), use hooks. They run once per request (or once during build for SSG). The \"use client\" boundary is explicit — components that need interactivity must be split. Caching considerations: data in Server Components can be cached with Next.js's fetch cache or React's cache() function. Error handling uses error boundaries in Client Components wrapping Server Components."
+    }
+  ],
+  "interviewAnswer": "React Server Components run and render on the server, sending only the resulting UI to the client. They reduce the client bundle by keeping dependencies server-side. Server Components can be async and directly access databases/file systems without exposing credentials. They enable component-level data fetching without useEffect or external data libraries. The \"use client\" directive marks client boundaries. Server Components have no state, effects, or browser APIs — they are for static/derived content. Next.js App Router uses Server Components by default. Key benefits: zero client bundle impact for server logic, direct data access, parallel data fetching, and streaming.",
+  "interviewQuestions": [
+    {
+      "question": "What are React Server Components?",
+      "answer": "Components that run exclusively on the server, producing a serialized RSC payload sent to the client. They have no state, effects, or browser APIs, and can directly access server-side resources."
+    },
+    {
+      "question": "How do you mark a component as a Client Component?",
+      "answer": "Add \"use client\" directive at the top of the file. Every component without this directive is a Server Component by default in Next.js App Router."
+    },
+    {
+      "question": "How does data fetching work in Server Components?",
+      "answer": "Direct async/await at the component level: async function Page() { const data = await db.query(...); return <View data={data} />; }. No hooks, no loading states, no waterfall."
+    },
+    {
+      "question": "What is the bundle size benefit of Server Components?",
+      "answer": "Dependencies imported only in Server Components are never included in the client bundle. A markdown parser, date library, or utility used solely in server code has zero cost for the client."
+    },
+    {
+      "question": "Can Server Components use hooks or state?",
+      "answer": "No. Server Components cannot use useState, useEffect, useContext, or any React hooks. They cannot handle events or browser interactions. Use Client Components for interactivity."
+    },
+    {
+      "question": "How do Server Components relate to Next.js App Router?",
+      "answer": "In Next.js App Router, all components are Server Components by default. Adding \"use client\" at the top of a file makes it a Client Component. This is the recommended approach for new Next.js apps."
+    },
+    {
+      "question": "Can Server Components import Client Components?",
+      "answer": "Yes. Server Components can import and render Client Components. Client Components can receive Server Components as children (via composition), but cannot import them directly."
+    },
+    {
+      "question": "How does caching work with Server Components?",
+      "answer": "Server Components run per request (dynamic) or once at build time (static). Next.js provides fetch caching: fetch(url, { cache: \"force-cache\" }) or { next: { revalidate: 60 } }. React's cache() function deduplicates requests during a render pass."
+    },
+    {
+      "question": "How do you handle errors in Server Components?",
+      "answer": "Wrap Server Components in Client Component error boundaries. The error boundary must be a Client Component that catches errors during rendering of its Server Component children."
+    },
+    {
+      "question": "What is the RSC payload format?",
+      "answer": "A compact binary/JSON format that represents the rendered tree. It can be streamed to the client progressively. The client merges the RSC payload with existing Client Component state to produce the final UI."
+    }
+  ],
+  "diagramSvg": "<svg viewBox=\"0 0 650 320\" xmlns=\"http://www.w3.org/2000/svg\" style=\"max-width:650px;\"><defs><marker id=\"sArr\" markerWidth=\"10\" markerHeight=\"7\" refX=\"10\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0 0,10 3.5,0 7\" fill=\"#6c9fff\"/></marker></defs><rect x=\"10\" y=\"10\" width=\"630\" height=\"300\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\"/><text x=\"325\" y=\"38\" fill=\"#e8eaed\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">React Server Components Architecture</text><rect x=\"30\" y=\"55\" width=\"260\" height=\"100\" rx=\"8\" fill=\"#1a1d28\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/><text x=\"160\" y=\"80\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"bold\" text-anchor=\"middle\">🔵 Server (Node.js)</text><text x=\"160\" y=\"100\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">Server Components run here</text><text x=\"160\" y=\"115\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">Direct DB, FS, API access</text><text x=\"160\" y=\"130\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">Async fetch, no client JS cost</text><line x1=\"290\" y1=\"105\" x2=\"350\" y2=\"105\" stroke=\"#6c9fff\" stroke-width=\"2\" marker-end=\"url(#sArr)\"/><text x=\"320\" y=\"95\" fill=\"#34d399\" font-size=\"9\" text-anchor=\"middle\">RSC payload</text><rect x=\"350\" y=\"55\" width=\"260\" height=\"100\" rx=\"8\" fill=\"#1a1d28\" stroke=\"#34d399\" stroke-width=\"1.5\"/><text x=\"480\" y=\"80\" fill=\"#34d399\" font-size=\"13\" font-weight=\"bold\" text-anchor=\"middle\">🟢 Client (Browser)</text><text x=\"480\" y=\"100\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">Client Components with \"use client\"</text><text x=\"480\" y=\"115\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">State, effects, interactivity</text><text x=\"480\" y=\"130\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">Receives serialized RSC result</text><rect x=\"30\" y=\"180\" width=\"580\" height=\"100\" rx=\"8\" fill=\"#1a1d28\" stroke=\"#f87171\" stroke-width=\"1.5\"/><text x=\"320\" y=\"205\" fill=\"#f87171\" font-size=\"13\" font-weight=\"bold\" text-anchor=\"middle\">Key Principles</text><text x=\"320\" y=\"225\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">1. Server Components: no state, no effects, no browser APIs — pure rendering from server data</text><text x=\"320\" y=\"242\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">2. \"use client\" marks the boundary — everything else is Server Component by default (Next.js App Router)</text><text x=\"320\" y=\"259\" fill=\"#9aa0b0\" font-size=\"10\" text-anchor=\"middle\">3. Server Components can import Client Components; Client Components cannot import Server Components</text></svg>",
+  "codeExamples": [
+    {
+      "title": "Server Component Data Fetching",
+      "useCase": "Direct database access without hooks",
+      "code": "// This is a Server Component (no \"use client\" directive)\nasync function BlogPage() {\n  const posts = await db.query(`\n    SELECT id, title, excerpt, created_at\n    FROM posts\n    ORDER BY created_at DESC\n    LIMIT 10\n  `);\n\n  return (\n    <div>\n      <h1>Latest Posts</h1>\n      {posts.map(post => (\n        <article key={post.id}>\n          <h2>{post.title}</h2>\n          <p>{post.excerpt}</p>\n          <small>{post.created_at.toLocaleDateString()}</small>\n        </article>\n      ))}\n    </div>\n  );\n}",
+      "description": "Server Component fetches data directly from the database. No API endpoint, no useEffect, no loading state. The component is async — it suspends while the query runs, then streams the result."
+    },
+    {
+      "title": "Client Component Interactivity",
+      "useCase": "Interactive parts use \"use client\"",
+      "code": "\"use client\";\n\nimport { useState } from \"react\";\n\nfunction LikeButton({ postId, initialLikes }) {\n  const [likes, setLikes] = useState(initialLikes);\n  const [liked, setLiked] = useState(false);\n\n  async function handleLike() {\n    const res = await fetch(\"/api/like\", {\n      method: \"POST\",\n      body: JSON.stringify({ postId }),\n    });\n    const data = await res.json();\n    setLikes(data.likes);\n    setLiked(true);\n  }\n\n  return (\n    <button onClick={handleLike} disabled={liked}>\n      {liked ? `${likes} ❤️` : `${likes} 🤍`}\n    </button>\n  );\n}",
+      "description": "Client Component handles interactivity (state, effects, events). Server Component passes initial data as props."
+    },
+    {
+      "title": "Server + Client Composition",
+      "useCase": "Best practice for mixing both",
+      "code": "// Server Component (parent)\nasync function PostPage({ params }) {\n  const post = await db.query(\"SELECT * FROM posts WHERE id = $1\", [params.id]);\n  const comments = await db.query(\"SELECT * FROM comments WHERE post_id = $1\", [params.id]);\n\n  return (\n    <article>\n      <h1>{post.title}</h1>\n      <div>{post.content}</div>\n      {/* Server Component renders Client Component */}\n      <LikeButton postId={post.id} initialLikes={post.likes} />\n      <CommentList initialComments={comments} postId={post.id} />\n    </article>\n  );\n}\n\n// Client Component with \"use client\"\n\"use client\";\nfunction CommentList({ initialComments, postId }) {\n  const [comments, setComments] = useState(initialComments);\n  // ... interactivity logic\n}",
+      "description": "Server Component handles data fetching. Client Components handle interactivity. Composition pattern: Server Component wraps Client Components with initial data as props."
+    }
+  ],
+  "mcqQuestions": [
+    {
+      "question": "What is a React Server Component?",
+      "options": [
+        "A component that renders on the server and sends only the resulting UI to the client",
+        "A component that runs in the browser",
+        "A component that is pre-rendered at build time",
+        "A component that cannot have props"
+      ],
+      "answer": 0,
+      "explanation": "Server Components run on the server, producing a serialized payload sent to the client."
+    },
+    {
+      "question": "How do you mark a component as a Client Component?",
+      "options": [
+        "Add \"use server\" directive",
+        "Add \"use client\" directive",
+        "No special marking needed",
+        "Import from \"react-dom\""
+      ],
+      "answer": 1,
+      "explanation": "\"use client\" at the top of the file marks the client boundary."
+    },
+    {
+      "question": "Can Server Components use hooks?",
+      "options": [
+        "Yes, all hooks",
+        "No, no hooks or state",
+        "Only useState",
+        "Only useEffect"
+      ],
+      "answer": 1,
+      "explanation": "Server Components cannot use any hooks, state, effects, or browser APIs."
+    },
+    {
+      "question": "How does data fetching work in Server Components?",
+      "options": [
+        "useEffect hook",
+        "Direct async/await at component level",
+        "React Query",
+        "SWR"
+      ],
+      "answer": 1,
+      "explanation": "Server Components can be async and use direct async/await for data fetching without hooks."
+    },
+    {
+      "question": "What is the bundle size benefit of RSC?",
+      "options": [
+        "Dependencies used only in Server Components are not included in the client bundle",
+        "No benefit",
+        "Smaller HTML files",
+        "Faster CSS loading"
+      ],
+      "answer": 0,
+      "explanation": "Dependencies imported only in Server Components have zero cost for the client bundle."
+    },
+    {
+      "question": "Can Client Components import Server Components?",
+      "options": [
+        "Yes, directly",
+        "No, but can receive them as children via composition",
+        "Only with \"use server\" directive",
+        "Only in development"
+      ],
+      "answer": 1,
+      "explanation": "Client Components cannot import Server Components directly but can receive them as children."
+    },
+    {
+      "question": "What is the default in Next.js App Router?",
+      "options": [
+        "All components are Client Components",
+        "All components are Server Components",
+        "Must explicitly choose each component",
+        "Components are hybrid"
+      ],
+      "answer": 1,
+      "explanation": "In Next.js App Router, all components are Server Components by default unless marked with \"use client\"."
+    }
+  ]
+};
+
