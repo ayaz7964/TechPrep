@@ -68,9 +68,9 @@ module.exports = function padTopics(topics) {
       }
       // Add generic items if still needed
       var genericTLDR = [
-        t.title + ' plays a vital role in modern CI/CD pipelines, enabling automation and reducing manual effort.',
-        'Proper implementation of ' + t.title + ' improves deployment frequency, reduces failure rates, and accelerates time-to-market.',
-        t.title + ' integrates with various DevOps tools and platforms to create a seamless end-to-end delivery pipeline.'
+        t.title + ' is an essential concept that helps teams automate and streamline their development workflows effectively.',
+        'Adopting ' + t.title + ' leads to faster deployments, lower failure rates, and quicker recovery when issues arise.',
+        t.title + ' works alongside other modern tools and platforms to support end-to-end software delivery processes.'
       ];
       while (t.tldr.length < 4) {
         t.tldr.push(genericTLDR[(t.tldr.length - 1) % genericTLDR.length]);
@@ -80,8 +80,8 @@ module.exports = function padTopics(topics) {
     // ---- 3. Pad deep dive to at least 3 sections ----
     if (t.deepDive.length < 3) {
       var extraDD = [
-        { heading: 'Best Practices', text: 'Follow industry best practices for ' + t.title + ': automate repetitive tasks, monitor continuously, document configurations thoroughly, implement proper security measures, and conduct regular reviews. A well-structured approach ensures reliability and maintainability.' },
-        { heading: 'Common Use Cases', text: t.title + ' is widely used across various scenarios including build automation, continuous integration, test execution, deployment orchestration, and infrastructure management. Each use case leverages specific features and configuration patterns for optimal results.' },
+        { heading: 'Best Practices', text: 'When working with ' + t.title + ', automate repetitive tasks, monitor continuously, document configurations thoroughly, implement proper security measures, and conduct regular reviews. A well-structured approach ensures reliability and maintainability.' },
+        { heading: 'Common Use Cases', text: t.title + ' applies to build automation, continuous integration, test execution, deployment orchestration, and infrastructure management. Each scenario leverages specific features and configuration patterns for optimal results.' },
         { heading: 'Troubleshooting Tips', text: 'Common issues with ' + t.title + ' include configuration errors, permission problems, and integration failures. Always check logs first, verify configuration syntax, test in isolation, and consult documentation. Enable verbose logging for detailed diagnostics.' }
       ];
       while (t.deepDive.length < 3) {
