@@ -209,6 +209,7 @@ function highlightCode(code) {
 }
 
 /* =================== EMBEDDED DATA (works with file://) =================== */
+var hamburger, sidebar, sidebarOverlay;
 var EMBEDDED = {
   categories: [
     { id: "javascript",  name: "JavaScript",       icon: "\u26A1", color: "#f7df1e", description: "Core JavaScript concepts, ES6+, and advanced patterns" },
@@ -237,7 +238,8 @@ var EMBEDDED = {
     { id: "devops",      name: "DevOps & Cloud",         icon: "\u2601\uFE0F", color: "#0078D4", description: "Docker, AWS, CI/CD pipelines, deployment, and monitoring" },
     { id: "git",         name: "Git & CI/CD",            icon: "\uD83D\uDD00", color: "#f05032", description: "Version control, branching strategies, and automation" },
     { id: "dsa",         name: "DSA",                   icon: "\uD83D\uDCCA", color: "#ff6b35", description: "Data structures, algorithms, problem-solving patterns" },
-    { id: "oop",         name: "OOP & CS Fundamentals", icon: "\uD83D\uDCBB", color: "#9b59b6", description: "OOP principles, design patterns, and CS core concepts" }
+    { id: "oop",         name: "OOP & CS Fundamentals", icon: "\uD83D\uDCBB", color: "#9b59b6", description: "OOP principles, design patterns, and CS core concepts" },
+    { id: "practice",    name: "Practice Questions", icon: "\uD83D\uDCDD", color: "#e74c3c", description: "Real interview questions across algorithms, system design, SQL, JS, React, and behavioral" }
   ],
   topics: {
     javascript: [
@@ -1098,6 +1100,14 @@ var EMBEDDED = {
       { id: "oop-computer-arch", title: "Computer Architecture", difficulty: "beginner", estimatedMinutes: 15, file: "oop-computer-arch.json" },
       { id: "oop-operating-systems", title: "Operating Systems", difficulty: "intermediate", estimatedMinutes: 15, file: "oop-operating-systems.json" },
       { id: "oop-networking-basics", title: "Networking Basics", difficulty: "intermediate", estimatedMinutes: 15, file: "oop-networking-basics.json" }
+    ],
+    practice: [
+      { id: "practice-algorithms",     title: "Top Algorithm Coding Problems",        difficulty: "intermediate", estimatedMinutes: 45, file: "practice-algorithms.json" },
+      { id: "practice-system-design",  title: "System Design Interview Problems",      difficulty: "advanced",    estimatedMinutes: 45, file: "practice-system-design.json" },
+      { id: "practice-sql",            title: "SQL Practice Problems",                 difficulty: "intermediate", estimatedMinutes: 35, file: "practice-sql.json" },
+      { id: "practice-javascript",     title: "JavaScript Coding Challenges",          difficulty: "intermediate", estimatedMinutes: 35, file: "practice-javascript.json" },
+      { id: "practice-react",          title: "React Coding Challenges",               difficulty: "advanced",    estimatedMinutes: 40, file: "practice-react.json" },
+      { id: "practice-behavioral",     title: "Behavioral & Real-World Scenarios",     difficulty: "intermediate", estimatedMinutes: 30, file: "practice-behavioral.json" }
     ]
   }
 };
@@ -1261,6 +1271,27 @@ function init() {
     searchEl.addEventListener('input', function() {
       state.searchQuery = this.value;
       renderSidebar();
+    });
+  }
+
+  // Hamburger menu toggle
+  hamburger = $('#hamburger');
+  sidebar = $('#sidebar');
+  sidebarOverlay = $('#sidebar-overlay');
+  if (hamburger) {
+    hamburger.addEventListener('click', function() {
+      var isOpen = sidebar.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      sidebarOverlay.classList.toggle('open');
+      hamburger.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+  }
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', function() {
+      sidebar.classList.remove('open');
+      hamburger.classList.remove('active');
+      sidebarOverlay.classList.remove('open');
+      hamburger.innerHTML = '&#9776;';
     });
   }
 
@@ -1445,6 +1476,12 @@ function renderSidebar() {
       const catId = el.dataset.cat;
       const topicId = el.dataset.topic;
       loadTopic(catId, topicId);
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        hamburger.classList.remove('active');
+        sidebarOverlay.classList.remove('open');
+        hamburger.innerHTML = '&#9776;';
+      }
     });
   });
 }

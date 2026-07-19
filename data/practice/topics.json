@@ -1,0 +1,44 @@
+[
+  {
+    "id": "practice-algorithms",
+    "title": "Top Algorithm Coding Problems",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 45,
+    "file": "practice-algorithms.json"
+  },
+  {
+    "id": "practice-system-design",
+    "title": "System Design Interview Problems",
+    "difficulty": "advanced",
+    "estimatedMinutes": 45,
+    "file": "practice-system-design.json"
+  },
+  {
+    "id": "practice-sql",
+    "title": "SQL Practice Problems",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 35,
+    "file": "practice-sql.json"
+  },
+  {
+    "id": "practice-javascript",
+    "title": "JavaScript Coding Challenges",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 35,
+    "file": "practice-javascript.json"
+  },
+  {
+    "id": "practice-react",
+    "title": "React Coding Challenges",
+    "difficulty": "advanced",
+    "estimatedMinutes": 40,
+    "file": "practice-react.json"
+  },
+  {
+    "id": "practice-behavioral",
+    "title": "Behavioral & Real-World Scenarios",
+    "difficulty": "intermediate",
+    "estimatedMinutes": 30,
+    "file": "practice-behavioral.json"
+  }
+]
